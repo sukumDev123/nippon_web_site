@@ -22,8 +22,10 @@ $photos = acf_photo_gallery("banners" , get_the_ID());
 <header id="home_header"  > 
     <div class="bk-header"></div>
     <div class="container">
+   <a href="/">
     <img alt="logo" src="<?php bloginfo("template_directory");  ?>/assets/images/logo.png"  class="image-logo" />
 
+   </a>
     <?php 
         wp_nav_menu(
             [

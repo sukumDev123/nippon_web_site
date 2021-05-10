@@ -47,6 +47,7 @@ function showListOfFamilyColorThisShade(shadeId) {
 }
 
 function findColorClose(value, type, familyColors) {
+  console.log({ value });
   if (type === "rgb") {
     const _value = value;
     const _dist = [];
@@ -73,14 +74,24 @@ function findColorClose(value, type, familyColors) {
     // console.log({ suggestion1 });
     suggestion1.style.backgroundColor = _sort[0].color;
     titleFamilyColor.innerHTML = _sort[0].name;
-    _sort.splice(0, 1);
+
     const _card = document.querySelector(".suggestion2 .shade4side");
     if (_card.firstChild) {
       while (_card.lastElementChild) {
         _card.removeChild(_card.lastElementChild);
       }
     }
-    _sort.forEach((sort) => {
+    const _4Data = [];
+    let _max = _sort.length;
+    const sLength = _sort.length;
+    if (sLength > 4) {
+      _max = 4;
+    }
+    for (let i = 0; i < _max; i++) {
+      _4Data.push(_sort[i]);
+    }
+
+    _4Data.forEach((sort) => {
       const _cardFamilyColor = document.createElement("div");
       _cardFamilyColor.className = "card-color-family";
       _cardFamilyColor.innerHTML = `
@@ -237,7 +248,7 @@ function homePageInitSwiper() {
     },
   });
   const newsSwiper = new Swiper(".news-swiper", {
-    // loop: true,
+    loop: true,
     speed: 1000,
     // autoplay: {
     //     delay: 3000,
@@ -334,6 +345,9 @@ const homePageHeaderOnFixed = () => {
 };
 
 const onClickedHeader = () => {
+  const header = document.querySelector("header#home_header");
+  const menuTop = document.querySelectorAll("#menu-top-menu > li");
+
   if (header.className.match(/header-active/)) {
     const _ddd = home_header.className
       .split(" ")
@@ -496,6 +510,7 @@ window.onload = () => {
 };
 
 function onSearchColor() {
+  console.log({ family_colors });
   if (searchType === "rgb-div") {
     const r = document.querySelector("#r").value;
     const g = document.querySelector("#g").value;

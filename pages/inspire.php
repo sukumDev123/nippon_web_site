@@ -1,4 +1,4 @@
- 
+<!--  
 <div id="inspire-div">
   <div>
   <div class="image">
@@ -12,4 +12,4 @@
   </div>
 </div>
  
-
+ -->

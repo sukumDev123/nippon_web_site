@@ -23,9 +23,9 @@ $products = get_field("products");
                             <img src="<?php echo $featured_img_url ?>" alt="image">
                             <h4>
                                 <a href="<?php echo get_permalink($product->ID) ?>">
-                                    <span class="d-inline-block text-truncate" style="max-width: 240px;">
+                                    <!-- <span class="d-inline-block text-truncate" style="max-width: 240px;"> -->
                                         <?php echo $title ?>
-                                    </span> 
+                                    <!-- </span>  -->
                                 </a>
                             </h4>
                             <p><?php echo get_the_excerpt($product->ID) ?></p>

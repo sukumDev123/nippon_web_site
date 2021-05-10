@@ -99,7 +99,7 @@ if(isset($_GET["page"])) {
                 array_push($meta_query ,  $product_relation);
             endif;   
         endif;
-        
+     
         if(isset($_GET['type'])) :
             if($_GET['type']):
                 $tax_query = [
@@ -123,18 +123,14 @@ if(isset($_GET["page"])) {
         if(count($meta_query) ) :
             $argc["meta_query"] = $meta_query;
         endif;
-
-        if(count($meta_query) > 1) :
-            array_push($meta_query , ["relation" => "AND"]);
-        endif;
  
         $query = new WP_Query($argc);
   
-        if($query->have_posts()): while($query->have_posts()) : $query->the_post(); 
-        $size_data += 1;
+       
     ?>
     <?php 
-        
+    if($query->have_posts()): while($query->have_posts()) : $query->the_post(); 
+        $size_data += 1;
         $modal_header    = get_field('text_example');
         $photos = acf_photo_gallery("photos" , get_the_ID());
     
@@ -164,7 +160,15 @@ if(isset($_GET["page"])) {
                 </h1>
                  
                 <p><?php echo  $modal_header;  ?></p> 
-                <h5> <i class="far fa-calendar-alt"></i> <?php " ".the_date("d/M/Y"); ?></h5>
+              <div class="d-flex justify-content-between">
+                <h5>
+                    <i class="fas fa-eye"></i>
+                </h5>
+                <h5>
+                    <i class="fas fa-eye"></i>
+                </h5>
+                </div>
+                <!-- <h5> <i class="far fa-calendar-alt"></i> <?php " ".the_date("d/M/Y"); ?></h5> -->
             
             
             </div>

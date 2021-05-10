@@ -12,17 +12,21 @@
 ?>
 
 <?php
+        // $terms = get_terms('product_cat', array('hide_empty' => false, 'parent' => 0));
+        // $termShow = [];
+        // $termId = 0;
+        // if(isset($_GET['cate'])) {
+        //     $termShow = get_terms('product_cat', array('hide_empty' => false, 'parent' => intval($_GET['cate'])));
+        //     $termId = intval($_GET['cate']);
+       
+        // } else {
+        //     $termShow = get_terms('product_cat', array('hide_empty' => false, 'parent' => $terms[0]->term_id));
+        //     $termId = $terms[0]->term_id;
+        // }
         $terms = get_terms('product_cat', array('hide_empty' => false, 'parent' => 0));
         $termShow = [];
-        $termId = 0;
-        if(isset($_GET['cate'])) {
-            $termShow = get_terms('product_cat', array('hide_empty' => false, 'parent' => intval($_GET['cate'])));
-            $termId = intval($_GET['cate']);
-       
-        } else {
-            $termShow = get_terms('product_cat', array('hide_empty' => false, 'parent' => $terms[0]->term_id));
-            $termId = $terms[0]->term_id;
-        }
+        $termId  = get_queried_object_id();
+        $termShow = get_terms('product_cat', array('hide_empty' => false, 'parent' =>$termId));
     ?>
 
 
@@ -43,7 +47,7 @@
         <?php if(count($terms) > 0): ?>
             <?php foreach($terms as  $term): $className = ""; if($termId == $term->term_id): $className="cate-active"; endif;  ?>
                 <li class="<?php  echo $className ?>"> 
-                    <a href="?cate=<?php echo $term->term_id ?>"><?php echo $term->name ?></a>
+                    <a href="<?php  echo get_term_link($term->term_id) ?>"><?php echo $term->name ?></a>
                 </li>
             <?php endforeach; ?>
         <?php endif; ?>
@@ -176,14 +180,12 @@
 <script>
     function getChecked(slug , _slug_ ) {
         let _slug = "";
- 
-        // _slug  
-        console.log({dd: slug.match(_slug_)})
+  
         if(slug.match(_slug_)) {
             _slug = slug.split(",").filter(s => s != _slug_).join(",")
         } else {
             _slug = slug ? slug + "," + _slug_ : _slug_
-            console.log({_slug})
+           
         
         }
         if(_slug) window.location.assign("?cate=" + <?php echo $termId ?> + "&slug=" + _slug)

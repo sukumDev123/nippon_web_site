@@ -7,33 +7,29 @@ $shades  = get_field("shades");
 ?>
 
 
-
+ 
 <section id="home_suggestion_shades">
     <div class="image-contain">
 
        <div class="swiper-container shade-suggestion">
            <div class="swiper-wrapper">
            <?php if(count($shades) > 0): ?>
-            <?php foreach($shades as $shade): ?>
+            <?php foreach($shades as $shade): $g_permalink  = get_permalink($shade->ID); ?>
               <div class="swiper-slide ">
                   <div class="shade-swiper">
                     <!-- <div>
                     </div>   -->
                     <div class="image-div">
-                        <!-- <div class="image">
-
-                        </div> -->
                         <img src="<?php echo get_field("image-shade", $shade->ID)['url'] ?>" alt="">
                         <div class="swiper-pagination shade-pagination"></div>
-
                     </div>
 
-                    <div class="shades-color">
+                    <a href="<?php echo  $g_permalink  ?>" target="_blank" class="shades-color">
                         <div style="background-color:<?php echo $shade->shade1  ?>;width:88px;height:88px;" ></div>
                         <div style="background-color:<?php echo $shade->shade2  ?>;width:88px;height:88px;" ></div>
                         <div style="background-color:<?php echo $shade->shade3  ?>;width:88px;height:88px;" ></div>
                         <div style="background-color:<?php echo $shade->shade4  ?>;width:88px;height:88px;" ></div>
-                    </div>
+                    </a>
                   </div>
                     
               </div>

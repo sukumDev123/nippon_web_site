@@ -17,7 +17,7 @@ let family_colors = [];
  <?php 
 //  get_template_part("headers/header-single");
 
- $argc = ["post_type" => "family_color"];
+ $argc = ["post_type" => "family_color" , "posts_per_page"  => -1];
  $query = new WP_Query($argc);
  $familyColors  = [];
 $i = 0;
@@ -28,7 +28,7 @@ $num = $query->post_count;
         $id = get_the_ID();
         $name = get_field("name");
         $color = get_field("color");
-        $familyColors;
+      
         array_push($familyColors , [
             "name" => get_the_title(),
             "color" => $color
@@ -40,7 +40,7 @@ $num = $query->post_count;
  endif;
  
  wp_reset_query();
-
+ 
  
  ?>
 

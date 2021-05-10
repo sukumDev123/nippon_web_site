@@ -32,7 +32,11 @@ if($parent_title) {
         )
     ?>
         <div class="login">
-             <h5><i class="fas fa-search"></i></h5>
+             <h5>
+                <a href="/menu-products/">
+                    <i class="fas fa-search"></i>
+                </a>    
+            </h5>
              <div class="th_en">
                  <h5>TH|</h5>
                  <h5>EN</h5>
