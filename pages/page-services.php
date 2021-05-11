@@ -3,6 +3,7 @@
     <?php 
     $argc = ["post_type" => "page" , "post_parent" => 143];
     $loop = new WP_Query( $argc );
+    print_r( $loop->have_posts());
     ?>
     <div class="services-card">
 
@@ -28,7 +29,7 @@
         echo __( 'No products found' );
     }
 
-    wp_reset_postdata();
+    wp_reset_query();
 
     ?>
     </div>

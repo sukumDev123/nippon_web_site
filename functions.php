@@ -36,9 +36,10 @@ register_nav_menus(
 add_action("init" , function() {
 	register_post_type("Info" , [
 	'public' => true ,
-	"label" => "Info",
+	"labels" => ['name' => "Infos"   , "singular_name" => "Info"],
 	 
-	'show_in_rest' => true ,
+ 
+    'hierarchical' => true
  
 	]);
 });
@@ -104,37 +105,7 @@ function initProject() {
         'taxonomies'   => array( 'category' , 'tags' ),
      
         ]);
-
-        // register_taxonomy( 'project', array('project'), array(
-        //     'hierarchical' => true, 
-        //     'label' => 'Projects', 
-        //     'singular_label' => 'Project', 
-        //     'rewrite' => array( 'slug' => 'project', 'with_front'=> false )
-        //     )
-        // );
-   
-        // register_taxonomy( 'product', array('project'), array(
-        //     'hierarchical' => true, 
-        //     'label' => 'Products', 
-        //     'singular_label' => 'Product', 
-        //     'rewrite' => array( 'slug' => 'product', 'with_front'=> false )
-        //     )
-        // );
-
-        // register_taxonomy( 'grade', array('product'), array(
-        //     'hierarchical' => true, 
-        //     'label' => 'Grades', 
-        //     'singular_label' => 'Grade', 
-        //     'rewrite' => array( 'slug' => 'grade', 'with_front'=> false )
-        //     )
-        // );
-        // register_taxonomy( 'function', array('product'), array(
-        //     'hierarchical' => true, 
-        //     'label' => 'Functions', 
-        //     'singular_label' => 'Function', 
-        //     'rewrite' => array( 'slug' => 'product', 'with_front'=> false )
-        //     )
-        // );
+ 
    
 }
 add_action("init" , "initProject");
@@ -183,27 +154,7 @@ function reg_tag() {
 add_action('init', 'reg_tag');
 
  
-// function create_topics_nonhierarchical_taxonomy() {
  
-// // Labels part for the GUI
- 
-//   $labels = array(
-//     'name' => 'Tags'
-//     'singular_name' => 'Tag'
-//   ); 
- 
-// // Now register the non-hierarchical taxonomy like tag
- 
-//   register_taxonomy('tag', 'project',array(
-//     'hierarchical' => false,
-//     'labels' => $labels,
-    
-    
-//     'rewrite' => array( 'slug' => 'tag' ),
-//   ));
-// }
-
-// add_action( 'init', 'create_topics_nonhierarchical_taxonomy' );
 function get_top_ancestor_id(){
     global $post;
     if($post->post_parent) {
@@ -212,3 +163,58 @@ function get_top_ancestor_id(){
     }
     return $post->ID;
 }
+
+ 
+
+
+function loadAddress() {
+    $html = "";
+    $argc = ["post_type"  => "info" , 'posts_per_page' => 1 ,  "meta_query" => [[
+        "key" => "slug",
+        "value"  => 'address',
+        'compare' => "LIKE"
+    ]] ];
+    $query = new WP_Query($argc);
+    if($query->have_posts()): while($query->have_posts()) : $query->the_post(); 
+    $html = '
+    <div class="address">
+        <h1>'.get_the_title().' </h1>
+        <p>
+            '.get_field("description" , get_the_ID()).'
+        </p>
+    </div>
+    ';
+    endwhile;  endif;  wp_reset_query();
+
+    return  $html;
+}
+
+
+add_action("action_address" , "loadAddress");
+
+function loadService() {
+  
+            
+            $html = "";
+            $argc = ["post_type"  => "info" , 'posts_per_page' => 1 ,  "meta_query" => [[
+                "key" => "slug",
+                "value"  => 'careline-service',
+                'compare' => "LIKE"
+            ]] ];
+            $query = new WP_Query($argc);
+            if($query->have_posts()): while($query->have_posts()) : $query->the_post(); 
+            $html = '
+            
+                <h1 class="footer-title">'.get_the_title().' </h1>
+                <h1 class="font-service">
+                    '.get_field("description" , get_the_ID()).'
+                </h1>
+            
+            ';
+            endwhile;  endif;  wp_reset_query();
+            
+            return $html;
+}
+
+
+add_action("action_address" , "loadService");

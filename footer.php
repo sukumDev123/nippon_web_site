@@ -17,15 +17,8 @@
     </div>
     <div class="footer-content">
         <div>
-            <div class="address">
-                <h1>ADDRESS </h1>
-                <p>
-                    บริษัท นิปปอนเพนต์ เดคโคเรทีฟ โคทติ้ง </br>
-                    (ประเทศไทย) จำกัด</br>
-                    101 ม. 3 ซ.สุขสวัสดิ์ 76 ถนนสุขสวัสดิ์</br> 
-                    บางจาก พระประแดง สมุทรปราการ 10130
-                </p>
-            </div>
+            <?php echo loadAddress() ?>
+         
             <div class="phone">
                 <h1>PHONE </h1>
                 <h5><a>TEL 0 246 25299  </a></h5>
@@ -42,6 +35,12 @@
             )
             
             ?>
+        </div>
+        <div>
+        <?php echo loadService() ?>
+            <h1 class='mt-4 footer-title'>
+            ติดตามเราได้ที่นี่
+            </h1>
         </div>
         <!-- <div></div>
         <div></div>

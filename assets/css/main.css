@@ -1,41 +1,41 @@
 @font-face {
   font-family: "Sukhumvit Set";
-  src: url("/assets/fonts/_format/SukhumvitSet-Medium.woff2") format("woff2"), url("/assets/fonts/_format/SukhumvitSet-Medium.woff") format("woff");
+  src: url("/wp-content/themes/nippontheme/assets/fonts/_format/SukhumvitSet-Medium.woff2") format("woff2"), url("/wp-content/themes/nippontheme/assets/fonts/_format/SukhumvitSet-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Sukhumvit Set";
-  src: url("/assets/fonts/_format/SukhumvitSet-Bold.woff2") format("woff2"), url("/assets/fonts/_format/SukhumvitSet-Bold.woff") format("woff");
+  src: url("/wp-content/themes/nippontheme/assets/fonts/_format/SukhumvitSet-Bold.woff2") format("woff2"), url("/wp-content/themes/nippontheme/assets/fonts/_format/SukhumvitSet-Bold.woff") format("woff");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Sukhumvit Set";
-  src: url("/assets/fonts/_format/SukhumvitSet-Light.woff2") format("woff2"), url("/assets/fonts/_format/SukhumvitSet-Light.woff") format("woff");
+  src: url("/wp-content/themes/nippontheme/assets/fonts/_format/SukhumvitSet-Light.woff2") format("woff2"), url("/wp-content/themes/nippontheme/assets/fonts/_format/SukhumvitSet-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Sukhumvit Set";
-  src: url("/assets/fonts/_format/SukhumvitSet-SemiBold.woff2") format("woff2"), url("/assets/fonts/_format/SukhumvitSet-SemiBold.woff") format("woff");
+  src: url("/wp-content/themes/nippontheme/assets/fonts/_format/SukhumvitSet-SemiBold.woff2") format("woff2"), url("/wp-content/themes/nippontheme/assets/fonts/_format/SukhumvitSet-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Sukhumvit Set";
-  src: url("/assets/fonts/_format/SukhumvitSet-Text.woff2") format("woff2"), url("/assets/fonts/_format/SukhumvitSet-Text.woff") format("woff");
+  src: url("/wp-content/themes/nippontheme/assets/fonts/_format/SukhumvitSet-Text.woff2") format("woff2"), url("/wp-content/themes/nippontheme/assets/fonts/_format/SukhumvitSet-Text.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Sukhumvit Set";
-  src: url("/assets/fonts/_format/SukhumvitSet-Thin.woff2") format("woff2"), url("/assets/fonts/_format/SukhumvitSet-Thin.woff") format("woff");
+  src: url("/wp-content/themes/nippontheme/assets/fonts/_format/SukhumvitSet-Thin.woff2") format("woff2"), url("/wp-content/themes/nippontheme/assets/fonts/_format/SukhumvitSet-Thin.woff") format("woff");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -413,6 +413,14 @@ footer > div:nth-child(2) h1 {
   margin-bottom: 10px;
   font-weight: bold;
 }
+footer > div:nth-child(2) .footer-title {
+  font-size: 27px;
+  font-weight: 600;
+}
+footer > div:nth-child(2) .font-service {
+  font-size: 51px;
+  font-weight: 600;
+}
 footer .text-center {
   text-align: center;
 }
@@ -427,7 +435,7 @@ footer .footer-content {
   padding-top: 4rem;
   padding-bottom: 4rem;
   padding-right: 1rem;
-  max-width: 1200px;
+  max-width: 1337px;
   margin: auto;
   display: flex;
 }
@@ -681,7 +689,7 @@ footer .footer-content .menu-footer-menu-container #menu-footer-menu li a {
   font-size: 17px;
   padding: 0px;
   margin: 0px;
-  margin-bottom: 2em;
+  margin-bottom: 0.5em;
 }
 #news .news-div > div .content h1 a {
   color: black !important;

@@ -9,16 +9,7 @@ if(isset($_GET["page"])) {
 }
 // echo $limit_page;
  ?>
-<div class="page-bk">
-
-    <!-- <div class="page-bk-image"> -->
-    <img alt="logo" src="<?php bloginfo("template_directory");  ?>/assets/images/bk-page.jpg"  class="image-logo" />
-    <div class="image-logo-bk"> </div>
-    <!-- </div> -->
-    <div class="page-detail">
-            <h1><?php the_title();  ?></h1>
-    </div>
-</div>
+<?php get_template_part("pages/page-bk");  ?>
 <div class="page-filter">
 <?php 
     $args = array(
@@ -158,19 +149,19 @@ if(isset($_GET["page"])) {
                         <?php the_title(); ?>
                     </a>
                 </h1>
-                 
-                <p><?php echo  $modal_header;  ?></p> 
-              <div class="d-flex justify-content-between">
-                <h5>
+                <?php echo get_field("short_text" , get_the_ID());  ?> 
+              <div class="d-flex ">
+                <h5 class="me-4">
                     <i class="fas fa-eye"></i>
+                  <?php echo " " + pvc_get_post_views(get_the_ID()) ?>
+
                 </h5>
                 <h5>
-                    <i class="fas fa-eye"></i>
+                    <i class="fas fa-share"></i>
+                 
                 </h5>
                 </div>
-                <!-- <h5> <i class="far fa-calendar-alt"></i> <?php " ".the_date("d/M/Y"); ?></h5> -->
-            
-            
+               
             </div>
             </div>
         

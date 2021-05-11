@@ -69,17 +69,7 @@ $posts = get_field("post");
 
 
 
-<div class="page-bk">
-
-    <!-- <div class="page-bk-image"> -->
-    <img alt="logo" src="<?php bloginfo("template_directory");  ?>/assets/images/bk-page.jpg"  class="image-logo" />
-    <div class="image-logo-bk"> </div>
-    <!-- </div> -->
-    <div class="page-detail">
-            <h1><?php echo $parent_title  ?></h1>
-            <?php echo get_field("short_text", $postId) ?>
-    </div>
-</div>
+<?php get_template_part("pages/page-bk");  ?>
 <div class="menus-solution">
 <div class="container">
     <a href="">
