@@ -3,7 +3,26 @@
 
 $shade_explain  = get_field("shade_explain");
 $shades  = get_field("shades");
- 
+// $_url = 
+$lang=get_bloginfo("language");  
+$text_static = [
+    "en" => [
+        "url" => "/shade-en",
+        "title" => "ค้นหาสีสันในแบบที่คุณต้องการ",
+        "detail" => "“เพราะทุกเฉดสีมีความหมายในตัวเอง” <br />
+        เราจึงรวบรวมทุกสีสันมาไว้ให้คุณเลือกในที่เดียว ไม่ว่าจะเป็นสีโทนร้อนหรือสีโทนเย็น คุณก็สามารถค้นหาโทนสีได้ง่ายๆ เพียงแค่คลิกลิงก์ที่อยู่ด้านล่าง"
+    ],
+    "th" => [
+        "url" => "/shade-th/collection-color-th/",
+        "title" => "ค้นหาสีสันในแบบที่คุณต้องการ",
+        "detail" => "“เพราะทุกเฉดสีมีความหมายในตัวเอง” <br />
+        เราจึงรวบรวมทุกสีสันมาไว้ให้คุณเลือกในที่เดียว ไม่ว่าจะเป็นสีโทนร้อนหรือสีโทนเย็น คุณก็สามารถค้นหาโทนสีได้ง่ายๆ เพียงแค่คลิกลิงก์ที่อยู่ด้านล่าง"
+
+         
+
+    ]
+][$lang];
+ if(isset($shade_explain) && isset($shades)):
 ?>
 
 
@@ -13,7 +32,7 @@ $shades  = get_field("shades");
 
        <div class="swiper-container shade-suggestion">
            <div class="swiper-wrapper">
-           <?php if(count($shades) > 0): ?>
+           <?php if(!empty($shades)): ?>
             <?php foreach($shades as $shade): $g_permalink  = get_permalink($shade->ID); ?>
               <div class="swiper-slide ">
                   <div class="shade-swiper">
@@ -24,11 +43,11 @@ $shades  = get_field("shades");
                         <div class="swiper-pagination shade-pagination"></div>
                     </div>
 
-                    <a href="<?php echo  $g_permalink  ?>" target="_blank" class="shades-color">
+                    <a target="_blank" class="shades-color" href="<?php  echo $text_static['url'] . "?shade_id=".$shade->ID ?>">
                         <div style="background-color:<?php echo $shade->shade1  ?>;width:88px;height:88px;" ></div>
                         <div style="background-color:<?php echo $shade->shade2  ?>;width:88px;height:88px;" ></div>
                         <div style="background-color:<?php echo $shade->shade3  ?>;width:88px;height:88px;" ></div>
-                        <div style="background-color:<?php echo $shade->shade4  ?>;width:88px;height:88px;" ></div>
+                      <?php if($shade->shade4): ?>  <div style="background-color:<?php echo $shade->shade4  ?>;width:88px;height:88px;" ></div> <?php endif; ?>
                     </a>
                   </div>
                     
@@ -39,11 +58,18 @@ $shades  = get_field("shades");
        </div>
     </div>
     <div class="content">
-        <h1><?php echo $shade_explain['title'] ?></h1>
-        <?php echo $shade_explain['detail'] ?>
+        <h1><?php echo $text_static['title'] ?></h1>
+        <?php echo $text_static['detail'] ?>
         <div class="left-right">
-                <h3><?php echo $shade_explain['text_left'] ?></h3>
-                <h3><?php echo $shade_explain['text_right'] ?></h3>
+                <h3>
+                    
+                    <a href="<?php echo $shade_explain['page_link_left'] ?>"><?php echo $shade_explain['text_left'] ?></a>
+                </h3>
+                <h3>
+                    <a href="<?php echo $shade_explain['page_link_right'] ?>"><?php echo $shade_explain['text_right'] ?></a>
+                </h3>
         </div>
     </div>
 </section>
+
+<?php endif; ?>

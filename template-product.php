@@ -8,7 +8,6 @@
  /** Template Name: Product */
  global $product;
 
- 
 ?>
 
 <?php
@@ -181,6 +180,14 @@
         else {
             window.location.assign("?cate=" + <?php echo $termId ?>)
         }
+    }
+
+    function onLikeClicked(id) {
+        fetch("<?php  echo get_permalink(); ?>" + "?id=" + id).catch(error => console.log({error}));
+
+
+        document.querySelector("#heart"+ id).className = "fas fa-heart";
+      
     }
 </script>
 

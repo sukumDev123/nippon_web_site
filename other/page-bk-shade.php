@@ -11,9 +11,9 @@
  
 ?>  
 <div class="page-bk-shade">
-    <img alt="logo" src="<?php echo $featured_img_url ; ?>"  class="image-logo" />
+    <img alt="logo" src="<?php echo $featured_img_url ; ?>"  class="image-logo-desktop" />
     <div class="image-logo-bk"> </div>
-    <div class="page-detail container">
+    <div class="page-detail">
         <div class="page-title-list">
             <?php  
                  $classNameOut = "" ; 
@@ -31,12 +31,12 @@
                     } 
                 }  else {
                     if($index == 1) {
-                        $className = "order1";
-                        $classNameOut = "order3";
+                        $className = "order1 ";
+                        $classNameOut = "order3 null-content ";
                     }
                     if($index == 2) {
                         $className = "order3";
-                        $classNameOut = "order1";
+                        $classNameOut = "order1 null-content";
 
                     } 
                     

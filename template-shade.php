@@ -17,23 +17,42 @@
  <?php 
  
  
-$argc = ["post_type" => "shade"];
+$argc = [
+    "post_type" => "shade" ,  
+    "orderby" => "order",
+    'order' => 'ASC' 
+];
+
 $query = new WP_Query($argc);
-$firstPostId;
+$firstPostId = "";
 echo "<div class='container' id='shade-div'>";
 the_content();
-if($query->have_posts()):
+$terms = get_terms('shade_cate', array('hide_empty' => false));
+$shadeId = "";
+if(isset($_GET["shade_id"])):
+$shadeId = $_GET["shade_id"];
+echo "<script>
+ setTimeout(() => {
+
+    showListOfFamilyColorThisShade(".$shadeId.");
+
+ } , 1000)
+</script>";
+
+endif;
+
+if($terms):
 ?>
  
 <div class="filter-collection">
     <select id="shade-filter" >
 <?php 
-    while($query->have_posts()):
-    $query->the_post();
+    foreach($terms as $term):
+    
 ?>
-        <option value="<?php echo get_the_ID() ?>"><?php echo get_the_title() ?></option>
+        <option value="<?php echo $term->term_id ?>"><?php echo $term->name ?></option>
 <?php 
-    endwhile;
+    endforeach;
 ?>
     </select>
 </div>
@@ -41,26 +60,28 @@ if($query->have_posts()):
 <?php 
 endif;
 ?>
-    <div class="swiper-container shade-swiper">
-        <div class="swiper-wrapper">
+    <div class=" shade-swiper-family">
+        <!-- <div class="swiper-wrapper"> -->
             <!-- <div class="shade-boxs"> -->
 <?php
+$i = 0;
 if($query->have_posts()):
     while($query->have_posts()):
         $query->the_post();
         $family_colors = get_field("family_color");
         $thisId = get_the_ID();
-        echo "<div  class='shade-box swiper-slide' >";
+        echo "<div  class='shade-box' >";
         echo "<h2>". get_the_title(get_the_ID())."</h2>";
-        if(!$firstPostId) {
-            $firstPostId = $thisId;
+        if($i == 0): $firstPostId = $thisId;endif;
+        $i += 1;
+        if(!$firstPostId == "") {
             echo "<script> firstPostId = ".$firstPostId." </script>";
         }
         echo '<div onclick="showListOfFamilyColorThisShade('.$thisId.')" class="shade-color-div">';
             echo '<div style="background:'. get_field("shade1") .'; width: 64px;height:64px"></div>';
             echo '<div style="background:'. get_field("shade2") .'; width: 64px;height:64px"></div>';
             echo '<div style="background:'. get_field("shade3") .'; width: 64px;height:64px"></div>';
-            echo '<div style="background:'. get_field("shade4") .'; width: 64px;height:64px"></div>';
+           if(get_field("shade4")): echo '<div style="background:'. get_field("shade4") .'; width: 64px;height:64px"></div>'; endif;
         echo '</div>';
         // print_r();/get_field("family_color")
         if( $family_colors):
@@ -79,18 +100,22 @@ if($query->have_posts()):
     endwhile;
  endif;
 ?>
-
-<!-- <div class="swiper-container"> -->
-        <!-- <div class="swiper-wrapper"> -->
-        <!-- </div>   -->
-        </div>
-     
+ 
     </div>
 </div>
 <!--  -->
 <div  id="family-color-list" class="container">
+    <div class="swiper-container family-image" id="family-image">
+        <div class="swiper-wrapper">
+            <img class="swiper-slide" src="<?php bloginfo("template_directory");  ?>/assets/images/room1.png" alt="">
+            <img class="swiper-slide" src="<?php bloginfo("template_directory");  ?>/assets/images/room2.png" alt="">
+        </div>
+        <div class="swiper-image-next swiper-button-prev"></div>
+        <div class="swiper-image-prev swiper-button-next"></div>
+    </div> 
+
     <div id="family-list"></div>
-    <div id="family-image"></div>
+
 </div>
 <!--  -->
 <?php 
@@ -105,6 +130,12 @@ if($query->have_posts()):
 
 <?php 
  get_template_part("pages/page-services");
+ echo "<script>
+ setTimeout(() => {
+
+    showListOfFamilyColorThisShade(".$firstPostId.");
+
+ } , 1000); </script>";
 ?>
 
 

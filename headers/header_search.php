@@ -1,6 +1,6 @@
 <?php 
 
- 
+$title = get_the_title();
 
 ?>
 <!doctype html>

@@ -1,4 +1,4 @@
-<div id="footer_banner" class="container">
+<div id="footer_banner" >
             <div class="swiper-container footer_banner">
                 <div class="swiper-wrapper">
                 <?php
@@ -20,3 +20,4 @@
             </div>
         
         </div>
+    <div class="mt-10rem"></div>

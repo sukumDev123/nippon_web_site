@@ -14,9 +14,7 @@
         
         ?>
         <div class="card">
-            <div class="card-image">
-                    <img src="<?php echo $card['image']["url"] ?>" />
-            </div>
+         
             <div class="card-content">
                 <span class="title-detail"><?php echo $card["title_detail"] ?></span>
                 <h1 class="title-1"><?php echo $card['title_1'] ?></h1>
@@ -26,18 +24,11 @@
                     <?php echo $card["detail"] ?>
                 </p>
             </div>
-           
+            <div class="card-image">
+                    <img src="<?php echo $card['image']["url"] ?>" />
+            </div>
         </div>
-    <!-- </div> -->
-    <div id="solution_home">
-        <h1><?php echo get_field("solution_title") ?></h1>
-        <p><?php echo get_field("solution_detail") ?></p>
-        <?php
-           
-        
-        ?>
-    </div>
-
+ 
 
 
 
@@ -45,18 +36,20 @@
 
     <div class="mt-10rem"></div>
 
-    <?php  get_template_part("other/products-2"); ?>
+    <?php  get_template_part("other/products-3"); ?>
  <div class="mt-10rem"></div>
 
     <?php  get_template_part("other/inspire-suggestion"); ?>
+    <div class="mt-10rem"></div>
+
+<?php  get_template_part("other/solution-home-page"); ?>
  <div class="mt-10rem"></div>
 
     <?php  get_template_part("other/shade-home"); ?>
-    
+     <div class="mt-10rem"></div>
     <?php  get_template_part("other/footer_banner"); ?>
-    
+    <div class="mt-5"></div>
 
-  
 </section>
 
 <?php get_footer(); ?>

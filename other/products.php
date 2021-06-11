@@ -1,16 +1,37 @@
 <?php 
 
 $products = get_field("products");
+$lang=get_bloginfo("language");  
 
+ $text_static = [
+     "en" => [
+         "product_title" => "Product Relation",
+         "product_link" => "Search",
+         "product_link_url" =>  get_site_url()  . "/products/"
+
+     ],
+     "th" => [
+         "product_title" => "ผลิตภัณฑ์แนะนำ",
+         "product_link" => "ค้นหาผลิตภัณฑ์เพิ่มเติม",
+          "product_link_url" => get_site_url()  . "/products/"
+
+     ]
+ ][$lang];
 
 ?>
 <div  id="products-1">
        <div class="container">
             <div class="title">
-                    <h1><?php echo get_field("explain")['title']; ?></h1>
-                    <a><?php echo get_field("explain")['button_title']; ?></a>
+                    <h1><?php echo  $text_static['product_title'] ?></h1>
+                    <a href="<?php echo  $text_static['product_link_url'] ?>  ">
+                    <?php echo $text_static['product_link'] ?>
+                        <i class="fas fa-long-arrow-alt-right ml-5"></i>
+                    </a>
+                   
             </div>
             <div class="products-card">
+ 
+            
             <?php 
 
                 if($products):
@@ -20,16 +41,16 @@ $products = get_field("products");
                         $title = get_the_title($product->ID);
                         ?>
                         <div class="product-card">
+                            <a href="<?php echo get_permalink($product->ID) ?>">
                             <img src="<?php echo $featured_img_url ?>" alt="image">
                             <h4>
-                                <a href="<?php echo get_permalink($product->ID) ?>">
                                     <!-- <span class="d-inline-block text-truncate" style="max-width: 240px;"> -->
                                         <?php echo $title ?>
                                     <!-- </span>  -->
-                                </a>
-                            </h4>
-                            <p><?php echo get_the_excerpt($product->ID) ?></p>
-
+                                </h4>
+                                <p><?php echo get_the_excerpt($product->ID) ?></p>
+                                
+                            </a>
 
 
                     </div>
@@ -40,6 +61,7 @@ $products = get_field("products");
 
                 // wp_reset_query();
             ?>
+           
         </div>  
         </div>
 </div>

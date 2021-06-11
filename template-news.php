@@ -38,12 +38,13 @@ if(isset($_GET["page"])) {
         $photos = acf_photo_gallery("photos" , get_the_ID());
         // echo $photos[0]['url'];
  
-        $_image = false;
+        $_image = false ;
         // echo $photos[0]["thumbnail_image_url"]; 
         foreach($photos as $image):
             $full_image_url= $image['full_image_url']; 
-            $thumbnail_image_url=  acf_photo_gallery_resize_image($full_image_url, 403, 271);
-            $_image =  $thumbnail_image_url;
+            
+       
+            $_image =  $full_image_url;
             break;
         endforeach;
         ?>
@@ -66,7 +67,7 @@ if(isset($_GET["page"])) {
                     </a>
                 </h1>
                 <p><?php echo  $modal_header;  ?></p> 
-                <h5> <i class="far fa-calendar-alt"></i> <?php " ".the_date("d/M/Y"); ?></h5>
+                <h5> <i class="far fa-calendar-alt"></i> <?php  echo " ".get_the_date("d/M/Y" , get_the_ID()); ?></h5>
             
             
             </div>

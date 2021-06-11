@@ -7,7 +7,25 @@
 get_template_part("headers/header-shade");
 
 get_template_part("other/loading");
+$lang=get_bloginfo("language");  
+$text_static = [
+    "en" => [
+        "title" => "Results Search",
+        "title2" => "สีที่ใกล้เคียง",
+        "title3" => "สีที่เป็นไปได้อื่นๆ",
+        "search" => "Search"
 
+
+    ],
+    "th" => [
+        "title" => "ผลการค้นหา",
+        "title2" => "สีที่ใกล้เคียง",
+        "title3" => "สีที่เป็นไปได้อื่นๆ",
+        "search" => "ค้นหาเฉดสี"
+        
+
+    ]
+][$lang];
 
  ?>
  <script>
@@ -56,10 +74,11 @@ $num = $query->post_count;
 
 <div id="search-shade"  >
 <?php the_content() ?>
-
+ <?php echo  get_field("short_text" , get_the_ID()) ?> 
  <div>
+  
  
-    <div class="select-custom">
+    <div id="selected_shade_color" class="select-custom">
         <div class="select-input">
             <input type="text" id="search_type"  placeholder="" value="RGB" />
             <i id="search-select" class="fas fa-chevron-down"></i>
@@ -111,24 +130,35 @@ $num = $query->post_count;
 
         </div>
     </div>
-    <button type="submit" onclick="onSearchColor()"  > Search </button>
+    <!-- <button type="submit" > Search </button>
+ -->
+    
+ <a class="a-primary-button"  onclick="onSearchColor()"  >
+                        <button class="primary-button">
+                        <?php echo $text_static["search"] ?>
+                            <i class="fas fa-long-arrow-alt-right"></i>
+                        </button>
+                    </a>
  <!-- </form> -->
  </div>
 </div>
 
 
 <div id="shade-center" >
-    <h1 class="text-center">ผลการค้นหา</h1>
+    <h1 class="text-center">
+        <?php echo $text_static['title'] ?>
+    </h1>
     <div class="container slide-2">
         <div class="suggestion1">
-            <h3>สีใกล้เคียง</h3>
+            <h3>         <?php echo $text_static['title2'] ?></h3>
             <div class="card-color-family">
                 <div id="bk-family-color"></div>
-                <h2 id="title-family-color"></h2>\
+                <h2 id="title-family-color"></h2>
             </div>
         </div>
         <div class="suggestion2">
-            <h3>สีที่เป็นไปได้อื่นๆ</h3>
+ 
+            <h3>         <?php echo $text_static['title3'] ?></h3>
             <div class="shade4side"></div>
         </div>
     </div>

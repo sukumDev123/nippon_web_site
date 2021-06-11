@@ -1,6 +1,6 @@
 
 <?php
-    get_template_part("headers/header-single");
+        get_template_part("headers/header-single");
 
         $terms = get_terms('product_cat', array('hide_empty' => false, 'parent' => 0));
         $termShow = [];
@@ -12,10 +12,10 @@
 
  
 <div   id="nav-products">
-    <ul>
+    <ul class="desktop">
         <?php if(count($terms) > 0): ?>
             <?php foreach($terms as  $term):   ?>
-                <li> 
+                <li > 
                     <a href="/product/?cate=<?php echo $term->term_id ?>"><?php echo $term->name ?></a>
                 </li>
             <?php endforeach; ?>

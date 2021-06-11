@@ -1,33 +1,45 @@
-<div class="container">
+<?php 
+
+
+$lang=get_bloginfo("language");  
+$text_static_inspire_suggestion = [
+    "en" => [
+        "title" => "ค้นหาร้านค้าตัวแทน",
+        "detail" => "เรามีตัวแทนจำหน่ายทั่วประเทศ ที่พร้อมให้บริการคุณลูกค้าและให้คำปรึกษาเรื่องสีได้ โดยสามารถค้าหาตัวแทนจำหน่ายใกล้บ้านคุณได้แล้ว ที่นี่",
+        "button_title" => "ค้นหาตัวแทนจำหน่าย",
+        "button_link" => get_the_permalink()."ค้นหาร้านค้า"
+    ],
+    "th" => [
+        "title" => "ค้นหาร้านค้าตัวแทน",
+        "detail" => "เรามีตัวแทนจำหน่ายทั่วประเทศ ที่พร้อมให้บริการคุณลูกค้าและให้คำปรึกษาเรื่องสีได้ โดยสามารถค้าหาตัวแทนจำหน่ายใกล้บ้านคุณได้แล้ว ที่นี่",
+        "button_title" => "ค้นหาตัวแทนจำหน่าย",
+        "button_link" => get_the_permalink()."ค้นหาร้านค้า"
+    ]
+][$lang];
+?>
+
+
+<div id="find_location">
             <div class="find_location">
                 <div class="content">
-                    <h1><?php echo get_field("find_location")["title"] ?></h1>
-                    <?php echo get_field("find_location")["detail"] ?>
+                    <h1><?php echo $text_static_inspire_suggestion["title"] ?></h1>
+                   <p> <?php echo $text_static_inspire_suggestion["detail"] ?></p>
+                    <div class="mt-5"></div>
+                    <a id="find_location_btn_desktop" class="a-primary-button" href="<?php echo $text_static_inspire_suggestion['button_link'] ?>">
+                        <button class="primary-button">
+                            <?php echo $text_static_inspire_suggestion['button_title'] ?>
+                            <i class="fas fa-long-arrow-alt-right"></i>
+                        </button>
+                    </a>
                 </div>
                 <div class="image_location">
-                    <div class="left">
-                        <?php 
-                            $imageLeft = get_field("find_location")['left']['image']['url'];
-                        ?>
-                        <img src="<?php echo $imageLeft  ?>" alt="" />
-                        <div class="image-bk"></div>
-
-                        <div class="text">
-                            <h1> <i class="fas fa-location-arrow"></i> <?php echo get_field("find_location")['left']["title"] ?></h1>
-                                <p><?php echo get_field("find_location")['left']["detail"] ?></p>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <?php 
-                            $imageRight = get_field("find_location")['right']['image']['url'];
-                        ?>
-                        <img src="<?php echo $imageRight  ?>" alt="" />
-                        <div class="image-bk"></div>
-                       <div class="text">
-                        <h1><i class="fas fa-map-marker-alt"></i> <?php echo get_field("find_location")['right']["title"] ?></h1>
-                           <p> <?php echo get_field("find_location")['right']["detail"] ?></p>
-                       </div>
-                    </div>
+                    <img src="<?php echo get_field("find_location")['image_location']['url'] ?>" alt="">
                 </div>
+                <a  id="find_location_btn_mobile" class="a-primary-button" href="<?php echo $text_static_inspire_suggestion['button_link'] ?>">
+                        <button class="primary-button">
+                            <?php echo $text_static_inspire_suggestion['button_title'] ?>
+                            <i class="fas fa-long-arrow-alt-right"></i>
+                        </button>
+                    </a>
             </div>
         </div>

@@ -2,7 +2,27 @@
 <?php 
 get_header();
 $featured_img_url = get_the_post_thumbnail_url( get_the_ID(),'full'); 
+ 
+$lang=get_bloginfo("language");  
+$product_search = "";
+if(isset($_GET['product_search'])):
+    $product_search = $_GET['product_search'];
+endif;
+$text_static = [
+    "en" => [
+        "product_title" => "Product",
+        "product_link_title" => "More",
+        "product_link" =>  get_site_url() . "/products/" .  $product_search
 
+    ],
+    "th" => [
+        "product_title" => "ผลิตภัณฑ์",
+        "product_link_title" => "ค้นหาผลิตภัณฑ์เพิ่มเติม",
+        "product_link" => get_site_url() . "/products/" . $product_search
+        
+
+    ]
+][$lang];
 ?>
 <?php 
 
@@ -90,8 +110,8 @@ $argc_new = [
     <div  id="products-1">
         <div class="container">
                 <div class="title">
-                        <h1>ผลิตภัณฑ์</h1>
-                        <a>ค้นหาผลิตภัณฑ์เพิ่มเติม</a>
+                        <h1><?php echo $text_static['product_title'] ?></h1>
+                        <a href="<?php echo $text_static["product_link"] ?>"><?php echo $text_static['product_link_title'] ?>   </a>
                 </div>
                 <div class="products-card">
                 <?php 
@@ -104,16 +124,16 @@ $argc_new = [
                             $title = get_the_title(get_the_ID());
                             ?>
                             <div class="product-card">
+                                    <a href="<?php echo get_permalink(get_the_ID()) ?>">
                                 <img src="<?php echo $featured_img_url ?>" alt="image">
                                 <h4>
-                                    <a href="<?php echo get_permalink(get_the_ID()) ?>">
                                         <span class="d-inline-block text-truncate" style="max-width: 240px;">
                                             <?php echo $title ?>
                                         </span> 
-                                    </a>
                                 </h4>
                                 <p><?php echo get_the_excerpt(get_the_ID()) ?></p>
 
+                                    </a>
 
 
                         </div>

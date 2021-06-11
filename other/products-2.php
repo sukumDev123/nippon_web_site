@@ -1,11 +1,26 @@
  
   
 <?php 
-
+ $lang=get_bloginfo("language");  
+ $text_static_product = [
+     "en" => [
+         "title" => "ผลิตภัณฑ์สีคุณภาพ <br />
+         คัดสรรมาเพื่อคุณ",
+         "detail" => "ตอบโจทย์ทุกการแต่งบ้านกับผลิตภัณฑ์สีคุณภาพที่คัดสรรมาเพื่อคุณโดยเฉพาะ เปลี่ยนบ้านให้สวยสดใหม่เพื่อสะท้อนตัวตนแบบที่คุณต้องการ",
+          
+         "button_title" => "ค้นหาผลิตภัณฑ์เพิ่มเติม" 
+     ],
+     "th" => [
+         "title" => "ผลิตภัณฑ์สีคุณภาพ <br />
+         คัดสรรมาเพื่อคุณ",
+         "detail" => "ตอบโจทย์ทุกการแต่งบ้านกับผลิตภัณฑ์สีคุณภาพที่คัดสรรมาเพื่อคุณโดยเฉพาะ  เปลี่ยนบ้านให้สวยสดใหม่เพื่อสะท้อนตัวตนแบบที่คุณต้องการ",
+          
+        "button_title" => "ค้นหาผลิตภัณฑ์เพิ่มเติม" 
+     ]
+ ][$lang];
            
-$products = get_field("products");
-$explain = get_field("explain");
  
+ $explain = get_field("explain");
 ?>
    
 <div  id="products-2">
@@ -13,46 +28,57 @@ $explain = get_field("explain");
         <div class="grid">
 
             <div class="product-content">
-                <h1><?php echo $explain['title'] ?></h1>
+                <h1><?php echo  $text_static_product['title'] ?></h1>
      
-                    <?php echo $explain['detail'] ?>
+                   <p> <?php echo  $text_static_product['detail'] ?></p>
                
-             
-                <a class="a-primary-button" href="">
+               
+                    <a id="project_2_show_desktop" class="a-primary-button" href="<?php if($explain['button_link']): echo get_term_link($explain['button_link'][0])  ; endif;  ?>">
                         <button class="primary-button">
-                            <?php  echo $explain['button_title'] ?>
+                            <?php  echo  $text_static_product['button_title'] ?>
                             <i class="fas fa-long-arrow-alt-right"></i>
                         </button>
                     </a>
             </div>
           
 
-            <div class="swiper-container products-card-swiper">
-                <div class="swiper-wrapper">
-                    <?php 
+            <div class="products-card-swiper">
+                <!-- <div class="swiper-wrapper"> -->
+                <?php 
                             $products = get_field("products");
-                            if($products):
+                            if(isset($products)):
                                 foreach($products as $product):
                                     
                                     $featured_img_url = get_the_post_thumbnail_url( $product->ID,'full');
                                     $title = get_the_title($product->ID);
                                     ?>
-                                    <div class="swiper-slide">
+                                    <!-- <div class="swiper-slide"> -->
                                         <div class="product-card"> 
+                                                        <a href="<?php echo get_permalink($product->ID) ?>">    
                                             <div>
                                                     <img src="<?php echo $featured_img_url ?>" alt="image">
-                                                    <h1><?php echo $title ?></h1>
+                                                    <h1>
+                                                        <?php echo $title ?>
+                                                    </h1>
                                                     <p><?php echo get_the_excerpt($product->ID) ?></p>
                                             </div>
+                                                        </a>
                                         </div>
-                                    </div>
+                                    <!-- </div> -->
                                     <?php 
 
                                 endforeach;
                             endif;
                         ?>
-                </div>  
+                <!-- </div>   -->
             </div>  
+
+            <a id="project_2_show_mobile" class="a-primary-button" href="<?php if($explain['button_link']): echo get_term_link($explain['button_link'][0])  ; endif;  ?>">
+                        <button class="primary-button">
+                            <?php  echo  $text_static_product['button_title'] ?>
+                            <i class="fas fa-long-arrow-alt-right"></i>
+                        </button>
+            </a>
         </div>
 
     </div>

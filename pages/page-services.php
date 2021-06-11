@@ -3,7 +3,7 @@
     <?php 
     $argc = ["post_type" => "page" , "post_parent" => 143];
     $loop = new WP_Query( $argc );
-    print_r( $loop->have_posts());
+ 
     ?>
     <div class="services-card">
 
@@ -18,7 +18,7 @@
                             <div class="bk"></div>
                             <img src="<?php echo $featured_img_url ?>" alt="image" class="service-image"  />
                             <h2><?php echo get_the_title() ?></h2>
-                            <a  href="<?php echo get_permalink(get_the_ID()) ?>">Read More</a>
+                            <a target="_blank"  href="https://smartpainter.nipponpaintdecor.com/">Read More</a>
                         <!-- </a> -->
                       </div>
                     </div>

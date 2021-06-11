@@ -17,7 +17,7 @@
     </script>
     <div class="search-div-product">
         <div id="search_product_">
-            <form action="/search-result" method="get">
+            <form action="search-result" method="get">
                 <div class="search-div-input">
                     <i class="fas fa-search"></i>
                     <input type="text" name="product_search" id="product_search" placeholder="Search" />

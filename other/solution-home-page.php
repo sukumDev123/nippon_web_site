@@ -1,22 +1,61 @@
+<!-- <?php ?> -->
+<?php 
+
+
+$lang=get_bloginfo("language");  
+$text_static_solution = [
+    "en" => [
+        "title" => "เคล็ดลับซ่อมแซมปัญหาสีบ้าน จากนิปปอนเพนต์",
+        "detail" => "“ทุกปัญหาบ้าน นิปปอนเพนต์ช่วยได้” <br/>
+        ซ่อมแซมบ้านให้เหมือนใหม่อีกครั้ง ด้วยเคล็ดลับจากนิปปอนเพนต์ที่คุณก็สามารถลงมือทำเองได้ด้วยตัวเอง"
+
+
+    ],
+    "th" => [
+        "title" => "เคล็ดลับซ่อมแซมปัญหาสีบ้าน จากนิปปอนเพนต์",
+        "detail" => "“ทุกปัญหาบ้าน นิปปอนเพนต์ช่วยได้” <br/>
+        ซ่อมแซมบ้านให้เหมือนใหม่อีกครั้ง ด้วยเคล็ดลับจากนิปปอนเพนต์ที่คุณก็สามารถลงมือทำเองได้ด้วยตัวเอง"
+       
+        
+
+    ]
+][$lang];
+
+
+
+?>
+ 
+
+
+
 <div id="solution-list-home-page">
-    <h1><?php echo get_field("solution_title") ?></h1>
-     <?php echo get_field("solution_detail") ?> 
-    <div class="header container">
+    <h1><?php echo $text_static_solution['title'] ?></h1>
+     <p><?php echo $text_static_solution['detail'] ?> </p>
+    <div class="header">
         <?php 
                     $show_detail = get_field("solution_show_data");
                     $page_solution = get_field("page_solution");
                     $postShowId = 0;
                     $index = 0;
-                    $solutions = [];
-                    if(isset($_GET['solution'])) {
-                        $postShowId  = intval($_GET['solution']);
-                    }
-                    foreach ( $page_solution as $solution):
+                    // $solutions = [];
+                    // if(isset($_GET['solution'])) {
+                    //     $postShowId  = intval($_GET['solution']);
+                    // }
+                    $argc_solution_page = [
+                        "post_type" => "page",
+                        "post_parent" => 83,
+                        'order'             => 'ASC',
+                        'orderby'           => 'order',
+                    ];
+                    $query_solution_page = new WP_Query($argc_solution_page);
+                    if($query_solution_page->have_posts()):
+                    while ($query_solution_page->have_posts()):
+                        $query_solution_page->the_post();
                         if($index == 0 &&  $postShowId == 0):
-                            $postShowId = $solution->ID;
+                            $postShowId = get_the_ID();
                         endif;
                         $index = $index + 1;
-                        $id = $solution->ID;
+                        $id = get_the_ID();
                         $featured_img_url = get_the_post_thumbnail_url( $id,'full');
                         $className = "";
                         if($postShowId == $id) {
@@ -26,118 +65,82 @@
                         }
                         $href =  "";
                         if($show_detail):
-                            $href = "?solution=".$solution->ID."";
+                            $href = get_permalink($id);
                         endif;
                         ?>
                         <div class="solution-card <?php echo  $className ?>">
-                        <img src="<?php  echo $featured_img_url; ?>" />
-                        <h2 class="text-center"><a href="<?php echo $href ?>"><?php echo get_the_title($solution->ID); ?></a></h2>
+                            <a  onclick="loadSolutionFromPage(<?php echo $id ?>)">
+                                <img src="<?php  echo $featured_img_url; ?>" />
+                                <h2 class="text-center">
+                                    <?php echo get_the_title(get_the_ID()); ?>
+                                </h2>
+                            </a>
                         </div>
                     
                     <?php 
-                    endforeach;
-                  
+                    endwhile;
+                endif;
+                wp_reset_postdata();
             ?>
     </div>
-
     <div class="border-solution"></div>
-    <?php 
-                    if($show_detail == 1):
-?>
-<div class="show-list-problem">
-                        <div class="container">
-
-                        <?php
-                        $argc = ["post_type" => "solutions" ];
-                        $query_solution = new WP_Query($argc);
-                        $postShowDetailId = 0;
-                        $solutionShow = [];
-                        if(isset($_GET['solution_detail'])) {
-                            $postShowDetailId  = intval($_GET['solution_detail']);
-                        }
-                       
-                        $index = 0;
-                        if(count($solutions)):
-                            foreach($solutions as $solution):
-                                $soId = $solution->ID;
-                         
-                                $so_img_url = get_the_post_thumbnail_url( $soId,'full');
-                                if($index == 0 && $postShowDetailId == 0):
-                                    $postShowDetailId = $soId;
-                                endif;
-                                $index += 1;
-                                $hrefsS = "?solution=".$postShowId."&solution_detail=".$soId."";
-                                $className = "show-problem";
-                                if($postShowDetailId ==  $soId) {
-                                  
-                                    $className = "show-problem active";
-                                  
-                                    $solutionShow = [
-                                        "id" => $soId,
-                                        "fixed" =>  get_field("fixed" ,  $soId),
-                                        "problem" =>  get_field("problem" ,  $soId),
-                                    ];
-                                    // print_r($solutions);
-                                }
-                        ?>  
-
-
-                               <div class="<?php echo $className ?>">
-                                    <img src="<?php echo $so_img_url ?>" alt="">
-                                    <h3><a href="<?php echo $hrefsS ?>"><?php echo get_the_title($soId) ?></a></h3>
-                               </div>
-
-                <?php
-                   endforeach;
-                ?>
-                        </div>
-
-                </div>
-                <?php
-                endif; endif;  wp_reset_query();
-
-
-?>
-
-<?php if(count($solutionShow) > 0) : ?>
-
+ 
+    <div class="solution-div" ></div>
+       
+</div>
 <div id='info-solution'>
         <div class="container">
                <div class="content">
-                <h2><?php echo $solutionShow['problem']['title'] ;  ?></h2>
-                <h3 class="sub_title"><?php echo $solutionShow['problem']['sub_title'] ?></h3>
-                <?php echo $solutionShow['problem']['cause'] ;  ?>
-                <?php echo $solutionShow['problem']['result'] ;  ?>
+                <h1 id="problem_title" class="text-center"> </h1>
+      
+                <h3 id="problem_sub_title" class="sub_title text-center"> </h3>
+                <section id="problem_cause">
+                     
+                </section>
+                <section id="problem_result">
+              
+                </section>
                </div>
                <div class="before-after">
-                   <img src="<?php echo $solutionShow["problem"]["before_image"]["url"]  ?>" alt="">
-                   <img src="<?php echo $solutionShow["problem"]["after_image"]["url"] ?>" alt="">
+                   <img id="before_image_problem" src="" alt="">
+                   <img  id="after_image_problem"  src="" alt="">
                </div>
-               <h2 class="ee">วิธีการแก้ไข</h2>
+               <h1 class="ee">วิธีการแก้ไข</h1>
                <div class="fixed">
                    <div class="step1">
-                       <!-- <img src="" alt=""> -->
-                       <div class="image">       <img src="<?php echo $solutionShow["fixed"]["step1"]["image"]["url"] ?>" alt=""> </div>
+       
+                       <div class="image">       <img id="step1_image" src="" alt=""> </div>
 
-                       <h1><?php echo $solutionShow['fixed']['step1']['title'] ;  ?></h1>
-                       <?php echo $solutionShow['fixed']['step1']['detail'] ;  ?>
-                       <!-- <p></p> -->
+                       <h1 id="step1_title"></h1>
+                       <section id="step1_detail">
+                       
+                       </section>
+        
                    </div>
                    <div class="step2">
-                   <div class="image"> <img src="<?php echo $solutionShow["fixed"]["step2"]["image"]["url"] ?>" alt=""> </div>
+                   <div class="image"> <img id="step2_image" src="" alt=""> </div>
 
-                        <h1><?php echo $solutionShow['fixed']['step2']['title'] ;  ?></h1>
-                       <?php echo $solutionShow['fixed']['step2']['detail'] ;  ?>
+                        <h1 id="step2_title"></h1>
+                       <section id="step2_detail">
+                       
+
+                        </section>
                    </div>
                    <div class="step3">
-                   <div class="image">  <img src="<?php echo $solutionShow["fixed"]["step3"]["image"]["url"] ?>" alt="">  </div>
+                   <div class="image">  <img id="step3_image" src="" alt="">  </div>
 
-                        <h1><?php echo $solutionShow['fixed']['step3']['title'] ;  ?></h1>
-                        <?php echo $solutionShow['fixed']['step3']['detail'] ;  ?>
+                        <h1 id="step3_title"></h1>
+                        <section id="step3_detail">
+                 
+
+                        </section>
                    </div>
                </div>
         <!-- <p> </p> -->
+        <?php ?>
         </div>
+
+
         <div class="mt-10rem"></div>
         <?php 
             get_template_part("other/products");
@@ -145,10 +148,7 @@
         ?>
     </div>
    
- 
-     
 
-<div>
-<?php endif; ?>
+  
 </div>
-
+ 

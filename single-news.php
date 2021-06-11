@@ -13,10 +13,23 @@ $postUrl = 'http' . ( isset( $_SERVER['HTTPS'] ) ? 's' : '' ) . '://' . "{$_SERV
 
 
 <div id="single-news">
+
+<div class="show-video-link">
+        <?php if(get_field("video_info")): ?>
+    <iframe width="560" height="315" src="<?php echo get_field("video_info")['video_link'] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <?php endif; ?>
+    </div>
 <?php 
     the_post();
     ?>
     <div class="container">
+    <div  class="arrow-back">
+                <a href="/news-page/">
+                <i class="fas fa-arrow-left"></i>
+                </a>
+
+
+        </div>
         <h1>
                 <?php the_title();  ?>
         </h1>
@@ -76,46 +89,67 @@ $postUrl = 'http' . ( isset( $_SERVER['HTTPS'] ) ? 's' : '' ) . '://' . "{$_SERV
     </div>
 
 
-    <div class="container">
-        <div class="content">
-            <?php 
-            echo  get_field("info_1");
-            ?>
-
-        </div>
-        <div  class="content"> 
-            <?php 
-            echo  get_field("info_2");
-            ?>
-
-        </div>
+    <div class="container content">
+         <?php the_content() ?>
     </div>
 
-    <div class="swiper-container news-swiper">
-        <div class="swiper-wrapper">
-        <?php 
-            
-            $photos = acf_photo_gallery("photo_center_cards" , get_the_ID());
-        
-                foreach($photos as $image):
-                    $full_image_url= $image['full_image_url']; 
-                    $size_images += 1;
+ 
 
-            ?>
-            <div class="swiper-slide">
-                <img class="banner-image " src="<?php echo $full_image_url ?>" alt="<?php $image['title'] ?>" />
-                <?php  if($size_images > 1): ?>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-                    <?php endif; ?>
-            </div>
+
+    <div class="image-g">
+        <?php 
+            $photos = acf_photo_gallery("photo_center_cards" , get_the_ID());
+                // echo count( $photos);
+                if(count($photos) > 0):
+        ?>
+        <div class="swiper-container project-swiper1">
+            <div class="swiper-wrapper">
             <?php 
-                endforeach;
-            ?>
-        </div>
-       
-        <!-- <div class="swiper-pagination"></div> -->
+                
+            
+                    foreach($photos as $image):
+                        $full_image_url= $image['full_image_url']; 
+                ?>
+                <div class="swiper-slide">
+                    <img class="banner-image " src="<?php echo $full_image_url ?>" alt="<?php $image['title'] ?>" />
+                
+                </div>
+                <?php 
+                    endforeach;
+                ?>
+            </div>
+            <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+            <!-- <div class="swiper-pagination"></div> -->
+            <!-- <div class="swiper-pagination"></div> -->
         
+        </div>
+        <?php 
+            endif;
+            $photos = acf_photo_gallery("photo_center_cards" , get_the_ID());
+            if(count($photos) > 0):
+        ?>
+        <div class="swiper-container project-swiper2">
+            <div class="swiper-wrapper">
+            <?php 
+                
+                
+            
+                    foreach($photos as $image):
+                        $full_image_url= $image['full_image_url']; 
+                ?>
+                <div class="swiper-slide">
+                    <img class="banner-image " src="<?php echo $full_image_url ?>" alt="<?php $image['title'] ?>" />
+                    <!-- <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div> -->
+                </div>
+                <?php 
+                    endforeach;
+                ?>
+            </div>
+            
+        </div>
+        <?php endif; ?>
     </div>
 
 
@@ -123,7 +157,7 @@ $postUrl = 'http' . ( isset( $_SERVER['HTTPS'] ) ? 's' : '' ) . '://' . "{$_SERV
 
    <div class="container" >
    <?php 
-        get_template_part("other/suggesion");
+        get_template_part("other/news_suggestion");
     
     ?>
    </div>
