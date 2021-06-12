@@ -26,7 +26,7 @@ $photos = acf_photo_gallery("banners" , get_the_ID());
 </head>
 <body>
 
-<header id="home_header" class='home' > 
+<header id="home_header"  > 
     <div class="bk-header"></div>
     
 

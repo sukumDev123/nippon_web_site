@@ -168,17 +168,21 @@
 <script>
     function getChecked(slug , _slug_ ) {
         let _slug = "";
-  
+
+        console.log({slug , _slug_})
         if(slug.match(_slug_)) {
             _slug = slug.split(",").filter(s => s != _slug_).join(",")
         } else {
             _slug = slug ? slug + "," + _slug_ : _slug_
-           
-        
+
         }
         if(_slug) window.location.assign("?cate=" + <?php echo $termId ?> + "&slug=" + _slug)
         else {
             window.location.assign("?cate=" + <?php echo $termId ?>)
+        }
+        if(!slug) {
+            window.location.assign("")
+
         }
     }
 
