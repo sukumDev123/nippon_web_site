@@ -4,6 +4,7 @@
  
  /** Template Name: Search Shade */
 // get_header();
+// $shade_class = "search-shade";
 get_template_part("headers/header-shade");
 
 get_template_part("other/loading");

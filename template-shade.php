@@ -3,12 +3,19 @@
 <?php 
  
  /** Template Name: Shade */
+//  $shade_class = "shade";
+// if(isset($_GET["shade"])): 
+//     return json_encode($response);
 
+
+
+// endif;
+ 
  ?>
  <?php 
     get_template_part("headers/header-shade");
     get_template_part("other/loading");
- 
+   
  ?>
  <script>
      let shade = {};
@@ -84,17 +91,7 @@ if($query->have_posts()):
            if(get_field("shade4")): echo '<div style="background:'. get_field("shade4") .'; width: 64px;height:64px"></div>'; endif;
         echo '</div>';
         // print_r();/get_field("family_color")
-        if( $family_colors):
-            foreach($family_colors as $family_color):
-                $familyId = $family_color->ID;
-                $name =  get_field("name" ,  $familyId );
-                $color =  get_field("color" , $familyId );
-                $family_json = json_encode(["name" =>  $name , "color" => $color  , "ID" =>  $familyId] );
-                
-                echo '<script>  if(!shade['.$thisId.']) shade['.$thisId.'] = [];   </script>';
-                echo '<script>   shade['.$thisId.'].push('.$family_json.')  </script>';
-            endforeach;
-        endif;
+    
         echo "</div>";
     
     endwhile;

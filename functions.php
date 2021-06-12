@@ -341,17 +341,103 @@ add_action("action_address" , "loadService");
 @ini_set( "upload_max_size" , "300M" );
 @ini_set( "post_max_size", "300M");
 @ini_set( "max_execution_time", "300" );
-
-function acf_set_featured_image( $value, $post_id, $field  ){
-    
-    if($value != ''){
-	    //Add the value which is the image ID to the _thumbnail_id meta data for the current post
-    }
-    
-    add_post_meta($post_id, '_thumbnail_id', $value);
-    return $value;
-}
-
-// acf/update_value/name={$field_name} - filter for a specific field based on it's name
-add_filter('acf/update_value/name=post', 'acf_set_featured_image', 10, 3);
  
+function get_color_shade( $data ) {
+    // You can access parameters via direct array access on the object:
+    $_id = $data['id'];
+    $arg = ["post_type" => "shade" , "p" => intval($_id) , "posts_per_page" => 1];
+    $query = new WP_Query($arg );
+    $data = [];
+    if($query->have_posts()):
+        while($query->have_posts()):
+            $query->the_post();
+            $data["title"] = get_the_title();
+            $data['colors'] = [];
+            // if(get_field("family_color")):
+            //     $color = [
+            //         "title" => 
+            //     ];
+            //     array_push($data['colors'] ,json_decode(json_encode($color)))
+            // endif;
+            $family_colors = get_field("family_color");
+            if( $family_colors):
+                foreach($family_colors as $family_color):
+                    $familyId = $family_color->ID;
+                    $name =  get_field("name" ,  $familyId );
+                    $color =  get_field("color" , $familyId );
+                    $family_json = json_encode(["name" =>  $name , "color" => $color  , "ID" =>  $familyId] );
+                    
+                    array_push($data['colors'] , json_decode($family_json));
+                endforeach;
+            endif;
+        endwhile;
+    endif;
+    
+    return json_decode(json_encode($data));
+  }
+
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/shade/(?P<id>[\\d]+)', array(
+      'methods' => 'GET',
+      'callback' => 'get_color_shade',
+      'args' => array(
+        'id' => array(
+          'validate_callback' => function($param, $request, $key) {
+            return is_numeric( $param);
+          }
+        ),
+      ),
+    ) );
+  } );
+
+
+  function get_solution_data($data) {
+    $_id = $data['id'];
+    $arg = ["post_type" => "page" , "p" => intval($_id) , "posts_per_page" => 1];
+    $query = new WP_Query($arg );
+    $data = [];
+    if($query->have_posts()):
+        while($query->have_posts()):
+            $query->the_post();
+            $data["title"] = get_the_title();
+            $data['solutions'] = [];
+            if( get_field("post")) {
+                $solutions = get_field("post");
+                // if(count($solutions) > 0)  {
+                    foreach( $solutions as  $solution) {
+                            $featured_img_url = get_the_post_thumbnail_url($solution->ID,'full');    
+                            // get_the_title($solution->ID)
+                            $solution_array   = [
+                                "title" => get_the_title($solution->ID),
+                                "image" => $featured_img_url,
+                                "ID" => $solution->ID
+                            ];
+                            $solution = json_encode($solution_array);
+                            array_push($data['solutions'] , json_decode($solution));
+                  
+                    }
+        
+                // }
+    
+            }
+          
+        endwhile;
+    endif;
+    
+    return json_decode(json_encode($data));
+  }
+
+  
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/solution/(?P<id>[\\d]+)', array(
+      'methods' => 'GET',
+      'callback' => 'get_solution_data',
+      'args' => array(
+        'id' => array(
+          'validate_callback' => function($param, $request, $key) {
+            return is_numeric( $param);
+          }
+        ),
+      ),
+    ) );
+  } );

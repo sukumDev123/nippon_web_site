@@ -8,43 +8,86 @@ let searchType = "rgb-div";
 
 // let firstPostId = 0;
 function showListOfFamilyColorThisShade(shadeId) {
+  console.log({ shadeId });
   if (loading) loading.className = "";
   // document.querySelector("#shade-filter").value = shadeId;
-  if (shade[shadeId]) {
-    if (shade[shadeId].length) {
-      const familyDiv = document.querySelector("#family-list");
-      if (familyDiv.firstChild) {
-        while (familyDiv.lastElementChild) {
-          familyDiv.removeChild(familyDiv.lastElementChild);
+  fetch(domain + "/wp-json/api/v1/shade/" + shadeId)
+    .then((d) => d.json())
+    .then((d) => {
+      if (d.colors.length) {
+        const familyDiv = document.querySelector("#family-list");
+        if (familyDiv.firstChild) {
+          while (familyDiv.lastElementChild) {
+            familyDiv.removeChild(familyDiv.lastElementChild);
+          }
         }
-      }
-      Array.from(shade[shadeId]).forEach((shade, index) => {
-        const { name, ID, color } = shade;
-        const box = document.createElement("div");
-        box.className = "box-color";
-        box.style.backgroundColor = color;
-        if (index === 0)
-          document.querySelector("#family-image").style.backgroundColor = color;
-        box.addEventListener("click", () => {
-          document.querySelector("#family-image").style.backgroundColor = color;
+        Array.from(d.colors).forEach((shade, index) => {
+          const { name, ID, color } = shade;
+          const box = document.createElement("div");
+          box.className = "box-color";
+          box.style.backgroundColor = color;
+          if (index === 0)
+            document.querySelector("#family-image").style.backgroundColor =
+              color;
+          box.addEventListener("click", () => {
+            document.querySelector("#family-image").style.backgroundColor =
+              color;
+          });
+          familyDiv.appendChild(box);
         });
-        familyDiv.appendChild(box);
-      });
-    }
-  } else {
-    const familyDiv = document.querySelector("#family-list");
-    if (familyDiv.firstChild) {
-      while (familyDiv.lastElementChild) {
-        familyDiv.removeChild(familyDiv.lastElementChild);
-        document.querySelector("#family-image").style.backgroundColor =
-          "rgba(0,0,0,0)";
-      }
-    }
-    familyDiv.innerHTML = `
+      } else {
+        const familyDiv = document.querySelector("#family-list");
+
+        if (familyDiv.firstChild) {
+          while (familyDiv.lastElementChild) {
+            familyDiv.removeChild(familyDiv.lastElementChild);
+            document.querySelector("#family-image").style.backgroundColor =
+              "rgba(0,0,0,0)";
+          }
+        }
+        familyDiv.innerHTML = `
       <h1 class='text-center'> Family color null </h1>
     `;
-  }
-  if (loading) loading.className = "hide";
+      }
+      if (loading) loading.className = "hide";
+    })
+    .catch((e) => {
+      if (loading) loading.className = "hide";
+    });
+  // if (shade[shadeId]) {
+  //   if (shade[shadeId].length) {
+  //     const familyDiv = document.querySelector("#family-list");
+  //     if (familyDiv.firstChild) {
+  //       while (familyDiv.lastElementChild) {
+  //         familyDiv.removeChild(familyDiv.lastElementChild);
+  //       }
+  //     }
+  //     Array.from(shade[shadeId]).forEach((shade, index) => {
+  //       const { name, ID, color } = shade;
+  //       const box = document.createElement("div");
+  //       box.className = "box-color";
+  //       box.style.backgroundColor = color;
+  //       if (index === 0)
+  //         document.querySelector("#family-image").style.backgroundColor = color;
+  //       box.addEventListener("click", () => {
+  //         document.querySelector("#family-image").style.backgroundColor = color;
+  //       });
+  //       familyDiv.appendChild(box);
+  //     });
+  //   }
+  // } else {
+  //   const familyDiv = document.querySelector("#family-list");
+  //   if (familyDiv.firstChild) {
+  //     while (familyDiv.lastElementChild) {
+  //       familyDiv.removeChild(familyDiv.lastElementChild);
+  //       document.querySelector("#family-image").style.backgroundColor =
+  //         "rgba(0,0,0,0)";
+  //     }
+  //   }
+  //   familyDiv.innerHTML = `
+  //     <h1 class='text-center'> Family color null </h1>
+  //   `;
+  // }
 
   // if()
 }
@@ -228,50 +271,32 @@ function loadSolutionFromPage(id) {
     }
     // console.log({ id });
     if (loading) loading.className = "";
-    fetch(domain + "/wp-json/wp/v2/pages/" + id)
+
+    fetch(domain + "/wp-json/api/v1/solution/" + id)
       .then((d) => d.json())
-      .then((d) => {
-        const solutions = Array.from(d.acf.post);
-        const _fetch = [];
-        for (let i = 0; i < solutions.length; i++) {
-          const solution = solutions[i];
-          const ID = solution.ID;
-          // console.log({ solution });
+      .then((page) => {
+        loading.className = "hide";
 
-          const kk = domain + "/wp-json/wp/v2/solutions/" + ID + "?_embed";
+        page.solutions.forEach((solution) => {
+          const createDivCard = document.createElement("div");
+          createDivCard.id = "solution" + solution.ID;
+          createDivCard.onclick = function (event) {
+            solutionChange(solution.ID);
+            createDivCard.className = "card-active";
+          };
 
-          _fetch.push(fetch(kk));
-        }
-
-        Promise.all(_fetch).then((d) => {
-          loading.className = "hide";
-
-          Array.from(d).forEach((data) => {
-            data.json().then((_ata) => {
-              loading.className = "hide";
-
-              const createDivCard = document.createElement("div");
-              createDivCard.id = "solution" + _ata.id;
-              createDivCard.onclick = function (event) {
-                solutionChange(_ata.id);
-                createDivCard.className = "card-active";
-              };
-              const _embedded = _ata["_embedded"]["wp:featuredmedia"];
-              const __embedded = _embedded ? _embedded[0] : {};
-              createDivCard.innerHTML = `
-                    <a>
-                    <img src="${__embedded?.source_url}" />
-                    <h3 style="font-weight:bold">${_ata?.title?.rendered}</h3>
-                    <div class="bbb"></div>
-                    </a>
-                `;
-              solution_div.appendChild(createDivCard);
-            });
-          });
+          createDivCard.innerHTML = `
+              <a>
+              <img src="${solution["image"]}" />
+              <h3 style="font-weight:bold">${solution["title"]}</h3>
+              <div class="bbb"></div>
+              </a>
+          `;
+          solution_div.appendChild(createDivCard);
         });
-        // _fetch[0].then(d => d.json()).then(d => console.log({f: d}))
-      })
-      .catch((e) => (loading.className = "hide"));
+      });
+
+    // _fetch[0].then(d => d.json()).then(d => console.log({f: d}))
   }
 }
 

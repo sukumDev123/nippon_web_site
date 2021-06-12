@@ -219,20 +219,7 @@ wp_reset_query();
 <div id="solutions" >
     <div class="solution-div">
     <?php 
-        $args_solution = [
-            "post_type" => 'solutions',
-            // "posts_per_page" => -1,
-        ];
-        $args_solution['meta_query'] = array(
-            array(
-                'key'   => 'page_parent',
-                'value' => esc_sql($thisPostId ),
-                "compare" => "="
-            )
-        );
-    
-    // $thisPostId
-        $query_solution = new WP_Query( $args_solution);
+ 
 
         if(count( $solutions) > 0)  {
             foreach( $solutions as  $solution) {

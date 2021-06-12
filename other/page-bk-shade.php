@@ -8,9 +8,9 @@
     $argc = ['post_type'=> "page" , 'post_parent' => $postId];
     $query = new WP_Query($argc);
     $index = 1;
- 
+    $shade_class = "page-".$post->ID;
 ?>  
-<div class="page-bk-shade">
+<div class="page-bk-shade <?php echo $shade_class; ?>">
     <img alt="logo" src="<?php echo $featured_img_url ; ?>"  class="image-logo-desktop" />
     <div class="image-logo-bk"> </div>
     <div class="page-detail">
@@ -43,9 +43,9 @@
                 }
                 $index += 1;
             ?>
-                <h1  class="<?php echo   $className;?>" > 
-                <a href="<?php echo get_permalink() ?>"><?php echo get_the_title() ?> </a>
-                </h1>
+                <a href="<?php echo get_permalink() ?>" class="<?php echo   $className;?>" > 
+                <h1><?php echo get_the_title() ?> </h1>
+            </a>
             <?php endwhile;endif; ?>
 
             <h1 class="<?php echo  $classNameOut ?>"></h1>

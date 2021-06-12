@@ -24,7 +24,11 @@ $text_static = [
         <div class="header-icon">
             <div >
                 <div class="d-flex align-items-center justify-content-between">
-                <img  alt="logo" src="<?php bloginfo("template_directory");  ?>/assets/images/logo.png"  class="image-logo" />
+                <!-- <img  alt="logo" src="<?php bloginfo("template_directory");  ?>/assets/images/logo.png"  class="image-logo" />
+             -->
+             <a href="<?php echo get_site_url() ?>">
+                    <img alt="logo" src="<?php bloginfo("template_directory");  ?>/assets/images/logo.png"  class="image-logo" />
+            </a>
                 <i id="header_mobile_close" class="fas fa-times"></i>
             </div>
             </div>
