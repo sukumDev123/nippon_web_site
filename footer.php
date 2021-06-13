@@ -1,4 +1,15 @@
 <?php wp_footer(); ?>
+<?php
+       $tb =  get_bloginfo("template_directory");
+       $fb = $tb . "/assets/images/fb.svg";
+       $line = $tb . "/assets/images/line.svg";
+       $yb = $tb . "/assets/images/yb.svg";
+       $ig = $tb . "/assets/images/ig.svg";
+       $tw = $tb . "/assets/images/tw.svg";
+       $in = $tb . "/assets/images/in.svg";
+
+
+?>
 <footer>
     <div  >
  
@@ -41,8 +52,8 @@
          
             <div class="phone">
                 <h1>PHONE </h1>
-                <h5><a>TEL 0 246 25299  </a></h5>
-                <h5><a>FAX 0 2463 2863 </a></h5>
+                <h5><a href="tel:024625299">TEL 0 246 25299  </a></h5>
+                <h5><a href="tel:024632863">FAX 0 2463 2863 </a></h5>
             </div>
         </div>
         <div  class="footer-menu-desktop">
@@ -57,17 +68,23 @@
             ?>
         </div>
         <div>
-            <?php echo loadService() ?>
+           
+        <h1 class="footer-title">Careline Service</h1>
+
+            <h1 class="font-service">
+                <a href="tel:024631899">02 463 1899</a>
+            </h1>
             <h1 class='mt-4 footer-title'>
             ติดตามเราได้ที่นี่
             </h1>
             <div class="social-div">
-            <i class="fab fa-facebook"></i>
-            <i class="fab fa-twitter-square"></i>
-            <i class="fab fa-instagram-square"></i>
-            <i class="fab fa-youtube"></i>
-            <i class="fab fa-line"></i>
-            <i class="fab fa-linkedin"></i>
+                <img src="<?php echo $fb; ?>" alt="">
+                <img src="<?php echo $line; ?>" alt="">
+                <img src="<?php echo $yb; ?>" alt="">
+                <img src="<?php echo $ig ; ?>" alt="">
+                <img src="<?php echo $tw; ?>" alt="">
+                <img src="<?php echo $in; ?>" alt="">
+ 
             </div>
         </div>
         <!-- <div></div>

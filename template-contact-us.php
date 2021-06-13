@@ -19,7 +19,17 @@
  get_template_part("other/page-bk");
 
 ?>
+<?php
+       $tb =  get_bloginfo("template_directory");
+       $fb = $tb . "/assets/images/fb.svg";
+       $line = $tb . "/assets/images/line.svg";
+       $yb = $tb . "/assets/images/yb.svg";
+       $ig = $tb . "/assets/images/ig.svg";
+       $tw = $tb . "/assets/images/tw.svg";
+       $in = $tb . "/assets/images/in.svg";
 
+
+?>
 
 <div id="contact-us" class="container"> 
         <div class="phone-cs-social-address">
@@ -28,8 +38,8 @@
                 <h1> <i class="fas fa-phone-alt"></i> PHONE </h1>
                 <div class="mt-4"></div>
 
-                <a>TEL 0 246 25299  </a><br />
-                <a>FAX 0 2463 2863 </a>
+                <a href="tel:024625299">TEL 0 246 25299  </a><br />
+                <a href="tel024632863">FAX 0 2463 2863 </a>
         
             </div>
             </div>
@@ -45,12 +55,15 @@
 
 
                 <div class="social-div">
-                <i class="fab fa-facebook"></i>
-                <i class="fab fa-twitter-square"></i>
-                <i class="fab fa-instagram-square"></i>
-                <i class="fab fa-youtube"></i>
-                <i class="fab fa-line"></i>
-                <i class="fab fa-linkedin"></i>
+                
+                    <img src="<?php echo $fb; ?>" alt="">
+                    <img src="<?php echo $line; ?>" alt="">
+                    <img src="<?php echo $yb; ?>" alt="">
+                    <img src="<?php echo $ig ; ?>" alt="">
+                    <img src="<?php echo $tw; ?>" alt="">
+                    <img src="<?php echo $in; ?>" alt="">
+
+
                 </div>
             </div>
             <div class="address mt-3">

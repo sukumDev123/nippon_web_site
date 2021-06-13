@@ -890,7 +890,6 @@ window.onload = () => {
 };
 
 function solutionChange(id) {
-  console.log({ id });
   if (loading) loading.className = "";
   const solution_div = document.querySelectorAll(".solution-div div");
   const info_solution = document.querySelector("#info-solution");
@@ -939,15 +938,15 @@ function solutionChange(id) {
 
         if (step1.image) {
           const step1_image = document.querySelector("#step1_image");
-          step1_image.src = step1.image.sizes.thumbnail;
+          step1_image.src = step1.image.url;
         }
         if (step2.image) {
           const step2_image = document.querySelector("#step2_image");
-          step2_image.src = step2.image.sizes.thumbnail;
+          step2_image.src = step2.image.url;
         }
         if (step3.image) {
           const step3_image = document.querySelector("#step3_image");
-          step3_image.src = step3.image.sizes.thumbnail;
+          step3_image.src = step3.image.url;
         }
 
         if (problem.after_image) {
