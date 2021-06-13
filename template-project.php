@@ -1,4 +1,4 @@
-<?php   /** Template Name: News */ ?>
+<?php   /** Template Name: Project */ ?>
 <?php get_header(); ?>
 <?php 
 $first_page = 0;

@@ -850,9 +850,11 @@ header#page {
 }
 .social-div {
   display: flex;
+  flex-wrap: wrap;
   img {
     border-radius: 100% !important;
     font-size: 2em;
+    width: 44px;
     margin-right: 0.3em;
   }
   img:last-child {
@@ -1069,7 +1071,7 @@ footer {
     }
     @media screen and (max-width: 1026px) {
       & {
-        padding: 1em 2em;
+        padding: 1em 1em;
         > div:first-child {
           > div {
             h1 {
@@ -1497,6 +1499,29 @@ footer {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(1fr, 1fr));
     grid-gap: 2em;
+  }
+  .news-div-overflow {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 1em;
+    padding-left: 1px;
+    > div {
+      width: 410px;
+      flex-shrink: 0;
+      margin-right: 2em;
+    }
+    &::-webkit-scrollbar {
+      width: $scroll-bar-size;
+      height: $scroll-bar-size;
+      opacity: 0.5;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #3d464f !important;
+      border-radius: 9px;
+    }
+  }
+  .news-div,
+  .news-div-overflow {
     > div {
       box-shadow: 0 0 13px 1px rgba($color: #000000, $alpha: 0.1);
       height: fit-content;
@@ -1560,6 +1585,7 @@ footer {
       }
     }
   }
+
   .see-more {
     text-align: center;
     margin-top: 4rem;
@@ -1577,7 +1603,8 @@ footer {
   }
   @media screen and (min-width: 900px) {
     & {
-      .news-div {
+      .news-div,
+      .news-div-overflow {
         grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
       }
     }
@@ -2391,7 +2418,7 @@ footer {
     & {
       padding: 2em 0;
       .shade-swiper-family {
-        margin: 2.5em 0 0 0;
+        margin: 2.5em 0 0 1em;
       }
     }
   }
