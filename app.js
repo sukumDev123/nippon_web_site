@@ -819,6 +819,9 @@ function handleFilterProductMobile() {
   const product_cate = document.querySelectorAll(
     ".filter-content .product-cate-card"
   );
+  const product_cate_clicked = document.querySelectorAll(
+    ".filter-content .product-cate-card-clicked"
+  );
   const filter_button = document.querySelector(".filter-button");
   if (filter_product_close) {
     filter_product_close.addEventListener("click", (event) => {
@@ -833,8 +836,8 @@ function handleFilterProductMobile() {
   if (filter_product_mobiles) {
     // console.log({ product_cate });
     // if (filter_product_mobiles.className === "active") {
-    Array.from(product_cate).forEach((productCate) => {
-      productCate.addEventListener("click", (event) => {
+    Array.from(product_cate).forEach((productCate, index) => {
+      product_cate_clicked[index].addEventListener("click", (event) => {
         if (productCate.className.match("active")) {
           productCate.className = " product-cate-card";
         } else {
@@ -1119,12 +1122,15 @@ function loadLocation() {
           // "&province=" +
           // province[provinceValue].PROVINCE_NAME;
           if (countryValue) {
-            search += "&country=" + catProductValue;
+            search += "?country=" + countryValue;
           }
           if (provinceValue) {
             search += "&province=" + province[provinceValue].PROVINCE_NAME;
             search_all =
               districtValue + " " + province[provinceValue].PROVINCE_NAME;
+          }
+          if (countryValue != "th") {
+            search_all += " " + countryValue;
           }
         } else {
           // search +=
@@ -1133,12 +1139,15 @@ function loadLocation() {
           //   "&province=" +
           //   province[provinceValue].PROVINCE_NAME;
           if (countryValue) {
-            search += "?country=" + catProductValue;
+            search += "?country=" + countryValue;
           }
           if (provinceValue) {
             search += "&province=" + province[provinceValue].PROVINCE_NAME;
             search_all =
               districtValue + " " + province[provinceValue].PROVINCE_NAME;
+          }
+          if (countryValue != "th") {
+            search_all += " " + countryValue;
           }
         }
 
@@ -1149,7 +1158,12 @@ function loadLocation() {
         // }
 
         console.log({ search_all });
-        window.location.href = search + "&search=" + search_all;
+        if (search) {
+          window.location.href = search + "&search=" + search_all;
+        }
+        if (search_all) {
+          window.location.href = search + "&search=" + search_all;
+        }
       });
   }
 }

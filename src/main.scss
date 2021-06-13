@@ -930,6 +930,13 @@ footer {
 
     @media screen and (max-width: 1026px) {
       & {
+        > div:first-child {
+          // background-color: #000;
+          padding: 1em 1em;
+          h5 {
+            padding: 0.1em 0 1em;
+          }
+        }
         > div {
           display: block;
         }
@@ -3682,6 +3689,7 @@ footer {
 .a-primary-button {
   text-decoration: none;
   color: white;
+  max-width: 300px;
   .primary-button {
     border: 0px solid;
     background-color: $primary-color;
@@ -3710,6 +3718,8 @@ footer {
   }
   @media screen and (max-width: 1440px) {
     & {
+      margin: auto;
+      margin-top: 1em;
       .primary-button {
         min-width: 100%;
       }

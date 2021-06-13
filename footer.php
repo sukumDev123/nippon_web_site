@@ -74,7 +74,7 @@
             <h1 class="font-service">
                 <a href="tel:024631899">02 463 1899</a>
             </h1>
-            <h1 class='mt-4 footer-title'>
+            <!-- <h1 class='mt-4 footer-title'>
             ติดตามเราได้ที่นี่
             </h1>
             <div class="social-div">
@@ -85,7 +85,7 @@
                 <img src="<?php echo $tw; ?>" alt="">
                 <img src="<?php echo $in; ?>" alt="">
  
-            </div>
+            </div> -->
         </div>
         <!-- <div></div>
         <div></div>
@@ -104,7 +104,7 @@
         </div>
     </div>
     <div class="border-bottom"></div>
-        <h5 class="text-center">2021 - © Nippon Paint Decorative Coatings (Thailand) Co.,Ltd. All rights reserved.</h5>
+        <h5 class="text-center ps-2 pe-2">2021 - © Nippon Paint Decorative Coatings (Thailand) Co.,Ltd. All rights reserved.</h5>
 </footer>
 </body>
 </html>

@@ -60,17 +60,32 @@ endif;
 
 if(isset($_GET["cat_product"])):
     $cat_product = $_GET["cat_product"];
+     
     $argc['meta_query'] = array(
         array(
             'key' => 'portfolio',
-            'value' => $_GET['cat_product'],
-            'compare' => 'LIKE'
+            'value' =>   $cat_product,
+            'compare' => 'REGEXP'
         )
         );
    
 endif;
 
-
+if(isset($_GET["cat_product"]) && isset($_GET['search'])) {
+    $argc['meta_query'] = array(
+        array(
+            'key' => 'word_map',
+            'value' => $_GET['search'],
+            'compare' => 'REGEXP'
+        ),
+        array(
+            'key' => 'portfolio',
+            'value' =>   $cat_product,
+            'compare' => 'REGEXP'
+        )
+        );
+}
+ 
 $query = new WP_Query($argc);
 ?>
 
@@ -91,6 +106,7 @@ $query = new WP_Query($argc);
        <select  id="country" >
            <option value=""><?php echo $text_static['country'] ?></option>
            <option value="th"><?php echo "ประเทศไทย" ?></option>
+           <option value="ประเทศลาว"><?php echo "ประเทศลาว" ?></option>
        </select>
        <select  id="province" >
            <option value=""><?php echo $text_static['province'] ?></option>

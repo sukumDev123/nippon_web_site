@@ -7,13 +7,13 @@ $lang=get_bloginfo("language");
      "en" => [
          "product_title" => "Product Relation",
          "product_link" => "Search",
-         "product_link_url" =>  get_site_url()  . "/products/"
+         "product_link_url" =>  get_site_url()  . "/products/สีน้ำทาอาคาร"
 
      ],
      "th" => [
          "product_title" => "ผลิตภัณฑ์แนะนำ",
          "product_link" => "ค้นหาผลิตภัณฑ์เพิ่มเติม",
-          "product_link_url" => get_site_url()  . "/products/"
+          "product_link_url" => get_site_url()  . "/products/สีน้ำทาอาคาร"
 
      ]
  ][$lang];

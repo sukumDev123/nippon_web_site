@@ -49,7 +49,7 @@
 
                 <h5 style="font-weight:bold"><a href="tel:024631899">02 463 1899</a></h5>
             </div>
-            <div class="social">
+            <!-- <div class="social">
                 <h1>ติดตามเราได้ที่นี่</h1>
                 <div class="mt-4"></div>
 
@@ -65,7 +65,7 @@
 
 
                 </div>
-            </div>
+            </div> -->
             <div class="address mt-3">
              
          

@@ -7,7 +7,7 @@ $shades  = get_field("shades");
 $lang=get_bloginfo("language");  
 $text_static = [
     "en" => [
-        "url" => "/shade-en",
+        "url" => "/shade-en/collection-color-th/",
         "title" => "ค้นหาสีสันในแบบที่คุณต้องการ",
         "detail" => "“เพราะทุกเฉดสีมีความหมายในตัวเอง” <br />
         เราจึงรวบรวมทุกสีสันมาไว้ให้คุณเลือกในที่เดียว ไม่ว่าจะเป็นสีโทนร้อนหรือสีโทนเย็น คุณก็สามารถค้นหาโทนสีได้ง่ายๆ เพียงแค่คลิกลิงก์ที่อยู่ด้านล่าง"
@@ -16,9 +16,11 @@ $text_static = [
         "url" => "/shade-th/collection-color-th/",
         "title" => "ค้นหาสีสันในแบบที่คุณต้องการ",
         "detail" => "“เพราะทุกเฉดสีมีความหมายในตัวเอง” <br />
-        เราจึงรวบรวมทุกสีสันมาไว้ให้คุณเลือกในที่เดียว ไม่ว่าจะเป็นสีโทนร้อนหรือสีโทนเย็น คุณก็สามารถค้นหาโทนสีได้ง่ายๆ เพียงแค่คลิกลิงก์ที่อยู่ด้านล่าง"
-
-         
+        เราจึงรวบรวมทุกสีสันมาไว้ให้คุณเลือกในที่เดียว ไม่ว่าจะเป็นสีโทนร้อนหรือสีโทนเย็น คุณก็สามารถค้นหาโทนสีได้ง่ายๆ เพียงแค่คลิกลิงก์ที่อยู่ด้านล่าง",
+        "text_left" =>"ค้นหาเฉดสีที่ต้องการ",
+        "text_right" => "ค้นหาสีที่เป็นตัวคุณ",
+        "page_left"  => "/shade-th/shade-color-th",
+        "page_right"  => "collection-color-th"
 
     ]
 ][$lang];
@@ -63,10 +65,10 @@ $text_static = [
         <div class="left-right">
                 <h3>
                     
-                    <a href="<?php echo $shade_explain['page_link_left'] ?>"><?php echo $shade_explain['text_left'] ?></a>
+                    <a href="<?php echo $text_static['page_left'] ?>"><?php echo $text_static['text_left'] ?></a>
                 </h3>
                 <h3>
-                    <a href="<?php echo $shade_explain['page_link_right'] ?>"><?php echo $shade_explain['text_right'] ?></a>
+                    <a href="<?php echo $text_static['page_right'] ?>"><?php echo $text_static['text_right'] ?></a>
                 </h3>
         </div>
     </div>

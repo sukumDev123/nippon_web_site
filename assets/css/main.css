@@ -878,6 +878,12 @@ footer > div:first-child h5 {
   color: white;
 }
 @media screen and (max-width: 1026px) {
+  footer > div:first-child > div:first-child {
+    padding: 1em 1em;
+  }
+  footer > div:first-child > div:first-child h5 {
+    padding: 0.1em 0 1em;
+  }
   footer > div:first-child > div {
     display: block;
   }
@@ -3354,6 +3360,7 @@ footer .footer-content .footer-menu-mobile {
 .a-primary-button {
   text-decoration: none;
   color: white;
+  max-width: 300px;
 }
 .a-primary-button .primary-button {
   border: 0px solid;
@@ -3380,6 +3387,10 @@ footer .footer-content .footer-menu-mobile {
   padding-left: 40px;
 }
 @media screen and (max-width: 1440px) {
+  .a-primary-button {
+    margin: auto;
+    margin-top: 1em;
+  }
   .a-primary-button .primary-button {
     min-width: 100%;
   }
