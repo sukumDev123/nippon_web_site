@@ -1,9 +1,10 @@
 <?php 
-
-$products = get_field("products");
+// echo ;
+ 
+$products = get_field("products" );
 $lang=get_bloginfo("language");  
 
- $text_static = [
+$text_static = [
      "en" => [
          "product_title" => "Product Relation",
          "product_link" => "Search",
@@ -16,7 +17,7 @@ $lang=get_bloginfo("language");
           "product_link_url" => get_site_url()  . "/products/สีน้ำทาอาคาร"
 
      ]
- ][$lang];
+][$lang];
 
 ?>
 <div  id="products-1">

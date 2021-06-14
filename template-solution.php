@@ -183,6 +183,7 @@ $args = [
 // $thisPostId
 $solutions = [];
 $query = new WP_Query($args);
+$solution_id = 0;
 while ($query->have_posts()) {
     $query->the_post();
     $id = get_the_ID();
@@ -191,6 +192,7 @@ while ($query->have_posts()) {
   
     if($thisPostId == $id) {
         $className = "active";
+        $solution_id = $id;
         if( get_field("post")) {
             $solutions = get_field("post");
 
@@ -232,7 +234,7 @@ wp_reset_query();
                     }
                     ?>
                     <!-- <a  > -->
-                    <div id="solution<?php echo $solution->ID ?>" onclick="solutionChange(<?php echo $solution->ID ?>)"  class="<?php echo $className   ?>">
+                    <div id="solution<?php echo $solution->ID ?>" onclick="solutionChange(<?php echo $solution->ID ?> , false)"  class="<?php echo $className   ?>">
                         <img src="<?php echo $featured_img_url  ?>" alt="image" />  
                            
                            <h3>
@@ -321,7 +323,7 @@ wp_reset_query();
 
         <div class="mt-10rem"></div>
         <?php 
-            get_template_part("other/products");
+            get_template_part("other/products"  );
         
         ?>
     </div>

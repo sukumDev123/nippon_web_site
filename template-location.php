@@ -85,6 +85,15 @@ if(isset($_GET["cat_product"]) && isset($_GET['search'])) {
         )
         );
 }
+
+$country = "";
+if(isset($_GET['country']) ): 
+    $country =$_GET['country'];
+    echo "<script>
+    document.querySelector('#country').value = '".$country."';
+    </script>";
+endif;  
+
  
 $query = new WP_Query($argc);
 ?>
@@ -103,8 +112,9 @@ $query = new WP_Query($argc);
             <?php endforeach; ?>
         <?php endif; ?>
        </select>
-       <select  id="country" >
-           <option value=""><?php echo $text_static['country'] ?></option>
+    
+       <select  id="country" value="<?php echo $country  ?> " >
+           <!-- <option value=""><?php echo $text_static['country'] ?></option> -->
            <option value="th"><?php echo "ประเทศไทย" ?></option>
            <option value="ประเทศลาว"><?php echo "ประเทศลาว" ?></option>
        </select>

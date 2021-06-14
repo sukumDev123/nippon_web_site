@@ -11,6 +11,13 @@
     if ( $loop->have_posts() ) {
         while ( $loop->have_posts() ) : $loop->the_post();
                 $featured_img_url = get_the_post_thumbnail_url( get_the_ID(),'full');
+                $link = "";
+                if(get_the_ID() == 148):
+                    $link = "https://smartpainter.nipponpaintdecor.com/";
+                endif;
+                if(get_the_ID() == 181):
+                    $link = "https://web.facebook.com/NipponPaintDecor/posts/3967456120036278?_rdc=3&_rdr";
+                endif;
             ?>
                     <div class="service-card">
                       <div >
@@ -18,7 +25,7 @@
                             <div class="bk"></div>
                             <img src="<?php echo $featured_img_url ?>" alt="image" class="service-image"  />
                             <h2><?php echo get_the_title() ?></h2>
-                            <a target="_blank"  href="https://smartpainter.nipponpaintdecor.com/">Read More</a>
+                            <a target="_blank"  href="<?php echo $link ?>">Read More</a>
                         <!-- </a> -->
                       </div>
                     </div>

@@ -220,7 +220,7 @@ body {
       padding: 2em 1em;
 
       > h2 {
-        font-size: 2em;
+        font-size: 1.5em;
       }
       .services-card {
         display: block;
@@ -3190,13 +3190,13 @@ footer {
           border-radius: 9px;
         }
         .product-card {
-          max-width: 350px;
+          width: 300px;
           border: 1px solid rgba($color: #000000, $alpha: 0.1);
-          min-width: 350px;
           text-align: center;
           display: flex;
           align-items: center;
           margin-right: 3em;
+          flex-shrink: 0;
           &:last-child {
             margin-right: 0px;
           }
@@ -3292,13 +3292,12 @@ footer {
     //   }
     // }
     .product-card {
-      max-width: 350px;
-      // border: 1px solid rgba($color: #000000, $alpha: 0.1);
-      min-width: 350px;
+      width: 300px;
       text-align: center;
       display: flex;
       align-items: center;
       margin-right: 3em;
+      flex-shrink: 0;
       &:last-child {
         margin-right: 0px;
       }
@@ -3477,7 +3476,7 @@ footer {
     max-width: 400px;
     // margin-right: 50px;
     .product-card {
-      max-width: 350px;
+      max-width: 300px;
       border: 1px solid rgba($color: #000000, $alpha: 0.1);
 
       text-align: center;
@@ -3808,21 +3807,21 @@ footer {
   .project_home_suggestion {
     margin-top: 4rem;
     margin-bottom: 4rem;
-    height: 630px !important;
+    height: 470px !important;
     .swiper-pagination-bullet-active {
       background-color: $font-color !important;
     }
     .swiper-wrapper {
-      height: 550px !important;
+      height: 400px !important;
       img {
         width: 100%;
-        height: 550px !important;
+        height: 400px !important;
         object-fit: cover;
         z-index: 1;
       }
       .swiper-slide {
-        max-width: 699px;
-        height: 550px;
+        max-width: 400px;
+        height: 400px;
         .swiper-button-prev,
         .swiper-container-rtl .swiper-button-next {
           color: $font-color;
@@ -4532,6 +4531,9 @@ footer {
         }
       }
       .right-side {
+        .categories {
+          padding: 2em 2em;
+        }
         .file-left-right {
           .right {
             margin-left: 0px;
@@ -5102,4 +5104,11 @@ section#location_page_div {
   width: auto;
   height: 150px;
   object-fit: contain;
+}
+
+#province {
+  display: none;
+}
+#district {
+  display: none;
 }

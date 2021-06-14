@@ -401,9 +401,11 @@ add_action( 'rest_api_init', function () {
             $query->the_post();
             $data["title"] = get_the_title();
             $data['solutions'] = [];
+            $data['products_suggestion'] =  [];
             if( get_field("post")) {
                 $solutions = get_field("post");
-                // if(count($solutions) > 0)  {
+            
+               
                     foreach( $solutions as  $solution) {
                             $featured_img_url = get_the_post_thumbnail_url($solution->ID,'full');    
                             // get_the_title($solution->ID)
@@ -416,10 +418,32 @@ add_action( 'rest_api_init', function () {
                             array_push($data['solutions'] , json_decode($solution));
                   
                     }
+                   
         
                 // }
     
             }
+
+
+
+            if(get_field("products")):
+                $products = get_field("products");
+                foreach(  $products as   $product) {
+                        $featured_img_url = get_the_post_thumbnail_url($product->ID,'full');    
+                        // get_the_title($product->ID)
+                        $product_array   = [
+                            "title" => get_the_title($product->ID),
+                            "image" => $featured_img_url,
+                            "ID" => $product->ID,
+                            "link" => get_permalink($product->ID) ,
+                            "excerpt" => get_the_excerpt($product->ID)
+                        ];
+                        $product = json_encode($product_array);
+                        array_push($data['products_suggestion'] , json_decode($product));
+            
+                }
+        endif;
+
           
         endwhile;
     endif;

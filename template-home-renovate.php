@@ -42,7 +42,7 @@
     <div class="mt-10rem"></div>
 
     <?php  get_template_part("other/group_find_location_footer_banner"); ?>
-    <div class="mt-5"></div>
+ 
     
 
    

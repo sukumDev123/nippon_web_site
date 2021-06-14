@@ -1,9 +1,9 @@
 // const { babelConfig } = require("laravel-mix");
-const domain = "https://staging.tanpong.me";
-// const domain = "http://localhost/nippon/";
+// const domain = "https://staging.tanpong.me";
+const domain = "http://localhost/nippon/";
 const loading = document.querySelector("#loading");
 let searchType = "rgb-div";
-
+let product_suggestion = [];
 // let family_colors = [];
 
 // let firstPostId = 0;
@@ -276,7 +276,8 @@ function loadSolutionFromPage(id) {
       .then((d) => d.json())
       .then((page) => {
         loading.className = "hide";
-
+        product_suggestion = page.products_suggestion;
+        console.log({ product_suggestion });
         page.solutions.forEach((solution) => {
           const createDivCard = document.createElement("div");
           createDivCard.id = "solution" + solution.ID;
@@ -848,6 +849,7 @@ function handleFilterProductMobile() {
     // }
   }
 }
+
 function handleFooterMenuClicked() {
   const footer_menu_mobile = document.querySelectorAll(
     ".footer-menu-mobile > div > ul > li"
@@ -892,7 +894,7 @@ window.onload = () => {
   } catch (error) {}
 };
 
-function solutionChange(id) {
+function solutionChange(id, load_product = true) {
   if (loading) loading.className = "";
   const solution_div = document.querySelectorAll(".solution-div div");
   const info_solution = document.querySelector("#info-solution");
@@ -977,6 +979,49 @@ function solutionChange(id) {
           const problem_cause = document.querySelector("#problem_cause");
           problem_cause.innerHTML = problem.cause;
         }
+
+        if (load_product == true) {
+          const product1 = document.querySelector("#products-1 .products-card");
+          console.log({ product1: product1.lastElementChild, load_product });
+          if (product1 || load_product != false)
+            while (product1.lastElementChild) {
+              if (product1.lastElementChild.value == "") break;
+              product1.removeChild(product1.lastElementChild);
+            }
+          if (product_suggestion.length) {
+            for (let i = 0; i < product_suggestion.length; i++) {
+              const product_s = product_suggestion[i];
+              const product_card = document.createElement("div");
+              product_card.className = "product-card";
+              product_card.innerHTML = `
+              <a href="${product_s?.link}">
+              <img src="${product_s?.image}" alt="image">
+              <h4>
+                     
+                         ${product_s.title}
+                    
+                  </h4>
+                  <p>${product_s.excerpt}</p>
+                  
+              </a>
+              
+              
+              `;
+              product1.appendChild(product_card);
+              //         <div class="product-card">
+
+              // </div>
+            }
+          } else {
+            const product_card = document.createElement("div");
+            product_card.style = "width:100%";
+            product_card.innerHTML = `
+              <h5 class='text-center'>Null product</h5>
+            
+            `;
+            product1.appendChild(product_card);
+          }
+        }
       }
       if (loading) loading.className = "hide";
 
@@ -1048,6 +1093,7 @@ function loadLocation() {
     countryElement.addEventListener("change", (event) => {
       const { value } = event.target;
       if (value.toUpperCase() === "TH") {
+        provinceElement.style = "display: block;";
         Promise.all([
           fetch(
             domain + "/wp-content/themes/nippontheme/assets/json/province.json"
@@ -1082,6 +1128,8 @@ function loadLocation() {
             console.log({ districts });
           });
         });
+      } else {
+        provinceElement.style = "display: none;";
       }
     });
 
@@ -1089,6 +1137,7 @@ function loadLocation() {
       const { value } = event.target;
       const district = districts[value];
       console.log({ district });
+      districtElement.style = "display: block";
       while (districtElement.lastElementChild) {
         if (
           districtElement.lastElementChild.value == "" ||
@@ -1109,9 +1158,10 @@ function loadLocation() {
     document
       .querySelector("#location_search")
       .addEventListener("click", (event) => {
+        const countryValue = countryElement.value;
         const provinceValue = provinceElement.value;
         const districtValue = districtElement.value;
-        const countryValue = countryElement.value;
+
         const catProductValue = cat_product.value;
         let search = "";
         let search_all = "";

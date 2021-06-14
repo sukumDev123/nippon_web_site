@@ -3,6 +3,7 @@
 
 
 $lang=get_bloginfo("language");  
+$solution_id = 0 ;
 $text_static_solution = [
     "en" => [
         "title" => "เคล็ดลับซ่อมแซมปัญหาสีบ้าน จากนิปปอนเพนต์",
@@ -143,6 +144,8 @@ $text_static_solution = [
 
         <div class="mt-10rem"></div>
         <?php 
+        // set_query_var( 'id', "test");
+
             get_template_part("other/products");
         
         ?>
