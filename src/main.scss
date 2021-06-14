@@ -3204,20 +3204,22 @@ footer {
           a {
             text-decoration: none;
             color: black;
-            height: 380px;
+            height: auto;
+
             padding: 2em;
             display: block;
             width: 100%;
           }
           h1 {
             font-size: 20px;
-            margin-top: 30px;
-            margin-bottom: 20px;
+            margin-top: 20px;
+            margin-bottom: 10px;
             text-align: left;
             font-weight: 700;
           }
           p {
             text-align: left;
+            margin-bottom: 0px;
           }
           img {
             width: 178px;
@@ -3304,15 +3306,15 @@ footer {
       a {
         text-decoration: none;
         color: black;
-        height: 380px;
+        height: auto;
         padding: 2em;
         display: block;
         width: 100%;
       }
       h1 {
         font-size: 20px;
-        margin-top: 30px;
-        margin-bottom: 20px;
+        margin-top: 20px;
+        margin-bottom: 5px;
         text-align: left;
         font-weight: 700;
       }
@@ -3806,21 +3808,21 @@ footer {
   .project_home_suggestion {
     margin-top: 4rem;
     margin-bottom: 4rem;
-    height: 730px !important;
+    height: 630px !important;
     .swiper-pagination-bullet-active {
       background-color: $font-color !important;
     }
     .swiper-wrapper {
-      height: 661px !important;
+      height: 550px !important;
       img {
         width: 100%;
-        height: 661px !important;
+        height: 550px !important;
         object-fit: cover;
         z-index: 1;
       }
       .swiper-slide {
         max-width: 699px;
-        height: 661px;
+        height: 550px;
         .swiper-button-prev,
         .swiper-container-rtl .swiper-button-next {
           color: $font-color;

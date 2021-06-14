@@ -1,5 +1,5 @@
 <div id="services" class="container">
-    <h2>รวมทุกเซอร์วิสและบริการจากนิปปอนเพนต์</h2>
+    <h2>รวมทุกเซอร์วิส และบริการจากนิปปอนเพนต์</h2>
     <?php 
     $argc = ["post_type" => "page" , "post_parent" => 143];
     $loop = new WP_Query( $argc );
