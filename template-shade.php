@@ -123,11 +123,16 @@ if($query->have_posts()):
 <?php   get_template_part("other/idea-suggestion"); ?>
 
 <!-- product suggestion -->
-<div class="mt-5rem"></div>
+<div class="mt-10rem"></div>
 
 
 <?php 
  get_template_part("pages/page-services");
+
+ ?>
+<div class="mt-10rem"></div>
+
+ <?php
  echo "<script>
  setTimeout(() => {
 

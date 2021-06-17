@@ -116,9 +116,10 @@ body {
   margin: auto;
 }
 
-#services {
-  padding: 4em 0;
+.flex-start {
+  justify-content: flex-start !important;
 }
+
 #services > h2 {
   text-align: center;
   font-size: 36px;
@@ -176,9 +177,6 @@ body {
   padding: 1em;
 }
 @media screen and (max-width: 1026px) {
-  #services {
-    padding: 2em 1em;
-  }
   #services > h2 {
     font-size: 1.5em;
   }
@@ -2209,6 +2207,9 @@ footer .footer-content .footer-menu-mobile {
 #shade-div {
   padding: 4em 0;
 }
+#shade-div.container {
+  max-width: 1170px;
+}
 #shade-div .filter-collection {
   display: flex;
   align-items: center;
@@ -2263,16 +2264,21 @@ footer .footer-content .footer-menu-mobile {
 }
 @media screen and (max-width: 1026px) {
   #shade-div {
-    padding: 2em 0;
+    padding: 2em 2em;
   }
   #shade-div .shade-swiper-family {
-    margin: 2.5em 0 0 1em;
+    margin: 2.5em 0 0 0;
   }
 }
 
 #family-color-list {
   margin-top: 0rem;
   margin-bottom: 2em;
+}
+#family-color-list.container {
+  max-width: 1170px;
+  padding: 0px;
+  margin: auto;
 }
 #family-color-list #family-list {
   width: 100%;
@@ -2305,6 +2311,11 @@ footer .footer-content .footer-menu-mobile {
 #family-color-list #family-image img {
   width: 100%;
   height: 353px;
+}
+@media screen and (max-width: 1026px) {
+  #family-color-list.container {
+    padding: 0 2em !important;
+  }
 }
 @media screen and (min-width: 900px) {
   #family-color-list {
@@ -2342,9 +2353,13 @@ footer .footer-content .footer-menu-mobile {
 #search-shade input {
   width: 100%;
 }
+#search-shade a {
+  width: 100% !important;
+}
 #search-shade button {
   width: 100%;
   color: white;
+  margin: auto;
   margin-top: 5rem;
   padding: 1rem 0;
   background-color: #1e4f92;
@@ -2548,6 +2563,7 @@ footer .footer-content .footer-menu-mobile {
 @media screen and (max-width: 1026px) {
   #shade-center {
     display: block;
+    padding: 2em 2em;
   }
   #shade-center .container.slide-2 {
     display: block;
@@ -3190,7 +3206,7 @@ footer .footer-content .footer-menu-mobile {
 }
 #products-1 .container {
   padding: 0px;
-  width: 1170px;
+  max-width: 1170px;
 }
 #products-1 .container > .title {
   color: black;
@@ -4436,6 +4452,9 @@ footer .footer-content .footer-menu-mobile {
 #single-product .right-side .file-left-right {
   display: flex;
 }
+#single-product .right-side .file-left-right .left {
+  margin-right: 4em;
+}
 #single-product .right-side .file-left-right .left h5 {
   font-weight: 700;
   font-size: 2em;
@@ -4443,9 +4462,6 @@ footer .footer-content .footer-menu-mobile {
 #single-product .right-side .file-left-right .left img {
   max-width: 202px;
   margin-top: 1em;
-}
-#single-product .right-side .file-left-right .right {
-  margin-left: 4em;
 }
 #single-product .right-side .file-left-right .right > h5 {
   font-size: 2em;

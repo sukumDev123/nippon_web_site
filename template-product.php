@@ -158,11 +158,13 @@
     </ul><!--/.products-->
 
 </div>
+<div class="mt-10rem"></div>
 
 <?php 
  get_template_part("pages/page-services");
 
 ?>
+<div class="mt-10rem"></div>
 
 
 <script>

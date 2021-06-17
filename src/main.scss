@@ -154,9 +154,12 @@ body {
   padding-right: 1rem;
   margin: auto;
 }
+.flex-start {
+  justify-content: flex-start !important;
+}
 #services {
   $_height: 459px;
-  padding: 4em 0;
+  // padding: 4em 0;
   > h2 {
     text-align: center;
     font-size: 36px;
@@ -220,7 +223,7 @@ body {
 
   @media screen and (max-width: 1026px) {
     & {
-      padding: 2em 1em;
+      // padding: 2em 1em;
 
       > h2 {
         font-size: 1.5em;
@@ -2410,7 +2413,9 @@ footer {
 
 #shade-div {
   padding: 4em 0;
-
+  &.container {
+    max-width: $container-size;
+  }
   .filter-collection {
     display: flex;
     align-items: center;
@@ -2472,9 +2477,9 @@ footer {
   }
   @media screen and (max-width: 1026px) {
     & {
-      padding: 2em 0;
+      padding: 2em 2em;
       .shade-swiper-family {
-        margin: 2.5em 0 0 1em;
+        margin: 2.5em 0 0 0;
       }
     }
   }
@@ -2483,6 +2488,11 @@ footer {
 #family-color-list {
   margin-top: 0rem;
   margin-bottom: 2em;
+  &.container {
+    max-width: $container-size;
+    padding: 0px;
+    margin: auto;
+  }
   #family-list {
     width: 100%;
     // display: grid;
@@ -2523,12 +2533,19 @@ footer {
     }
   }
   // grid-template-columns: 1fr 1fr;
-
+  @media screen and (max-width: 1026px) {
+    & {
+      &.container {
+        padding: 0 2em !important;
+      }
+    }
+  }
   @media screen and (min-width: 900px) {
     & {
       display: flex;
       margin-top: 0rem;
       margin-bottom: 4em;
+
       #family-list {
         order: 1;
         grid-template-columns: repeat(auto-fill, minmax(151px, 1fr));
@@ -2563,10 +2580,14 @@ footer {
   }
   padding-top: 4rem;
   padding-bottom: 4rem;
-
+  a {
+    width: 100% !important;
+    // display: block;
+  }
   button {
     width: 100%;
     color: white;
+    margin: auto;
     margin-top: 5rem;
     padding: 1rem 0;
     background-color: $primary-color;
@@ -2788,7 +2809,7 @@ footer {
   @media screen and (max-width: 1026px) {
     & {
       display: block;
-
+      padding: 2em 2em;
       .container {
         &.slide-2 {
           display: block;
@@ -3480,7 +3501,7 @@ footer {
   }
   .container {
     padding: 0px;
-    width: $container-size;
+    max-width: $container-size;
     > .title {
       color: black;
       text-decoration: none;
@@ -4883,9 +4904,9 @@ footer {
           max-width: 202px;
           margin-top: 1em;
         }
+        margin-right: 4em;
       }
       .right {
-        margin-left: 4em;
         > h5 {
           font-size: 2em;
           font-weight: 700;

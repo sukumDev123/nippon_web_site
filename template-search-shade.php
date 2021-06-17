@@ -173,9 +173,8 @@ $num = $query->post_count;
 <div class="mt-10rem"></div>
 <?php   get_template_part("other/idea-suggestion"); ?>
 
-<!-- product suggestion -->
-<div class="mt-5rem"></div>
- 
+<div class="mt-10rem"></div>
+
 
 <?php 
  
@@ -183,6 +182,7 @@ $num = $query->post_count;
  get_template_part("pages/page-services");
 ?>
 
+<div class="mt-10rem"></div>
 
  
  

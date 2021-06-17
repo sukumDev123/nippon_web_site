@@ -1234,3 +1234,11 @@ function loadLocation(url = "") {
       });
   }
 }
+
+if (document.querySelectorAll("ul.sub-menu"))
+  document.querySelectorAll("ul.sub-menu").forEach((el) => {
+    if (el.children.length >= 5) {
+      // console.log("Found the worst element ever: ", el);
+      el.className += " flex-start";
+    }
+  });
