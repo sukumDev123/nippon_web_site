@@ -8,7 +8,14 @@
        $tw = $tb . "/assets/images/tw.svg";
        $in = $tb . "/assets/images/in.svg";
 
-
+    $linkFb = "https://www.facebook.com/NipponPaintDecor";
+    $linkLine = "https://lin.ee/lVj5H8r";
+    $linkYB = "https://www.youtube.com/NipponPaintDecorative";
+    $linkIG = "https://www.instagram.com/nipponpaint_th";
+    $linkTW = "https://twitter.com/NipponPaintTH";
+    $linkIN = "https://www.linkedin.com/company/nipponpaintdecorative";
+    $linkPT = "https://pinterest.com/nipponpaint_th";
+   
 ?>
 <footer>
     <div  >
@@ -74,18 +81,20 @@
             <h1 class="font-service">
                 <a href="tel:024631899">02 463 1899</a>
             </h1>
-            <!-- <h1 class='mt-4 footer-title'>
+            <h1 class='mt-4 footer-title'>
             ติดตามเราได้ที่นี่
             </h1>
             <div class="social-div">
-                <img src="<?php echo $fb; ?>" alt="">
-                <img src="<?php echo $line; ?>" alt="">
-                <img src="<?php echo $yb; ?>" alt="">
-                <img src="<?php echo $ig ; ?>" alt="">
-                <img src="<?php echo $tw; ?>" alt="">
-                <img src="<?php echo $in; ?>" alt="">
+                <a target="_blank"  href="<?php echo $linkFb; ?>"><img src="<?php echo $fb; ?>" alt=""></a>
+                <a target="_blank"  href="<?php echo  $linkLine; ?>"><img src="<?php echo $line; ?>" alt=""></a>
+                <a target="_blank"  href="<?php echo  $linkYB ; ?>"><img src="<?php echo $yb; ?>" alt=""></a>
+                <a target="_blank"  href="<?php echo $linkIG; ?>"><img src="<?php echo $ig ;?>" alt=""></a>
+                <a target="_blank"  href="<?php echo $linkTW ; ?>"><img src="<?php echo $tw; ?>" alt=""></a>
+                <a target="_blank"  href="<?php echo $linkIN; ?>"><img src="<?php echo $in; ?>" alt=""></a>
  
-            </div> -->
+                  
+ 
+            </div>
         </div>
         <!-- <div></div>
         <div></div>

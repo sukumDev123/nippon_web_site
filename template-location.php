@@ -136,7 +136,7 @@ $count = $query->found_posts;
            <option value=""><?php echo $text_static['cat_product'] ?></option>
  
            <?php if(count($terms) > 0): ?>
-            <?php foreach($terms as  $term): $className = ""; if($termId == $term->term_id): $className="cate-active"; endif;  ?>
+            <?php foreach($terms as  $term): $className = "";  ?>
                 
                     <option value="<?php  echo $term->name ?>"><?php echo $term->name ?></option>
                 

@@ -34,10 +34,12 @@
    
     <?php  get_template_part("other/solution-home-page"); ?>
     <div class="mt-10rem"></div>
-    <?php   get_template_part("other/idea-suggestion"); ?>
- <div class="mt-10rem"></div>
+
 
     <?php  get_template_part("other/shade-home"); ?>
+ <div class="mt-10rem"></div>
+
+ <?php   get_template_part("other/idea-right-suggestion"); ?>
  <div class="mt-10rem"></div>
 
     <?php  get_template_part("other/inspire-suggestion"); ?>

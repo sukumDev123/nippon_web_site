@@ -25,12 +25,22 @@ $text_static = [
     ]
 ][$lang];
  
- 
 ?>
 
 
  
-<section id="home_suggestion_shades">
+<section id="home_suggestion_shades_right">
+<div class="content">
+        <h1><?php echo $text_static['title'] ?></h1>
+        <?php echo $text_static['detail'] ?>
+        <div class="mt-5"></div>
+        <a  class="a-primary-button " href="<?php echo $g_permalink ?>" target="_blank" >
+            <button class="primary-button">
+                <?php  echo  $text_static['button_title'] ?>
+                <i class="fas fa-long-arrow-alt-right"></i>
+            </button>
+        </a>
+    </div>
     <div class="image-contain">
 
        <div class="swiper-container inspire-div">
@@ -65,17 +75,7 @@ $text_static = [
            </div>
        </div>
     </div>
-    <div class="content">
-        <h1><?php echo $text_static['title'] ?></h1>
-        <?php echo $text_static['detail'] ?>
-        <div class="mt-5"></div>
-        <a  class="a-primary-button " href="<?php echo $g_permalink ?>" target="_blank" >
-            <button class="primary-button">
-                <?php  echo  $text_static['button_title'] ?>
-                <i class="fas fa-long-arrow-alt-right"></i>
-            </button>
-        </a>
-    </div>
+   
 </section>
 
  

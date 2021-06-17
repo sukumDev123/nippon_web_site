@@ -20,4 +20,3 @@
             </div>
         
         </div>
-    <div class="mt-10rem"></div>

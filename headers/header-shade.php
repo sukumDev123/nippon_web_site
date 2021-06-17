@@ -5,8 +5,13 @@ $title = get_the_content();
 if($parent_title) {
     $title = get_the_title();
 }
+$lang=get_bloginfo("language");  
 
 $photos = acf_photo_gallery("banners" , get_the_ID());
+$title_static = [
+    "en" => " - Nippon Paint The Coatings Expert",
+    "th" => " - นิปปอนเพนต์ ผู้ชี่ยวชาญทุกงานสี"
+][$lang];
 
 ?>
 <!doctype html>
@@ -15,7 +20,7 @@ $photos = acf_photo_gallery("banners" , get_the_ID());
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<?php wp_head(); ?>
-    <title><?php echo $title; ?></title>
+    <title><?php echo $title.$title_static; ?></title>
     <link rel="icon" href="<?php bloginfo("template_directory");  ?>/assets/images/favicon.svg" type="image/svg+xml"/>
 
 </head>
@@ -32,7 +37,7 @@ $photos = acf_photo_gallery("banners" , get_the_ID());
            <div class="header-top-slide">
                <div class="header-top-right">
                         <div id="login-top" class="login">
-                        <a class="contact-button" href="/contact-us/">ติดต่อ</a>
+                        <a class="contact-button" href="/contact-us/">ติดต่อเรา</a>
 
 
                             <h5>
@@ -68,7 +73,7 @@ $photos = acf_photo_gallery("banners" , get_the_ID());
                         ?>
                         
                         <div id="login-right" class="login">
-                        <a class="contact-button" href="/contact-us/">ติดต่อ</a>
+                        <a class="contact-button" href="/contact-us/">ติดต่อเรา</a>
 
                             <h5>
                                 <a href="/menu-products/">

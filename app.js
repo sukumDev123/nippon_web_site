@@ -1139,7 +1139,7 @@ function loadD(id) {
   });
   document.querySelector("#province").value = id;
 }
-function loadLocation() {
+function loadLocation(url = "") {
   const countryElement = document.querySelector("#country");
   const provinceElement = document.querySelector("#province");
   const districtElement = document.querySelector("#district");
@@ -1164,12 +1164,13 @@ function loadLocation() {
     document
       .querySelector("#location_search")
       .addEventListener("click", (event) => {
+        event.preventDefault();
         const countryValue = countryElement.value;
         const provinceValue = provinceElement.value;
         const districtValue = districtElement.value;
 
         const catProductValue = cat_product.value;
-        let search = "";
+        let search = url;
         let search_all = "";
         if (catProductValue) {
           search += "?cat_product=" + catProductValue;
@@ -1178,7 +1179,7 @@ function loadLocation() {
           // "&province=" +
           // province[provinceValue].PROVINCE_NAME;
           if (countryValue) {
-            search += "?country=" + countryValue;
+            search += "&country=" + countryValue;
           }
           if (provinceValue) {
             search += "&province=" + provinceValue;
@@ -1222,12 +1223,13 @@ function loadLocation() {
 
         // }
 
-        console.log({ search_all });
+        console.log({ search, search_all });
+
         if (search) {
-          window.location.href = search + "&search=" + search_all;
-        }
-        if (search_all) {
-          window.location.href = search + "&search=" + search_all;
+          window.location.href = search;
+          if (search_all) {
+            window.location.href = search + "&search=" + search_all;
+          }
         }
       });
   }

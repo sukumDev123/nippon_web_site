@@ -61,7 +61,7 @@ $text_static = [
     </div>
     <div class="content">
         <h1><?php echo $text_static['title'] ?></h1>
-        <?php echo $text_static['detail'] ?>
+        <p><?php echo $text_static['detail'] ?></p>
         <div class="left-right">
                 <h3>
                     

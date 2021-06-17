@@ -1,10 +1,19 @@
+<?php 
+$lang=get_bloginfo("language");  
+
+$title_static = [
+    "en" => " - Nippon Paint The Coatings Expert",
+    "th" => " - นิปปอนเพนต์ ผู้ชี่ยวชาญทุกงานสี"
+][$lang];
+
+?>
 <!doctype html>
  
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<?php wp_head(); ?>
-    <title><?php the_title(); ?></title>
+    <title><?php the_title().$title_static; ?></title>
 </head>
 <body>
 
@@ -12,7 +21,7 @@
  
     <div class="bk-header"></div>
     <div class="container">
-    <a href="<?php echo get_site_url() ?>">
+    <a href="<?php echo get_site_url().$title_static ?>">
         <img alt="logo" src="<?php bloginfo("template_directory");  ?>/assets/images/logo.png"  class="image-logo-desktop" />
    </a>
     <?php 
@@ -23,7 +32,7 @@
         )
     ?>
         <div class="login">
-        <a class="contact-button" href="/contact-us/">ติดต่อ</a>
+        <a class="contact-button" href="/contact-us/">ติดต่อเรา</a>
         
         <h5>
                 <a href="/menu-products/">

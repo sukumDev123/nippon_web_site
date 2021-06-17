@@ -8,13 +8,13 @@ $text_static = [
      "en" => [
          "product_title" => "Product Relation",
          "product_link" => "Search",
-         "product_link_url" =>  get_site_url()  . "/products/สีน้ำทาอาคาร"
+         "product_link_url" =>  get_site_url()  . "/products/decorative-coatings/"
 
      ],
      "th" => [
          "product_title" => "ผลิตภัณฑ์แนะนำ",
          "product_link" => "ค้นหาผลิตภัณฑ์เพิ่มเติม",
-          "product_link_url" => get_site_url()  . "/products/สีน้ำทาอาคาร"
+          "product_link_url" => get_site_url()  . "/products/decorative-coatings/"
 
      ]
 ][$lang];
