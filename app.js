@@ -1,10 +1,13 @@
 // const { babelConfig } = require("laravel-mix");
-// const domain = "https://staging.tanpong.me";
-const domain = "http://localhost/nippon/";
+const domain = "https://staging.tanpong.me";
+// const domain = "http://localhost/nippon/";
 const loading = document.querySelector("#loading");
 let searchType = "rgb-div";
 let product_suggestion = [];
 // let family_colors = [];
+let province = {};
+
+let districts = {};
 
 // let firstPostId = 0;
 function showListOfFamilyColorThisShade(shadeId) {
@@ -1081,10 +1084,62 @@ function cmyk2rgb(c, m, y, k, normalized) {
     b: b,
   };
 }
+function loadP() {
+  const provinceElement = document.querySelector("#province");
 
+  Promise.all([
+    fetch(domain + "/wp-content/themes/nippontheme/assets/json/province.json"),
+    fetch(domain + "/wp-content/themes/nippontheme/assets/json/districts.json"),
+  ]).then((d) => {
+    const [_province, _districts] = d;
+    _province.json().then((p) => {
+      // province.push(p);
+      while (provinceElement.lastElementChild) {
+        if (provinceElement.lastElementChild.value == "") break;
+        provinceElement.removeChild(provinceElement.lastElementChild);
+      }
+      Array.from(p).forEach((d) => {
+        if (!province[d.PROVINCE_ID]) province[d.PROVINCE_ID] = d;
+        const createOption = document.createElement("option");
+        createOption.value = d.PROVINCE_ID;
+        createOption.innerHTML = d.PROVINCE_NAME;
+        provinceElement.appendChild(createOption);
+      });
+
+      // console.log({ province });
+    });
+    _districts.json().then((d) => {
+      districts = d.reduce((obj, data) => {
+        if (!obj[data.PROVINCE_ID]) obj[data.PROVINCE_ID] = [];
+        obj[data.PROVINCE_ID].push(data);
+        return obj;
+      }, {});
+      // console.log({ districts });
+    });
+  });
+}
+function loadD(id) {
+  const district = districts[id];
+  const districtElement = document.querySelector("#district");
+
+  districtElement.style = "display: block";
+  while (districtElement.lastElementChild) {
+    if (
+      districtElement.lastElementChild.value == "" ||
+      districtElement.lastElementChild.value == "เมือง"
+    )
+      break;
+    districtElement.removeChild(districtElement.lastElementChild);
+  }
+  Array.from(district).forEach((d) => {
+    const createOption = document.createElement("option");
+    createOption.value = d.DISTRICT_NAME;
+    createOption.innerHTML = d.DISTRICT_NAME;
+    districtElement.appendChild(createOption);
+  });
+  document.querySelector("#province").value = id;
+}
 function loadLocation() {
-  let province = {};
-  let districts = {};
   const countryElement = document.querySelector("#country");
   const provinceElement = document.querySelector("#province");
   const districtElement = document.querySelector("#district");
@@ -1094,40 +1149,7 @@ function loadLocation() {
       const { value } = event.target;
       if (value.toUpperCase() === "TH") {
         provinceElement.style = "display: block;";
-        Promise.all([
-          fetch(
-            domain + "/wp-content/themes/nippontheme/assets/json/province.json"
-          ),
-          fetch(
-            domain + "/wp-content/themes/nippontheme/assets/json/districts.json"
-          ),
-        ]).then((d) => {
-          const [_province, _districts] = d;
-          _province.json().then((p) => {
-            // province.push(p);
-            while (provinceElement.lastElementChild) {
-              if (provinceElement.lastElementChild.value == "") break;
-              provinceElement.removeChild(provinceElement.lastElementChild);
-            }
-            Array.from(p).forEach((d) => {
-              if (!province[d.PROVINCE_ID]) province[d.PROVINCE_ID] = d;
-              const createOption = document.createElement("option");
-              createOption.value = d.PROVINCE_ID;
-              createOption.innerHTML = d.PROVINCE_NAME;
-              provinceElement.appendChild(createOption);
-            });
-
-            // console.log({ province });
-          });
-          _districts.json().then((d) => {
-            districts = d.reduce((obj, data) => {
-              if (!obj[data.PROVINCE_ID]) obj[data.PROVINCE_ID] = [];
-              obj[data.PROVINCE_ID].push(data);
-              return obj;
-            }, {});
-            console.log({ districts });
-          });
-        });
+        loadP();
       } else {
         provinceElement.style = "display: none;";
       }
@@ -1135,23 +1157,7 @@ function loadLocation() {
 
     provinceElement.addEventListener("change", (event) => {
       const { value } = event.target;
-      const district = districts[value];
-      console.log({ district });
-      districtElement.style = "display: block";
-      while (districtElement.lastElementChild) {
-        if (
-          districtElement.lastElementChild.value == "" ||
-          districtElement.lastElementChild.value == "เมือง"
-        )
-          break;
-        districtElement.removeChild(districtElement.lastElementChild);
-      }
-      Array.from(district).forEach((d) => {
-        const createOption = document.createElement("option");
-        createOption.value = d.DISTRICT_NAME;
-        createOption.innerHTML = d.DISTRICT_NAME;
-        districtElement.appendChild(createOption);
-      });
+      loadD(value);
     });
     const cat_product = document.querySelector("#cat_product");
 
@@ -1175,7 +1181,11 @@ function loadLocation() {
             search += "?country=" + countryValue;
           }
           if (provinceValue) {
-            search += "&province=" + province[provinceValue].PROVINCE_NAME;
+            search += "&province=" + provinceValue;
+            search_all = province[provinceValue].PROVINCE_NAME;
+          }
+          if (districtValue) {
+            search += "&district=" + districtValue;
             search_all =
               districtValue + " " + province[provinceValue].PROVINCE_NAME;
           }
@@ -1191,8 +1201,13 @@ function loadLocation() {
           if (countryValue) {
             search += "?country=" + countryValue;
           }
+
           if (provinceValue) {
-            search += "&province=" + province[provinceValue].PROVINCE_NAME;
+            search += "&province=" + provinceValue;
+            search_all = province[provinceValue].PROVINCE_NAME;
+          }
+          if (districtValue) {
+            search += "&district=" + districtValue;
             search_all =
               districtValue + " " + province[provinceValue].PROVINCE_NAME;
           }

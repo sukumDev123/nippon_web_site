@@ -119,11 +119,12 @@ if($query->have_posts()):
  echo "</div>";
 ?>
  
-<?php 
- get_template_part("pages/inspire");
-?>
+<div class="mt-10rem"></div>
+<?php   get_template_part("other/idea-suggestion"); ?>
 
 <!-- product suggestion -->
+<div class="mt-5rem"></div>
+
 
 <?php 
  get_template_part("pages/page-services");

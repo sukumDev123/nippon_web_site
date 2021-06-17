@@ -14,7 +14,7 @@ $featured_img_url = get_the_post_thumbnail_url( get_the_ID(),'full');
 <div class="page-detail">
         <h1><?php the_title(); ?></h1>
         <p>
-            <?php the_content(); ?>
+            <?php echo get_field("short_text"); ?>
         </p>
         
      

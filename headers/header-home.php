@@ -5,6 +5,10 @@ $title = get_the_content();
 if($parent_title) {
     $title = $parent_title;
 }
+if(get_field("title_banner")):
+
+    $title = get_field("title_banner");
+endif;
 
 $photos = acf_photo_gallery("banners" , get_the_ID());
 

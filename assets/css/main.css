@@ -1248,6 +1248,11 @@ footer .footer-content .footer-menu-mobile {
   position: relative;
   padding: 4em 2em;
 }
+#contact-us img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  height: auto;
+}
 #contact-us iframe {
   width: 100% !important;
 }
@@ -1277,6 +1282,9 @@ footer .footer-content .footer-menu-mobile {
 #contact-us p,
 #contact-us a {
   font-weight: 600;
+}
+#contact-us p {
+  min-height: 30px;
 }
 @media screen and (max-width: 1026px) {
   #contact-us .phone-cs-social-address {
@@ -3079,6 +3087,10 @@ footer .footer-content .footer-menu-mobile {
     padding-left: 1em;
     padding-right: 1em;
   }
+  #products-2 > div .grid .product-content h1,
+#products-3 > div .grid .product-content h1 {
+    font-size: 22px;
+  }
   #products-2#products-3,
 #products-3#products-3 {
     height: 750px;
@@ -3267,6 +3279,33 @@ footer .footer-content .footer-menu-mobile {
 #home_suggestion_shades .image-contain .image-div .swiper-pagination > span.swiper-pagination-bullet-active {
   background-color: #fff !important;
 }
+#home_suggestion_shades .image-contain .inspire-div .image-div {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+#home_suggestion_shades .image-contain .inspire-div .div-bk {
+  display: flex;
+  justify-content: flex-end;
+}
+#home_suggestion_shades .image-contain .inspire-div .div-bk .inspire-data {
+  display: block;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  color: #637381;
+  text-decoration: none;
+  padding: 2em 4em;
+  margin-right: 1em;
+  margin-top: -4em;
+  margin-bottom: 1em;
+}
+#home_suggestion_shades .image-contain .inspire-div .div-bk .inspire-data h3 {
+  font-weight: bold;
+}
 #home_suggestion_shades .content {
   padding-left: 2em;
   padding-top: 2em;
@@ -3320,11 +3359,11 @@ footer .footer-content .footer-menu-mobile {
     padding-bottom: 0px;
     display: block;
   }
-  #home_suggestion_shades .image-contain .shade-swiper {
+  #home_suggestion_shades .image-contain .shade-suggestion .shade-swiper {
     display: flex;
     align-items: center;
   }
-  #home_suggestion_shades .image-contain .shade-swiper .shades-color {
+  #home_suggestion_shades .image-contain .shade-suggestion .shade-swiper .shades-color {
     left: 20px;
   }
   #home_suggestion_shades .image-contain .image-div {
@@ -3336,6 +3375,15 @@ footer .footer-content .footer-menu-mobile {
     max-height: 579px;
     -o-object-fit: contain;
        object-fit: contain;
+  }
+  #home_suggestion_shades .image-contain .inspire-div .div-bk {
+    justify-content: center;
+  }
+  #home_suggestion_shades .image-contain .inspire-div .div-bk .inspire-data {
+    margin-right: 0px;
+  }
+  #home_suggestion_shades .content h1 {
+    font-size: 22px;
   }
   #home_suggestion_shades .content .left-right {
     background-color: #1e4f92;
@@ -3374,8 +3422,9 @@ footer .footer-content .footer-menu-mobile {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 300px;
+  max-width: 300px;
   transition: all 0.3s ease-in;
+  width: 100%;
 }
 .a-primary-button .primary-button:hover {
   background-color: #c01315 !important;
@@ -3392,8 +3441,10 @@ footer .footer-content .footer-menu-mobile {
     margin: auto;
     margin-top: 1em;
   }
-  .a-primary-button .primary-button {
-    min-width: 100%;
+}
+@media screen and (max-width: 1026px) {
+  .a-primary-button {
+    display: flex;
   }
 }
 
@@ -4648,10 +4699,6 @@ section#location_page_div .header_list .locations-card .location-card p {
      object-fit: contain;
 }
 
-#province {
-  display: none;
-}
-
-#district {
+.display_none {
   display: none;
 }

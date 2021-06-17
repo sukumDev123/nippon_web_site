@@ -244,19 +244,18 @@ function get_top_ancestor_id(){
  function post_like() {
  
      if(isset($_GET['id']) && isset($_GET['type'])) {
-         //      echo "console.log({ testL: ".$id." });";
-         $id = intval($_GET['id']);
-         $type = $_GET['type'];
-         if($type == "liked") {
+        $id = intval($_GET['id']);
+        $type = $_GET['type'];
+        if($type == "liked") {
             $like_count = get_post_meta( $id, 'likes', true);
             if($like_count):
                 $like_count = $like_count + 1;
-            else :
+            else:
                 $like_count = 1;
             endif;
             $processed_like = update_post_meta($id, 'likes', $like_count);
             return json_encode(['message' => "Success"]);
-         }
+        }
  
           
      }

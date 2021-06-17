@@ -57,7 +57,7 @@ endif;
         );
    
 endif;
-
+$cat_product = "";
 if(isset($_GET["cat_product"])):
     $cat_product = $_GET["cat_product"];
      
@@ -87,23 +87,54 @@ if(isset($_GET["cat_product"]) && isset($_GET['search'])) {
 }
 
 $country = "";
+$p_class = "display_none";
+$d_class = "display_none";
+$loadScript = "";
+$district = "";
+
 if(isset($_GET['country']) ): 
     $country =$_GET['country'];
-    echo "<script>
-    document.querySelector('#country').value = '".$country."';
-    </script>";
+    $loadP = "";
+    if($country == "th")  {   $p_class = ""; };
+    $loadScript .= "document.querySelector('#country').value = '".$country."';".$loadP.";";
+endif;  
+if(isset($_GET['province']) ): 
+    $p_class   = "";
+    $province =$_GET['province'];
+    // echo "<script>
+    $loadScript .=  "loadD('".$province."');";
+    // </script>";
+    $p_class  = "";
+    $d_class  = "";
+
+endif;  
+if(isset($_GET['district']) ): 
+    $district =$_GET['district'];
+    
+    $loadScript .=  "document.querySelector('#district').value = '".$district."';";
+
+    $d_class  = "";
 endif;  
 
- 
+ echo "<script>
+ setTimeout(() => {
+     loadP();
+    } , 100);
+ setTimeout(() => {
+     document.querySelector('#cat_product').value = '".$cat_product."';
+     ".$loadScript."
+    } , 1100);
+ </script>";
 $query = new WP_Query($argc);
+$count = $query->found_posts;
 ?>
 
 <section id="location_page_div">
 
     <div class="header_location">
-        <select  id="cat_product" >
+        <select  id="cat_product" value="<?php echo $cat_product ?>" >
            <option value=""><?php echo $text_static['cat_product'] ?></option>
-           <option value="th"><?php echo "ประเภทสินค้า" ?></option>
+ 
            <?php if(count($terms) > 0): ?>
             <?php foreach($terms as  $term): $className = ""; if($termId == $term->term_id): $className="cate-active"; endif;  ?>
                 
@@ -113,15 +144,15 @@ $query = new WP_Query($argc);
         <?php endif; ?>
        </select>
     
-       <select  id="country" value="<?php echo $country  ?> " >
-           <!-- <option value=""><?php echo $text_static['country'] ?></option> -->
+       <select  id="country"  >
+           <option value=""><?php echo $text_static['country'] ?></option>
            <option value="th"><?php echo "ประเทศไทย" ?></option>
            <option value="ประเทศลาว"><?php echo "ประเทศลาว" ?></option>
        </select>
-       <select  id="province" >
+       <select class="<?php echo $p_class ?>"     id="province" >
            <option value=""><?php echo $text_static['province'] ?></option>
        </select>
-       <select  id="district" >
+       <select class="<?php echo $d_class ?>"  id="district" >
            <option value=""><?php echo $text_static['district'] ?></option>
            <option value="เมือง"><?php echo "เมือง" ?></option>
        </select>
@@ -150,18 +181,55 @@ $query = new WP_Query($argc);
             <?php endwhile;  ?>
             <?php endif;  ?>
         </div>
+ 
+        <?php if($count > $limit_location ): ?>
         <h5 class="text-center mt-5 see_more">
             <a href=<?php 
             $limit_location += 9;
-            if(isset($_GET['search'])):
-                // echo "?country=".$_GET['country']."&province=".$_GET['province']."&district=".$_GET['district']."&search=".$_GET['search']. "&limit=". $limit_location;
-            else:
-                // echo "?limit=". $limit_location;
+            $link = "";
+			if(isset($_GET["cat_product"])) {
+                $link = "?cat_product=".$_GET["cat_product"]."";
+                if(isset($_GET['country'])) {
+                    $link .= "&country=".$_GET['country']."";
+                }
+                if(isset($_GET['province'])) {
+                    $link .= "&province=".$_GET['province']."";
+                }
+                if(isset($_GET['district'])) {
+                    $link .= "&district=".$_GET['district']."";
+                }
+                if(isset($_GET['search'])) {
+                    $link .= "&search=".$_GET['search']."";
+                }
+              
+            } else {
+                if(isset($_GET['country'])) {
+                    $link .= "?country=".$_GET['country']."";
+                }
+                if(isset($_GET['province'])) {
+                    $link .= "&province=".$_GET['province']."";
+                }
+                if(isset($_GET['district'])) {
+                    $link .= "&district=".$_GET['district']."";
+                }
+                if(isset($_GET['search'])) {
+                    $link .= "&search=".$_GET['search']."";
+                }
+            }
+            if( $link == "") {
 
-            endif;  
+                echo "?limit=". $limit_location ;
+            } else {
+                echo $link."&limit=". $limit_location ;
 
+            }
+
+
+        
             ?> ><?php echo $text_static["see_more"] ?></a>
         </h5>
+        <?php endif;  ?>
+
     </div>
 
 </section>

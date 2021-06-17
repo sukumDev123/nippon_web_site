@@ -33,6 +33,8 @@
     <!-- </div> -->
 
     <div class="mt-10rem"></div>
+    <?php   get_template_part("other/idea-suggestion"); ?>
+    <div class="mt-10rem"></div>
     <?php   get_template_part("other/products-2"); ?>
  <div class="mt-10rem"></div>
     <?php   get_template_part("other/shade-home"); ?>

@@ -16,7 +16,9 @@
                     $link = "https://smartpainter.nipponpaintdecor.com/";
                 endif;
                 if(get_the_ID() == 181):
-                    $link = "https://web.facebook.com/NipponPaintDecor/posts/3967456120036278?_rdc=3&_rdr";
+                    // $link = "https://web.facebook.com/NipponPaintDecor/posts/3967456120036278?_rdc=3&_rdr";
+                    $link = "https://smartpainter.nipponpaintdecor.com/";
+
                 endif;
             ?>
                     <div class="service-card">
