@@ -1,7 +1,7 @@
 <?php   /** Template Name: Services */ ?>
 <?php get_header() ?>
 
- <?php get_template_part("pages/page-bk");  ?>
+ <?php get_template_part("pages/page-bk-2");  ?>
  <div class="mt-5rem"></div>
 
 <?php

@@ -10,7 +10,8 @@ $text_static_inspire_suggestion = [
         "button_link" => get_the_permalink()."search-shop"
     ],
     "th" => [
-        "title" => "ค้นหาร้านค้าตัวแทน",
+        "title" => "ค้นหาร้านค้าตัวแทน<br />
+        จำหน่ายนิปปอนเพนต์",
         "detail" => "เรามีตัวแทนจำหน่ายทั่วประเทศ ที่พร้อมให้บริการคุณลูกค้าและให้คำปรึกษาเรื่องสีได้ โดยสามารถค้าหาตัวแทนจำหน่ายใกล้บ้านคุณได้แล้ว ที่นี่",
         "button_title" => "ค้นหาตัวแทนจำหน่าย",
         "button_link" => get_the_permalink()."search-shop"

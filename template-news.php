@@ -13,7 +13,8 @@ if(isset($_GET["page"])) {
  ?>
  
 
-<?php get_template_part("pages/page-bk");  ?>
+ <?php get_template_part("pages/page-bk-2");  ?>
+
 
 <div id="news" class="container">
  
@@ -79,7 +80,7 @@ if(isset($_GET["page"])) {
         $argc = ["post_type"  => "news" , 'posts_per_page' => $limit_page , "post__not_in" => array( $first_page ) ];
         $query = new WP_Query($argc);
        
-        
+        $count = $query->found_posts;
     ?>
     <?php 
          if($query->have_posts()): while($query->have_posts()) : $query->the_post(); 
@@ -125,9 +126,11 @@ if(isset($_GET["page"])) {
             <?php endwhile; else: endif;  wp_reset_query();
         ?>    
     </div>
+    <?php if($count > $limit_page ): ?>
     <h5 class="see-more">
     <a href="<?php echo esc_url( add_query_arg( 'page', $limit_page + 1, get_permalink() ) ); ?>" >See more</a>
     </h5>
+    <?php endif; ?>
 </div>
 
 <?php get_footer(); ?>

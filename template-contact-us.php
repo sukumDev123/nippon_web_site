@@ -14,11 +14,9 @@
  
  ?>
 <!-- <div id="banner-page"> -->
+<?php get_template_part("pages/page-bk-2");  ?>
 
-<?php 
- get_template_part("other/page-bk");
-
-?>
+ 
 <?php
        $tb =  get_bloginfo("template_directory");
        $fb = $tb . "/assets/images/fb.svg";

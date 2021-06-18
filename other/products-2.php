@@ -19,10 +19,12 @@
      ]
  ][$lang];
            
+ $products = get_field("products");
  
  $explain = get_field("explain");
+ 
 ?>
-   
+   <?php if( isset($products) && $products):  ?>
 <div  id="products-2">
     <div>
         <div class="grid">
@@ -45,7 +47,6 @@
             <div class="products-card-swiper">
                 <!-- <div class="swiper-wrapper"> -->
                 <?php 
-                            $products = get_field("products");
                             if(isset($products)):
                                 foreach($products as $product):
                                     
@@ -83,4 +84,4 @@
 
     </div>
 </div>
- 
+<?php endif; ?>

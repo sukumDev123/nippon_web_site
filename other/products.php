@@ -19,7 +19,9 @@ $text_static = [
      ]
 ][$lang];
 
+ 
 ?>
+<?php  if($products): ?>
 <div  id="products-1">
        <div class="container">
             <div class="title">
@@ -66,3 +68,4 @@ $text_static = [
         </div>  
         </div>
 </div>
+<?php  endif; ?>

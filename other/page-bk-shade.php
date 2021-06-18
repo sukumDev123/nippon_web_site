@@ -11,7 +11,7 @@
     $shade_class = "page-".$post->ID;
 ?>  
 <div class="page-bk-shade <?php echo $shade_class; ?>">
-    <img alt="logo" src="<?php echo $featured_img_url ; ?>"  class="image-logo-desktop" />
+    <img alt="logo" src="<?php echo $featured_img_url ; ?>"  class="image-logo-bk" />
     <div class="image-logo-bk"> </div>
     <div class="page-detail">
         <div class="page-title-list">

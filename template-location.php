@@ -21,7 +21,7 @@ $text_static = [
         "province" => "จังหวัด",
        "district" => "เขต/อำเภอ",
        "title" => "ผลการค้นหา",
-       "search" => "ค้นหา",
+       "search" => "ค้นหาร้านค้า",
        "see_more" => "See More",
        "cat_product" => "ประเภทสินค้า"
 
@@ -37,7 +37,7 @@ $text_static = [
 
 <?php 
  
- get_template_part("pages/page-bk");
+ get_template_part("pages/page-bk-2");
 
  $limit_location = 12;
  if(isset($_GET['limit'])):
