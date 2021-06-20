@@ -97,7 +97,7 @@
             
             </div>   
             <div class="address mt-3">
-                <h1> <i class="fas fa-map-marker-alt me-2"></i> Email </h1>
+                <h1> <i class="fas fa-envelope me-2"></i></i> Email </h1>
                 <div class="mt-4"></div>
                
                 <div style="margin-left:28px;">

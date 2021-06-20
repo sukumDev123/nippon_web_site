@@ -1781,6 +1781,14 @@ footer .footer-content .footer-menu-mobile {
   font-weight: 800;
   color: #3d464f;
 }
+@media screen and (max-width: 1366px) {
+  #contact-us .phone-cs-social-address .cs h5 a {
+    font-size: 45px;
+  }
+  #contact-us .phone-cs-social-address h1 {
+    font-size: 20px;
+  }
+}
 #contact-us h1,
 #contact-us a,
 #contact-us p {
@@ -1921,8 +1929,7 @@ footer .footer-content .footer-menu-mobile {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  min-height: 500px;
-  max-height: 482px;
+  max-height: 443px;
 }
 #news .news-div > div a,
 #news .news-div-overflow > div a {
@@ -1933,7 +1940,7 @@ footer .footer-content .footer-menu-mobile {
 #news .news-div > div img,
 #news .news-div-overflow > div img {
   width: 100%;
-  max-height: 250px !important;
+  max-height: 265px !important;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -1943,7 +1950,7 @@ footer .footer-content .footer-menu-mobile {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 250px;
+  min-height: 206px;
 }
 #news .news-div > div .content h1,
 #news .news-div-overflow > div .content h1 {
@@ -1955,13 +1962,14 @@ footer .footer-content .footer-menu-mobile {
 }
 #news .news-div > div .content p,
 #news .news-div-overflow > div .content p {
-  font-size: 1em;
-  height: 120px;
+  font-size: 14px;
+  height: 59px;
   overflow: auto;
   font-weight: 600;
   line-height: normal;
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-right: 5px;
 }
 #news .news-div > div .content p::-webkit-scrollbar,
 #news .news-div-overflow > div .content p::-webkit-scrollbar {
@@ -2277,7 +2285,7 @@ footer .footer-content .footer-menu-mobile {
 
 #solutions {
   max-width: 1600px;
-  margin: 0rem auto;
+  margin: 2rem auto;
   margin-bottom: 0px;
 }
 #solutions .solution-div {
