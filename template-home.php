@@ -14,15 +14,18 @@
         <div class="card">
             
             <div class="card-content">
-                <span class="title-detail"><?php echo $card["title_detail"] ?></span>
+               <div class="content">
+               <span class="title-detail"><?php echo $card["title_detail"] ?></span>
                 <h1 class="title-1"><?php echo $card['title_1'] ?></h1>
                 <div class="border-line"></div>
                 <h3  class="title-2"><?php echo $card['title_2'] ?></h3>
                 <p>
                     <?php echo $card["detail"] ?>
                 </p>
+               </div>
             </div>
             <div class="card-image">
+                <!-- <div class="card-image-bk"></div> -->
                     <img src="<?php echo $card['image']["url"] ?>" />
             </div>
            

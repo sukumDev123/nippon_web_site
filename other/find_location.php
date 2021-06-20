@@ -29,7 +29,8 @@ $text_static_inspire_suggestion = [
                     <a id="find_location_btn_desktop" class="a-primary-button" href="<?php echo $text_static_inspire_suggestion['button_link'] ?>">
                         <button class="primary-button">
                             <?php echo $text_static_inspire_suggestion['button_title'] ?>
-                            <i class="fas fa-long-arrow-alt-right"></i>
+                                                <img  class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">
+
                         </button>
                     </a>
                 </div>
@@ -39,7 +40,8 @@ $text_static_inspire_suggestion = [
                 <a  id="find_location_btn_mobile" class="a-primary-button" href="<?php echo $text_static_inspire_suggestion['button_link'] ?>">
                         <button class="primary-button">
                             <?php echo $text_static_inspire_suggestion['button_title'] ?>
-                            <i class="fas fa-long-arrow-alt-right"></i>
+                                                <img  class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">
+
                         </button>
                     </a>
             </div>

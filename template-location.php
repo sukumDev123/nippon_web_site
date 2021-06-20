@@ -4,7 +4,7 @@ get_header();
 
 
 $lang=get_bloginfo("language");  
-$terms = get_terms('product_cat', array('hide_empty' => false, 'parent' => 0));
+// $terms = get_terms('product_cat', array('hide_empty' => false, 'parent' => 0));
 
 $text_static = [
     "en" => [
@@ -32,9 +32,40 @@ $text_static = [
 ][$lang];
 
 
+$text_static_cate = [
+    "th" => [
+        "สีทาอาคาร",
+        "สีน้ำมัน",
+        "สีสเปรย์",
+        "TOOLS",
+        "สีสร้างลาย"
+    ],
+    "en" => [
+        "สีทาอาคาร",
+        "สีน้ำมัน",
+        "สีสเปรย์",
+        "TOOLS",
+        "สีสร้างลาย"
+    ]
+][$lang];
+?>
+<?php 
+if(isset($_GET['search']) || isset($_GET['country'])) {
+    ?>
+
+    <script>
+
+    setTimeout(() => {
+        document.querySelector("#location_page_div").scrollIntoView({behavior: "smooth" , block: "center"});
+        
+    }, 1000);
+</script>
+
+
+    <?php 
+}
 
 ?>
-
 <?php 
  
  get_template_part("pages/page-bk-2");
@@ -103,7 +134,7 @@ if(isset($_GET['province']) ):
     $province =$_GET['province'];
     // echo "<script>
     $loadScript .=  "loadD('".$province."');";
-    // </script>";
+    // </>";
     $p_class  = "";
     $d_class  = "";
 
@@ -132,17 +163,7 @@ $count = $query->found_posts;
 <section id="location_page_div">
 
     <div class="header_location">
-        <select  id="cat_product" value="<?php echo $cat_product ?>" >
-           <option value=""><?php echo $text_static['cat_product'] ?></option>
- 
-           <?php if(count($terms) > 0): ?>
-            <?php foreach($terms as  $term): $className = "";  ?>
-                
-                    <option value="<?php  echo $term->name ?>"><?php echo $term->name ?></option>
-                
-            <?php endforeach; ?>
-        <?php endif; ?>
-       </select>
+      
     
        <select  id="country"  >
            <option value=""><?php echo $text_static['country'] ?></option>
@@ -156,10 +177,24 @@ $count = $query->found_posts;
            <option value=""><?php echo $text_static['district'] ?></option>
            <option value="เมือง"><?php echo "เมือง" ?></option>
        </select>
+       <select  id="cat_product" value="<?php echo $cat_product ?>" >
+           <option value=""><?php echo $text_static['cat_product'] ?></option>
+ 
+           <?php if(count($text_static_cate) > 0): ?>
+            <?php foreach($text_static_cate as  $term): $className = "";  ?>
+                
+                    <option value="<?php  echo $term ?>"><?php echo $term ?></option>
+                
+            <?php endforeach; ?>
+        <?php endif; ?>
+       </select>
 
 
+       <button id="location_search" class="mt-5 d-flex align-items-center justify-content-center"  >
+       <?php  echo $text_static['search'] ?> 
+          <img class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">
 
-       <button id="location_search" class="mt-5"  > <?php  echo $text_static['search'] ?>  </button>
+        </button>
 
 
     </div>

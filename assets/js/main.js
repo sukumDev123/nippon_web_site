@@ -201,6 +201,13 @@ function hexToRGB(h) {
 function loadSolutionFromPage(id) {
   var solution_div = document.querySelector(".solution-div");
   var info_solution = document.querySelector("#info-solution");
+  var solutions_div = document.querySelectorAll(".solution-div");
+
+  if (solutions_div) {
+    console.log({
+      solutions_div: solutions_div
+    });
+  }
 
   if (solution_div) {
     solution_div.style.display = "flex";
@@ -235,7 +242,7 @@ function loadSolutionFromPage(id) {
 
         var __embedded = _embedded ? _embedded[0] : {};
 
-        createDivCard.innerHTML = "\n            <a>\n              <img src=\"".concat(__embedded === null || __embedded === void 0 ? void 0 : __embedded.source_url, "\" />\n              <h3 style=\"font-weight:bold\">").concat(solution === null || solution === void 0 ? void 0 : (_solution$title = solution.title) === null || _solution$title === void 0 ? void 0 : _solution$title.rendered, "</h3>\n              <div class=\"bbb\"></div>\n            </a>\n          ");
+        createDivCard.innerHTML = "\n            <a>\n              <img src=\"".concat(__embedded === null || __embedded === void 0 ? void 0 : __embedded.source_url, "\" />\n              <h3 style=\"font-weight:bold\">").concat(solution === null || solution === void 0 ? void 0 : (_solution$title = solution.title) === null || _solution$title === void 0 ? void 0 : _solution$title.rendered, "</h3>\n             \n            </a>\n          ");
         solution_div.appendChild(createDivCard);
       };
 

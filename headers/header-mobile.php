@@ -27,7 +27,7 @@ $text_static = [
                 <!-- <img  alt="logo" src="<?php bloginfo("template_directory");  ?>/assets/images/logo.png"  class="image-logo" />
              -->
              <a href="<?php echo get_site_url() ?>">
-                    <img alt="logo" src="<?php bloginfo("template_directory");  ?>/assets/images/logo.png"  class="image-logo" />
+                    <img alt="logo" src="<?php bloginfo("template_directory");  ?>/assets/images/logo.svg"  class="image-logo-mobile" />
             </a>
                 <i id="header_mobile_close" class="fas fa-times"></i>
             </div>

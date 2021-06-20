@@ -62,7 +62,7 @@ $text_static_solution = [
                         $featured_img_url = get_the_post_thumbnail_url( $id,'full');
                         $className = "";
                         if($postShowId == $id) {
-                            $className = "active";
+                            // $className = "active";
                             $solutions = get_field("post" , $id);
                             // print_r($solutions);
                         }

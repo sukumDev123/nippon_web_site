@@ -1,4 +1,20 @@
+<?php 
+
+$lang=get_bloginfo("language");  
+
+$text_static  = [
+    "en" => [
+        "title" =>  "ผลิตภัณฑ์แนะนำ",
+    ],
+    "th" => [
+        "title" => "ผลิตภัณฑ์แนะนำ"
+    ]
+][$lang];
+
+?>
+
 <div id="footer_banner" >
+    <h1 class="footer_banner_title"><?php echo $text_static["title"]; ?></h1>
             <div class="swiper-container footer_banner">
                 <div class="swiper-wrapper">
                 <?php

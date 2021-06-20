@@ -31,14 +31,14 @@ $title_static = [
 </head>
 <body>
 
-<header id="home_header" class="product"  > 
+<header id="home_header"  > 
     <div class="bk-header"></div>
     
 
 
     <div class="container">
             <a href="<?php echo get_site_url() ?>">
-                    <img alt="logo" src="<?php bloginfo("template_directory");  ?>/assets/images/logo.png"  class="image-logo-desktop" />
+                    <img alt="logo" src="<?php bloginfo("template_directory");  ?>/assets/images/logo.svg"  class="image-logo-desktop" />
             </a>
            <div class="header-top-slide">
                <div class="header-top-right">
@@ -47,7 +47,7 @@ $title_static = [
 
 
                             <h5>
-                                <a href="/menu-products/">
+                                <a href="/search/">
                                     <i class="fas fa-search"></i>
                                 </a>    
                             </h5>
@@ -82,7 +82,7 @@ $title_static = [
                         <a class="contact-button" href="/contact-us/">ติดต่อเรา</a>
 
                             <h5>
-                                <a href="/menu-products/">
+                                <a href="/search/">
                                     <i class="fas fa-search"></i>
                                 </a>    
                             </h5>
@@ -113,6 +113,8 @@ $title_static = [
     </div>
  
 </header>
+
+
 <?php 
  get_template_part("headers/header-mobile");
 

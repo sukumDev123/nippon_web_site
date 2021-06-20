@@ -33,7 +33,8 @@ $projects = get_field("projects");
             <a  id="project_suggestion_button_desktop" class="a-primary-button" href="<?php echo  $text_static_inspire_suggestion['button_link'] ?>">
                 <button class="primary-button">
                     <?php echo $text_static_inspire_suggestion['button_text'] ?>
-                    <i class="fas fa-long-arrow-alt-right"></i>
+                    <img  class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">
+
                 </button>
             </a>
        
@@ -71,7 +72,8 @@ $projects = get_field("projects");
     <a  id="project_suggestion_button_mobile" class="a-primary-button" href="<?php echo  $text_static_inspire_suggestion['button_link'] ?>">
                 <button class="primary-button">
                     <?php echo $text_static_inspire_suggestion['button_text'] ?>
-                    <i class="fas fa-long-arrow-alt-right"></i>
+                    <img  class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">
+
                 </button>
             </a>
    

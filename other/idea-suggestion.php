@@ -48,7 +48,7 @@ $text_static = [
                         <div class="swiper-pagination shade-pagination"></div>
                     </div>
                    <div class="div-bk">
-                    <a target="_blank" class="inspire-data" href="<?php echo $g_permalink ?>"  >
+                    <a   class="inspire-data" href="<?php echo $g_permalink ?>"  >
                             <h3>House Inspiration</h3>
                             <p>ดูไอเดียการตกแต่งบ้านได้ตามสไตล์คุณ</p>
                             <div   style="margin-top:40px"> </div>
@@ -69,10 +69,12 @@ $text_static = [
         <h1><?php echo $text_static['title'] ?></h1>
         <?php echo $text_static['detail'] ?>
         <div class="mt-5"></div>
-        <a  class="a-primary-button " href="<?php echo $g_permalink ?>" target="_blank" >
+        <a  class="a-primary-button " href="<?php echo $g_permalink ?>"  >
             <button class="primary-button">
-                <?php  echo  $text_static['button_title'] ?>
-                <i class="fas fa-long-arrow-alt-right"></i>
+                <span><?php  echo  $text_static['button_title'] ?></span>
+                <!-- <i class="fas fa-long-arrow-alt-right"></i>
+             -->
+             <img  class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">
             </button>
         </a>
     </div>

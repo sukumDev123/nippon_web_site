@@ -38,7 +38,8 @@
                     <a id="project_2_show_desktop" class="a-primary-button" href="<?php if($explain['button_link']): echo get_term_link($explain['button_link'][0])  ; endif;  ?>">
                         <button class="primary-button">
                             <?php  echo  $text_static_product['button_title'] ?>
-                            <i class="fas fa-long-arrow-alt-right"></i>
+                            <img  class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">
+
                         </button>
                     </a>
             </div>
@@ -62,7 +63,15 @@
                                                         <?php echo $title ?>
                                                     </h1>
                                                     <p><?php echo get_the_excerpt($product->ID) ?></p>
+
                                             </div>
+                                            <h5 class="arrow">
+                                                    <img  
+                                        class="arrow-left-white" 
+                                        src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-blue.svg" alt="">
+
+                                <!-- <i class="fas fa-long-arrow-alt-right"></i> -->
+                                                    </h5>       
                                                         </a>
                                         </div>
                                     <!-- </div> -->
@@ -77,7 +86,9 @@
             <a id="project_2_show_mobile" class="a-primary-button" href="<?php if($explain['button_link']): echo get_term_link($explain['button_link'][0])  ; endif;  ?>">
                         <button class="primary-button">
                             <?php  echo  $text_static_product['button_title'] ?>
-                            <i class="fas fa-long-arrow-alt-right"></i>
+                            <!-- <i class="fas fa-long-arrow-alt-right"></i> -->
+                            <img  class="arrow-left-white"  class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">
+
                         </button>
             </a>
         </div>

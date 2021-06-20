@@ -81,7 +81,7 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
 <div class="page-bk">
 
 <!-- <div class="page-bk-image"> -->
-<img alt="logo" src="<?php echo $featured_img_url ; ?>"  class="image-logo-desktop" />
+<img alt="logo" src="<?php echo $featured_img_url ; ?>"  class="image-logo-bk" />
 <div class="image-logo-bk"> </div>
 <!-- </div> -->
 <div class="page-detail">
@@ -169,6 +169,15 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
 </div>
 
 <div id="solution-pages" class="container">
+<?php 
+ 
+if(isset($_GET['scroll'])):
+    echo '<script> setTimeout(() => {
+        document.querySelector("#solutions").scrollIntoView({behavior: "smooth" , block: "center"})
+    } , 1000)</script>';
+endif;
+
+?>
 
 <?php 
 
@@ -200,7 +209,7 @@ while ($query->have_posts()) {
     }
     ?>
     <div class="solution-card <?php echo  $className ?>">
-    <a  style="color:#637381;  text-decoration: none;" href="<?php the_permalink(); ?>">
+    <a  style="color:#637381;  text-decoration: none;" href="<?php the_permalink(); ?>/?scroll=true">
     <img src="<?php  echo $featured_img_url; ?>" />
     <h2 class="text-center"><?php the_title(); ?></h2>
     </a>
@@ -214,7 +223,6 @@ wp_reset_query();
 ?>
  
 </div>
-
 
  
 
@@ -240,8 +248,7 @@ wp_reset_query();
                            <h3>
                            <?php echo get_the_title($solution->ID) ?>
                            </h3>
-                        <div class="bbb"></div>
-                          
+                         
                         </div>
                     <!-- </a> -->
                         

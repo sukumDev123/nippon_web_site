@@ -27,7 +27,15 @@ $text_static = [
 
 
 ?>
+<?php 
+ 
+if(isset($_GET['scroll'])):
+    echo '<script> setTimeout(() => {
+        document.querySelector(".card").scrollIntoView({behavior: "smooth" , block: "center"})
+    } , 1000)</script>';
+endif;
 
+?>
 
 <div class='button'>
     
@@ -40,13 +48,16 @@ $text_static = [
                         <div class="btn-group" role="group">
                             <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <?php echo $text_static['title1'] ?>
+                            <img src="<?php echo get_bloginfo("template_directory"); ?>/assets/images/arrow-down-white.svg" alt="">
+
+
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>">
+                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/?scroll=true">
                             <?php echo $text_static['new_home'] ?>
                             
                             </a></li>
-                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-paint-thailand/home-renovate">
+                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-paint-thailand/home-renovate?scroll=true">
                             <?php echo $text_static['owner_renovate'] ?>
                             </a></li>
                             </ul>
@@ -59,19 +70,20 @@ $text_static = [
                     <div class="btn-group" role="group">
                             <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <?php echo $text_static['title2'] ?>
+                            <img src="<?php echo get_bloginfo("template_directory"); ?>/assets/images/arrow-down-white.svg" alt="">
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-paint-thailand/home-perfessions-constractors">
+                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-paint-thailand/home-perfessions-constractors/?scroll=true">
                             
                             <?php echo $text_static['EngineersAndContractors'] ?>
                             
                             </a></li>
-                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-paint-thailand/home-perfessions-designers">
+                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-paint-thailand/home-perfessions-designers?scroll=true">
                             
                             <?php echo $text_static['Designer'] ?>
                             
                             </a></li>
-                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-paint-thailand/home-owner-develop">
+                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-paint-thailand/home-owner-develop?scroll=true">
                             <?php echo $text_static['ProjectOwner'] ?>
                             </a></li>
                             </ul>

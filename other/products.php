@@ -28,7 +28,8 @@ $text_static = [
                     <h1><?php echo  $text_static['product_title'] ?></h1>
                     <a href="<?php echo  $text_static['product_link_url'] ?>  ">
                     <?php echo $text_static['product_link'] ?>
-                        <i class="fas fa-long-arrow-alt-right ml-5"></i>
+                    <img  class="arrow-left-black" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-black.svg" alt="">
+
                     </a>
                    
             </div>
@@ -46,11 +47,11 @@ $text_static = [
                         <div class="product-card">
                             <a href="<?php echo get_permalink($product->ID) ?>">
                             <img src="<?php echo $featured_img_url ?>" alt="image">
-                            <h4>
+                            <h2>
                                     <!-- <span class="d-inline-block text-truncate" style="max-width: 240px;"> -->
                                         <?php echo $title ?>
                                     <!-- </span>  -->
-                                </h4>
+                                </h2>
                                 <p><?php echo get_the_excerpt($product->ID) ?></p>
                                 
                             </a>

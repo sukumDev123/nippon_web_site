@@ -179,7 +179,10 @@ function hexToRGB(h) {
 function loadSolutionFromPage(id) {
   const solution_div = document.querySelector(".solution-div");
   const info_solution = document.querySelector("#info-solution");
-
+  const solutions_div = document.querySelectorAll(".solution-div");
+  if (solutions_div) {
+    console.log({ solutions_div });
+  }
   if (solution_div) {
     solution_div.style.display = "flex";
     info_solution.style.display = "none";
@@ -208,7 +211,7 @@ function loadSolutionFromPage(id) {
             <a>
               <img src="${__embedded?.source_url}" />
               <h3 style="font-weight:bold">${solution?.title?.rendered}</h3>
-              <div class="bbb"></div>
+             
             </a>
           `;
           solution_div.appendChild(createDivCard);

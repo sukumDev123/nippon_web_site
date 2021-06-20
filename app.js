@@ -265,10 +265,28 @@ function hexToRGB(h) {
 function loadSolutionFromPage(id) {
   const solution_div = document.querySelector(".solution-div");
   const info_solution = document.querySelector("#info-solution");
-
+  const solutions_div = document.querySelectorAll(
+    "#solution-list-home-page .header > div"
+  );
+  if (solutions_div) {
+    for (let i = 0; i < Array.from(solutions_div).length; i++) {
+      const _s = solutions_div[i];
+      _s.className = "solution-card ";
+      _s.addEventListener("click", (event) => {
+        _s.className = "solution-card active";
+      });
+    }
+    // console.log({ solutions_div });
+  }
   if (solution_div) {
-    solution_div.style.display = "flex";
+    solution_div.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+    // solution_div.style.display = "flex";
+    solution_div.style.height = "300px";
     info_solution.style.display = "none";
+    // solution_div.className = "solution_div active";
     while (solution_div.lastElementChild) {
       solution_div.removeChild(solution_div.lastElementChild);
     }
@@ -280,24 +298,25 @@ function loadSolutionFromPage(id) {
       .then((page) => {
         loading.className = "hide";
         product_suggestion = page.products_suggestion;
-        console.log({ product_suggestion });
-        page.solutions.forEach((solution) => {
-          const createDivCard = document.createElement("div");
-          createDivCard.id = "solution" + solution.ID;
-          createDivCard.onclick = function (event) {
-            solutionChange(solution.ID);
-            createDivCard.className = "card-active";
-          };
 
-          createDivCard.innerHTML = `
+        if (page.solutions)
+          page.solutions.forEach((solution) => {
+            const createDivCard = document.createElement("div");
+            createDivCard.id = "solution" + solution.ID;
+            createDivCard.onclick = function (event) {
+              solutionChange(solution.ID);
+              createDivCard.className = "card-active";
+            };
+
+            createDivCard.innerHTML = `
               <a>
               <img src="${solution["image"]}" />
               <h3 style="font-weight:bold">${solution["title"]}</h3>
-              <div class="bbb"></div>
+             
               </a>
           `;
-          solution_div.appendChild(createDivCard);
-        });
+            solution_div.appendChild(createDivCard);
+          });
       });
 
     // _fetch[0].then(d => d.json()).then(d => console.log({f: d}))
@@ -346,6 +365,10 @@ function homePageInitSwiper() {
   // });
   const product_owner = new Swiper(".products-card-owner-develop-swiper", {
     slidesPerView: 1,
+    navigation: {
+      nextEl: ".pd-next",
+      prevEl: ".pd-prev",
+    },
   });
   const home_banner = new Swiper(".home-banner-swiper", {
     speed: 1000,
@@ -495,27 +518,27 @@ function homePageInitSwiper() {
   // }
 }
 const homePageHeaderOnFixed = () => {
-  window.addEventListener("scroll", () => {
-    const element = document.querySelector("body");
-    try {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
-      const home_header = document.querySelector("#home_header");
-      if (element && home_header) {
-        if (scrollTop >= 500) {
-          if (!home_header.className.match(/home_header_fixed/)) {
-            home_header.className += " home_header_fixed";
-          }
-        } else {
-          const ddd = home_header.className
-            .split(" ")
-            .filter((c) => c != "home_header_fixed")
-            .join(" ");
-          home_header.className = ddd;
-        }
-      }
-    } catch (error) {}
-  });
+  //   // window.addEventListener("scroll", () => {
+  //   //   const element = document.querySelector("body");
+  //   //   try {
+  //   //     const scrollTop =
+  //   //       window.pageYOffset || document.documentElement.scrollTop;
+  //   //     const home_header = document.querySelector("#home_header");
+  //   //     if (element && home_header) {
+  //   //       if (scrollTop >= 500) {
+  //   //         if (!home_header.className.match(/home_header_fixed/)) {
+  //   //           home_header.className += " home_header_fixed";
+  //   //         }
+  //   //       } else {
+  //   //         const ddd = home_header.className
+  //   //           .split(" ")
+  //   //           .filter((c) => c != "home_header_fixed")
+  //   //           .join(" ");
+  //   //         home_header.className = ddd;
+  //   //       }
+  //   //     }
+  //   //   } catch (error) {}
+  //   // });
 };
 
 const onClickedHeader = () => {
@@ -563,11 +586,12 @@ const headerClicked = () => {
     });
 
     Array.from(menuTop).forEach((menu) => {
-      menu.querySelector("a").addEventListener("click", (event) => {
+      menu.querySelector("a").addEventListener("mouseenter", (event) => {
         // if (menu.querySelector("a").href.match("#"))
-        if (menu.querySelector("a").href.match(/#/)) {
-          event.preventDefault();
-
+        // if (menu.querySelector("a").href.match(/#/)) {
+        // event.preventDefault();
+        // console.log({ l:  });
+        if (menu.children[1]) {
           Array.from(menuTop).forEach((_menu) => {
             if (_menu.className.match("menu-active")?.length) {
               const ddd = _menu.className
@@ -599,6 +623,8 @@ const headerClicked = () => {
             header.className += " header-active";
           }
         }
+
+        // }
       });
     });
   }
@@ -903,7 +929,11 @@ function solutionChange(id, load_product = true) {
   const info_solution = document.querySelector("#info-solution");
   info_solution.style.display = "block";
   const solution_div_array = Array.from(solution_div);
-  console.log({ solution_div_array });
+
+  info_solution.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
   if (solution_div_array?.length) {
     for (let i = 0; i < solution_div_array.length; i++) {
       const sDiv = solution_div_array[i];
@@ -985,12 +1015,15 @@ function solutionChange(id, load_product = true) {
 
         if (load_product == true) {
           const product1 = document.querySelector("#products-1 .products-card");
-          console.log({ product1: product1.lastElementChild, load_product });
-          if (product1 || load_product != false)
-            while (product1.lastElementChild) {
-              if (product1.lastElementChild.value == "") break;
-              product1.removeChild(product1.lastElementChild);
-            }
+
+          if (product1 || load_product != false) {
+            console.log({ product1 });
+            // while (product1.lastElementChild) {
+            //   if (product1.lastElementChild.value == "") break;
+            //   product1.removeChild(product1.lastElementChild);
+            // }
+          }
+
           if (product_suggestion.length) {
             for (let i = 0; i < product_suggestion.length; i++) {
               const product_s = product_suggestion[i];
@@ -1010,7 +1043,7 @@ function solutionChange(id, load_product = true) {
               
               
               `;
-              product1.appendChild(product_card);
+              if (product1) product1.appendChild(product_card);
               //         <div class="product-card">
 
               // </div>
@@ -1022,7 +1055,7 @@ function solutionChange(id, load_product = true) {
               <h5 class='text-center'>Null product</h5>
             
             `;
-            product1.appendChild(product_card);
+            if (product1) product1.appendChild(product_card);
           }
         }
       }

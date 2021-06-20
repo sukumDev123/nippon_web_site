@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45">
+  <g id="Youtube" transform="translate(0.5 0.5)">
+    <circle id="Oval_5_Copy_2" data-name="Oval 5 Copy 2" cx="22" cy="22" r="22" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="1"/>
+    <g id="Icon_feather-youtube" data-name="Icon feather-youtube" transform="translate(11.501 14.622)">
+      <path id="Path_28573" data-name="Path 28573" d="M22.058,8.31A2.653,2.653,0,0,0,20.207,6.4,68.731,68.731,0,0,0,12,6S5.432,6,3.79,6.439A2.653,2.653,0,0,0,1.939,8.348,27.679,27.679,0,0,0,1.5,13.4a27.678,27.678,0,0,0,.439,5.087A2.653,2.653,0,0,0,3.79,20.316c1.642.439,8.208.439,8.208.439s6.566,0,8.208-.439a2.653,2.653,0,0,0,1.852-1.909A27.678,27.678,0,0,0,22.5,13.4a27.678,27.678,0,0,0-.439-5.087Z" transform="translate(-1.499 -6)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <path id="Path_28574" data-name="Path 28574" d="M14.625,20.164l6.545-3.722L14.625,12.72Z" transform="translate(-6.558 -9.037)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

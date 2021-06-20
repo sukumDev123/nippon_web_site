@@ -19,12 +19,13 @@
  
 <?php
        $tb =  get_bloginfo("template_directory");
-       $fb = $tb . "/assets/images/fb.svg";
-       $line = $tb . "/assets/images/line.svg";
-       $yb = $tb . "/assets/images/yb.svg";
-       $ig = $tb . "/assets/images/ig.svg";
-       $tw = $tb . "/assets/images/tw.svg";
-       $in = $tb . "/assets/images/in.svg";
+       $fb = $tb . "/assets/images/FB-black.svg";
+
+       $line = $tb . "/assets/images/Line-black.svg";
+       $yb = $tb . "/assets/images/Youtube-black.svg";
+       $ig = $tb . "/assets/images/IG-black.svg";
+       $tw = $tb . "/assets/images/Twitter-black.svg";
+       $in = $tb . "/assets/images/Linkin-black.svg";
 
 
        $linkFb = "https://www.facebook.com/NipponPaintDecor";

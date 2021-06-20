@@ -35,6 +35,8 @@
     <?php  get_template_part("other/solution-home-page"); ?>
     <div class="mt-10rem"></div>
 
+    <?php   get_template_part("other/products-2"); ?>
+    <div class="mt-10rem"></div>
 
     <?php  get_template_part("other/shade-home"); ?>
  <div class="mt-10rem"></div>

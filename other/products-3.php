@@ -36,7 +36,8 @@ $explain = get_field("explain");
                     <a id="project_2_show_desktop" class="a-primary-button" href="<?php if($explain['button_link']): echo get_term_link($explain['button_link'][0])  ; endif;  ?>">
                         <button class="primary-button">
                             <?php  echo $text_static_product['button_title'] ?>
-                            <i class="fas fa-long-arrow-alt-right"></i>
+                            <img  class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">
+
                         </button>
                     </a>
             </div>
@@ -44,7 +45,7 @@ $explain = get_field("explain");
 
             <div class="product-image-content">
                 <img src="<?php  echo get_template_directory_uri()?>/assets/images/product-image.jpg " alt="">
- <!-- products-card-owner-develop-swiper -->
+ 
                 <div class="slide-wrapper-product">
                 <div class="swiper-container products-card-owner-develop-swiper">
                     <div class="swiper-wrapper">
@@ -57,16 +58,18 @@ $explain = get_field("explain");
                                     $title = get_the_title($product->ID);
                                     ?>
                                     <div class="swiper-slide">
-                                        <div class="product-card"> 
+                                        <div class="product-card-2"> 
                                             <a href="<?php echo get_permalink($product->ID) ?>">    
                                             <div>
                                                     <img src="<?php echo $featured_img_url ?>" alt="image">
-                                                    <h1>
+                                                    <h2>
                                                         <?php echo $title ?>
-                                                    </h1>
+                                                    </h2>
                                                     <p><?php echo get_the_excerpt($product->ID) ?></p>
                                                 </div>
                                             </a>
+                                            <div class="swiper-button-prev pd-prev"></div>
+                                            <div class="swiper-button-next pd-next"></div>
                                         </div>
                                     </div>
                                     <?php 
@@ -80,12 +83,13 @@ $explain = get_field("explain");
                 </div>
             </div>  
 
-            <a id="project_2_show_mobile" class="a-primary-button" href="<?php if($explain['button_link']): echo get_term_link($explain['button_link'][0])  ; endif;  ?>">
+                    <a id="project_2_show_mobile" class="a-primary-button" href="<?php if($explain['button_link']): echo get_term_link($explain['button_link'][0])  ; endif;  ?>">
                         <button class="primary-button">
                             <?php  echo $text_static_product['button_title'] ?>
-                            <i class="fas fa-long-arrow-alt-right"></i>
+                            <img  class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">
+
                         </button>
-            </a>
+                    </a>
         </div>
 
     </div>

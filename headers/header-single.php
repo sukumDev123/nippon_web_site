@@ -16,51 +16,89 @@ $title_static = [
     <title><?php the_title().$title_static; ?></title>
 </head>
 <body>
-
-<header id="page"> 
- 
+<header id="home_header"  > 
     <div class="bk-header"></div>
+    
+
+
     <div class="container">
-    <a href="<?php echo get_site_url().$title_static ?>">
-        <img alt="logo" src="<?php bloginfo("template_directory");  ?>/assets/images/logo.png"  class="image-logo-desktop" />
-   </a>
-    <?php 
-        wp_nav_menu(
-            [ 
-                "theme_location" => 'top-menu'
-            ]
-        )
-    ?>
-        <div class="login">
-        <a class="contact-button" href="/contact-us/">ติดต่อเรา</a>
-        
-        <h5>
-                <a href="/menu-products/">
-                    <i class="fas fa-search"></i>
-                </a>    
-            </h5>
-             <!-- <div class="th_en"> -->
-             <?php 
-            //   wp_nav_menu(
-            //     [
-            //         "theme_location" => 'language'
-            //     ]
-            // )
-             
-             ?>
-             <!-- </div>    -->
-             <!-- <div class="user-div">
-               <h5>
-               <i class="fas fa-user"></i>
-               </h5>
-             </div>     -->
-        </div>
+            <a href="<?php echo get_site_url() ?>">
+                    <img alt="logo" src="<?php bloginfo("template_directory");  ?>/assets/images/logo.svg"  class="image-logo-desktop" />
+            </a>
+           <div class="header-top-slide">
+               <div class="header-top-right">
+                        <div id="login-top" class="login">
+                        <a class="contact-button" href="/contact-us/">ติดต่อเรา</a>
+
+
+                            <h5>
+                                <a href="/search/">
+                                    <i class="fas fa-search"></i>
+                                </a>    
+                            </h5>
+                            <!-- <div class="th_en"> -->
+                                <!-- <h5>TH|</h5>
+                                <h5>EN</h5> -->
+                            <?php 
+                            // wp_nav_menu(
+                            //     [
+                            //         "theme_location" => 'language'
+                            //     ]
+                            // )
+                            
+                            ?>
+                                <!-- </div>    -->
+                            <div class="user-div">
+                                <h5><i class="fas fa-user"></i></h5>
+                            </div>    
+                        </div>
+               </div>
+                <div class="header-top">
+                        <?php 
+                            wp_nav_menu(
+                                [
+                                    "theme_location" => 'top-menu'
+                                ]
+                            )
+                        
+                        ?>
+                        
+                        <div id="login-right" class="login">
+                        <a class="contact-button" href="/contact-us/">ติดต่อเรา</a>
+
+                            <h5>
+                                <a href="/search/">
+                                    <i class="fas fa-search"></i>
+                                </a>    
+                            </h5>
+                            <!-- <div class="th_en"> -->
+                                <!-- <h5>TH|</h5>
+                                <h5>EN</h5> -->
+                            <?php 
+                            // wp_nav_menu(
+                            //     [
+                            //         "theme_location" => 'language'
+                            //     ]
+                            // )
+                            
+                            ?>
+                                <!-- </div>    -->
+                            <div class="user-div">
+                                <h5><i class="fas fa-user"></i></h5>
+                            </div>    
+                        </div>
+                </div>
+                
+           </div>
+            
     </div>
+
     <div class="show-menus-mobile">
         <i class="fas fa-bars"></i>
     </div>
  
 </header>
+
 
 
 <?php 

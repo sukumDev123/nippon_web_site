@@ -45,11 +45,11 @@ $text_static = [
                         <div class="swiper-pagination shade-pagination"></div>
                     </div>
 
-                    <a target="_blank" class="shades-color" href="<?php  echo $text_static['url'] . "?shade_id=".$shade->ID ?>">
-                        <div style="background-color:<?php echo $shade->shade1  ?>;width:88px;height:88px;" ></div>
-                        <div style="background-color:<?php echo $shade->shade2  ?>;width:88px;height:88px;" ></div>
-                        <div style="background-color:<?php echo $shade->shade3  ?>;width:88px;height:88px;" ></div>
-                      <?php if($shade->shade4): ?>  <div style="background-color:<?php echo $shade->shade4  ?>;width:88px;height:88px;" ></div> <?php endif; ?>
+                    <a  class="shades-color" href="<?php  echo $text_static['url'] . "?shade_id=".$shade->ID ?>">
+                        <div class="shades-color-box" style="background-color:<?php echo $shade->shade1  ?>;" ></div>
+                        <div class="shades-color-box" style="background-color:<?php echo $shade->shade2  ?>;" ></div>
+                        <div class="shades-color-box" style="background-color:<?php echo $shade->shade3  ?>;" ></div>
+                      <?php if($shade->shade4): ?>  <div class="shades-color-box" style="background-color:<?php echo $shade->shade4  ?>;" ></div> <?php endif; ?>
                     </a>
                   </div>
                     
