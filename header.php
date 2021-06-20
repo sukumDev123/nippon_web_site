@@ -1,13 +1,13 @@
 <?php 
 
 $parent_title = get_the_title($post->post_parent);
-$title = get_the_content();
+$title = get_the_title();
 if($parent_title) {
     $title = $parent_title;
 }
 
 $photos = acf_photo_gallery("banners" , get_the_ID());
-$lang= get_bloginfo("language");  
+$lang=get_bloginfo("language");  
  
 $title_static = [
     "en" => " - Nippon Paint The Coatings Expert",
@@ -31,6 +31,8 @@ $title_static = [
 
 </head>
 <body>
+
+<?php  get_template_part("headers/message_contact"); ?>
 
 
 <header id="home_header"  > 

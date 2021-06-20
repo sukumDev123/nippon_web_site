@@ -25,6 +25,8 @@ $title_static = [
 
 </head>
 <body>
+<?php  get_template_part("headers/message_contact"); ?>
+
 <header id="home_header"  > 
     <div class="bk-header"></div>
     

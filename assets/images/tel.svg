@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="37.035" height="36.113" viewBox="0 0 37.035 36.113">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_337" data-name="Rectangle 337" width="30.648" height="30.804" fill="#1e4f92"/>
+    </clipPath>
+  </defs>
+  <g id="Group_14919" data-name="Group 14919" transform="translate(-1787.789 -953.541)">
+    <path id="Icon_map-volume-control-telephone" data-name="Icon map-volume-control-telephone" d="M13.953,17.009h2.391c.717,0,1.175-1.054,1.175-1.765V7.718c0-.712-.458-.513-1.175-.513H13.953Zm0,14.261h2.391c.717,0,1.175.827,1.175,1.54v7.524c0,.708-.458,1.631-1.175,1.631H13.953ZM10.8,24.14c-.021-6.878,1.273-7.131,2.01-7.131h.254V7.2h-.3c-1.313,0-7.717,2.158-7.717,17.38s6.4,17.382,7.717,17.382h.3V31.27h-.254C12.071,31.27,10.817,31.015,10.8,24.14Z" transform="translate(1779.148 963.543) rotate(-45)" fill="#1e4f92"/>
+    <g id="Group_1502" data-name="Group 1502" transform="translate(1794.176 953.541)" clip-path="url(#clip-path)">
+      <path id="Path_929" data-name="Path 929" d="M304.4,302.237a8.327,8.327,0,0,1,6.781,6.781.868.868,0,0,0,.861.725,1.2,1.2,0,0,0,.149-.013.874.874,0,0,0,.718-1.009,10.069,10.069,0,0,0-8.2-8.2.879.879,0,0,0-1.009.712.864.864,0,0,0,.705,1.009Zm0,0" transform="translate(-287.853 -294.874)" fill="#1e4f92"/>
+      <path id="Path_930" data-name="Path 930" d="M321.27,245.287a16.579,16.579,0,0,0-13.509-13.509.872.872,0,1,0-.285,1.721,14.809,14.809,0,0,1,12.073,12.073.868.868,0,0,0,.86.724,1.123,1.123,0,0,0,.149-.013.857.857,0,0,0,.712-1Zm0,0" transform="translate(-290.673 -231.694)" fill="#1e4f92"/>
+    </g>
+  </g>
+</svg>

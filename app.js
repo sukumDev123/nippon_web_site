@@ -912,11 +912,26 @@ window.onload = () => {
   handleFilterProductMobile();
   handleFooterMenuClicked();
   loadLocation();
-
+  const message_right = document.querySelector(".message-right");
+  const contact_message_box = document.querySelector(".contact-message-box");
+  const arrow_up_to_top = document.querySelector(".arrow-up-to-top");
+  if (message_right && contact_message_box) {
+    contact_message_box.addEventListener("click", () => {
+      if (message_right.className == "message-right active") {
+        message_right.className = "message-right";
+      } else {
+        message_right.className = "message-right active";
+      }
+    });
+    arrow_up_to_top.addEventListener("click", () => {
+      window.scrollTo(0, 0);
+    });
+  }
   try {
     if (family_colors) {
       if (family_colors.length) findColorClose([0, 0, 0], "rgb", family_colors);
     }
+
     if (firstPostId) {
       onPageShadeInit();
     }

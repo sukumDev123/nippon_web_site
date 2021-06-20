@@ -47,15 +47,19 @@ $projects = get_field("projects");
                         $photos = acf_photo_gallery("photos" , $project->ID);
                 ?>
                     <div class="swiper-slide">
-                        <div>
+                    <a   href="<?php echo get_permalink($project->ID) ?>">
+                    <div>
                             <img src="<?php echo $photos[0]['full_image_url']; ?>" alt="" />
                             <div class="content">
                                 <h1>
-                                    <a target="_blank" href="<?php echo get_permalink($project->ID) ?>"><?php echo get_the_title($project->ID) ?></a>
+                                    <a   href="<?php echo get_permalink($project->ID) ?>"><?php echo get_the_title($project->ID) ?></a>
                                 </h1>
                                 <?php echo get_field("short_text" , $project->ID) ?>
                             </div>
                         </div>
+
+                            </a>
+                        
                         <div class="swiper-button-prev inspire-prev"></div>
                         <div class="swiper-button-next inspire-next"></div>
                     </div>    

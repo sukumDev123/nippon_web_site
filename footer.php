@@ -86,6 +86,11 @@
 
         
     </div>
+    <div class="arrow-up-to-top">
+        <img src="<?php echo  get_bloginfo("template_directory");  ?>/assets/images/arrow-g.svg" alt="arrow-g.svg" />
+
+    </div>
+
     <div class="footer-content">
         <div>
            <img src="<?php echo  get_bloginfo("template_directory");  ?>/assets/images/logo_footer.png" alt="logo_footer.png" />

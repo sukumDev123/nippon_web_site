@@ -31,9 +31,10 @@ $title_static = [
         href="<?php bloginfo("template_directory");  ?>/assets/images/favicon.svg" 
         type="image/svg+xml"
     />
-
+    <!-- <script src="http://localhost:35729/livereload.js"></script> -->
 </head>
 <body>
+    <?php  get_template_part("headers/message_contact"); ?>
 
 <header id="home_header"  > 
     <div class="bk-header"></div>

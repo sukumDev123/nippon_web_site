@@ -14,6 +14,8 @@ $word_selected = "เลือกประเภทสินค้า";
 
  
 ?>
+<?php  get_header(); ?>
+
 <script>
     let product_cate_select = "";
 </script>

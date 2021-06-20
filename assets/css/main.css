@@ -59,7 +59,7 @@ body {
   color: #3d464f;
   overflow-x: hidden;
   max-width: 100%;
-  padding-top: 124px;
+  padding-top: 120px;
   position: absolute;
   top: 0;
   width: 100%;
@@ -1009,6 +1009,28 @@ footer {
   padding-bottom: 1rem;
   position: relative;
 }
+footer .arrow-up-to-top {
+  position: absolute;
+  bottom: 100px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: #ffffff;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+footer .arrow-up-to-top img {
+  transform: rotate(-90deg);
+  width: 24px;
+}
+@media screen and (max-width: 400px) {
+  footer .arrow-up-to-top {
+    bottom: 153px;
+  }
+}
 footer .copywrite {
   color: white;
 }
@@ -1854,8 +1876,17 @@ footer .footer-content .footer-menu-mobile {
   width: 50%;
   height: 50%;
 }
+#single-news .container {
+  max-width: 1170px;
+  padding: 0px !important;
+}
 #single-news .container > h1 {
   font-weight: 800;
+}
+@media screen and (max-width: 1200px) {
+  #single-news .container {
+    padding: 2em 2em !important;
+  }
 }
 #single-news .container.content img {
   -o-object-fit: contain;
@@ -2324,7 +2355,7 @@ footer .footer-content .footer-menu-mobile {
 #product-container .product-cate-card {
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 1em;
-  width: 192px;
+  width: 250px;
   margin-bottom: 2em;
 }
 #product-container .product-cate-card h2 {
@@ -5525,4 +5556,85 @@ section#location_page_div .header_list .locations-card .location-card p {
 #btnGroupDrop1 img {
   margin-left: 5px;
   transition: all 0.3s ease-in;
+}
+
+.message-right {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+.message-right .contact-message-top {
+  height: 0px;
+  transition: height 0.3s ease-in;
+  overflow: hidden;
+}
+.message-right .contact-message-top .content-message-box-1 {
+  width: 60px;
+  height: 60px;
+  background-color: #ffffff;
+  border-radius: 100%;
+  flex-shrink: 0;
+  margin-left: auto;
+  margin-bottom: 30px;
+  opacity: 0;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px 1px rgba(0, 0, 0, 0.1);
+}
+pointer .message-right .contact-message-top .content-message-box-1:hover {
+  box-shadow: 0 4px 10px 1px rgba(0, 0, 0, 0.5);
+}
+.message-right .contact-message-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 9px;
+}
+.message-right .contact-message-div h5 {
+  width: 100%;
+  max-width: 229px;
+  border-radius: 29px;
+  background-color: #1e4f92;
+  padding: 10px 20px;
+  color: white;
+  font-weight: bold;
+  flex-shrink: 0;
+  margin-right: 0px;
+  opacity: 0;
+  transition: all 0.3s ease-in;
+}
+.message-right .contact-message-div .contact-message-box {
+  width: 60px;
+  height: 60px;
+  background-color: #ffffff;
+  border-radius: 100%;
+  flex-shrink: 0;
+  transition: all 0.3s ease-in;
+  margin-left: 30px;
+  box-shadow: 0 4px 10px 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.message-right .contact-message-div .contact-message-box:hover {
+  box-shadow: 0 4px 10px 1px rgba(0, 0, 0, 0.5);
+}
+.message-right.active .contact-message-div h5 {
+  opacity: 1;
+}
+.message-right.active .contact-message-top {
+  height: 259px;
+}
+.message-right.active .contact-message-top .content-message-box-1 {
+  opacity: 1;
+}
+@media screen and (max-width: 1026px) {
+  .message-right {
+    display: none;
+  }
 }

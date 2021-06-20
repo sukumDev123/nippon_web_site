@@ -27,7 +27,8 @@ $postUrl = 'http' . ( isset( $_SERVER['HTTPS'] ) ? 's' : '' ) . '://' . "{$_SERV
     <div class="container">
             <div  class="arrow-back">
                 <a href="/project-reference/">
-                <i class="fas fa-arrow-left"></i>
+                <img src="<?php echo  get_bloginfo("template_directory");  ?>/assets/images/arrow-g.svg" alt="arrow-g.svg" />
+
                 </a>
 
 
