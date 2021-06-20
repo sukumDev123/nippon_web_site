@@ -11,7 +11,6 @@ let districts = {};
 
 // let firstPostId = 0;
 function showListOfFamilyColorThisShade(shadeId) {
-  console.log({ shadeId });
   if (loading) loading.className = "";
   // document.querySelector("#shade-filter").value = shadeId;
   fetch(domain + "/wp-json/api/v1/shade/" + shadeId)
@@ -53,6 +52,10 @@ function showListOfFamilyColorThisShade(shadeId) {
     `;
       }
       if (loading) loading.className = "hide";
+      document.querySelector(".shade-color-div").scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     })
     .catch((e) => {
       if (loading) loading.className = "hide";
@@ -281,7 +284,7 @@ function loadSolutionFromPage(id) {
   if (solution_div) {
     solution_div.scrollIntoView({
       behavior: "smooth",
-      block: "center",
+      block: "end",
     });
     // solution_div.style.display = "flex";
     solution_div.style.height = "300px";
@@ -586,6 +589,18 @@ const headerClicked = () => {
     });
 
     Array.from(menuTop).forEach((menu) => {
+      if (menu.children[1])
+        menu.children[1].addEventListener("mouseleave", (event) => {
+          // console.log({ event });
+          const ddd = menu.className
+            .split(" ")
+            .filter((c) => c != "menu-active")
+            .join(" ");
+          menu.className = ddd;
+          // const timeOut = setTimeout(() => {
+          //   clearTimeout(timeOut);
+          // }, 1000);
+        });
       menu.querySelector("a").addEventListener("mouseenter", (event) => {
         // if (menu.querySelector("a").href.match("#"))
         // if (menu.querySelector("a").href.match(/#/)) {
@@ -599,11 +614,6 @@ const headerClicked = () => {
                 .filter((c) => c != "menu-active")
                 .join(" ");
               _menu.className = ddd;
-              // const _ddd = header.className
-              //   .split(" ")
-              //   .filter((c) => c != "home_header_fixed")
-              //   .join(" ");
-              // header.className = _ddd;
             }
           });
 
@@ -945,10 +955,11 @@ function solutionChange(id, load_product = true) {
   info_solution.style.display = "block";
   const solution_div_array = Array.from(solution_div);
 
-  info_solution.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
+  if (solution_div_array[0])
+    solution_div_array[0].scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   if (solution_div_array?.length) {
     for (let i = 0; i < solution_div_array.length; i++) {
       const sDiv = solution_div_array[i];
@@ -1104,6 +1115,10 @@ function onSearchColor() {
     const { r, g, b } = cmyk2rgb(c, m, y, k, false);
     findColorClose([+r, +g, +b], "rgb", family_colors);
   }
+  document.querySelector("#shade-center .text-center").scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
 }
 
 function cmyk2rgb(c, m, y, k, normalized) {

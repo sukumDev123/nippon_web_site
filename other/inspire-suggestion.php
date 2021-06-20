@@ -27,7 +27,7 @@ $projects = get_field("projects");
     <div class="container">
         <div class="left">
             <h1><?php echo $text_static_inspire_suggestion['title'] ?></h1>
-            <?php echo $text_static_inspire_suggestion['detail'] ?>
+            <p><?php echo $text_static_inspire_suggestion['detail'] ?></p>
         </div>
         <div class="right">
             <a  id="project_suggestion_button_desktop" class="a-primary-button" href="<?php echo  $text_static_inspire_suggestion['button_link'] ?>">

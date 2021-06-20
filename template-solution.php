@@ -21,7 +21,28 @@ $postId =   get_top_ancestor_id();
 $thisPostId = $post->ID;
 $posts = get_field("post");
  
-// echo $limit_page;
+$lang=get_bloginfo("language");  
+ 
+$text_static_solution = [
+    "en" => [
+        "title" => "เคล็ดลับซ่อมแซมปัญหาสีบ้าน จากนิปปอนเพนต์",
+        "detail" => "“ทุกปัญหาสีบ้าน นิปปอนเพนต์ช่วยได้” <br/>
+        เมื่อรู้สาเหตุของปัญหาสีที่เกิดขึ้น มีแนวทางการแก้ไขที่ถูกขั้นตอน และเลือกใช้ผลิตภัณฑ์ที่ตอบโจทย์ บ้านของคุณก็จะสวยใหม่อยู่เสมอ"
+
+
+    ],
+    "th" => [
+        "title" => "เคล็ดลับซ่อมแซมปัญหาสีบ้าน จากนิปปอนเพนต์",
+        "detail" => "“ทุกปัญหาสีบ้าน นิปปอนเพนต์ช่วยได้” <br/>
+        เมื่อรู้สาเหตุของปัญหาสีที่เกิดขึ้น มีแนวทางการแก้ไขที่ถูกขั้นตอน และเลือกใช้ผลิตภัณฑ์ที่ตอบโจทย์ บ้านของคุณก็จะสวยใหม่อยู่เสมอ"
+       
+        
+
+    ]
+][$lang];
+
+
+
  ?>
 <?php 
 get_template_part("other/loading");
@@ -168,7 +189,16 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
 
 </div>
 
-<div id="solution-pages" class="container">
+<div id="solution-pages" >
+    <div class="content">
+        <h1><?php echo $text_static_solution['title'] ?></h1>
+        <p><?php echo $text_static_solution['detail'] ?> </p>
+        </div>
+
+    <div class="container">
+
+
+
 <?php 
  
 if(isset($_GET['scroll'])):
@@ -221,12 +251,14 @@ while ($query->have_posts()) {
 wp_reset_query();
  
 ?>
- 
+    </div>
+    <div class="border-solution"></div>
 </div>
 
  
 
 <div id="solutions" >
+   
     <div class="solution-div">
     <?php 
  

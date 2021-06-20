@@ -23,8 +23,8 @@ $word_selected = "เลือกประเภทสินค้า";
 <?php
     $terms = get_terms('product_cat', array('hide_empty' => false, 'parent' => 0));
     $termShow = [];
-    // $termId  = get_queried_object_id();
-    // $termShow = get_terms('product_cat', array('hide_empty' => false, 'parent' =>$termId));
+    $termId  = get_queried_object_id();
+    $termShow = get_terms('product_cat', array('hide_empty' => false ,"parent" => 2160 )  );
     if(isset($_GET['slug']) || isset($_GET['scroll']) || isset($_GET['search'])):
         echo '<script> setTimeout(() => {
             document.querySelector("#product-container").scrollIntoView({behavior: "smooth" , block: "center"})
@@ -52,7 +52,8 @@ $word_selected = "เลือกประเภทสินค้า";
 <a  id="project_suggestion_button_desktop" class="a-primary-button"  onclick="clicked_cate_filter()">
             <button class="primary-button">
                 ตกลง
-                <i class="fas fa-long-arrow-alt-right"></i>
+                <img  class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">
+
             </button>
         </a>
    
@@ -69,7 +70,7 @@ $word_selected = "เลือกประเภทสินค้า";
 <div class="page-detail">
  
     <h1><?php echo get_the_title() ?></h1>
-    <p><?php echo get_field("short_text") ?></p>
+    <?php echo get_field("short_text") ?> 
     <form   method="get" class="search-filter">
     <?php 
     $slug = "";
@@ -90,11 +91,11 @@ $word_selected = "เลือกประเภทสินค้า";
 <div  id="nav-products">
 <ul class="desktop">
     <?php if(count($terms) > 0): ?>
-        <?php foreach($terms as  $term): $className = "";  $word_selected=$term->name;    ?>
+        <?php foreach($terms as  $term): $className = "";  $word_selected=$term->name;  if($term->name != "all"):  ?>
             <li class="<?php  echo $className ?>"> 
                 <a href="<?php echo get_term_link($term->term_id)  ?>/?scroll=true"><?php echo $term->name ?></a>
             </li>
-        <?php endforeach; ?>
+        <?php endif; endforeach; ?>
     <?php endif; ?>
 </ul>
 
@@ -113,14 +114,14 @@ $word_selected = "เลือกประเภทสินค้า";
                     เลือกประเภทสินค้า
                 </a>    
         </li>
-    <?php foreach($terms as  $term): $className = ""; 
+    <?php foreach($terms as  $term):  if($term->name != "all"): $className = ""; 
      ?>
             <li > 
                 <a 
                     class="dropdown-item"  
                     href="<?php echo get_term_link($term->term_id)  ?>"><?php echo $term->name ?></a>
             </li>
-        <?php endforeach; ?>
+        <?php endif; endforeach; ?>
         
     </ul>
 
@@ -136,7 +137,8 @@ $word_selected = "เลือกประเภทสินค้า";
   
     if(!empty($termShow)) {
         foreach($termShow as $t) {
-            $termShowData = get_terms('product_cat', array('hide_empty' => false, 'parent' => $t->term_id));
+            if($t->parent != 0):
+                $termShowData = get_terms('product_cat', array('hide_empty' => false, 'parent' => $t->term_id));
             
                 echo '<div class="product-cate-card"><h2>'.$t->name.'</h2>';
                 $_slugs = "";
@@ -157,25 +159,27 @@ $word_selected = "เลือกประเภทสินค้า";
                   
                             foreach( $_slugs as $_slug):
                              
-                                if(  urlencode($_slug) == urlencode($category->term_id)):
-                                    $checked= "checked";
+                                if(  urlencode($_slug) == urlencode($category->name)):
+                                    $checked= "active";
                                 endif;
                             
                             endforeach;
                         endif;
                     endif;
                 
-                    $thisCate = "'".$category->term_id."'";
+                    $thisCate = "'".$category->name."'";
                     echo '
                     <h5>
                         <a>'. $category->name .' </a>
-                        <input '.$checked.' type="checkbox" onchange="getChecked('.$slug.' , '. $thisCate.')" />
+                        <div class="box-check" onclick="getChecked('.$slug.' , '. $thisCate.')" >
+                        <div class=" '.$checked.'"></div>
+                    </div>
                         </h5>
 
                         ';
                 }
                 echo '</div>';
-
+            endif;
         }
     }
 ?>
@@ -198,14 +202,21 @@ $word_selected = "เลือกประเภทสินค้า";
         if(count($_slugs) > 0):
             $tax_query = [
                 'relation' => 'AND',
-                [
-                    'taxonomy' => 'product_cat',
-                    'field' => 'term_id',
-                    'terms' =>  $_slugs,
-                    'include_children' => true,
-                    'operator' => 'IN' 
-                ]
+                
             ];
+            
+            for($i = 0 ; $i < count($_slugs);$i++) {
+                $_s = $_slugs[$i];
+                if($_s) {
+                    array_push($tax_query , [
+                        'taxonomy' => 'product_cat',
+                        'field' => 'name',
+                        'terms' =>  $_s,
+                        'include_children' => true,
+                        'operator' => 'IN'
+                    ]);
+                }
+            }
         endif;
     
    
@@ -213,6 +224,7 @@ $word_selected = "เลือกประเภทสินค้า";
     $args = array(
         'post_type' => 'product',
         'posts_per_page' => 15,
+        "tax_query" =>  $tax_query,
        
         
        
@@ -302,7 +314,9 @@ function getChecked(slug , _slug_ ) {
         _slug = slug.split(",").filter(s => s != _slug_).join(",")
         // console.log({_slug})
         if(_slug == "") {
-           
+            // window.location.assign("");
+            window.location.href = '<?php echo get_permalink() ; ?>';
+
         }
     } else {
         _slug = slug ? slug + "," + _slug_ : _slug_;
@@ -342,3 +356,4 @@ function clicked_cate_filter() {
     }
 }
 </script>
+<?php  get_footer() ?>

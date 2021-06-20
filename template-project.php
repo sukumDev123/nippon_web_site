@@ -199,29 +199,29 @@ endif;
             endif;
             
             ?>
-            <div class="content">
-               <div>
-                    <h1>
-                            <?php the_title(); ?>
-                        <!-- </a> -->
-                    </h1>
-                    <?php echo get_field("short_text" , get_the_ID());  ?> 
-               </div>
-              <div  class="d-flex  justify-content-between button-love-share">
-                  <div class="d-flex  align-items-center">
-                    <h5 class="me-4">
-                            <i class="fas fa-eye"></i>
-                            <?php echo   pvc_get_post_views(get_the_ID()) ?>
-                        </h5>
-                        <h5>
-                            <i  class="fas fa-share"></i>
-                        <?php if( get_post_meta( get_the_ID(), 'shares', true)):  echo get_post_meta( get_the_ID(), 'shares', true); else: echo 0;  endif; ?>
-                        </h5>
-                  </div>
-                  <i style="cursor:pointer" id="heart<?php echo get_the_ID() ?>" onclick="onLikeClicked(<?php echo get_the_ID() ?>)" class="far fa-heart"></i>
+                <div class="content">
+                <div>
+                        <h1>
+                                <?php the_title(); ?>
+                            <!-- </a> -->
+                        </h1>
+                        <?php echo get_field("short_text" , get_the_ID());  ?> 
                 </div>
-               
-            </div>
+                    <div  class="d-flex  justify-content-between button-love-share">
+                    <div class="d-flex  align-items-center">
+                        <h5 class="me-4">
+                                <i class="fas fa-eye"></i>
+                                <?php echo   pvc_get_post_views(get_the_ID()) ?>
+                            </h5>
+                            <h5>
+                                <i  class="fas fa-share"></i>
+                            <?php if( get_post_meta( get_the_ID(), 'shares', true)):  echo get_post_meta( get_the_ID(), 'shares', true); else: echo 0;  endif; ?>
+                            </h5>
+                    </div>
+                    <i style="cursor:pointer" id="heart<?php echo get_the_ID() ?>" onclick="onLikeClicked(<?php echo get_the_ID() ?>)" class="far fa-heart"></i>
+                    </div>
+                
+                </div>
             </a>
             </div>
         

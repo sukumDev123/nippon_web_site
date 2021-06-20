@@ -99,7 +99,7 @@ $postUrl = 'http' . ( isset( $_SERVER['HTTPS'] ) ? 's' : '' ) . '://' . "{$_SERV
     </div>
 
    
-    <div class="image-g">
+    <div  class="image-g ">
         <?php 
             $photos = acf_photo_gallery("photo_center_cards" , get_the_ID());
                 // echo count( $photos);

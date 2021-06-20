@@ -35,13 +35,14 @@
         <div class="mt-10rem"></div>
  
         <?php  get_template_part("other/products-3"); ?>
-        
  <div class="mt-product"></div>
+
+
+        <?php  get_template_part("other/solution-home-page"); ?>
+        <div class="mt-10rem"></div>
  
     <?php  get_template_part("other/inspire-suggestion"); ?>
-    <div class="mt-5rem"></div>
-
-<?php  get_template_part("other/solution-home-page"); ?>
+   
  <div class="mt-10rem"></div>
 
     <?php  get_template_part("other/shade-home"); ?>

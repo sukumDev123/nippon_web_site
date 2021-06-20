@@ -1,20 +1,30 @@
 <?php   /** Template Name: Search */ ?>
 <?php get_template_part("headers/header_search"); ?>
 <?php       $terms = get_terms('product_cat', array('hide_empty' => false, 'parent' => 0));  ?>
-
- 
+<?php 
+$red = "";
+if(isset($_GET['red'])):
+$red = $_GET['red'];
+endif;
+?>
+ <style>
+     body {
+        margin-top: 0px !important;
+        padding-top: 0px !important;
+     }
+     .fa-times  {
+         position: absolute;
+         right:30px;
+         top: 30px;
+         font-size: 30px;
+         cursor: pointer;
+     }
+    
+ </style>
 
 <body>
-    <script>
-        function searchTerm(name) {
-            console.log({ name });
-            const product_search = document.querySelector("#product_search");
-            if (product_search) {
-                product_search.value = name;
-            }
-    }
-
-    </script>
+  
+    <i id="cancelled"  class="fa fa-times"></i>
     <div class="search-div-product">
         <div id="search_product_">
             <form action="/search-result" method="get">
@@ -37,5 +47,28 @@
         </div>
     </div>
 </body>
+
+<script>
+        function searchTerm(name) {
+            
+            const product_search = document.querySelector("#product_search");
+            if (product_search) {
+                product_search.value = name;
+            }
+        }
+        const cancelled = document.querySelector("#cancelled");
+        console.log({cancelled})
+        if(cancelled) {
+            cancelled.addEventListener("click" , event => {
+                <?php if($red): ?>
+                    window.location.href = "<?php  echo $red?>";
+
+                <?php else: ?>
+                        window.location.href = "<?php echo get_site_url() ?>";
+                <?php endif; ?>
+            })
+        }
+
+    </script>
 
 

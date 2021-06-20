@@ -1,6 +1,6 @@
 <div class="project-suggestion" >
 <h1 >ไอเดียโปรเจกต์แนะนำ</h1>
-<div class="nt-5"></div>
+ 
        <div >
         
        <?php 

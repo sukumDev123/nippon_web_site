@@ -26,6 +26,7 @@
        $ig = $tb . "/assets/images/IG-black.svg";
        $tw = $tb . "/assets/images/Twitter-black.svg";
        $in = $tb . "/assets/images/Linkin-black.svg";
+       $pt = $tb . "/assets/images/print_t_b.svg";
 
 
        $linkFb = "https://www.facebook.com/NipponPaintDecor";
@@ -42,21 +43,21 @@
         <div class="phone-cs-social-address">
             <div class="phone">             
                 <div class="phone">
-                <h1> <i class="fas fa-phone-alt me-2"></i> PHONE </h1>
-                <div class="mt-4"></div>
+                    <h1> <i class="fas fa-phone-alt me-2"></i> PHONE </h1>
+                    <div class="mt-4"></div>
 
-                <div class="ml-35px">
-                    <a href="tel:024625299">TEL 0 246 25299  </a><br />
-                    <a href="tel:024632863">FAX 0 2463 2863 </a>    
-                </div>
+                    <div class="ml-35px">
+                        <a href="tel:024625299">TEL 0 246 25299  </a><br />
+                        <a href="tel:024632863">FAX 0 2463 2863 </a>    
+                    </div>
         
-            </div>
+                </div>
             </div>
             <div class="cs">
-            <h1>CARELINE</h1>
-            <div class="mt-3"></div>
+                <h1>CARELINE</h1>
+                <div class="mt-3"></div>
 
-                <h5   style="font-weight:bold"><a href="tel:024631899">02 463 1899</a></h5>
+                    <h5   style="font-weight:bold"><a href="tel:024631899">02 463 1899</a></h5>
             </div>
             <div class="social">
                 <h1>ติดตามเราได้ที่นี่</h1>
@@ -70,37 +71,39 @@
                 <a target="_blank"  href="<?php echo $linkIG; ?>"><img src="<?php echo $ig ;?>" alt=""></a>
                 <a target="_blank"  href="<?php echo $linkTW ; ?>"><img src="<?php echo $tw; ?>" alt=""></a>
                 <a target="_blank"  href="<?php echo $linkIN; ?>"><img src="<?php echo $in; ?>" alt=""></a>
+                <a target="_blank"  href="<?php echo $linkPT; ?>"><img src="<?php echo $pt; ?>" alt=""></a>
  
                   
  
             </div>
             </div>
             <div class="address mt-3">
-             
-         
-                 <h1> <i class="fas fa-map-marker-alt me-2"></i> ADDRESS </h1>
+                <h1> <i class="fas fa-map-marker-alt me-2"></i> ADDRESS </h1>
                 <div class="mt-4"></div>
 
-              <div style="margin-left:28px;">
-                <p>
-                        บริษัท นิปปอนเพนต์ เดคโคเรทีฟ โคทติ้ง </br>
-                        (ประเทศไทย) จำกัด</br>
-                        101 ม. 3 ซ.สุขสวัสดิ์ 76 ถนนสุขสวัสดิ์</br> 
-                        บางจาก พระประแดง สมุทรปราการ 10130
-                    </p>
+                <div style="margin-left:28px;">
+                        <p>
+                            บริษัท นิปปอนเพนต์ เดคโคเรทีฟ โคทติ้ง </br>
+                            (ประเทศไทย) จำกัด</br>
+                            101 ม. 3 ซ.สุขสวัสดิ์ 76 ถนนสุขสวัสดิ์</br> 
+                            บางจาก พระประแดง สมุทรปราการ 10130
+                        </p>
+                        
+                </div>
+            
 
+                    
             
             
-                    <p class='mt-4'>
-                    Nippon Paint Decorative Coatings (Thailand) Co.,Ltd. <br />
-    101 Moo 3, Soi Suksawad 76, Suksawad Road, Bangchak, Prapradaeng, Samutprakarn 10130. 
-                    </p>
-              </div>
-
-          
-         
-        </div>   
- 
+            </div>   
+            <div class="address mt-3">
+                <h1> <i class="fas fa-map-marker-alt me-2"></i> Email </h1>
+                <div class="mt-4"></div>
+               
+                <div style="margin-left:28px;">
+                    <h5>Careline@nipponpaint.co.th</h5>
+                </div>
+            </div>
 
 
     </div>

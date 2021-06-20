@@ -16,6 +16,7 @@
     $ig = $tb . "/assets/images/IG.svg";
     $tw = $tb . "/assets/images/Twitter.svg";
     $in = $tb . "/assets/images/Linkin.svg";
+    $pt = $tb . "/assets/images/print_t.svg";
 
     $linkFb = "https://www.facebook.com/NipponPaintDecor";
     $linkLine = "https://lin.ee/lVj5H8r";
@@ -86,10 +87,7 @@
 
         
     </div>
-    <div class="arrow-up-to-top">
-        <img src="<?php echo  get_bloginfo("template_directory");  ?>/assets/images/arrow-g.svg" alt="arrow-g.svg" />
-
-    </div>
+  
 
     <div class="footer-content">
         <div>
@@ -109,6 +107,7 @@
                <a target="_blank"  href="<?php echo $linkIG; ?>"><img src="<?php echo $ig ;?>" alt=""></a>
                <a target="_blank"  href="<?php echo $linkTW ; ?>"><img src="<?php echo $tw; ?>" alt=""></a>
                <a target="_blank"  href="<?php echo $linkIN; ?>"><img src="<?php echo $in; ?>" alt=""></a>
+               <a target="_blank"  href="<?php echo $linkPT; ?>"><img src="<?php echo $pt; ?>" alt=""></a>
 
                  
 
@@ -158,6 +157,13 @@
     </div>
     <div class="border-bottom"></div>
         <h5 class="copywrite text-center ps-2 pe-2">2021 - © Nippon Paint Decorative Coatings (Thailand) Co.,Ltd. All rights reserved.</h5>
+
+
+
+        <div class="arrow-up-to-top">
+        <img src="<?php echo  get_bloginfo("template_directory");  ?>/assets/images/arrow-g.svg" alt="arrow-g.svg" />
+
+    </div>
 </footer>
 </body>
 </html>

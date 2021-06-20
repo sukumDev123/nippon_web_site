@@ -28,7 +28,22 @@
                             <div class="bk"></div>
                             <img src="<?php echo $featured_img_url ?>" alt="image" class="service-image"  />
                             <h2><?php echo get_the_title() ?></h2>
-                            <a target="_blank"  href="<?php echo $link ?>">Read More</a>
+                           
+                            <?php 
+                            
+
+                            if(get_the_ID() == 181):
+                               ?>
+                                    <a target="_blank" class="link-image"  href="<?php echo $link ?>">
+                                        <img src="<?php bloginfo("template_directory");  ?>/assets/images/LineImage.png" alt="">
+                                    </a>
+                               <?php 
+                            endif;
+
+                            ?>
+                          
+                            <a target="_blank" class="readmore"  href="<?php echo $link ?>">Read More</a>
+                             
                         <!-- </a> -->
                       </div>
                     </div>

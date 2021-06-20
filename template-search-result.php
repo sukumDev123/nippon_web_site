@@ -12,13 +12,25 @@ $text_static = [
     "en" => [
         "product_title" => "Product",
         "product_link_title" => "More",
-        "product_link" =>  get_site_url() . "/products/" .  $product_search
-
+        "product_link" =>  get_site_url() . "/products/" .  $product_search,
+        "project_title" => "บทความโครงการที่ใช้สีนิปปอนเพนต์",
+        "project_link" =>  get_site_url() . "/project-reference/",
+        "project_link_title" => "บทความเพิ่มเติม",
+        "news_title" => "ข่าวสารและกิจกรรม",
+        "news_link" =>  get_site_url() . "/news/",
+        "news_link_title" => "บทความเพิ่มเติม"
+        
     ],
     "th" => [
         "product_title" => "ผลิตภัณฑ์",
         "product_link_title" => "ค้นหาผลิตภัณฑ์เพิ่มเติม",
-        "product_link" => get_site_url() . "/products/" . $product_search
+        "product_link" => get_site_url() . "/products/" . $product_search,
+        "project_title" => "บทความโครงการที่ใช้สีนิปปอนเพนต์",
+        "project_link" =>  get_site_url() . "/project-reference/",
+        "project_link_title" => "บทความเพิ่มเติม",
+        "news_title" => "ข่าวสารและกิจกรรม",
+        "news_link" =>  get_site_url() . "/news/",
+        "news_link_title" => "บทความเพิ่มเติม"
         
 
     ]
@@ -153,9 +165,14 @@ $argc_new = [
 
     
     <div id="news" class="container" >
-    
-        <div class="news-div">
+        <div class="header-link">
+            <h1 class="product_title"><?php echo $text_static['project_title'] ?></h1>
+            <a href="<?php echo $text_static["project_link"] ?>"><?php echo $text_static['project_link_title'] ?>   </a>
+
+        </div>
+        <div class="news-div">  
         <?php 
+        $size_data  = 0 ;
             $query_project = new WP_Query($argc_project ); 
             if($query_project->have_posts()): while($query_project->have_posts()) : $query_project->the_post(); 
                 $size_data += 1;
@@ -180,18 +197,29 @@ $argc_new = [
                 endif;
                 
                 ?>
-                <div class="content">
-                    <h1>
-                        <a href="<?php  echo get_permalink(); ?>">
-                            <?php the_title(); ?>
-                        </a>
-                    </h1>
-                    
-                    <p><?php echo  $modal_header;  ?></p> 
-                    <h5> <i class="far fa-calendar-alt"></i> <?php " ".the_date("d/M/Y"); ?></h5>
-                
-                
-                </div>
+                    <div class="content">
+                <div>
+                        <h1>
+                                <?php the_title(); ?>
+                            <!-- </a> -->
+                        </h1>
+                        <?php echo get_field("short_text" , get_the_ID());  ?> 
+                        </div>
+                            <div  class="d-flex  justify-content-between button-love-share">
+                            <div class="d-flex  align-items-center">
+                                <h5 class="me-4">
+                                        <i class="fas fa-eye"></i>
+                                        <?php echo   pvc_get_post_views(get_the_ID()) ?>
+                                    </h5>
+                                    <h5>
+                                        <i  class="fas fa-share"></i>
+                                    <?php if( get_post_meta( get_the_ID(), 'shares', true)):  echo get_post_meta( get_the_ID(), 'shares', true); else: echo 0;  endif; ?>
+                                    </h5>
+                            </div>
+                            <i style="cursor:pointer" id="heart<?php echo get_the_ID() ?>" onclick="onLikeClicked(<?php echo get_the_ID() ?>)" class="far fa-heart"></i>
+                            </div>
+                        
+                        </div>
                 </div>
             
                 <?php endwhile; else: endif;  wp_reset_query();
@@ -204,7 +232,11 @@ $argc_new = [
 
 
     <div id="news" class="container" >
-    
+    <div class="header-link">
+            <h1 class="product_title"><?php echo $text_static['news_title'] ?></h1>
+            <a href="<?php echo $text_static["news_link"] ?>"><?php echo $text_static['news_link_title'] ?>   </a>
+
+        </div>
         <div class="news-div">
         <?php 
             $query_news = new WP_Query($argc_new ); 

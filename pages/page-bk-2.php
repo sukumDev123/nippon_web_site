@@ -10,7 +10,7 @@ if(!$featured_img_url) {
 <div class="page-bk-2">
 
     <!-- <div class="page-bk-image"> -->
-    <img alt="logo" src="<?php echo  $featured_img_url ?>"  class="image-logo-desktop" />
+    <img alt="logo" src="<?php echo  $featured_img_url ?>"  class="image-logo-bk" />
     <div class="image-logo-bk"> </div>
     <!-- </div> -->
     <div class="page-detail">

@@ -5,6 +5,7 @@ $title_static = [
     "en" => " - Nippon Paint The Coatings Expert",
     "th" => " - นิปปอนเพนต์ ผู้ชี่ยวชาญทุกงานสี"
 ][$lang];
+$search  =  get_site_url() . "/search/?red=" .get_permalink();
 
 ?>
 <!doctype html>
@@ -34,7 +35,7 @@ $title_static = [
 
 
                             <h5>
-                                <a href="/search/">
+                                <a href="<?php echo $search ?>">
                                     <i class="fas fa-search"></i>
                                 </a>    
                             </h5>

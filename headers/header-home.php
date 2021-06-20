@@ -16,7 +16,7 @@ $title_static = [
     "en" => " - Nippon Paint The Coatings Expert",
     "th" => " - นิปปอนเพนต์ ผู้ชี่ยวชาญทุกงานสี"
 ][$lang];
-
+$search  =  get_site_url() . "/search/?red=" .get_permalink();
 ?>
 <!doctype html>
  
@@ -31,7 +31,6 @@ $title_static = [
         href="<?php bloginfo("template_directory");  ?>/assets/images/favicon.svg" 
         type="image/svg+xml"
     />
-    <!-- <script src="http://localhost:35729/livereload.js"></script> -->
 </head>
 <body>
     <?php  get_template_part("headers/message_contact"); ?>
@@ -52,7 +51,8 @@ $title_static = [
 
 
                             <h5>
-                                <a href="/search/">
+                            <a href="<?php echo $search  ?>">
+
                                     <i class="fas fa-search"></i>
                                 </a>    
                             </h5>
@@ -87,7 +87,7 @@ $title_static = [
                         <a class="contact-button" href="/contact-us/">ติดต่อเรา</a>
 
                             <h5>
-                                <a href="/search/">
+                                <a href="<?php echo $search  ?>">
                                     <i class="fas fa-search"></i>
                                 </a>    
                             </h5>

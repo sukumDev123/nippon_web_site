@@ -137,7 +137,8 @@ $num = $query->post_count;
  <a class="a-primary-button"  onclick="onSearchColor()"  >
                         <button class="primary-button">
                         <?php echo $text_static["search"] ?>
-                            <i class="fas fa-long-arrow-alt-right"></i>
+                        <img  class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">
+
                         </button>
                     </a>
  <!-- </form> -->

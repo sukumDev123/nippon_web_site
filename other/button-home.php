@@ -53,11 +53,11 @@ endif;
 
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/?scroll=true">
+                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-th/new-house?scroll=true">
                             <?php echo $text_static['new_home'] ?>
                             
                             </a></li>
-                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-paint-thailand/home-renovate?scroll=true">
+                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-th/renovate-house?scroll=true">
                             <?php echo $text_static['owner_renovate'] ?>
                             </a></li>
                             </ul>
@@ -73,17 +73,17 @@ endif;
                             <img src="<?php echo get_bloginfo("template_directory"); ?>/assets/images/arrow-down-white.svg" alt="">
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-paint-thailand/home-perfessions-constractors/?scroll=true">
+                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-th/constractors/?scroll=true">
                             
                             <?php echo $text_static['EngineersAndContractors'] ?>
                             
                             </a></li>
-                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-paint-thailand/home-perfessions-designers?scroll=true">
+                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-th/designers?scroll=true">
                             
                             <?php echo $text_static['Designer'] ?>
                             
                             </a></li>
-                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-paint-thailand/home-owner-develop?scroll=true">
+                            <li><a class="dropdown-item" href="<?php echo get_site_url() ?>/nippon-th/owner-and-develop?scroll=true">
                             <?php echo $text_static['ProjectOwner'] ?>
                             </a></li>
                             </ul>
