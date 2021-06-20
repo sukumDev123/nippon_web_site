@@ -1,4 +1,4 @@
-<!-- <script src="http://localhost:35729/livereload.js"></script> -->
+<script src="http://localhost:35729/livereload.js"></script>
 
 <div class='message-right'>
     

@@ -18,6 +18,7 @@ if(isset($_GET["page"])) {
 
 <div id="news" class="container">
  
+    <div class="margin-page"></div>
  
 
 
@@ -131,6 +132,8 @@ if(isset($_GET["page"])) {
     <a href="<?php echo esc_url( add_query_arg( 'page', $limit_page + 1, get_permalink() ) ); ?>" >See more</a>
     </h5>
     <?php endif; ?>
+    <div class="margin-page"></div>
+
 </div>
 
 <?php get_footer(); ?>

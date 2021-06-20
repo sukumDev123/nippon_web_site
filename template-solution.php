@@ -190,6 +190,7 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
 </div>
 
 <div id="solution-pages" >
+    <div class="margin-page"></div>
     <div class="content">
         <h1><?php echo $text_static_solution['title'] ?></h1>
         <p><?php echo $text_static_solution['detail'] ?> </p>
@@ -258,7 +259,7 @@ wp_reset_query();
  
 
 <div id="solutions" >
-   
+  
     <div class="solution-div">
     <?php 
  
@@ -379,11 +380,12 @@ wp_reset_query();
  get_template_part("pages/page-services");
 ?>
 
+<!-- 
+<div class="mt-10rem"></div> -->
 
-<div class="mt-10rem"></div>
 
 
-
+<div class="margin-page"></div>
 
 </div>
  

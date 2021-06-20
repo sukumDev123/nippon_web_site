@@ -2,14 +2,15 @@
 <?php get_header() ?>
 
  <?php get_template_part("pages/page-bk-2");  ?>
- <div class="mt-5rem"></div>
-
+ 
+<div class="margin-page"></div>
 <?php
 
 get_template_part("pages/page-services");
 
 
 ?>
-<div class="mt-5rem"></div>
+<div class="margin-page"></div>
+ 
 
 <?php get_footer() ?>

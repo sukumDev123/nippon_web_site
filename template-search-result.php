@@ -17,7 +17,7 @@ $text_static = [
         "project_link" =>  get_site_url() . "/project-reference/",
         "project_link_title" => "บทความเพิ่มเติม",
         "news_title" => "ข่าวสารและกิจกรรม",
-        "news_link" =>  get_site_url() . "/news/",
+        "news_link" =>  get_site_url() . "/news-page//",
         "news_link_title" => "บทความเพิ่มเติม"
         
     ],
@@ -29,7 +29,7 @@ $text_static = [
         "project_link" =>  get_site_url() . "/project-reference/",
         "project_link_title" => "บทความเพิ่มเติม",
         "news_title" => "ข่าวสารและกิจกรรม",
-        "news_link" =>  get_site_url() . "/news/",
+        "news_link" =>  get_site_url() . "/news-page//",
         "news_link_title" => "บทความเพิ่มเติม"
         
 
@@ -123,7 +123,11 @@ $argc_new = [
         <div class="container">
                 <div class="title">
                         <h1><?php echo $text_static['product_title'] ?></h1>
-                        <a href="<?php echo $text_static["product_link"] ?>"><?php echo $text_static['product_link_title'] ?>   </a>
+                        <a href="<?php echo $text_static["product_link"] ?>"><?php echo $text_static['product_link_title'] ?>  
+                        <img  class="arrow-left-black" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-g.svg" alt="">
+                    
+                    
+                    </a>
                 </div>
                 <div class="products-card">
                 <?php 
@@ -139,9 +143,9 @@ $argc_new = [
                                     <a href="<?php echo get_permalink(get_the_ID()) ?>">
                                 <img src="<?php echo $featured_img_url ?>" alt="image">
                                 <h4>
-                                        <span class="d-inline-block text-truncate" style="max-width: 240px;">
+                                        
                                             <?php echo $title ?>
-                                        </span> 
+                                       
                                 </h4>
                                 <p><?php echo get_the_excerpt(get_the_ID()) ?></p>
 
@@ -167,7 +171,9 @@ $argc_new = [
     <div id="news" class="container" >
         <div class="header-link">
             <h1 class="product_title"><?php echo $text_static['project_title'] ?></h1>
-            <a href="<?php echo $text_static["project_link"] ?>"><?php echo $text_static['project_link_title'] ?>   </a>
+            <a href="<?php echo $text_static["project_link"] ?>"><?php echo $text_static['project_link_title'] ?> 
+            <img  class="arrow-left-black" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-g.svg" alt="">
+          </a>
 
         </div>
         <div class="news-div">  
@@ -234,7 +240,9 @@ $argc_new = [
     <div id="news" class="container" >
     <div class="header-link">
             <h1 class="product_title"><?php echo $text_static['news_title'] ?></h1>
-            <a href="<?php echo $text_static["news_link"] ?>"><?php echo $text_static['news_link_title'] ?>   </a>
+            <a href="<?php echo $text_static["news_link"] ?>"><?php echo $text_static['news_link_title'] ?> 
+            <img  class="arrow-left-black" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-g.svg" alt="">
+           </a>
 
         </div>
         <div class="news-div">
@@ -261,7 +269,7 @@ $argc_new = [
                     <img src="<?php echo $_image; ?>" alt ="image" />
                     <?php 
                 endif;
-                
+                $_image
                 ?>
                 <div class="content">
                     <h1>

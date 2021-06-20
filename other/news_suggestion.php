@@ -33,6 +33,7 @@
                 endif;
         ?>
             <div>
+                <a href="<?php  echo  get_permalink(); ?>">
             <?php 
             if($_image) {
                 ?>
@@ -43,14 +44,13 @@
             
             ?>
             <div class="content">
-                <a href="<?php  echo  get_permalink(); ?>">
                 <h1>
                         <?php the_title(); ?>
                     </h1>
                     <p><?php echo  $modal_header;  ?></p> 
                     <h5> <i class="far fa-calendar-alt"></i> <?php echo " ".get_the_date("d/M/Y" , get_the_ID()); ?></h5>
-                </a>
-            </div>
+                </div>
+            </a>
             </div>
         
             <?php endwhile;  endif;  wp_reset_query();

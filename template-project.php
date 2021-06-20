@@ -131,7 +131,7 @@ endif;
 <div id="news" class="container">
 
  
- 
+    <div class="margin-page"></div>
     <div class="news-div">
     <?php 
         $filter_product  = '';
@@ -239,6 +239,7 @@ endif;
         <?php 
     }
     ?>
+    <div class="margin-page"></div>
     
 </div>
  

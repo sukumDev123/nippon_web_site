@@ -161,7 +161,7 @@ $count = $query->found_posts;
 ?>
 
 <section id="location_page_div">
-
+<div class="margin-page"></div>
     <div class="header_location">
       
     

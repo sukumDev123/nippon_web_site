@@ -14,7 +14,7 @@
             if($query_data->have_posts()): while($query_data->have_posts()) : $query_data->the_post(); 
             
         ?>
-        <?php 
+                <?php 
         
                 // $modal_header    = get_field('text_example' , get_the_ID());
                 $modal_header    =  get_field("short_text" , get_the_ID()); 
@@ -31,9 +31,9 @@
                         break;
                     endforeach;
                 endif;
-        ?>
+                ?>
             <div>
-            <a href="<?php  echo  get_permalink(); ?>">
+                <a href="<?php  echo  get_permalink(); ?>">
 
             <?php 
             if($_image) {
