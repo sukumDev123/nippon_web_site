@@ -119,6 +119,15 @@ $argc_new = [
 
 
 <div id="search-result">
+    
+<?php 
+
+$query_products = new WP_Query($argc_product); 
+
+$count_products  = $query_products->found_posts;
+
+if($count_products > 0):
+?>
     <div  id="products-1">
         <div class="container">
                 <div class="title">
@@ -131,7 +140,6 @@ $argc_new = [
                 </div>
                 <div class="products-card">
                 <?php 
-                    $query_products = new WP_Query($argc_product); 
                     if( $query_products->have_posts()):
                         while($query_products->have_posts()):
                             $query_products->the_post();
@@ -163,11 +171,18 @@ $argc_new = [
             </div>  
             </div>
     </div>
+<?php endif ?>
 
 
 
+    <?php 
 
-    
+    $query_project = new WP_Query($argc_project ); 
+
+    $count__project  = $query_project->found_posts;
+
+    if($count__project > 0):
+    ?> 
     <div id="news" class="container" >
         <div class="header-link">
             <h1 class="product_title"><?php echo $text_static['project_title'] ?></h1>
@@ -179,7 +194,6 @@ $argc_new = [
         <div class="news-div">  
         <?php 
         $size_data  = 0 ;
-            $query_project = new WP_Query($argc_project ); 
             if($query_project->have_posts()): while($query_project->have_posts()) : $query_project->the_post(); 
                 $size_data += 1;
                 $modal_header    = get_field('text_example' ,  get_the_ID()) ;
@@ -233,32 +247,39 @@ $argc_new = [
 
         </div>
     </div>
+                <?php endif ?>
 
 
+<?php 
 
+$query_news = new WP_Query($argc_new ); 
+$count_new  = $query_news->found_posts;
 
-    <div id="news" class="container" >
-    <div class="header-link">
-            <h1 class="product_title"><?php echo $text_static['news_title'] ?></h1>
-            <a href="<?php echo $text_static["news_link"] ?>"><?php echo $text_static['news_link_title'] ?> 
-            <img  class="arrow-left-black" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-g.svg" alt="">
-           </a>
+if($count_new > 0):
+?>
+        <div id="news" class="container" >
+            <div class="header-link">
+                <h1 class="product_title"><?php echo $text_static['news_title'] ?></h1>
+                <a href="<?php echo $text_static["news_link"] ?>"><?php echo $text_static['news_link_title'] ?> 
+                <img  class="arrow-left-black" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-g.svg" alt="">
+            </a>
 
-        </div>
-        <div class="news-div">
-        <?php 
-            $query_news = new WP_Query($argc_new ); 
-            if($query_news->have_posts()): while($query_news->have_posts()) : $query_news->the_post(); 
+            </div>
+              <div   div class="news-div">
+            <?php 
+                if($query_news->have_posts()): while($query_news->have_posts()) : $query_news->the_post(); 
                 $size_data += 1;
                 $modal_header    = get_field('text_example' ,  get_the_ID()) ;
-                $photos = acf_photo_gallery("photos" , get_the_ID());
+                $photos2= acf_photo_gallery("photos" , get_the_ID());
             
-                $_image = false;
-                // echo $photos[0]["thumbnail_image_url"]; 
-                foreach($photos as $image):
+                $_image ="";
+               
+     
+                foreach($photos2 as $image):
                     $full_image_url= $image['full_image_url']; 
-                    $thumbnail_image_url=  acf_photo_gallery_resize_image($full_image_url, 403, 271);
-                    $_image =  $thumbnail_image_url;
+                    $thumbnail_image_url=  acf_photo_gallery_resize_image($full_image_url, 403, 271 ,  get_the_ID());
+                    $_image =  $full_image_url;
+               
                     break;
                 endforeach;
             ?>
@@ -269,7 +290,7 @@ $argc_new = [
                     <img src="<?php echo $_image; ?>" alt ="image" />
                     <?php 
                 endif;
-                $_image
+   
                 ?>
                 <div class="content">
                     <h1>
@@ -286,9 +307,10 @@ $argc_new = [
                 </div>
             
                 <?php endwhile; else: endif;  wp_reset_query();
-            ?>
-
+?>
         </div>
+      <?php endif;  ?>
     </div>
 </div>
+
 <?php get_footer() ?>
