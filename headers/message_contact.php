@@ -1,4 +1,4 @@
-<!-- <script src="http://localhost:35729/livereload.js"></script> -->
+<script src="http://localhost:35729/livereload.js"></script>
 <script>
     // localStorage.setTimes();
     localStorage.setItem("link_now", "<?php echo get_permalink() ?>")
@@ -7,22 +7,22 @@
 <div class='message-right'>
     
     <div class="contact-message-top">
-        <div class="content-message-box-1">
-        <a href="<?php echo get_site_url() ?>/contact-us/">
+         
+        <a class="content-message-box-1" href="<?php echo get_site_url() ?>/contact-us/">
             <img src="<?php bloginfo("template_directory");  ?>/assets/images/message-2.svg" alt="">
         </a>
-        </div>
-        <div class="content-message-box-1">
-        <a href="tel:024631899">
+ 
+        <!-- <div class="content-message-box-1"> -->
+        <a  class="content-message-box-1" href="tel:024631899">
             <img src="<?php bloginfo("template_directory");  ?>/assets/images/tel.svg" alt="">
         </a>
-        </div>
-        <div class="content-message-box-1">
-        <a target="_blank" href="https://bit.ly/inbox-nipponpaint">
+        <!-- </div> -->
+        <!-- <div class="content-message-box-1"> -->
+        <a  class="content-message-box-1" target="_blank" href="https://bit.ly/inbox-nipponpaint">
             <img src="<?php bloginfo("template_directory");  ?>/assets/images/fb-message.svg" alt="">
         </a>
 
-        </div>
+        <!-- </div> -->
         
     </div>
     <div class="contact-message-div">
@@ -34,5 +34,71 @@
                 </svg>
 
         </div>
+    </div>
+</div>
+
+
+<div id="user_info">
+<div class="icon-items">
+        <i class="fa fa-times"></i>
+    </div>
+    <div class="user_info_form">
+            <div>
+                        <div class="form1">
+                        <div class="form-items">
+                            <label  for="Email">Email: </label>
+                            <input type="text" id="email" placeholder="Email" />
+                        </div>
+                    <div class="form-items">
+                        <label for="Fullname">Fullname: </label>
+
+                            <input id="fullname" type="text" placeholder="Fullname" />
+                        </div>
+                
+                        <div class="form-items">
+                            <label for="Type user">Type user: </label>
+
+                                <select id="type">
+                                            
+                                            <option value="บ้านใหม่">บ้านใหม่</option>
+                                            <option value="ปรับปรุงบ้าน">ปรับปรุงบ้าน</option>
+                                           
+                                            <option value="วิศวกรและผู้รับเหมา">วิศวกรและผู้รับเหมา</option>
+                                            <option value="นักออกแบบ">นักออกแบบ</option>
+                                            <option value="เจ้าของโครงการ">เจ้าของโครงการ</option>
+                                
+                                    
+                                </select>    
+                        </div>
+                    </div>
+                        <div class="form2">
+                        <div class="form-items">
+                        <label for="Email">Contact: </label>
+
+                            <input id="contact" type="text" placeholder="Contact" />
+                        </div>
+                    
+                        <div class="form-items">
+                        <label for="Email">Career: </label>
+
+                            <input type="text" placeholder="Career" id="career" />
+                        </div>
+                
+                        </div>
+                        
+    
+
+            </div>
+           <div class="form-button">
+           <button id="send_data">
+                    Save 
+                    <img  class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">
+
+                </button>
+            
+           </div>
+           <div class="form-message">
+               <h5>บันทึกข้อมูลสำเร็จ</h5>
+           </div>
     </div>
 </div>

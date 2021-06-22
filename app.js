@@ -1,5 +1,5 @@
 // const { babelConfig } = require("laravel-mix");
-const domain = "https://staging.tanpong.me";
+const domain = "https://staging.tanpong.me/";
 // const domain = "http://localhost/nippon/";
 const loading = document.querySelector("#loading");
 let searchType = "rgb-div";
@@ -922,9 +922,17 @@ window.onload = () => {
   handleFilterProductMobile();
   handleFooterMenuClicked();
   loadLocation();
+  saveUserInfo();
   const message_right = document.querySelector(".message-right");
   const contact_message_box = document.querySelector(".contact-message-box");
   const arrow_up_to_top = document.querySelector(".arrow-up-to-top");
+  const closeEmailF = document.querySelector(".icon-items");
+  if (closeEmailF) {
+    closeEmailF.addEventListener("click", (event) => {
+      const user_info = document.querySelector("#user_info");
+      user_info.className = "";
+    });
+  }
   if (message_right && contact_message_box) {
     contact_message_box.addEventListener("click", () => {
       if (message_right.className == "message-right active") {
@@ -1307,3 +1315,55 @@ if (document.querySelectorAll("ul.sub-menu"))
       el.className += " flex-start";
     }
   });
+
+function sendEmail() {
+  const email = document.querySelector("#email");
+  const email_t = document.querySelector("#email_t");
+  const user_info = document.querySelector("#user_info");
+  console.log({ user_info });
+  if (email) {
+    user_info.className += " active";
+    email.value = email_t.value;
+  }
+}
+
+function saveUserInfo() {
+  const send_data = document.querySelector("#send_data");
+  if (send_data) {
+    const email = document.querySelector("#email");
+    const fullname = document.querySelector("#fullname");
+    const type = document.querySelector("#type");
+    const contact = document.querySelector("#contact");
+    const career = document.querySelector("#career");
+
+    send_data.addEventListener("click", (event) => {
+      const emailV = email.value;
+      const fullnameV = fullname.value;
+      const typeV = type.value;
+      const contactV = contact.value;
+
+      const careerV = career.value;
+      const data = {
+        email: emailV,
+        fullname: fullnameV,
+        type: typeV,
+        contact: contactV,
+        career: careerV,
+      };
+
+      fetch(domain + "wp-json/api/v1/save_user_info", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((data) => data.json())
+        .then((d) => {
+          const fm = document.querySelector(".form-message");
+          fm.className = "form-message show";
+        })
+        .catch((err) => console.log({ err }));
+    });
+  }
+}

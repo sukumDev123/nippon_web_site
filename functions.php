@@ -203,6 +203,23 @@ function initLocations() {
 }
 add_action("init" , "initLocations");
  
+ 
+function initUserInfo() {
+ 
+    register_post_type("user_info" , [
+    'public' => true ,
+    'labels' => array('name' => 'Users Info' , 'singular_name' => 'User Info'),
+    'hierarchical' => true ,
+    'has_archive' => true,
+    
+    "rest_base" => "user_info",
+ 
+  
+    ]);
+
+}
+add_action("init" , "initUserInfo");
+ 
 function initHeaders() {
  
         register_post_type("header" , [
@@ -375,6 +392,7 @@ function get_color_shade( $data ) {
     return json_decode(json_encode($data));
   }
 
+ 
 add_action( 'rest_api_init', function () {
     register_rest_route( 'api/v1', '/shade/(?P<id>[\\d]+)', array(
       'methods' => 'GET',
@@ -386,6 +404,34 @@ add_action( 'rest_api_init', function () {
           }
         ),
       ),
+    ) );
+  } );
+ function save_users($request) {
+    $data = $request->get_body();
+    $toArray = json_decode($data);
+    $info = [
+        "fullname" =>  $toArray->fullname,
+        "type" =>  $toArray->type,
+        "contact" =>  $toArray->contact,
+        "career" =>  $toArray->career,
+
+    ];
+    $postArr = [
+        'post_title' => $toArray->email,
+        "meta_input" => $info,
+        "post_type" => "user_info",
+        "post_status" => "publish"
+    ];
+    wp_insert_post($postArr);
+
+    return json_decode(json_encode(["message" => "success"]));
+
+ }
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/save_user_info/', array(
+      'methods' => 'post',
+      'callback' => 'save_users',
+      
     ) );
   } );
 
@@ -464,3 +510,7 @@ add_action( 'rest_api_init', function () {
       ),
     ) );
   } );
+
+
+
+

@@ -13,7 +13,7 @@
         while ( $loop->have_posts() ) : $loop->the_post();
                 $featured_img_url = get_the_post_thumbnail_url( get_the_ID(),'full');
                 $link = "";
-                if(get_the_ID() == 148):
+                if(get_the_ID() == 184):
                     $link = "https://smartpainter.nipponpaintdecor.com/";
                 endif;
                 if(get_the_ID() == 181):

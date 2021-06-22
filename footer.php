@@ -77,12 +77,14 @@
             </div> 
 
             <?php    endwhile;  endif;  wp_reset_query(); ?>
-            <form method="get" class="footer-input">
-                <input type="text" name="email"  placeholder="Email" />
+            <div  class="footer-input">
+                <input type="text" name="email"  placeholder="Email" id="email_t" />
                 <!-- <i class="fas fa-long-arrow-alt-right"></i> -->
-                <img src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left-yellow.svg" alt="">
+               <button onclick="sendEmail()">
+                 <img src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left-yellow.svg" alt="">
+               </button>
 
-            </form>
+            </div>
         </div>
 
         

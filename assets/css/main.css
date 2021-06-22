@@ -1176,6 +1176,10 @@ footer > div:first-child .footer-input {
   justify-content: space-between;
   border-bottom: 1px solid rgba(255, 255, 255, 0.8);
 }
+footer > div:first-child .footer-input button {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px;
+}
 footer > div:first-child .footer-input input {
   background-color: rgba(255, 255, 255, 0);
   color: white;
@@ -1214,6 +1218,11 @@ footer > div:first-child .footer-input input::-ms-input-placeholder {
 }
 footer > div:first-child .footer-input i {
   color: white;
+}
+@media screen and (max-width: 1100px) {
+  footer > div:first-child .footer-input {
+    padding: 1em 0em;
+  }
 }
 footer > div:first-child h1,
 footer > div:first-child h5 {
@@ -6081,7 +6090,7 @@ section#location_page_div .header_list .locations-card .location-card p {
   justify-content: center;
   box-shadow: 0 4px 10px 1px rgba(0, 0, 0, 0.1);
 }
-pointer .message-right .contact-message-top .content-message-box-1:hover {
+.message-right .contact-message-top .content-message-box-1:hover {
   box-shadow: 0 4px 10px 1px rgba(0, 0, 0, 0.5);
 }
 .message-right .contact-message-div {
@@ -6124,6 +6133,12 @@ pointer .message-right .contact-message-top .content-message-box-1:hover {
 .message-right .contact-message-div .contact-message-box svg path {
   fill: #1e4f92;
 }
+@media screen and (max-width: 1366px) {
+  .message-right .contact-message-div .contact-message-box svg {
+    width: 14px;
+    height: 14px;
+  }
+}
 .message-right .contact-message-div .contact-message-box.active path {
   fill: #a7a9ac;
 }
@@ -6134,7 +6149,9 @@ pointer .message-right .contact-message-top .content-message-box-1:hover {
   opacity: 1;
 }
 .message-right.active .contact-message-top {
-  height: 259px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   position: static;
   right: -100px;
 }
@@ -6221,4 +6238,105 @@ pointer .message-right .contact-message-top .content-message-box-1:hover {
 .email {
   text-decoration: none;
   color: #3d464f;
+}
+
+#user_info {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2em;
+  display: none;
+}
+#user_info.active {
+  display: flex;
+}
+#user_info .icon-items {
+  position: fixed !important;
+  top: 30px;
+  right: 40px;
+}
+#user_info .icon-items i {
+  font-size: 24px;
+  cursor: pointer;
+}
+#user_info > div {
+  display: block;
+}
+#user_info > div > div:first-child {
+  max-width: 1170px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+@media screen and (max-width: 1026px) {
+  #user_info > div > div:first-child {
+    display: block;
+  }
+}
+#user_info > div .form-items {
+  margin-bottom: 24px;
+}
+#user_info > div input {
+  border: 0px;
+  width: 100%;
+  min-width: 250px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 1em 0;
+}
+#user_info > div input:focus {
+  outline: 0;
+}
+#user_info > div select {
+  width: 100%;
+  border: 0px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 1em 0;
+}
+#user_info > div select:focus {
+  outline: 0;
+}
+#user_info > div .form-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#user_info > div .form-message {
+  opacity: 0;
+}
+#user_info > div .form-message.show {
+  opacity: 1;
+}
+#user_info > div .form-message h5 {
+  background-color: #71dd46;
+  max-width: 250px;
+  width: 100%;
+  padding: 0.5em 1em;
+  margin: auto;
+  margin-top: 1em;
+}
+#user_info > div button#send_data {
+  background-color: #1e4f92;
+  color: white;
+  width: 250px;
+  border: 0px;
+  padding: 0.5em 2em;
+  margin: auto;
+  transition: all 0.3s ease-in;
+}
+#user_info > div button#send_data:hover {
+  background-color: #003d87;
+}
+#user_info > div button#send_data:hover img {
+  margin-left: 20px;
+  transition: all 0.3s ease-in;
+}
+#user_info > div button#send_data img {
+  margin-left: 10px;
+  transition: all 0.3s ease-in;
 }

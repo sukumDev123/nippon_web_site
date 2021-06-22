@@ -244,6 +244,17 @@ endif;
 </div>
  
 <script>
+<?php 
+        if(isset($_GET["filter_product"]) || isset($_GET["type"])) :
+?>
+setTimeout(() => {
+    document.querySelector(".page-filter").scrollIntoView({behavior: "smooth" , block: "start"})
+} , 100);
+<?php
+
+        endif;
+
+?>
     function onLikeClicked(id) {
         fetch("<?php  echo get_permalink(); ?>" + "?id=" + id + "&type=" + "liked").catch(error => console.log({error}));
         document.querySelector("#heart"+ id).className = "fas fa-heart";
