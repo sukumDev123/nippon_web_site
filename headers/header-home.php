@@ -16,7 +16,7 @@ $title_static = [
     "en" => " - Nippon Paint The Coatings Expert",
     "th" => " - นิปปอนเพนต์ ผู้ชี่ยวชาญทุกงานสี"
 ][$lang];
-$search  =  get_site_url() . "/search/?red=" .get_permalink();
+$search  =  get_site_url() . "/search/";
 ?>
 <!doctype html>
  

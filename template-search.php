@@ -60,12 +60,7 @@ endif;
         console.log({cancelled})
         if(cancelled) {
             cancelled.addEventListener("click" , event => {
-                <?php if($red): ?>
-                    window.location.href = "<?php  echo $red?>";
-
-                <?php else: ?>
-                        window.location.href = "<?php echo get_site_url() ?>";
-                <?php endif; ?>
+               if( localStorage.getItem("link_now"))  window.location.href =     localStorage.getItem("link_now");
             })
         }
 

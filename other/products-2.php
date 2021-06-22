@@ -8,14 +8,18 @@
          คัดสรรมาเพื่อคุณ",
          "detail" => "ตอบโจทย์ทุกการแต่งบ้านกับผลิตภัณฑ์สีคุณภาพที่คัดสรรมาเพื่อคุณโดยเฉพาะ เปลี่ยนบ้านให้สวยสดใหม่เพื่อสะท้อนตัวตนแบบที่คุณต้องการ",
           
-         "button_title" => "ค้นหาผลิตภัณฑ์เพิ่มเติม" 
+         "button_title" => "ค้นหาผลิตภัณฑ์เพิ่มเติม" ,
+         "product_link_url" => get_site_url()  . "/products/"
+
      ],
      "th" => [
          "title" => "ผลิตภัณฑ์สีคุณภาพ <br />
          คัดสรรมาเพื่อคุณ",
          "detail" => "ตอบโจทย์ทุกการแต่งบ้านกับผลิตภัณฑ์สีคุณภาพที่คัดสรรมาเพื่อคุณโดยเฉพาะ  เปลี่ยนบ้านให้สวยสดใหม่เพื่อสะท้อนตัวตนแบบที่คุณต้องการ",
           
-        "button_title" => "ค้นหาผลิตภัณฑ์เพิ่มเติม" 
+        "button_title" => "ค้นหาผลิตภัณฑ์เพิ่มเติม" ,
+        "product_link_url" => get_site_url()  . "/products/"
+
      ]
  ][$lang];
            
@@ -35,7 +39,7 @@
                    <p> <?php echo  $text_static_product['detail'] ?></p>
                
                
-                    <a id="project_2_show_desktop" class="a-primary-button" href="<?php if($explain['button_link']): echo get_term_link($explain['button_link'][0])  ; endif;  ?>">
+                    <a id="project_2_show_desktop" class="a-primary-button" href="<?php echo $text_static_product["product_link_url"];  ?>">
                         <button class="primary-button">
                             <?php  echo  $text_static_product['button_title'] ?>
                             <img  class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">

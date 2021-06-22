@@ -56,9 +56,9 @@ if(isset($_GET['search']) || isset($_GET['country'])) {
     <script>
 
     setTimeout(() => {
-        document.querySelector("#location_page_div").scrollIntoView({behavior: "smooth" , block: "center"});
+        document.querySelector("#location_search").scrollIntoView({behavior: "smooth" , block: "start"});
         
-    }, 1000);
+    }, 100);
 </script>
 
 
@@ -103,6 +103,7 @@ if(isset($_GET["cat_product"])):
 endif;
 
 if(isset($_GET["cat_product"]) && isset($_GET['search'])) {
+    if($_GET['search']):
     $argc['meta_query'] = array(
         array(
             'key' => 'word_map',
@@ -115,6 +116,7 @@ if(isset($_GET["cat_product"]) && isset($_GET['search'])) {
             'compare' => 'REGEXP'
         )
         );
+    endif;
 }
 
 $country = "";
@@ -150,7 +152,7 @@ endif;
  echo "<script>
  setTimeout(() => {
      loadP();
-    } , 100);
+    } , 1000);
  setTimeout(() => {
      document.querySelector('#cat_product').value = '".$cat_product."';
      ".$loadScript."
@@ -200,8 +202,8 @@ $count = $query->found_posts;
     </div>
     <div class="header_list">
         <h2><?php echo $text_static["title"] ?></h2>
-        <div class="locations-card">
             <?php if($query->have_posts()):  ?>
+          <div class="locations-card">
             <?php while($query->have_posts()):  $query->the_post(); ?>
                 <div class="location-card">
                     <h4><?php echo get_the_title(get_the_ID()) ?></h4>
@@ -214,9 +216,11 @@ $count = $query->found_posts;
                 </p>
                 </div>
             <?php endwhile;  ?>
-            <?php endif;  ?>
+            
         </div>
- 
+        <?php else:  ?>
+            <h5 style="text-align:center">ไม่พบร้านค้า</h5>
+            <?php endif;  ?>
         <?php if($count > $limit_location ): ?>
         <h5 class="text-center mt-5 see_more">
             <a href=<?php 

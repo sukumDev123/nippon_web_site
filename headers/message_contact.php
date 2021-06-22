@@ -1,5 +1,9 @@
-<script src="http://localhost:35729/livereload.js"></script>
+<!-- <script src="http://localhost:35729/livereload.js"></script> -->
+<script>
+    // localStorage.setTimes();
+    localStorage.setItem("link_now", "<?php echo get_permalink() ?>")
 
+</script>
 <div class='message-right'>
     
     <div class="contact-message-top">

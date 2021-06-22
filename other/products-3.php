@@ -9,14 +9,17 @@ $text_static_product = [
         "detail" => "ตอบโจทย์ทุกคุณภาพการแต่งบ้านกับผลิตภัณฑ์นวัตกรรมสีที่คัดสรรมา
         เพื่อคุณโดยเฉพาะ เปลี่ยนบ้านให้สวยสดใหม่เพื่อสะท้อนตัวตนแบบที่คุณต้องการ",
          
-        "button_title" => "ค้นหาผลิตภัณฑ์เพิ่มเติม" 
+        "button_title" => "ค้นหาผลิตภัณฑ์เพิ่มเติม" ,
+        "button_link" =>  get_site_url(). "/products/innovation/"
+
     ],
     "th" => [
         "title" => "ผลิตภัณฑ์นวัตกรรม",
         "detail" => "ตอบโจทย์ทุกคุณภาพการแต่งบ้านกับผลิตภัณฑ์นวัตกรรมสีที่คัดสรรมา
         เพื่อคุณโดยเฉพาะ เปลี่ยนบ้านให้สวยสดใหม่เพื่อสะท้อนตัวตนแบบที่คุณต้องการ",
          
-       "button_title" => "ค้นหาผลิตภัณฑ์เพิ่มเติม" 
+       "button_title" => "ค้นหาผลิตภัณฑ์เพิ่มเติม" ,
+       "button_link" =>  get_site_url(). "/products/innovation/"
     ]
 ][$lang];
           
@@ -33,7 +36,7 @@ $explain = get_field("explain");
                 <h1><?php echo $text_static_product['title'] ?></h1>
      
                     <p><?php echo $text_static_product['detail'] ?></p>
-                    <a id="project_2_show_desktop" class="a-primary-button" href="<?php if($explain['button_link']): echo get_term_link($explain['button_link'][0])  ; endif;  ?>">
+                    <a id="project_2_show_desktop" class="a-primary-button" href="<?php echo  $text_static_product["button_link"] ;  ?>">
                         <button class="primary-button">
                             <?php  echo $text_static_product['button_title'] ?>
                             <img  class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">
@@ -83,7 +86,7 @@ $explain = get_field("explain");
                 </div>
             </div>  
 
-                    <a id="project_2_show_mobile" class="a-primary-button" href="<?php if($explain['button_link']): echo get_term_link($explain['button_link'][0])  ; endif;  ?>">
+                    <a id="project_2_show_mobile" class="a-primary-button"  href="<?php echo  $text_static_product["button_link"] ;  ?>">
                         <button class="primary-button">
                             <?php  echo $text_static_product['button_title'] ?>
                             <img  class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">

@@ -8,18 +8,21 @@ $text_static = [
      "en" => [
          "product_title" => "Product Relation",
          "product_link" => "Search",
-         "product_link_url" =>  get_site_url()  . "/products/decorative-coatings/"
+         "product_link_url" =>  get_site_url()  . "/products/"
 
      ],
      "th" => [
          "product_title" => "ผลิตภัณฑ์แนะนำ",
          "product_link" => "ค้นหาผลิตภัณฑ์เพิ่มเติม",
-          "product_link_url" => get_site_url()  . "/products/decorative-coatings/"
+          "product_link_url" => get_site_url()  . "/products/"
 
      ]
 ][$lang];
 
- 
+if(isset($args["title_product"])) {
+    $text_static["product_title"] = $args["title_product"];
+}
+
 ?>
 <?php  if($products): ?>
 <div  id="products-1">

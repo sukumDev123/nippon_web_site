@@ -225,7 +225,9 @@ $word_selected = "เลือกประเภทสินค้า";
         'post_type' => 'product',
         'posts_per_page' => 15,
         "tax_query" =>  $tax_query,
-       
+        'meta_key'	=> 'priority',
+            'orderby'   => 'meta_value_num',
+            'order'		=> 'ASC'
         
        
     );

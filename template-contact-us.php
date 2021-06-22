@@ -101,7 +101,13 @@
                 <div class="mt-4"></div>
                
                 <div style="margin-left:28px;">
-                    <h5>Careline@nipponpaint.co.th</h5>
+                    <h5>
+                        <a target="_blank" class="email" href="mailto:careline@nipponpaint.co.th">
+                        Careline@nipponpaint.co.th
+                        </a>
+                    </h5>
+                    
+
                 </div>
             </div>
 

@@ -1949,7 +1949,7 @@ footer .footer-content .footer-menu-mobile {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 206px;
+  min-height: 120px;
 }
 #news .news-div > div .content h1,
 #news .news-div-overflow > div .content h1 {
@@ -2225,7 +2225,7 @@ footer .footer-content .footer-menu-mobile {
 }
 .project-suggestion > div > div .content {
   padding: 1em;
-  height: 240px;
+  min-height: 120px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -4953,7 +4953,7 @@ footer .footer-content .footer-menu-mobile {
 #location_and_footer_banner #find_location .find_location .content h1 {
   font-size: 36px;
   font-weight: 800;
-  color: #3d464f;
+  color: #1e4f92;
   margin-bottom: 30px;
 }
 #location_and_footer_banner #find_location .find_location .content p {
@@ -5042,10 +5042,10 @@ footer .footer-content .footer-menu-mobile {
   height: fit-content;
 }
 #footer_banner .swiper-container .swiper-wrapper .swiper-slide img {
-  max-height: 566px;
+  max-height: 528px;
   width: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 #footer_banner .swiper-container .swiper-pagination-bullet-active {
   background-color: #637381 !important;
@@ -5448,7 +5448,7 @@ footer .footer-content .footer-menu-mobile {
   padding: 0px;
   margin: 0;
   margin: auto;
-  margin-top: 2em;
+  margin-top: 64px;
 }
 #search-result .container .header-link {
   display: flex;
@@ -6190,4 +6190,9 @@ pointer .message-right .contact-message-top .content-message-box-1:hover {
 }
 .news-suggestion > div > div a {
   display: block;
+}
+
+.email {
+  text-decoration: none;
+  color: #3d464f;
 }

@@ -2158,7 +2158,7 @@ footer {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        min-height: 206px;
+        min-height: 120px;
 
         h1 {
           font-size: 1em;
@@ -2476,7 +2476,7 @@ footer {
       // max-height: 482px;
       .content {
         padding: 1em;
-        height: 240px;
+        min-height: 120px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -5514,7 +5514,7 @@ footer {
         h1 {
           font-size: $font-size-title;
           font-weight: 800;
-          color: $font-title;
+          color: $primary-color;
           margin-bottom: 30px;
         }
         p {
@@ -5639,9 +5639,9 @@ footer {
       .swiper-slide {
         height: fit-content;
         img {
-          max-height: 566px;
+          max-height: 528px;
           width: 100%;
-          object-fit: contain;
+          object-fit: cover;
         }
       }
     }
@@ -6057,7 +6057,7 @@ footer {
     padding: 0px;
     margin: 0;
     margin: auto;
-    margin-top: 2em;
+    margin-top: 64px;
     .header-link {
       display: flex;
       justify-content: space-between;
@@ -6871,4 +6871,8 @@ section#location_page_div {
       }
     }
   }
+}
+.email {
+  text-decoration: none;
+  color: $font-title;
 }

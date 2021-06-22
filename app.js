@@ -1043,11 +1043,11 @@ function solutionChange(id, load_product = true) {
           const product1 = document.querySelector("#products-1 .products-card");
 
           if (product1 || load_product != false) {
-            console.log({ product1 });
-            // while (product1.lastElementChild) {
-            //   if (product1.lastElementChild.value == "") break;
-            //   product1.removeChild(product1.lastElementChild);
-            // }
+            // console.log({ product1 });
+            while (product1.lastElementChild) {
+              if (product1.lastElementChild.value == "") break;
+              product1.removeChild(product1.lastElementChild);
+            }
           }
 
           if (product_suggestion.length) {
