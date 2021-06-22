@@ -929,8 +929,10 @@ window.onload = () => {
     contact_message_box.addEventListener("click", () => {
       if (message_right.className == "message-right active") {
         message_right.className = "message-right";
+        contact_message_box.className = "contact-message-box ";
       } else {
         message_right.className = "message-right active";
+        contact_message_box.className = "contact-message-box active";
       }
     });
     arrow_up_to_top.addEventListener("click", () => {

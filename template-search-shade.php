@@ -166,8 +166,11 @@ $num = $query->post_count;
     </div>
     <div class="mt-10rem"></div>
         <?php 
+        if(get_field("products")):
             get_template_part("other/products");
+        endif;
         ?>
+
 </div>
 
 

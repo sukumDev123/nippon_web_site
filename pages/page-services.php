@@ -18,7 +18,7 @@
                 endif;
                 if(get_the_ID() == 181):
                     // $link = "https://web.facebook.com/NipponPaintDecor/posts/3967456120036278?_rdc=3&_rdr";
-                    $link = "https://smartpainter.nipponpaintdecor.com/";
+                    $link = "https://staging.tanpong.me/services/nippon-paint-rewards/";
 
                 endif;
             ?>
@@ -34,7 +34,7 @@
 
                             if(get_the_ID() == 181):
                                ?>
-                                    <a target="_blank" class="link-image"  href="<?php echo $link ?>">
+                                    <a target="_blank" class="link-image"  href="https://bit.ly/NP-Rewards-website">
                                         <img src="<?php bloginfo("template_directory");  ?>/assets/images/LineImage.png" alt="">
                                     </a>
                                <?php 

@@ -1181,6 +1181,7 @@ footer > div:first-child .footer-input input {
   color: white;
   border: 0px solid;
   width: 407px;
+  margin-right: 1em;
 }
 footer > div:first-child .footer-input input:focus {
   outline: none;
@@ -1260,6 +1261,11 @@ footer .border-bottom {
   width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin-top: 0rem;
+  margin-bottom: 2rem;
+}
+footer .border-bottom-footer {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  width: 100%;
   margin-bottom: 2rem;
 }
 footer .footer-content {
@@ -1803,6 +1809,11 @@ footer .footer-content .footer-menu-mobile {
 }
 #contact-us p {
   min-height: 30px;
+}
+@media screen and (max-width: 1200px) {
+  #contact-us {
+    padding: 4em 2em;
+  }
 }
 @media screen and (max-width: 1026px) {
   #contact-us {
@@ -4705,6 +4716,7 @@ footer .footer-content .footer-menu-mobile {
   max-width: 300px;
   transition: all 0.3s ease-in;
   width: 100%;
+  min-width: 250px;
 }
 .a-primary-button .primary-button:hover {
   background-color: #003d87 !important;
@@ -5989,6 +6001,10 @@ section#location_page_div .header_list .locations-card .location-card p {
   right: 40px;
   left: auto;
 }
+.family-image .swiper-button-next:after,
+.family-image .swiper-button-prev:after {
+  font-size: 20px !important;
+}
 
 #step1_image,
 #step2_image,
@@ -6101,6 +6117,16 @@ pointer .message-right .contact-message-top .content-message-box-1:hover {
   align-items: center;
   justify-content: center;
 }
+.message-right .contact-message-div .contact-message-box svg {
+  width: 27px;
+  height: 27px;
+}
+.message-right .contact-message-div .contact-message-box svg path {
+  fill: #1e4f92;
+}
+.message-right .contact-message-div .contact-message-box.active path {
+  fill: #a7a9ac;
+}
 .message-right .contact-message-div .contact-message-box:hover {
   box-shadow: 0 4px 10px 1px rgba(0, 0, 0, 0.5);
 }
@@ -6165,7 +6191,7 @@ pointer .message-right .contact-message-top .content-message-box-1:hover {
   height: 64px;
   border-radius: 100%;
   background-color: white;
-  box-shadow: 0 5px 10px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -5px 10px 1px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;

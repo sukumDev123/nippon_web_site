@@ -24,7 +24,7 @@ if(isset($args["title_product"])) {
 }
 
 ?>
-<?php  if($products): ?>
+ 
 <div  id="products-1">
        <div class="container">
             <div class="title">
@@ -46,6 +46,10 @@ if(isset($args["title_product"])) {
                         
                         $featured_img_url = get_the_post_thumbnail_url( $product->ID,'full');
                         $title = get_the_title($product->ID);
+                        $link =  get_permalink($product->ID);
+                        if(get_field("external_link")) {
+                            $link = get_field("external_link");
+                        }
                         ?>
                         <div class="product-card">
                             <a href="<?php echo get_permalink($product->ID) ?>">
@@ -72,4 +76,4 @@ if(isset($args["title_product"])) {
         </div>  
         </div>
 </div>
-<?php  endif; ?>
+ 

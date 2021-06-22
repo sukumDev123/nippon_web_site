@@ -107,7 +107,9 @@ if($query->have_posts()):
             <img class="swiper-slide" src="<?php bloginfo("template_directory");  ?>/assets/images/room1.png" alt="">
             <img class="swiper-slide" src="<?php bloginfo("template_directory");  ?>/assets/images/room2.png" alt="">
         </div>
-        <div class="swiper-image-next swiper-button-prev"></div>
+        <div class="swiper-image-next swiper-button-prev">
+            
+        </div>
         <div class="swiper-image-prev swiper-button-next"></div>
     </div> 
 
