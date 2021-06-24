@@ -87,7 +87,7 @@
                 <!-- </div>   -->
             </div>  
 
-            <a id="project_2_show_mobile" class="a-primary-button" href="<?php if($explain['button_link']): echo get_term_link($explain['button_link'][0])  ; endif;  ?>">
+            <a id="project_2_show_mobile" class="a-primary-button"  href="<?php echo $text_static_product["product_link_url"];  ?>">
                         <button class="primary-button">
                             <?php  echo  $text_static_product['button_title'] ?>
                             <!-- <i class="fas fa-long-arrow-alt-right"></i> -->

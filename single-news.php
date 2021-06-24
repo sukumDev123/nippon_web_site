@@ -22,8 +22,8 @@ $postUrl = 'http' . ( isset( $_SERVER['HTTPS'] ) ? 's' : '' ) . '://' . "{$_SERV
 <?php 
     the_post();
     ?>
-    <div class="container">
-    <div  class="arrow-back">
+    <div class="container box">
+        <div  class="arrow-back">
                 <a href="/news-page/">
                     <img src="<?php echo  get_bloginfo("template_directory");  ?>/assets/images/arrow-g.svg" alt="arrow-g.svg" />
 
@@ -32,7 +32,8 @@ $postUrl = 'http' . ( isset( $_SERVER['HTTPS'] ) ? 's' : '' ) . '://' . "{$_SERV
 
 
         </div>
-        <h1>
+      <div class="header-title">
+      <h1>
                 <?php the_title();  ?>
         </h1>
        <div class="date-social">
@@ -69,6 +70,7 @@ $postUrl = 'http' . ( isset( $_SERVER['HTTPS'] ) ? 's' : '' ) . '://' . "{$_SERV
         
         
         ?>
+        </div>
         </div>
     </div>
 

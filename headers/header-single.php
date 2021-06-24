@@ -15,6 +15,11 @@ $search  =  get_site_url() . "/search/";
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<?php wp_head(); ?>
     <title><?php the_title().$title_static; ?></title>
+    <link 
+        rel="icon" 
+        href="<?php bloginfo("template_directory");  ?>/assets/images/favicon.svg" 
+        type="image/svg+xml"
+    />
 </head>
 <body>
 <?php  get_template_part("headers/message_contact"); ?>

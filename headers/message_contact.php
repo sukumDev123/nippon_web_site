@@ -36,6 +36,12 @@
         </div>
     </div>
 </div>
+<!-- <option value="บ้านใหม่">บ้านใหม่</option>
+                                            <option value="ปรับปรุงบ้าน">ปรับปรุงบ้าน</option>
+                                           
+                                            <option value="วิศวกรและผู้รับเหมา">วิศวกรและผู้รับเหมา</option>
+                                            <option value="นักออกแบบ">นักออกแบบ</option>
+                                            <option value="เจ้าของโครงการ">เจ้าของโครงการ</option> -->
 
 
 <div id="user_info">
@@ -59,15 +65,24 @@
                             <label for="Type user">Type user: </label>
 
                                 <select id="type">
-                                            
-                                            <option value="บ้านใหม่">บ้านใหม่</option>
-                                            <option value="ปรับปรุงบ้าน">ปรับปรุงบ้าน</option>
+                                            <?php  
+                                                $argc = [
+                                                    "post_type" => "type_user" , 
+                                                    "posts_per_page" => -1 , 
+                                                    'order' => 'ASC',
+                                                    'orderby' => 'ID'
+                                                ];
+                                                $queryTypeUser = new WP_Query($argc);
+                                                if($queryTypeUser->have_posts()):
+                                                    while($queryTypeUser->have_posts()): $queryTypeUser->the_post();
+                                            ?>
                                            
-                                            <option value="วิศวกรและผู้รับเหมา">วิศวกรและผู้รับเหมา</option>
-                                            <option value="นักออกแบบ">นักออกแบบ</option>
-                                            <option value="เจ้าของโครงการ">เจ้าของโครงการ</option>
-                                
-                                    
+                                                    <option value="<?php echo get_the_title() ?>"><?php echo get_the_title() ?></option>
+                                            <?php 
+                                            
+                                                 endwhile;  endif;  wp_reset_query();
+                                            
+                                            ?>
                                 </select>    
                         </div>
                     </div>
@@ -91,7 +106,7 @@
             </div>
            <div class="form-button">
            <button id="send_data">
-                    Save 
+                    Send 
                     <img  class="arrow-left-white" src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-left.svg" alt="">
 
                 </button>

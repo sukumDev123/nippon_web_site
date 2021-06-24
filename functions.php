@@ -59,6 +59,19 @@ function intiNews() {
    
 }
 add_action("init" , "intiNews");
+function initTypeUser() {
+ 
+        register_post_type("type_user" , [
+        'public' => true ,
+        'labels' => array('name' => 'User Types' , 'singular_name' => 'User TYpe'),
+        'hierarchical' => true,
+        'has_archive' => true,
+ 
+        
+        ]);
+   
+}
+add_action("init" , "initTypeUser");
  
 
 function shadeAndFamilyColor() {

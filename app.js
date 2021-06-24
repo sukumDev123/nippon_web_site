@@ -589,18 +589,18 @@ const headerClicked = () => {
     });
 
     Array.from(menuTop).forEach((menu) => {
-      if (menu.children[1])
-        menu.children[1].addEventListener("mouseleave", (event) => {
-          // console.log({ event });
-          const ddd = menu.className
-            .split(" ")
-            .filter((c) => c != "menu-active")
-            .join(" ");
-          menu.className = ddd;
-          // const timeOut = setTimeout(() => {
-          //   clearTimeout(timeOut);
-          // }, 1000);
-        });
+      // if (menu.children[1])
+      //   menu.children[1].addEventListener("mouseleave", (event) => {
+      //     // console.log({ event });
+      //     const ddd = menu.className
+      //       .split(" ")
+      //       .filter((c) => c != "menu-active")
+      //       .join(" ");
+      //     menu.className = ddd;
+      //     // const timeOut = setTimeout(() => {
+      //     //   clearTimeout(timeOut);
+      //     // }, 1000);
+      //   });
       menu.querySelector("a").addEventListener("mouseenter", (event) => {
         // if (menu.querySelector("a").href.match("#"))
         // if (menu.querySelector("a").href.match(/#/)) {
@@ -1308,19 +1308,11 @@ function loadLocation(url = "") {
   }
 }
 
-if (document.querySelectorAll("ul.sub-menu"))
-  document.querySelectorAll("ul.sub-menu").forEach((el) => {
-    if (el.children.length >= 5) {
-      // console.log("Found the worst element ever: ", el);
-      el.className += " flex-start";
-    }
-  });
-
 function sendEmail() {
   const email = document.querySelector("#email");
   const email_t = document.querySelector("#email_t");
   const user_info = document.querySelector("#user_info");
-  console.log({ user_info });
+
   if (email) {
     user_info.className += " active";
     email.value = email_t.value;
@@ -1335,6 +1327,7 @@ function saveUserInfo() {
     const type = document.querySelector("#type");
     const contact = document.querySelector("#contact");
     const career = document.querySelector("#career");
+    const email_t = document.querySelector("#email_t");
 
     send_data.addEventListener("click", (event) => {
       const emailV = email.value;
@@ -1362,6 +1355,14 @@ function saveUserInfo() {
         .then((d) => {
           const fm = document.querySelector(".form-message");
           fm.className = "form-message show";
+
+          fullname.value = "";
+          email.value = "";
+
+          contact.value = "";
+          career.value = "";
+          careerV.value = "";
+          email_t.value = "";
         })
         .catch((err) => console.log({ err }));
     });

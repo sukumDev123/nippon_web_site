@@ -24,7 +24,7 @@ $postUrl = 'http' . ( isset( $_SERVER['HTTPS'] ) ? 's' : '' ) . '://' . "{$_SERV
 <?php 
     the_post();
     ?>
-    <div class="container">
+    <div class="container box">
             <div  class="arrow-back">
                 <a href="/project-reference/">
                 <img src="<?php echo  get_bloginfo("template_directory");  ?>/assets/images/arrow-g.svg" alt="arrow-g.svg" />
@@ -34,19 +34,20 @@ $postUrl = 'http' . ( isset( $_SERVER['HTTPS'] ) ? 's' : '' ) . '://' . "{$_SERV
 
         </div>
 
+       <div class="header-title">
         <h1>
-                <?php the_title();  ?>
-        </h1>
-       <div class="date-social">
-            <h5 class="date">  <?php " ".the_date("d M Y"); ?></h5>
+                    <?php the_title();  ?>
+            </h1>
+        <div class="date-social">
+                <h5 class="date">  <?php " ".the_date("d M Y"); ?></h5>
 
-            <section class="sharing-box content-margin content-background clearfix">
-                <div  class="share-button-wrapper">
-                    <a  onclick="onSharedClicked(<?php echo get_the_ID() ?>)" target="_blank" class="share-button share-twitter" href="https://twitter.com/intent/tweet?url=<?php echo $postUrl; ?>&text=<?php echo the_title(); ?>&via=<?php the_author_meta( 'twitter' ); ?>" title="Tweet this"><i class="fab fa-twitter"></i></a>
-                    <a  onclick="onSharedClicked(<?php echo get_the_ID() ?>)"   target="_blank" class="share-button share-facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $postUrl; ?>" title="Share on Facebook"><i class="fab fa-facebook"></i></a>
-                </div>
-            </section>
-       </div>
+                <section class="sharing-box content-margin content-background clearfix">
+                    <div  class="share-button-wrapper">
+                        <a  onclick="onSharedClicked(<?php echo get_the_ID() ?>)" target="_blank" class="share-button share-twitter" href="https://twitter.com/intent/tweet?url=<?php echo $postUrl; ?>&text=<?php echo the_title(); ?>&via=<?php the_author_meta( 'twitter' ); ?>" title="Tweet this"><i class="fab fa-twitter"></i></a>
+                        <a  onclick="onSharedClicked(<?php echo get_the_ID() ?>)"   target="_blank" class="share-button share-facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $postUrl; ?>" title="Share on Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </section>
+        </div>
 
 
 
@@ -72,6 +73,8 @@ $postUrl = 'http' . ( isset( $_SERVER['HTTPS'] ) ? 's' : '' ) . '://' . "{$_SERV
         
         ?>
         </div>
+       </div>
+
     </div>
 
     <div class="swiper-container swiper-project">
