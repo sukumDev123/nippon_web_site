@@ -139,7 +139,7 @@ $word_selected = "เลือกประเภทสินค้า";
         foreach($termShow as $t) {
             if($t->parent != 0):
                 $termShowData = get_terms('product_cat', array('hide_empty' => false, 'parent' => $t->term_id));
-            
+                if($t->description != "0"):
                 echo '<div class="product-cate-card"><h2>'.$t->name.'</h2>';
                 $_slugs = "";
                 foreach ($termShowData as  $category) {
@@ -168,6 +168,7 @@ $word_selected = "เลือกประเภทสินค้า";
                     endif;
                 
                     $thisCate = "'".$category->name."'";
+                    if($category->description):
                     echo '
                     <h5>
                         <a>'. $category->name .' </a>
@@ -177,8 +178,10 @@ $word_selected = "เลือกประเภทสินค้า";
                         </h5>
 
                         ';
+                    endif;
                 }
                 echo '</div>';
+                endif;
             endif;
         }
     }

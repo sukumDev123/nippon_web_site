@@ -120,7 +120,7 @@ function initProject() {
             'labels' => array('name' => 'Projects' , 'singular_name' => 'Project'),
             'hierarchical' => true ,
             'has_archive'  => true,
-            // 'show_in_rest' => true ,
+            'show_in_rest' => true ,
             'taxonomies'   => array(  'tags' , 'project_cate'   ),
             // 'supports'		=> array('title', 'editor', 'thumbnail'),
             // 'hierarchical' => false,
@@ -527,3 +527,21 @@ add_action( 'rest_api_init', function () {
 
 
 
+
+  
+if ( ! function_exists( 'woocommerce_content_custom' ) ) {
+    function woocommerce_content_custom() {
+    
+        if ( is_singular( 'product' ) ) :
+    
+            while ( have_posts() ) :
+                the_post();
+                get_template_part("woocom/content-single-product-custom");
+            endwhile;
+    
+         else:
+            get_template_part("woocom/content-product-custom");
+        endif;
+    }
+}
+ 
