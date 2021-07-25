@@ -1,6 +1,4 @@
 <?php 
- /** Template Name: Home Owner And Developer */
-
  
  get_template_part("headers/header-home");
  get_template_part("other/loading");
@@ -8,13 +6,12 @@
 <section id="home-content">
     <!-- <div class="container"> -->
     <?php  get_template_part("other/button-home"); ?>
-        
         <?php
             $card =  get_field("card");
         
         ?>
         <div class="card">
-         
+            
             <div class="card-content">
                 <span class="title-detail"><?php echo $card["title_detail"] ?></span>
                 <h1 class="title-1"><?php echo $card['title_1'] ?></h1>
@@ -28,28 +25,28 @@
                     <img src="<?php echo $card['image']["url"] ?>" />
             </div>
         </div>
- 
+    <!-- </div> -->
 
-
-  
-        <div class="mt-10rem"></div>
- 
-        <?php  get_template_part("other/products-3"); ?>
- <div class="mt-product"></div>
-
-
-        <?php  get_template_part("other/solution-home-page"); ?>
-        <div class="mt-10rem"></div>
- 
-    <?php  get_template_part("other/inspire-suggestion"); ?>
-   
- <div class="mt-10rem"></div>
+    <div class="mt-10rem"></div>
 
     <?php  get_template_part("other/shade-home"); ?>
-     <div class="mt-10rem"></div>
-    <?php  get_template_part("other/footer_banner"); ?>
+ <div class="mt-10rem"></div>
+
+    <?php  get_template_part("other/inspire-suggestion"); ?>
+    <div class="mt-10rem"></div>
+    <?php   get_template_part("other/idea-suggestion"); ?>
+ <div class="mt-10rem"></div>
+
+    <?php  get_template_part("other/products-2"); ?>
+ <div class="mt-10rem"></div>
+ <?php  get_template_part("other/footer_banner"); ?>
+
  
 
+   
+ 
+      
+  
 </section>
 
 <?php get_footer(); ?>

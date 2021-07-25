@@ -1,6 +1,4 @@
 <?php 
- /** Template Name: Home Renovate */
- 
  get_template_part("headers/header-home");
  get_template_part("other/loading");
 ?>

@@ -171,7 +171,7 @@ $word_selected = "เลือกประเภทสินค้า";
                     if($category->description):
                     echo '
                     <h5>
-                        <a>'. $category->name .' </a>
+                        <a>'. $category->name.' </a>
                         <div class="box-check" onclick="getChecked('.$slug.' , '. $thisCate.')" >
                         <div class=" '.$checked.'"></div>
                     </div>

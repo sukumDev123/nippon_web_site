@@ -79,7 +79,7 @@ $word_selected = "เลือกประเภทสินค้า";
                       if($category->description != "0"): 
                       echo '
                       <h5 id="mobile_categories" class="d-flex align-items-center justify-content-between">
-                          <a>'. $category->name  .' </a>
+                          <a>'. $category->name .' </a>
                           <input '.$checked.' type="checkbox" type="radio"   />
                           <input type="hidden" value="'.$category->name.'" />
                           </h5>
@@ -221,11 +221,11 @@ $word_selected = "เลือกประเภทสินค้า";
                         $thisCate = "'".$category->name."'";
                         if($category->description != "0"):
                         echo '
-                        <h5>
-                            <a>'. $category->name .' </a>
-                            <div class="box-check" onclick="getChecked('.$slug.' , '. $thisCate.')" >
-                                <div class=" '.$checked.'"></div>
-                            </div>
+                            <h5>
+                                <a>'. $category->name .' </a>
+                                <div class="box-check" onclick="getChecked('.$slug.' , '. $thisCate.')" >
+                                    <div class=" '.$checked.'"></div>
+                                </div>
                             </h5>
 
                             ';
