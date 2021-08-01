@@ -1,6 +1,8 @@
-<?php 
-
+<?php
+$parent_title = ""; 
+if($post):
 $parent_title = get_the_title($post->post_parent);
+endif;
 $title = get_the_title();
 if($parent_title) {
     $title = $parent_title;

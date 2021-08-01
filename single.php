@@ -2,11 +2,10 @@
  <?php 
 
 get_header();
-
+global $post;
 
 $slug = get_post_field( 'post_name');
 $post_type = get_post_field( 'post_type');
-//  echo $post_type;
 
 ?>
 <!-- <div id="banner-page"> -->

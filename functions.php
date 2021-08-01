@@ -2,7 +2,8 @@
 add_post_type_support( 'page', 'excerpt' );
 
 function load_stylesheets() {
-    
+     
+  
     wp_register_style("stylesheet" , get_template_directory_uri() . '/style.css' , '' , 1 , 'all');
     wp_enqueue_style("stylesheet");
     wp_register_style("swiper" ,'https://unpkg.com/swiper@5.3.8/css/swiper.min.css' , '' , 1 , 'all');
@@ -12,8 +13,15 @@ function load_stylesheets() {
     wp_register_style("bootstrap" , 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css' , '' , 1 , 'all');
     wp_enqueue_style("bootstrap");
  
- 
-    // 
+    // // 
+    wp_register_style("semantic" , get_template_directory_uri() . '/assets/semantic/semantic.min.css'  );
+    wp_enqueue_style("semantic");
+
+    // wp_register_style("fontawesome" , get_template_directory_uri() . '/assets/fontawesome/css/all.min.css' , '' , 1 , 'all');
+    // wp_enqueue_style("fontawesome");
+
+
+   
 }
 
 add_action('wp_enqueue_scripts' , "load_stylesheets");
@@ -21,10 +29,19 @@ add_action('wp_enqueue_scripts' , "load_stylesheets");
 function load_js() {
     wp_register_script("custom" ,  get_template_directory_uri() . '/app.js' , 'jquery' , 1 , true);
     wp_enqueue_script("custom");
+
+    wp_register_script("jquery" , 'https://code.jquery.com/jquery-3.1.1.min.js' , 'jquery' , 1 , true);
+    wp_enqueue_script("jquery");
     wp_register_script("swiper" , 'https://unpkg.com/swiper@5.3.8/js/swiper.min.js' , 'jquery' , 1 , true);
     wp_enqueue_script("swiper");
     wp_register_script("bootstrap" , 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js' , 'jquery' , 1 , true);
     wp_enqueue_script("bootstrap");
+    wp_register_script("semantic" , get_template_directory_uri() . '/assets/semantic/semantic.min.js' , '' , 1 , 'all');
+    wp_enqueue_script("semantic");
+    wp_register_script("fontawesome" , get_template_directory_uri() . '/assets/fontawesome/js/all.min.js' , '' , 1 , 'all');
+    wp_enqueue_script("fontawesome");
+    wp_register_script("form" ,  get_template_directory_uri() . '/src/form.js' , '' , 1 , true);
+    wp_enqueue_script("form");
 }
 add_action('wp_enqueue_scripts' , "load_js");
 
@@ -525,7 +542,7 @@ add_action( 'rest_api_init', function () {
   } );
 
 
-
+ 
 
 
   
@@ -545,3 +562,59 @@ if ( ! function_exists( 'woocommerce_content_custom' ) ) {
     }
 }
  
+ 
+function add_login_header() {
+    get_header();
+}
+function add_login_footer() {
+    get_footer();
+}
+function add_login_form($params) {
+    // get_footer();
+    // echo "<h1>Test</h1>";
+    $user_login  = $params["user_login"];
+$aria_describedby_error = $params["aria_describedby_error"];
+    get_template_part("templates/auth/signin" , null , [
+        "user_login" => $user_login,
+        "aria_describedby_error" => $aria_describedby_error
+    ]);
+}
+function add_register_form() {
+    get_template_part("templates/auth/signup" );
+}
+function add_lostpassword_form() {
+    get_template_part("templates/auth/lost_password" );
+
+}
+ 
+add_filter("login_form" , "add_login_form");
+add_filter("login_header" , "add_login_header");
+add_filter("login_footer" , "add_login_footer");
+add_filter("register_form" , "add_register_form");
+add_filter("lostpassword_form" , "add_lostpassword_form");
+ 
+
+function reset_pass_url() {
+    $siteURL = get_option('siteurl');
+    return "{$siteURL}/wp-login.php?action=lostpassword";
+}
+add_filter( 'lostpassword_url', 'reset_pass_url', 11, 0 );
+
+
+
+
+
+add_filter( 'woocommerce_account_menu_items', 'add_my_menu_items', 99, 1 );
+
+function add_my_menu_items(   $endpoints ) {
+    $endpoints = array(
+    //  endpoint   => label
+        'edit-account'    => get_option( 'woocommerce_myaccount_edit_account_endpoint', 'edit-account' ),
+
+    );
+ 
+	return   $endpoints;
+
+
+   
+}

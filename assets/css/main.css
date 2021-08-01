@@ -40,9 +40,32 @@
   font-style: normal;
   font-display: swap;
 }
-*,
+h1,
+h2,
+h3,
+h4,
+h5,
+a,
+span,
+button,
+p,
+li,
+label {
+  font-family: "Sukhumvit Set", sans-serif !important;
+}
+
 input {
-  font-family: "Sukhumvit Set", sans-serif;
+  font-size: 14px;
+}
+
+.primary-text,
+.blue {
+  color: #1e4f92 !important;
+}
+
+.bk-primary,
+.primary {
+  background: #1e4f92 !important;
 }
 
 .arrow-left-white {
@@ -409,9 +432,17 @@ body::-webkit-scrollbar-thumb {
 }
 
 .container {
-  max-width: 1170px;
+  max-width: 1170px !important;
   padding: 0px;
   margin: auto;
+}
+.container.login_form {
+  margin-top: 150px !important;
+  margin-bottom: 150px !important;
+}
+
+form.loginform {
+  max-width: 340px !important;
 }
 
 .flex-start {
@@ -5184,7 +5215,7 @@ footer .footer-content .footer-menu-mobile {
   #menu-top-menu > li.menu-active > ul.sub-menu,
 #menu-top-menu-mobile > li.menu-active > ul.sub-menu,
 #menu-top-menu-en > li.menu-active > ul.sub-menu {
-    top: 119px;
+    top: 112px;
   }
 }
 #menu-top-menu > li > ul.sub-menu,
@@ -6003,8 +6034,25 @@ section#location_page_div .header_list .locations-card .location-card {
 }
 section#location_page_div .header_list .locations-card .location-card h4 {
   font-weight: bold;
+  color: #3d464f;
 }
 section#location_page_div .header_list .locations-card .location-card p {
+  margin-top: 1em;
+  color: #637381;
+}
+section#location_page_div .header_list .locations-card .location-card.canLink {
+  display: block;
+  cursor: pointer;
+  color: #3d464f;
+  text-decoration: none;
+}
+section#location_page_div .header_list .locations-card .location-card.canLink:hover {
+  text-decoration: underline;
+}
+section#location_page_div .header_list .locations-card .location-card.canLink h4 {
+  font-weight: bold;
+}
+section#location_page_div .header_list .locations-card .location-card.canLink p {
   margin-top: 1em;
   color: #637381;
 }
@@ -6221,6 +6269,10 @@ section#location_page_div .header_list .locations-card .location-card p {
   }
 }
 
+.login .container.login-form form {
+  border: 0px;
+}
+
 .arrow-back {
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -6377,4 +6429,67 @@ section#location_page_div .header_list .locations-card .location-card p {
 #user_info > div button#send_data img {
   margin-left: 10px;
   transition: all 0.3s ease-in;
+}
+
+body.login {
+  background-position: center;
+  background-size: 100% 100%;
+  background: url("http://localhost/nippon/wp-content/themes/nippontheme/assets/images/background_signin.jpg") !important;
+}
+body.login .ui.form {
+  padding-top: 50px;
+  margin: 0 auto;
+  padding: 24px;
+  background-color: white;
+}
+body.login form .input,
+body.login input[type=password],
+body.login input[type=text] {
+  font-size: 1em;
+  padding: 0px;
+}
+
+.template-myaccount {
+  margin-top: 150px;
+  margin-bottom: 150px;
+}
+.template-myaccount .woocommerce {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-account-div {
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 40px;
+}
+
+.account-navbar {
+  list-style: none;
+}
+.account-navbar li:first-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.account-a {
+  color: black;
+}
+.account-a.active {
+  color: #1e4f92;
+  font-weight: bold;
+}
+
+.ui.secondary.pointing.menu .active.item {
+  color: #1e4f92 !important;
+  border-color: #1e4f92 !important;
+}
+
+.height-card-eq {
+  height: 100%;
+}
+
+.ui.grid > .row > .column {
+  margin-bottom: 1em !important;
 }

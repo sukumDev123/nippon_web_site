@@ -114,6 +114,7 @@ $word_selected = "เลือกประเภทสินค้า";
 
 <div class="page-bk-product">
 
+
     <!-- <div class="page-bk-image"> -->
     <img alt="logo" src="<?php echo $featured_img_url  ?>"  class="image-logo" />
     <div class="image-logo-bk"> </div>

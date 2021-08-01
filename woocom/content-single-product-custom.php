@@ -123,6 +123,7 @@ $word_selected = "";
         ?>
        <div>
            <img  src="<?php echo $featured_img_url ?>" />
+           <?php   echo do_shortcode('[yith_wcwl_add_to_wishlist]');  ?>
      
            </div>
    </div>

@@ -71,9 +71,31 @@ $font-size-title: 36px;
   font-style: normal;
   font-display: swap;
 }
-*,
+
+h1,
+h2,
+h3,
+h4,
+h5,
+a,
+span,
+button,
+p,
+li,
+label {
+  font-family: "Sukhumvit Set", sans-serif !important;
+}
+
 input {
-  font-family: "Sukhumvit Set", sans-serif;
+  font-size: 14px;
+}
+.primary-text,
+.blue {
+  color: $primary-color !important;
+}
+.bk-primary,
+.primary {
+  background: $primary-color !important;
 }
 .arrow-left-white {
   fill: white;
@@ -81,6 +103,7 @@ input {
 .arrow-left-black {
   fill: black;
 }
+
 body {
   //   background-color: red;
   // font-size: 40px;
@@ -498,12 +521,18 @@ body {
   }
 }
 .container {
-  max-width: $container-size;
-  // padding-left: 1rem;
-  // padding-right: 1rem;
+  max-width: $container-size !important;
   padding: 0px;
   margin: auto;
+  &.login_form {
+    margin-top: 150px !important;
+    margin-bottom: 150px !important;
+  }
 }
+form.loginform {
+  max-width: 340px !important;
+}
+
 .flex-start {
   justify-content: flex-start !important;
 }
@@ -5820,7 +5849,7 @@ footer {
         @media screen and (max-width: 1366px) {
           // top: 120px;
           & {
-            top: 119px;
+            top: 112px;
           }
         }
       }
@@ -6679,6 +6708,24 @@ section#location_page_div {
         border: 1px solid rgba($color: #000000, $alpha: 0.2);
         h4 {
           font-weight: bold;
+          color: $font-title;
+        }
+        p {
+          margin-top: 1em;
+          color: $font-color;
+        }
+      }
+      .location-card.canLink {
+        display: block;
+        cursor: pointer;
+        color: $font-title;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+        h4 {
+          font-weight: bold;
         }
         p {
           margin-top: 1em;
@@ -6935,7 +6982,9 @@ section#location_page_div {
     }
   }
 }
-
+.login .container.login-form form {
+  border: 0px;
+}
 .arrow-back {
   width: fit-content;
   height: fit-content;
@@ -7106,4 +7155,65 @@ section#location_page_div {
       }
     }
   }
+}
+
+body.login {
+  background-position: center;
+  background-size: 100% 100%;
+  background: url("http://localhost/nippon/wp-content/themes/nippontheme/assets/images/background_signin.jpg") !important;
+  .ui.form {
+    padding-top: 50px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: white;
+  }
+  form .input,
+  input[type="password"],
+  input[type="text"] {
+    font-size: 1em;
+    padding: 0px;
+  }
+}
+.template-myaccount {
+  margin-top: 150px;
+  margin-bottom: 150px;
+  .woocommerce {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.edit-account-div {
+  border-radius: 6px;
+  border: 1px solid rgba($color: #000000, $alpha: 0.1);
+  padding: 40px;
+}
+
+.account-navbar {
+  list-style: none;
+  li:first-child {
+    border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1) !important;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.account-a {
+  color: black;
+
+  &.active {
+    color: $primary-color;
+    font-weight: bold;
+  }
+}
+.ui.secondary.pointing.menu .active.item {
+  color: $primary-color !important;
+  border-color: $primary-color !important;
+}
+.height-card-eq {
+  height: 100%;
+  // margin-bottom: 1em;
+}
+.ui.grid > .row > .column {
+  margin-bottom: 1em !important;
 }

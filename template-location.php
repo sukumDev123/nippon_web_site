@@ -163,7 +163,7 @@ $count = $query->found_posts;
 ?>
 
 <section id="location_page_div">
-<div class="margin-page"></div>
+    <div class="margin-page"></div>
     <div class="header_location">
       
     
@@ -204,17 +204,41 @@ $count = $query->found_posts;
         <h2><?php echo $text_static["title"] ?></h2>
             <?php if($query->have_posts()):  ?>
           <div class="locations-card">
-            <?php while($query->have_posts()):  $query->the_post(); ?>
-                <div class="location-card">
+            <?php while($query->have_posts()):  $query->the_post();  ?>
+            <?php 
+            $google_map_link = get_field("google_map_link");
+            $classCardLocation = "";
+            if($google_map_link):
+                $classCardLocation = " canLink";
+                ?>
+                <a href="<?php echo $google_map_link; ?>" target="_blank" class="location-card <?php echo $classCardLocation ?>">
                     <h4><?php echo get_the_title(get_the_ID()) ?></h4>
-                    <p class='d-flex'> 
-                        
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span style="padding-left: 1em">
-                    <?php echo get_field("address" , get_the_ID()) ?>
-                    </span>    
-                </p>
-                </div>
+                        <p class='d-flex'> 
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span style="padding-left: 1em">
+                        <?php echo get_field("address" , get_the_ID()) ?>
+                        </span>    
+                    </p>
+                </a>
+
+           <?php
+            else:
+                ?>
+                     <div  class="location-card ">
+                        <h4><?php echo get_the_title(get_the_ID()) ?></h4>
+                            <p class='d-flex'> 
+                                
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span style="padding-left: 1em">
+                            <?php echo get_field("address" , get_the_ID()) ?>
+                            </span>    
+                        </p>
+                    </div>
+
+                <?php
+            endif;
+            ?>
+               
             <?php endwhile;  ?>
             
         </div>
