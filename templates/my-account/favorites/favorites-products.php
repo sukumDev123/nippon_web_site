@@ -27,13 +27,14 @@ $wishlists = YITH_WCWL_Wishlist_Factory::get_wishlists();
     'current_page' => 0,
    ] );
 
+	if ( $wishlist && $wishlist->has_items() ) :
   $wishlist_items = $wishlist->get_items( 0, 5 );
   ?>
   <div class="ui grid">
   <div class="doubling stackable three column row">
     <?php 
   foreach ( $wishlist_items as $item ) :
-    $product      = $item->get_product();
+    $product = $item->get_product();
     if ( $product && $product->exists() ) :
        
       ?>
@@ -41,6 +42,7 @@ $wishlists = YITH_WCWL_Wishlist_Factory::get_wishlists();
 
     <div class="column ">
       <div class=" ui segment height-card-eq">
+      <a href="<?php echo esc_url( add_query_arg( 'remove_from_wishlist',$item->get_product_id() ) ); ?>" class="remove_from_wishlist" title="<?php echo esc_html( apply_filters( 'yith_wcwl_remove_product_wishlist_message_title', __( 'Remove this product', 'yith-woocommerce-wishlist' ) ) ); ?>">Delete</a>
         <div style="text-align:center">
           <div class="ui small image ">
             <?php echo $product->get_image()  ?>
@@ -48,13 +50,7 @@ $wishlists = YITH_WCWL_Wishlist_Factory::get_wishlists();
         </div>
       
         <h5 class="ui head">
-
           <?php echo $product->get_name()  ?>
-
-
-
-								<a href="<?php echo esc_url( add_query_arg( 'remove_from_wishlist',$item->get_product_id() ) ); ?>" class="remove_from_wishlist" title="<?php echo esc_html( apply_filters( 'yith_wcwl_remove_product_wishlist_message_title', __( 'Remove this product', 'yith-woocommerce-wishlist' ) ) ); ?>">Delete</a>
-
         </h5>
       </div>
       
@@ -71,5 +67,11 @@ $wishlists = YITH_WCWL_Wishlist_Factory::get_wishlists();
     ?>
   </div>
   </div>
+<?php else:
+?>
 
+<h5>Null</h5>
+
+<?php
+endif; ?>
 </div>

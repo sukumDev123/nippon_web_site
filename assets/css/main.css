@@ -5286,6 +5286,10 @@ footer .footer-content .footer-menu-mobile {
 
 .btn-primary {
   background-color: #1e4f92 !important;
+  color: white !important;
+}
+.btn-primary a {
+  color: white !important;
 }
 
 .btn-custom {
@@ -6457,6 +6461,10 @@ body.login input[type=text] {
   display: flex;
   justify-content: space-between;
 }
+.template-myaccount ol,
+.template-myaccount ul {
+  padding-left: 0px !important;
+}
 
 .edit-account-div {
   border-radius: 6px;
@@ -6492,4 +6500,33 @@ body.login input[type=text] {
 
 .ui.grid > .row > .column {
   margin-bottom: 1em !important;
+}
+
+.page-mt {
+  width: 100px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  padding: 4em 0;
+}
+
+.form-career {
+  padding-left: 3em !important;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.container-careers {
+  max-width: 900px;
+  margin: 2em auto;
+}
+.container-careers .ui.grid {
+  padding: 20px 40px;
+}
+
+.container-career-header {
+  max-width: 700px;
+  margin: auto;
+}
+
+.border-r-20 {
+  border-radius: 20px !important;
 }

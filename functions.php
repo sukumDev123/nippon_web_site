@@ -618,3 +618,118 @@ function add_my_menu_items(   $endpoints ) {
 
    
 }
+
+
+
+
+ 
+
+function complete_registration(
+    $request
+) {
+    $data = $request->get_body();
+    $toArray = json_decode($data);
+    $userdata = array(
+        'user_login'    =>    $toArray->email,
+        'user_email'    =>    $toArray->email,
+        'user_pass'     =>    $toArray->password,
+        // 'user_url'      =>   $website,
+        'first_name'    =>    $toArray->first_name,
+        'last_name'     =>    $toArray->last_name,
+        // 'nickname'      =>   $nickname,
+        // 'description'   =>   $bio,
+        );
+    // $user = wp_update_user( $userdata );
+    $user = wp_insert_user( $userdata );
+
+    if ( is_wp_error( $user_data ) ) {
+        return json_decode(json_encode(["message" =>  $user_data ]));
+
+    }  
+
+    // echo "Register completed";
+    return json_decode(json_encode(["message" => "success" , "user" => json_encode($user) , "dd" => $toArray->$email]));
+
+}
+function register_user(
+    $request
+) {
+    $data = $request->get_body();
+    $toArray = json_decode($data);
+    $userdata = array(
+        'user_login'    =>    $toArray->email,
+        'user_email'    =>    $toArray->email,
+        'user_pass'     =>    $toArray->password,
+        // 'user_url'      =>   $website,
+        'first_name'    =>    $toArray->first_name,
+        'last_name'     =>    $toArray->last_name,
+        // 'nickname'      =>   $nickname,
+        // 'description'   =>   $bio,
+        );
+    $user = wp_insert_user( $userdata );
+
+    if ( is_wp_error( $userdata ) ) {
+        return json_decode(json_encode(["message" =>  $userdata ]));
+
+    }  
+ 
+    return json_decode(json_encode(["message" => "success" , "user" => json_encode($user) , "dd" => $toArray->$email]));
+
+}
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/user/create', array(
+      'methods' => 'post',
+      'callback' => 'register_user',
+      
+    ) );
+  } );
+
+function custom_registration_function() {
+    if ( isset($_POST['submit'] ) ) {
+        // registration_validation(
+        // $_POST['username'],
+        // $_POST['password'],
+        // $_POST['email'],
+        // $_POST['website'],
+        // $_POST['fname'],
+        // $_POST['lname'],
+        // $_POST['nickname'],
+        // $_POST['bio']
+        // );
+         
+        // // sanitize user form input
+        // global $username, $password, $email, $website, $first_name, $last_name, $nickname, $bio;
+        // $username   =   sanitize_user( $_POST['username'] );
+        // $password   =   esc_attr( $_POST['password'] );
+        // $email      =   sanitize_email( $_POST['email'] );
+        // $website    =   esc_url( $_POST['website'] );
+        // $first_name =   sanitize_text_field( $_POST['fname'] );
+        // $last_name  =   sanitize_text_field( $_POST['lname'] );
+        // $nickname   =   sanitize_text_field( $_POST['nickname'] );
+        // $bio        =   esc_textarea( $_POST['bio'] );
+ 
+        // // call @function complete_registration to create the user
+        // // only when no WP_error is found
+        // complete_registration(
+        // $username,
+        // $password,
+        // $email,
+        // $website,
+        // $first_name,
+        // $last_name,
+        // $nickname,
+        // $bio
+        // );
+    }
+ 
+    // registration_form(
+    //     $username,
+    //     $password,
+    //     $email,
+    //     $website,
+    //     $first_name,
+    //     $last_name,
+    //     $nickname,
+    //     $bio
+    //     );
+}

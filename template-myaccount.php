@@ -1,16 +1,28 @@
+<?php
+
+
+if ( ! is_user_logged_in() ) {
+    wp_safe_redirect( wp_login_url() );
+    exit;
+}
+
+?>
 <?php get_header() ?>
 <?php 
  /** Template Name: My Account */
- global $post;
- $slug_name = $post->post_name;
- $user = wp_get_current_user();
+
+    // global $post;
+    $slug_name = get_field("page_name", get_the_ID());
+    $user = wp_get_current_user();
    $checkedActive1 = $slug_name == "edit-account" ?  "active" : "" ;
    $checkedActive2 =  $slug_name == "edit-account" ? "" : "active";
    $slug_name =  $slug_name == "edit-account" ? $slug_name : "favorites/".$slug_name;
+  
+    
 ?>
 <div class="template-myaccount">
     <div class="header-account">
-        <h1 class="primary-text ui header centered">
+        <h1 class="primary-text ui header centered"> 
             บัญชีของฉัน  
             <div class="sub header"> คุณสามารถดูภาพรวมบัญชีล่าสุดของคุณ และอัปเดตข้อมูลเกี่ยวกับบัญชี </div>
         </h1>

@@ -1,5 +1,6 @@
 <?php 
 $user = $args["user"];
+
 ?>
  
  <div class="edit-account-div">

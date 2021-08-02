@@ -1,6 +1,6 @@
 // const { babelConfig } = require("laravel-mix");
-const domain = "https://staging.tanpong.me/";
-// const domain = "http://localhost/nippon/";
+// const domain = "https://staging.tanpong.me/";
+const domain = "http://localhost/nippon/";
 const loading = document.querySelector("#loading");
 let searchType = "rgb-div";
 let product_suggestion = [];

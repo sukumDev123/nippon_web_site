@@ -24,7 +24,7 @@
 			</p>
 </form> -->
 
-<div class="ui grid segment" id="sign_in_step1">
+<div class="ui stackable row grid segment " id="sign_in_step1">
 	<div class="ten wide column">
 		<h3 class="primary-text">สิทธิพิเศษสำหรับสมาชิก</h3>
 		<p class="mb-3">บทความแนะนำธุรกิจน่าลงทุน เหมาะสำหรับ ธุรกิจที่ต้องการหาตัวแทนจำหน่าย ขยายสาขา 
@@ -43,7 +43,7 @@
 	class="ui form loginform " 
 	name="loginform" 
 	id="loginform" 
-	action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" 
+ 
 	method="post">
 	<div class="field">
 		<h1 class="ui header primary-text" style="margin:0px;">
@@ -56,14 +56,13 @@
 	</div>
 
   <div class="required field ">
-  	<label for="user_login"><?php _e( 'Username or Email Address' ); ?></label>
+  	<label for="user_login"><?php _e( 'Email Address' ); ?></label>
 	  <input 
-	  	type="text" 
-		  placeholder="<?php  _e( 'Username' ); ?>" 
-		  name="log" 
-		  class="input" 
-		  size="20" 
-		  autocapitalize="off" />
+	  		type="text" 
+			placeholder="<?php  _e( 'Email' ); ?>" 
+			id="emailVal" 
+	 
+		   />
   </div>
   
   <div class="required field">
@@ -71,7 +70,8 @@
    	<div class="ui icon input">
    		<input 
         	type="password" 
-        	name="pwd" 
+        	name="pwd"
+			id="pwd" 
         	size="20"
          />
  		<i id="togglePassword" class="eye icon"></i>
@@ -83,10 +83,12 @@
    	<div class="ui icon input">
    		<input 
         	type="password" 
-        	name="pwd" 
+        	name="pwd"
+			id="pwd_confirm" 
+
         	size="20"
          />
- 		<i id="togglePassword" class="eye icon"></i>
+ 		<!-- <i id="togglePassword" class="eye icon"></i> -->
    </div>
 	 
 	<h5 class="ui header" style="margin:0px;">
@@ -97,8 +99,9 @@
  
   <button 
   	class="ui button submit primary fluid" 
-	name="wp-submit" 
-	id="wp-submit" 
+	name="wp-pass-signup" 
+	id="wp-pass-signup" 
+
 	type="submit"><?php esc_attr_e( 'Register' ); ?></button>
   
 </form>		
@@ -131,6 +134,7 @@
                 placeholder="<?php  _e( 'Name' ); ?>" 
                 name="log" 
                 class="input" 
+				id="name"
                 size="20" 
                 autocapitalize="off"
                 />
@@ -141,18 +145,20 @@
             <input 
                 type="text" 
                 placeholder="นามสกุล" 
-                name="log" 
+                id="lastname"
                 class="input" 
                 size="20" 
                 autocapitalize="off"
                 />
         </div>
         <div class="field">
-            <button 
+        <button 
                 class="ui button submit primary fluid" 
                 name="wp-submit" 
-                id="wp-submit" 
-                type="submit">ยืนยัน</button>
+                id="wp-register" 
+                type="submit"
+				
+				>ยืนยัน</button>
         </div>
     
  
@@ -160,3 +166,14 @@
  
     </form>
 </div>
+
+
+
+
+
+
+
+
+
+
+<?php  ?>

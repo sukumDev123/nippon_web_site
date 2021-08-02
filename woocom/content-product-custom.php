@@ -322,29 +322,24 @@ $word_selected = "เลือกประเภทสินค้า";
         $loop = new WP_Query( $args );
         if ( $loop->have_posts() ) {
             while ( $loop->have_posts() ) : $loop->the_post();
-                 
-                    $featured_img_url = get_the_post_thumbnail_url( get_the_ID(),'full');
-               
+                $featured_img_url = get_the_post_thumbnail_url( get_the_ID(),'full');
                 $link = get_permalink(get_the_ID());
                 $aTag = '<a  href="'.$link.'">';
                 if(get_field("external_link")) {
                     $link =  get_field("external_link");
-                $aTag = '<a target="_blank"  href="'.$link.'">';
-
+                    $aTag = '<a target="_blank"  href="'.$link.'">';
                 }
                ?>
                         <div class="product-card">
                                 <?php echo  $aTag; ?>
-
                                 <img src="<?php echo $featured_img_url ?>" alt="image"  />
                                 <h2><?php echo get_the_title() ?></h2>
                                 <p><?php echo get_the_excerpt() ?></p>
                                 <h5 class="arrow">
                                     <img  
                                         class="arrow-left-white" 
-                                        src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-blue.svg" alt="">
-
-                                <!-- <i class="fas fa-long-arrow-alt-right"></i> -->
+                                        src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-blue.svg" 
+                                        alt="">
                                 </h5>
                             </a>
                         </div>
