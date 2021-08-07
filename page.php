@@ -17,13 +17,21 @@ $post_type = get_post_field( 'post_type');
 if( $post->post_name != "my-account"): 
 get_template_part("other/page-bk");
  
+ 
 ?>
 
 
       <?php 
+            if($page_name == "faq"):  
+                  get_template_part("templates/faq/".$page_name);
+            endif; 
+   
+     
             if($page_name):  
                   get_template_part("templates/career/".$page_name);
             endif; 
+         
+           
             if($page_name == "page"):
                   
                   ?>
@@ -57,7 +65,7 @@ get_template_part("other/page-bk");
 <?php 
 else:
 
-      // the_content();
+ 
  get_template_part("templates/my-account/home");
 
 endif;

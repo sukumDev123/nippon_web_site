@@ -1,6 +1,6 @@
 // const { babelConfig } = require("laravel-mix");
-// const domain = "https://staging.tanpong.me/";
-const domain = "http://localhost/nippon/";
+const domain = "https://staging.tanpong.me/";
+// const domain = "http://localhost/nippon/";
 const loading = document.querySelector("#loading");
 let searchType = "rgb-div";
 let product_suggestion = [];
@@ -910,6 +910,10 @@ function handleFooterMenuClicked() {
     });
   }
 }
+
+function togglePasswordEvent() {
+  console.log({ asdasdsad: "Saassd" });
+}
 window.onload = () => {
   homePageInitSwiper();
   headerClicked();
@@ -923,6 +927,18 @@ window.onload = () => {
   handleFooterMenuClicked();
   loadLocation();
   saveUserInfo();
+  saveCareer();
+  saveData1();
+  IsNumber();
+  uploadFile();
+  showMoreCalPageInternal();
+  calculateInternalRoomStep1();
+  calculateInternalRoomStep2();
+  calculateInternalRoomStep3();
+  calculateInternalRoomStep4();
+  calculateInternalRoomSummary();
+  addPlusButton();
+  summaryExternalCal();
   const message_right = document.querySelector(".message-right");
   const contact_message_box = document.querySelector(".contact-message-box");
   const arrow_up_to_top = document.querySelector(".arrow-up-to-top");

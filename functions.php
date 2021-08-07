@@ -1,6 +1,7 @@
 <?php 
 add_post_type_support( 'page', 'excerpt' );
-
+define ('SITE_ROOT', realpath(dirname(__FILE__)));
+require_once( ABSPATH . 'wp-admin/includes/file.php' );
 function load_stylesheets() {
      
   
@@ -38,10 +39,14 @@ function load_js() {
     wp_enqueue_script("bootstrap");
     wp_register_script("semantic" , get_template_directory_uri() . '/assets/semantic/semantic.min.js' , '' , 1 , 'all');
     wp_enqueue_script("semantic");
+    // wp_register_script("se" , get_template_directory_uri() . '/assets/semantic/se.js' , '' , 1 , 'all');
+    // wp_enqueue_script("se");
     wp_register_script("fontawesome" , get_template_directory_uri() . '/assets/fontawesome/js/all.min.js' , '' , 1 , 'all');
     wp_enqueue_script("fontawesome");
     wp_register_script("form" ,  get_template_directory_uri() . '/src/form.js' , '' , 1 , true);
     wp_enqueue_script("form");
+    wp_register_script("capcha" , "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explici" , '' , 1 , true);
+    wp_enqueue_script("capcha");
 }
 add_action('wp_enqueue_scripts' , "load_js");
 
@@ -59,6 +64,14 @@ add_action("init" , function() {
 	"labels" => ['name' => "Infos"   , "singular_name" => "Info"],
 	 
  
+    'hierarchical' => true
+ 
+	]);
+});
+add_action("init" , function() {
+	register_post_type("Careers" , [
+	'public' => true ,
+	"labels" => ['name' => "Careers"   , "singular_name" => "Career"],
     'hierarchical' => true
  
 	]);
@@ -457,12 +470,109 @@ add_action( 'rest_api_init', function () {
     return json_decode(json_encode(["message" => "success"]));
 
  }
+
+function upload_file($request) {
+    $data = $request->get_body();
+    $toArray = json_decode($data);
+     
+    if(isset($_FILES["upfile"]))
+{
+
+	$extension = pathinfo($_FILES["upfile"]['name'], PATHINFO_EXTENSION);
+
+	$new_name = time() . '.' . $extension;
+
+    $image=basename($_FILES['upfile']['name']);
+    $image=str_replace(' ','|',$image);
+    var_dump($image);
+    $tmppath=SITE_ROOT.'/assets/uploads/'.$image;
+    $data = move_uploaded_file($_FILES['upfile']['tmp_name'],$tmppath);
+    $id_file_post = null;
+            if($data)
+            {
+                $postArr = [
+                    'post_title' => $image,
+                    "post_type" => "attachment",
+                    "post_status" => "publish",
+                    "post_name" => $image,
+                    "guid" => "https://staging.tanpong.me/wp-content/themes/nippontheme/assets/uploads/".$image
+                ];
+                $dd = wp_insert_post($postArr);
+                $id_file_post = $dd;
+            //  echo $dd;
+            }
+            else
+            {
+             echo "fail";
+            }
+
+            return json_decode( json_encode(["id" => $id_file_post]));
+}
+//     if(isset($_FILES['sample_image']))
+// {
+
+// 	$extension = pathinfo($_FILES['sample_image']['name'], PATHINFO_EXTENSION);
+
+// 	$new_name = time() . '.' . $extension;
+
+// 	move_uploaded_file($_FILES['sample_image']['tmp_name'], 'images/' . $new_name);
+
+// 	$data = array(
+// 		'image_source'		=>	'images/' . $new_name
+// 	);
+
+// 	echo json_encode($data);
+
+// }
+
+}
+
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/upload_file/', array(
+      'methods' => 'post',
+      'callback' => 'upload_file',
+      
+    ) );
+  } );
 add_action( 'rest_api_init', function () {
     register_rest_route( 'api/v1', '/save_user_info/', array(
       'methods' => 'post',
       'callback' => 'save_users',
       
     ) );
+  } );
+
+  function save_career($request) {
+    $data = $request->get_body();
+    $toArray = json_decode($data);
+    $info = [
+        "first_name" =>  $toArray->first_name,
+        "last_name" =>  $toArray->last_name,
+        "email" =>  $toArray->email,
+        "tel" =>  $toArray->tel,
+        "portfolio_link" =>  $toArray->portfolio_link,
+        "resume_cv" =>  $toArray->resume_cv,
+        "transcript" =>  $toArray->transcript,
+        "cover_letter" =>  $toArray->cover_letter,
+        "career_name" =>  $toArray-> career_name,
+
+    ];
+    $postArr = [
+        'post_title' =>$toArray->email,
+        "meta_input" => $info,
+        "post_type" => "careers",
+        "post_status" => "publish"
+    ];
+   $create =   wp_insert_post($postArr);
+ 
+    return json_decode(json_encode(["message" => "success" ,"LL" => $toArray , "f" =>  $create]));
+  }
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/career/save/', array(
+      'methods' => 'post',
+      'callback' => 'save_career',
+      
+    ));
   } );
 
 
@@ -573,7 +683,7 @@ function add_login_form($params) {
     // get_footer();
     // echo "<h1>Test</h1>";
     $user_login  = $params["user_login"];
-$aria_describedby_error = $params["aria_describedby_error"];
+    $aria_describedby_error = $params["aria_describedby_error"];
     get_template_part("templates/auth/signin" , null , [
         "user_login" => $user_login,
         "aria_describedby_error" => $aria_describedby_error
@@ -733,3 +843,23 @@ function custom_registration_function() {
     //     $bio
     //     );
 }
+
+
+function add_login_redirect() {
+     if(!is_user_logged_in()):
+
+        setcookie("latest_page" , get_permalink()  , time() * 300 , "/");
+    endif;
+    echo  get_permalink();
+
+
+    $redi =  get_site_url();
+    if(isset($_COOKIE["latest_page"])):
+        $redi = $_COOKIE["latest_page"];
+    endif;
+    echo $redi; ;
+    return $redi;
+         
+}
+
+add_filter( 'login_redirect', "add_login_redirect");

@@ -23,14 +23,14 @@ if(isset($_GET["search"])):
 endif;
  
 $query = new WP_Query($argc);
-
+$count = $query->found_posts;
 ?>
 
 
 <div class="container">
         <div class="margin-page"></div>
         <div class="container-career-header">
-            <h2 class="ui header primary-text center aligned mb-5">ตำแหน่งที่เปิดรับ</h2>
+            <h2 class="ui header primary-text center aligned mb-3">ตำแหน่งที่เปิดรับ</h2>
             <form action="<?php echo  get_site_url()."/career/" ?>" method="GET" class="ui grid aligned center">
                 <div class="twelve wide column">
                     <div class="ui  search">
@@ -51,7 +51,7 @@ $query = new WP_Query($argc);
         <div class="margin-page"></div>
     <div class="container-careers">
             <h3 class="ui header right aligned">
-                <div class="sub header"><?php echo $query->max_num_pages ?> ตำแหน่งที่เปิดรับ</div>
+                <div class="sub header"><?php echo $count ?> ตำแหน่งที่เปิดรับ</div>
             </h3>
 
         <?php 
@@ -65,10 +65,22 @@ $query = new WP_Query($argc);
                         <div class="ten wide column">
                         
                             <h2 class="primary-text ui header">
-                            <a class="primary-text" href="<?php echo get_permalink(get_the_ID()); ?>">
-                            <?php echo get_the_title() ?>
-                        </a>    
+                                <a class="primary-text" href="<?php echo get_permalink(get_the_ID()); ?>">
+                                <?php echo get_the_title() ?>
+                                </a>    
                            </h2>
+                           <div class="type-of-career-list">
+                                <h4>
+                                <?php get_template_part("components/icon" , null ,  ['icon' => "location-career"]) ?>  <?php echo get_field("location_career") ?>
+                                </h4>
+                                <h4>
+                                <?php get_template_part("components/icon" , null ,  ['icon' => "icon2"]) ?> <?php echo get_field("type_career") ?>
+                                </h4>
+                                <h4>
+                                <?php get_template_part("components/icon" , null ,  ['icon' => "icon-money-card"]) ?>  <?php echo get_field("role_career") ?>
+
+                                </h4>
+                            </div>
                         </div>
                         <div class="six wide column center aligned">
                         <button class="ui btn-primary button">
@@ -88,7 +100,7 @@ $query = new WP_Query($argc);
 
         ?>
 
-        <?php if($query->max_num_pages > $page): $page = $page +  3;  ?>
+        <?php if($count > $page): $page = $page +  3;  ?>
         <h3 class="ui header right aligned">
             <a href="<?php echo  get_site_url()."/career". $seeMore .= "?paged_show=".$page ?>">
                 <div class="sub header"> See More</div>

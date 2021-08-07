@@ -123,8 +123,21 @@ $word_selected = "";
         ?>
        <div>
            <img  src="<?php echo $featured_img_url ?>" />
-           <?php   echo do_shortcode('[yith_wcwl_add_to_wishlist]');  ?>
-     
+           <?php  echo do_shortcode('[yith_wcwl_add_to_wishlist]');  ?>
+           <div class="yith-wcwl-add-button">
+	        <a href="<?php echo esc_url( add_query_arg( 'add_to_wishlist', get_the_ID(), get_permalink() ) ); ?>" rel="nofollow" data-product-id="<?php echo esc_attr( $product_id ); ?>" data-product-type="<?php echo esc_attr( $product_type ); ?>" data-original-product-id="<?php echo esc_attr( $parent_product_id ); ?>" class="<?php echo esc_attr( $link_classes ); ?>" data-title="<?php echo esc_attr( apply_filters( 'yith_wcwl_add_to_wishlist_title', $label ) ); ?>">
+		     <i class="heart outline icon"></i>
+		  
+             <?php  var_dump(YITH_WCWL_Session()->has_session()) // echo YITH_WCWL()->is_product_in_wishlist( get_the_ID() )  ?>
+	</a>
+
+
+    <div class="yith-wcwl-add-to-wishlist add-to-wishlist-<?php echo esc_attr( $product_id ); ?> <?php echo esc_attr( $container_classes ); ?> wishlist-fragment on-first-load" data-fragment-ref="<?php echo esc_attr( $product_id ); ?>" data-fragment-options="<?php echo esc_attr( json_encode( $fragment_options ) ); ?>">
+	 
+</div>
+
+</div>
+
            </div>
    </div>
    <div class="right-side">

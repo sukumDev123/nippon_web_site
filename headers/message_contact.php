@@ -1,9 +1,10 @@
 <script src="http://localhost:35729/livereload.js"></script>
 <script>
     // localStorage.setTimes();
-    localStorage.setItem("link_now", "<?php echo get_permalink() ?>")
-
+    localStorage.setItem("link_now", "<?php echo get_permalink() ?>");
+   
 </script>
+ 
 <div class='message-right'>
     
     <div class="contact-message-top">
@@ -36,13 +37,7 @@
         </div>
     </div>
 </div>
-<!-- <option value="บ้านใหม่">บ้านใหม่</option>
-                                            <option value="ปรับปรุงบ้าน">ปรับปรุงบ้าน</option>
-                                           
-                                            <option value="วิศวกรและผู้รับเหมา">วิศวกรและผู้รับเหมา</option>
-                                            <option value="นักออกแบบ">นักออกแบบ</option>
-                                            <option value="เจ้าของโครงการ">เจ้าของโครงการ</option> -->
-
+ 
 
 <div id="user_info">
 <div class="icon-items">
@@ -113,7 +108,8 @@
             
            </div>
            <div class="form-message">
-               <h5>บันทึกข้อมูลสำเร็จ</h5>
+               <h5>บันทึกข้อมูลสำเร็จ </h5>
            </div>
     </div>
 </div>
+ 

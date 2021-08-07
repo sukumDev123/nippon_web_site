@@ -12,44 +12,44 @@ $aria_describedby_error = $args['aria_describedby_error'];
 	action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" 
 	method="post">
 	<div class="field">
-		<h1 class="ui header primary-text">
+		<h2 class="ui header centered  primary-text">
 			<?php _e("Log In") ?>
-		</h1>
-		สมาชิกใหม่?  <a class="primary-text" href="wp-login.php?action=register" > <?php echo _e("Register") ?> </a>
+			<div class="sub header">	สมาชิกใหม่?  <a class="primary-text" href="wp-login.php?action=register" > <?php echo _e("Register") ?> </a></div>
+		</h2>
+	
 	</div>
 
-  <div class="field ">
-  	<label for="user_login"><?php _e( 'Username or Email Address' ); ?></label>
-	  <input 
-	  	type="text" 
-		  placeholder="<?php  _e( 'Username' ); ?>" 
-		  name="log" 
-		  id="user_login"<?php echo $aria_describedby_error; ?> 
-		  class="input" 
-		  value="<?php echo esc_attr( $user_login ); ?>" 
-		  size="20" 
-		  autocapitalize="off" />
-  </div>
+
+	<?php  get_template_part("components/input_exclamation" , null ,  [
+		"placeholder" => "Email",
+		"name" => "log",
+		"label" => "Email",
+		"id" => "user_login",
+		"value" => esc_attr( $user_login ),
+		"class"=>"input" 
+	]); ?>
   
-  <div class="field">
+  
+  <div class="field required">
   	<label for="user_pass"><?php _e( 'Password' ); ?></label>
-   <div class="ui icon input">
-   <input 
-        type="password" 
-        name="pwd" 
-        id="pwd user_pass"<?php echo $aria_describedby_error; ?>  
-        placeholder="<?php  _e( 'Password' ); ?>" 
-        size="20"
-         />
+  
+		<input 
+				type="password" 
+				name="pwd" 
+				id="pwd_user_pass" <?php echo $aria_describedby_error; ?>  
+				placeholder="<?php  _e( 'Password' ); ?>" 
+				size="20"
+				/>
 
- <i id="togglePassword" class="eye icon"></i>
 
-   </div>
+	 
+
+    
 	
     
   </div>
  
- <div class="field">
+ <div class="field required">
  <a class="primary-text" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?' ); ?></a>
  </div>
 
@@ -60,3 +60,31 @@ $aria_describedby_error = $args['aria_describedby_error'];
 	type="submit"><?php esc_attr_e( 'Log In' ); ?></button>
   
 </form>		
+<!-- 
+
+<div class="ui equal width form">
+  <div class="fields">
+    <div class="field">
+      <label>Username</label>
+      <input type="text" placeholder="Username">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password">
+    </div>
+  </div>
+  <div class="fields">
+    <div class="field">
+      <label>First name</label>
+      <input type="text" placeholder="First Name">
+    </div>
+    <div class="field">
+      <label>Middle name</label>
+      <input type="text" placeholder="Middle Name">
+    </div>
+    <div class="field">
+      <label>Last name</label>
+      <input type="text" placeholder="Last Name">
+    </div>
+  </div>
+</div> -->

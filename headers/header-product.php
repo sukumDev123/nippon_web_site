@@ -14,6 +14,10 @@ $title_static = [
 ][$lang];
 
 $search  =  get_site_url() . "/search/";
+
+// if(!is_user_logged_in()):
+//     setcookie("latest_page" , get_permalink());
+// endif;
 ?>
 <!doctype html>
  
@@ -45,7 +49,11 @@ $search  =  get_site_url() . "/search/";
            <div class="header-top-slide">
                <div class="header-top-right">
                         <div id="login-top" class="login">
-                        <a class="contact-button" href="/contact-us/">ติดต่อเรา</a>
+                        <a class="contact-button" href="/contact-us/">ติดต่อเรา <?php 
+                        
+ 
+                        
+                        ?></a>
 
 
                             <h5>

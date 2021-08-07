@@ -16,7 +16,7 @@ $wishlists = YITH_WCWL_Wishlist_Factory::get_wishlists();
   </a>
    
 </div>
-<div class="ui">
+<!-- <div class="ui"> -->
   <?php // var_dump($wishlists); ?>
  
   <?php   
@@ -30,28 +30,50 @@ $wishlists = YITH_WCWL_Wishlist_Factory::get_wishlists();
 	if ( $wishlist && $wishlist->has_items() ) :
   $wishlist_items = $wishlist->get_items( 0, 5 );
   ?>
-  <div class="ui grid">
-  <div class="doubling stackable three column row">
-    <?php 
+
+<div class="ui stackable three column grid">
+
+
+
+
+
+<?php 
   foreach ( $wishlist_items as $item ) :
     $product = $item->get_product();
     if ( $product && $product->exists() ) :
-       
+      $link = get_permalink($product->get_id());
+     
       ?>
+  <!-- <div class="three wide column"></div> -->
 
-
-    <div class="column ">
+    <div class="column">
       <div class=" ui segment height-card-eq">
-      <a href="<?php echo esc_url( add_query_arg( 'remove_from_wishlist',$item->get_product_id() ) ); ?>" class="remove_from_wishlist" title="<?php echo esc_html( apply_filters( 'yith_wcwl_remove_product_wishlist_message_title', __( 'Remove this product', 'yith-woocommerce-wishlist' ) ) ); ?>">Delete</a>
+        <div class="cancel-icon"> 
+            <a    
+              href="<?php echo esc_url( add_query_arg( 'remove_from_wishlist',$item->get_product_id() ) ); ?>" 
+              class="remove_from_wishlist" 
+              title="<?php echo esc_html( apply_filters( 'yith_wcwl_remove_product_wishlist_message_title', __( 'Remove this product', 'yith-woocommerce-wishlist' ) ) ); ?>">
+     <?php 
+     
+     get_template_part("components/icon" ,null, ["icon" => "icon-cancel"]);
+
+    //  icon-cancel
+     
+     ?>
+          </a>
+        </div>
         <div style="text-align:center">
           <div class="ui small image ">
             <?php echo $product->get_image()  ?>
           </div>
         </div>
       
-        <h5 class="ui head">
-          <?php echo $product->get_name()  ?>
-        </h5>
+        <h3 class="ui head">
+          <a class='ui head black'  href="<?php echo $link ?>"> <?php echo $product->get_name()  ?></a>
+         
+          
+        </h3>
+        <p><?php echo $product->get_short_description()  ?></p>
       </div>
       
     </div>
@@ -65,13 +87,16 @@ $wishlists = YITH_WCWL_Wishlist_Factory::get_wishlists();
     endforeach;
     
     ?>
-  </div>
-  </div>
-<?php else:
-?>
 
-<h5>Null</h5>
 
-<?php
-endif; ?>
+
+
 </div>
+
+
+
+
+ 
+<?php endif; ?>
+
+
