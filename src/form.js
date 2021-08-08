@@ -200,6 +200,25 @@ function saveData1() {
       }
     });
 }
+
+function faqOnHeaderClicked() {
+  const card_faqs = document.querySelectorAll(".card-faq");
+  // .card-faq-header
+  const card_faqs_array = Array.from(card_faqs);
+  card_faqs_array.forEach((card) => {
+    console.log({ card });
+    if (card.children[0])
+      card.children[0].addEventListener("click", (e) => {
+        //  = "";
+        if (card.className.match(/active/)) {
+          card.className = "card-faq";
+        } else {
+          card.className = "card-faq active";
+        }
+      });
+  });
+}
+
 function IsNumber() {
   const isNumber = document.querySelector(".isNumber");
   isNumber &&

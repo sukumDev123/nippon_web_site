@@ -939,6 +939,7 @@ window.onload = () => {
   calculateInternalRoomSummary();
   addPlusButton();
   summaryExternalCal();
+  faqOnHeaderClicked();
   const message_right = document.querySelector(".message-right");
   const contact_message_box = document.querySelector(".contact-message-box");
   const arrow_up_to_top = document.querySelector(".arrow-up-to-top");

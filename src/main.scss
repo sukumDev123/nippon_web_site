@@ -196,8 +196,8 @@ body {
         // height: 215px;
       }
       img {
-        width: 180px;
-        height: 180px;
+        width: 160px;
+        height: 160px;
 
         margin-bottom: 20px;
         // height: 157px;
@@ -208,29 +208,29 @@ body {
       }
       h2 {
         font-size: 20px;
-
+        margin-top: 0px !important;
         // align-self: start;
       }
       &:hover {
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
       }
       &:hover img {
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
       }
     }
     .solution-card.active {
-      width: 200px;
-      height: 200px;
+      width: 180px;
+      height: 180px;
 
       a {
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
       }
       img {
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
       }
       // height: 181px;
     }
@@ -7614,13 +7614,18 @@ body.login {
   }
 }
 .card-faq {
+  margin-top: 20px;
+  height: auto;
   .card-faq-header {
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
     img {
       width: 24px;
+      transform: rotate(180deg);
+      transition: all 0.3s ease-in;
     }
   }
   h3 {
@@ -7631,6 +7636,27 @@ body.login {
   // border-radius: 10px;
   border: 1px solid rgba($color: #000000, $alpha: 0.1);
   padding: 20px 40px;
+
+  .content {
+    opacity: 0;
+
+    transform-origin: top;
+    transition: all 0.15s ease-out;
+    transform: scaleY(0);
+  }
+  &.active {
+    .content {
+      margin-top: 20px;
+      transform: scaleY(1);
+      opacity: 1;
+      transition: all 0.15s ease-out;
+    }
+    .card-faq-header {
+      img {
+        transform: rotate(0);
+      }
+    }
+  }
 }
 .list-faq {
   padding-bottom: 50px !important;
@@ -7642,4 +7668,7 @@ body.login {
 .faq-form {
   margin: 50px 0px !important;
   justify-content: space-between;
+}
+.ten.wide.column {
+  padding: 0px !important;
 }

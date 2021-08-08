@@ -163,8 +163,8 @@ body::-webkit-scrollbar-thumb {
   text-decoration: none;
 }
 #solution-pages .container .solution-card img {
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   margin-bottom: 20px;
   -o-object-fit: cover;
      object-fit: cover;
@@ -172,26 +172,27 @@ body::-webkit-scrollbar-thumb {
 }
 #solution-pages .container .solution-card h2 {
   font-size: 20px;
+  margin-top: 0px !important;
 }
 #solution-pages .container .solution-card:hover {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
 }
 #solution-pages .container .solution-card:hover img {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
 }
 #solution-pages .container .solution-card.active {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
 }
 #solution-pages .container .solution-card.active a {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
 }
 #solution-pages .container .solution-card.active img {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
 }
 @media screen and (max-width: 1366px) {
   #solution-pages .content {
@@ -6892,22 +6893,41 @@ body.login input[type=text] {
 }
 
 .card-faq {
+  margin-top: 20px;
+  height: auto;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 20px 40px;
 }
 .card-faq .card-faq-header {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
 }
 .card-faq .card-faq-header img {
   width: 24px;
+  transform: rotate(180deg);
+  transition: all 0.3s ease-in;
 }
 .card-faq h3 {
   margin: 0;
   padding: 0;
+}
+.card-faq .content {
+  opacity: 0;
+  transform-origin: top;
+  transition: all 0.15s ease-out;
+  transform: scaleY(0);
+}
+.card-faq.active .content {
+  margin-top: 20px;
+  transform: scaleY(1);
+  opacity: 1;
+  transition: all 0.15s ease-out;
+}
+.card-faq.active .card-faq-header img {
+  transform: rotate(0);
 }
 
 .list-faq {
@@ -6920,4 +6940,8 @@ body.login input[type=text] {
 .faq-form {
   margin: 50px 0px !important;
   justify-content: space-between;
+}
+
+.ten.wide.column {
+  padding: 0px !important;
 }

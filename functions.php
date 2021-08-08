@@ -68,6 +68,7 @@ add_action("init" , function() {
  
 	]);
 });
+
 add_action("init" , function() {
 	register_post_type("Careers" , [
 	'public' => true ,
@@ -76,6 +77,34 @@ add_action("init" , function() {
  
 	]);
 });
+
+add_action("init" , function() {
+	register_post_type("FAQs" , [
+        'public' => true ,
+        "labels" => ['name' => "FAQs"   , "singular_name" => "FAQ"],
+        'hierarchical' => true
+ 
+	]);
+
+    register_taxonomy( 'FAQsCate', array('faqs'), array(
+        'hierarchical' => true, 
+        'label' => 'FAQsCate', 
+        'singular_label' => 'FAQCate', 
+        'rewrite' => array( 'slug' => 'faqs_cate', 'with_front'=> false )
+        )
+    );
+
+
+
+});
+add_action("init" , function() {
+	register_post_type("FAQsForms" , [
+        'public' => true ,
+        "labels" => ['name' => "FAQsForm"   , "singular_name" => "FAQsForm"],
+        'hierarchical' => true
+	]);
+});
+
 function intiNews() {
  
         register_post_type("news" , [
