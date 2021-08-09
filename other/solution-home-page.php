@@ -46,7 +46,7 @@ $text_static_solution = [
                     // }
                     $argc_solution_page = [
                         "post_type" => "page",
-                        "post_parent" => 83,
+                        "post_parent" => 8402,
                         'order'             => 'ASC',
                         'orderby'           => 'order',
                     ];

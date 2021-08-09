@@ -1,0 +1,81 @@
+[09-Aug-2021 18:17:20 UTC] PHP Deprecated:  block_editor_preload_paths is <strong>deprecated</strong> since version 5.8.0! Use block_editor_rest_api_preload_paths instead. in /home/ploi/staging.tanpong.me/public/wp-includes/functions.php on line 5458
+[09-Aug-2021 18:17:21 UTC] PHP Deprecated:  block_categories is <strong>deprecated</strong> since version 5.8.0! Use block_categories_all instead. in /home/ploi/staging.tanpong.me/public/wp-includes/functions.php on line 5458
+[09-Aug-2021 18:17:21 UTC] PHP Deprecated:  block_categories is <strong>deprecated</strong> since version 5.8.0! Use block_categories_all instead. in /home/ploi/staging.tanpong.me/public/wp-includes/functions.php on line 5458
+[09-Aug-2021 18:17:55 UTC] PHP Deprecated:  block_editor_preload_paths is <strong>deprecated</strong> since version 5.8.0! Use block_editor_rest_api_preload_paths instead. in /home/ploi/staging.tanpong.me/public/wp-includes/functions.php on line 5458
+[09-Aug-2021 18:17:55 UTC] PHP Deprecated:  block_categories is <strong>deprecated</strong> since version 5.8.0! Use block_categories_all instead. in /home/ploi/staging.tanpong.me/public/wp-includes/functions.php on line 5458
+[09-Aug-2021 18:17:55 UTC] PHP Deprecated:  block_categories is <strong>deprecated</strong> since version 5.8.0! Use block_categories_all instead. in /home/ploi/staging.tanpong.me/public/wp-includes/functions.php on line 5458
+[09-Aug-2021 18:24:05 UTC] PHP Deprecated:  block_categories is <strong>deprecated</strong> since version 5.8.0! Use block_categories_all instead. in /home/ploi/staging.tanpong.me/public/wp-includes/functions.php on line 5458
+[09-Aug-2021 18:24:05 UTC] PHP Deprecated:  block_categories is <strong>deprecated</strong> since version 5.8.0! Use block_categories_all instead. in /home/ploi/staging.tanpong.me/public/wp-includes/functions.php on line 5458
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:10 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:19 UTC] PHP Notice:  Undefined index: detail in /home/ploi/staging.tanpong.me/public/wp-content/themes/nippontheme/template-solution.php on line 315
+[09-Aug-2021 18:24:31 UTC] PHP Deprecated:  block_categories is <strong>deprecated</strong> since version 5.8.0! Use block_categories_all instead. in /home/ploi/staging.tanpong.me/public/wp-includes/functions.php on line 5458
+[09-Aug-2021 18:24:31 UTC] PHP Deprecated:  block_categories is <strong>deprecated</strong> since version 5.8.0! Use block_categories_all instead. in /home/ploi/staging.tanpong.me/public/wp-includes/functions.php on line 5458
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:24:35 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:27:25 UTC] PHP Deprecated:  block_categories is <strong>deprecated</strong> since version 5.8.0! Use block_categories_all instead. in /home/ploi/staging.tanpong.me/public/wp-includes/functions.php on line 5458
+[09-Aug-2021 18:27:25 UTC] PHP Deprecated:  block_categories is <strong>deprecated</strong> since version 5.8.0! Use block_categories_all instead. in /home/ploi/staging.tanpong.me/public/wp-includes/functions.php on line 5458
+[09-Aug-2021 18:27:28 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:27:28 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:27:28 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:27:28 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:27:28 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:27:28 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:27:29 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:27:29 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:27:29 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:27:29 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:27:29 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:27:29 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:27:29 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:27:29 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:27:29 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:27:29 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:27:29 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:27:29 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:27:29 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:27:29 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:27:29 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 20
+[09-Aug-2021 18:27:29 UTC] PHP Notice:  Array to string conversion in /home/ploi/staging.tanpong.me/public/wp-content/plugins/navz-photo-gallery/includes/acf_photo_gallery.php on line 21
+[09-Aug-2021 18:33:12 UTC] PHP Deprecated:  block_categories is <strong>deprecated</strong> since version 5.8.0! Use block_categories_all instead. in /home/ploi/staging.tanpong.me/public/wp-includes/functions.php on line 5458
+[09-Aug-2021 18:33:12 UTC] PHP Deprecated:  block_categories is <strong>deprecated</strong> since version 5.8.0! Use block_categories_all instead. in /home/ploi/staging.tanpong.me/public/wp-includes/functions.php on line 5458

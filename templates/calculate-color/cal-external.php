@@ -103,6 +103,41 @@
             <h5 class="primary-text">ปริมาณสีที่ต้องใช้</h5>
         </div>
     </div>
+    <div class="body-summary">
+        <div class="header-1">
+            <h3 class="ui header">ผนังห้อง</h3>
+            <h5 class="ui header">(สีน้ำ)</h5>
+        </div>
+        <div class="header-2">
+            <h3 class="ui header">1. สีรองพื้นปูน <span>(ทา 1 รอบ)</span></h3>
+            <h3 class="ui header">2. สีทับหน้า <span>(ทา 2 รอบ)</span></h3>
+          
+        </div>
+        <div class="header-3">
+            <h3 id="result-top-1"  class="ui header"></h3>
+            <h3 id="result-top-2" class="ui header"></h3>
+        </div>
+    </div>
+    <div class="body-summary">
+        <div class="header-1">
+            <h3 class="ui header">ฝ้า</h3>
+            <h5 class="ui header">(สีน้ำ)</h5>
+        </div>
+        <div class="header-2">
+            <h3 class="ui header">1. สีรองพื้นปูน <span>(ทา 1 รอบ)</span></h3>
+            <h3 class="ui header">2. สีทับหน้า <span>(ทา 2 รอบ)</span></h3>
+        </div>
+        <div class="header-3">
+            <h3 id="result-bottom-1"  class="ui header"></h3>
+            <h3 id="result-bottom-2" class="ui header"></h3>
+        </div>
+    </div>
+
+    <h5 class="ui red header">
+    หมายเหตุ
+    </h5>
+    <p>*พื้นที่การใช้งานนี้เป็นข้อมูลจากการคำนวณทางทฤษฎีเท่านั้น ปริมาณการใช้งานจริงขึ้นอยู่กับวิธีการทำงาน สภาพพื้นผิว สภาพหน้างาน ความหนาในการเคลือบสี และปัจจัยอื่น ๆ 
+ที่อาจเกี่ยวข้อง</p>
 </div>
 
 <div class="mt-5rem"></div>

@@ -20,8 +20,8 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-// define('WP_CACHE', false);
-// define( 'WPCACHEHOME', '/home/ploi/staging.tanpong.me/public/wp-content/plugins/wp-super-cache/' );
+define('WP_CACHE', true);
+define( 'WPCACHEHOME', '/home/ploi/staging.tanpong.me/public/wp-content/plugins/wp-super-cache/' );
 define( 'DB_NAME', 'wp_stagingta_h6n' );
 
 /** MySQL database username */
@@ -38,6 +38,12 @@ define( 'DB_CHARSET', 'utf8' );
 
 /** The Database Collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
+
+
+// define( 'WP_DEBUG', true );
+
+// // Enable Debug logging to the /wp-content/debug.log file
+// define( 'WP_DEBUG_LOG', true );
 
 /**#@+
  * Authentication Unique Keys and Salts.
@@ -81,7 +87,12 @@ $table_prefix = 'dx36fd_';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', false );
+define('WP_DEBUG', true);
+// Enable Debug logging to the /wp-content/debug.log file
+define('WP_DEBUG_LOG', true);
+// Disable display of errors and warnings which is recommended on a live site.
+define('WP_DEBUG_DISPLAY', false);
+@ini_set('display_errors',0);
 
 /* That's all, stop editing! Happy publishing. */
 

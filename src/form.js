@@ -1,59 +1,3 @@
-jQuery(document).ready(function ($) {
-  // $("#upload_form").on("submit", function (evt) {
-  //   var form = $("evt.target"),
-  //     fileElt = form.find("input#upload"),
-  //     fileName = fileElt.val(),
-  //     messages = form.find("iframe#messages").contents().find("body"),
-  //     maxSize = 300000,
-  //     fail = function (msg) {
-  //       messages.append($("<P>").css("color", "red").text(msg));
-  //       fileElt.focus();
-  //     };
-
-  //   if (fileName.length == 0) {
-  //     fail("Please select a file.");
-  //   } else if (!/\.(xls|xlsx)$/.test(fileName)) {
-  //     fail("Only Excel files are permitted.");
-  //   } else {
-  //     var file = fileElt.get(0).files[0];
-  //     if (file.size > maxSize) {
-  //       fail(
-  //         "The file is too large. The maximum size is " + maxSize + " bytes."
-  //       );
-  //     } else {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // });
-  $(".ui.form").form({
-    fields: {
-      log: "empty",
-      pwd: "empty",
-      email: "empty",
-      emailVal: "empty",
-      name: "empty",
-      lastname: "empty",
-      last_name: "empty",
-      first_name: "empty",
-      tel: "empty",
-      resume_value: "empty",
-      transcript_value: "empty",
-      accept: "empty",
-
-      // portfolio_link: "empty",
-      pwd_confirm: "empty",
-      accept: "empty",
-    },
-  });
-
-  $(document).ready(function () {
-    $(".ui.fluid.search.selection.dropdown").dropdown({
-      clearable: true,
-    });
-  });
-});
-
 function uploadFile() {
   const resume_upload = document.querySelector("#resume_upload");
   const transcript_upload = document.querySelector("#transcript_upload");
@@ -70,6 +14,18 @@ function uploadFile() {
     resume_upload.addEventListener("change", (e) => {
       e.preventDefault();
       loading.style.display = "flex";
+      // console.log({ resume_upload:  });
+      const resId = document.querySelector(".resume_value_uploaded");
+      if (!resume_upload?.files[0]?.name) return;
+
+      const typeFile = resume_upload.files[0].name.split(".");
+      if (typeFile[1] !== "pdf") {
+        loading.style.display = "none";
+        resId.children[0].style.display = "none";
+        resId.children[1].style.display = "none";
+        resId.children[2].style.display = "block";
+        return;
+      }
       const form = new FormData();
       const file = resume_upload.files[0];
       form.append("upfile", file);
@@ -83,16 +39,37 @@ function uploadFile() {
         .then((d) => {
           console.log({ d });
           loading.style.display = "none";
+          resId.children[2].style.display = "none";
 
-          document.querySelector(".resume_value_uploaded").style.display =
-            "block";
-          resume_value.value = d.id;
+          if (d.message) {
+            resId.children[1].style.display = "block";
+            resId.children[0].style.display = "none";
+            resume_value.value = null;
+          } else {
+            resId.children[0].style.display = "block";
+            resId.children[1].style.display = "none";
+
+            resume_value.value = d.id;
+          }
+          // .style.display =
+          //   "block";
         });
     });
     transcript_upload.addEventListener("change", (e) => {
       e.preventDefault();
       loading.style.display = "flex";
+      const t = document.querySelector(".transcript_value_uploaded");
+      if (!transcript_upload?.files[0]?.name) return;
 
+      const typeFile = transcript_upload.files[0].name.split(".");
+
+      if (typeFile[1] !== "pdf") {
+        loading.style.display = "none";
+        t.children[0].style.display = "none";
+        t.children[1].style.display = "none";
+        t.children[2].style.display = "block";
+        return;
+      }
       const form = new FormData();
       const file = transcript_upload.files[0];
       form.append("upfile", file);
@@ -106,14 +83,31 @@ function uploadFile() {
         .then((d) => {
           console.log({ d });
           loading.style.display = "none";
+          t.children[2].style.display = "none";
 
-          document.querySelector(".transcript_value_uploaded").style.display =
-            "block";
-          transcript_value.value = d.id;
+          if (d.message) {
+            t.children[1].style.display = "block";
+            t.children[0].style.display = "none";
+            transcript_value.value = null;
+          } else {
+            t.children[0].style.display = "block";
+            t.children[1].style.display = "none";
+            transcript_value.value = d.id;
+          }
         });
     });
     cover_letter_upload.addEventListener("change", (e) => {
       e.preventDefault();
+      const cl = document.querySelector(".cover_letter_uploaded");
+      if (!cover_letter_upload?.files[0]?.name) return;
+      const typeFile = cover_letter_upload.files[0].name.split(".");
+      if (typeFile[1] !== "pdf") {
+        loading.style.display = "none";
+        cl.children[0].style.display = "none";
+        cl.children[1].style.display = "none";
+        cl.children[2].style.display = "block";
+        return;
+      }
       const form = new FormData();
       const file = cover_letter_upload.files[0];
       form.append("upfile", file);
@@ -128,11 +122,17 @@ function uploadFile() {
         .then((d) => {
           // console.log({ d });
           loading.style.display = "none";
+          cl.children[2].style.display = "none";
 
-          document.querySelector(".cover_letter_uploaded").style.display =
-            "block";
-
-          cover_letter_value.value = d.id;
+          if (d.message) {
+            cl.children[1].style.display = "block";
+            cl.children[0].style.display = "none";
+            cover_letter_value.value = null;
+          } else {
+            cl.children[0].style.display = "block";
+            cl.children[1].style.display = "none";
+            cover_letter_value.value = d.id;
+          }
           console.log({ cover_letter_value });
         });
     });
@@ -351,9 +351,10 @@ function calculateInternalRoomStep1() {
   [step_1_value_a, step_1_value_b, step_1_value_c].forEach((element) => {
     element &&
       element.addEventListener("keyup", (e) => {
-        const step_1_value_aV = parseInt(step_1_value_a.value) || 0;
-        const step_1_value_bV = parseInt(step_1_value_b.value) || 0;
-        const step_1_value_cV = parseInt(step_1_value_c.value) || 0;
+        console.log({ v: step_1_value_a.value });
+        const step_1_value_aV = +step_1_value_a.value;
+        const step_1_value_bV = +step_1_value_b.value;
+        const step_1_value_cV = +step_1_value_c.value;
         const sum = 2 * (step_1_value_aV + step_1_value_bV) * step_1_value_cV;
         step_1_result.innerHTML = sum;
       });
@@ -369,9 +370,11 @@ function calculateInternalRoomStep2() {
   [step_2_value_a, step_2_value_b, step_2_value_c].forEach((element) => {
     element &&
       element.addEventListener("keyup", (e) => {
-        const step_2_value_aV = parseInt(step_2_value_a.value) || 0;
-        const step_2_value_bV = parseInt(step_2_value_b.value) || 0;
-        const step_2_value_cV = parseInt(step_2_value_c.value) || 1;
+        const step_2_value_aV = +step_2_value_a.value;
+        const step_2_value_bV = +step_2_value_b.value;
+        const step_2_value_cV = !step_2_value_c.value
+          ? 1
+          : +step_2_value_c.value;
         const sum = step_2_value_aV * step_2_value_bV * step_2_value_cV;
         console.log({ step_2_value_cV });
         step_2_result.innerHTML = sum;
@@ -388,9 +391,11 @@ function calculateInternalRoomStep3() {
   [step_3_value_a, step_3_value_b, step_3_value_c].forEach((element) => {
     element &&
       element.addEventListener("keyup", (e) => {
-        const step_3_value_aV = parseInt(step_3_value_a.value) || 0;
-        const step_3_value_bV = parseInt(step_3_value_b.value) || 0;
-        const step_3_value_cV = parseInt(step_3_value_c.value) || 1;
+        const step_3_value_aV = +step_3_value_a.value;
+        const step_3_value_bV = +step_3_value_b.value;
+        const step_3_value_cV = !step_3_value_c.value
+          ? 1
+          : +step_3_value_c.value;
         const sum = step_3_value_aV * step_3_value_bV * step_3_value_cV;
         console.log({ step_3_value_cV });
         step_3_result.innerHTML = sum;
@@ -407,8 +412,8 @@ function calculateInternalRoomStep4() {
   [step_4_value_a, step_4_value_b].forEach((element) => {
     element &&
       element.addEventListener("keyup", (e) => {
-        const step_4_value_aV = parseInt(step_4_value_a.value) || 0;
-        const step_4_value_bV = parseInt(step_4_value_b.value) || 0;
+        const step_4_value_aV = +step_4_value_a.value;
+        const step_4_value_bV = +step_4_value_b.value;
 
         const sum = step_4_value_aV * step_4_value_bV;
 
@@ -487,7 +492,12 @@ function addPlusButton() {
       const _input1 = document.querySelector("#" + inputId);
       const _input2 = document.querySelector("#" + input2Id);
       const _result = document.querySelector("#" + result);
-      [_input1, _input2].forEach((element) => {
+      setTimeout(() => {
+        addExternal.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      })[(_input1, _input2)].forEach((element) => {
         element &&
           element.addEventListener("keyup", (e) => {
             const _input1Val = parseInt(_input1.value) || 0;
@@ -503,10 +513,21 @@ function summaryExternalCal() {
     "#submit_all_calculate_external"
   );
   const external_big_div = document.querySelector(".external-big-div");
-  if (submit_all_calculate_external) {
+  const result_top_1 = document.querySelector("#result-top-1");
+  const result_top_2 = document.querySelector("#result-top-2");
+  const summary_calculate = document.querySelector(".summary-calculate");
+  const result_bottom_1 = document.querySelector("#result-bottom-1");
+  const result_bottom_2 = document.querySelector("#result-bottom-2");
+  // const external_big_div = document.querySelector(".external-big-div");
+
+  const reset_calculate_external = document.querySelector(
+    "#reset_calculate_external"
+  );
+  if (submit_all_calculate_external && reset_calculate_external) {
     submit_all_calculate_external.addEventListener("click", (e) => {
       const children = external_big_div.children;
       const _childrenArrays = Array.from(children);
+      summary_calculate.style.display = "block";
       // _c.forEach((c) => {
       //   console.log({ c: c.innerHTML });
       // });
@@ -514,16 +535,52 @@ function summaryExternalCal() {
       for (let i = 0; i < _childrenArrays.length; i++) {
         const resultId = i + 1;
         const result = document.querySelector("#result_external_" + resultId);
-        console.log({ kk: result.innerHTML });
-        allResult += parseInt(result.innerHTML);
+        console.log({ kk: +result?.innerHTML, resultId });
+        allResult += +result?.innerHTML || 0;
       }
       const external_other_result = document.querySelector(
         "#external_other_result"
       );
+
       allResult += +external_other_result.innerHTML;
+
+      result_top_1.innerHTML = (+allResult / 30).toFixed(2);
+      result_top_2.innerHTML = (+allResult / 15).toFixed(2);
+      result_bottom_1.innerHTML = (+allResult / 30).toFixed(2);
+      result_bottom_2.innerHTML = (+allResult / 15).toFixed(2);
       document.querySelector("#summary_number_2").innerHTML = allResult;
       document.querySelector("#summary_number_1").innerHTML = allResult;
-      // console.log({ _c });
+      setTimeout(() => {
+        document.querySelector(".submit-calculate").scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
+    });
+    reset_calculate_external.addEventListener("click", (e) => {
+      const children = external_big_div.children;
+      const _childrenArrays = Array.from(children);
+
+      const external_input_1_1 = document.querySelector("#external_input_1_1");
+      const external_input_2_1 = document.querySelector("#external_input_2_1");
+      const result_external_1 = document.querySelector("#result_external_1");
+      const summary_number_1 = document.querySelector("#summary_number_1");
+      const summary_calculate = document.querySelector(".summary-calculate");
+      external_input_1_1.value = "";
+      external_input_2_1.value = "";
+      result_external_1.innerHTML = 0;
+      summary_number_1.innerHTML = 0;
+      summary_calculate.style.display = "none";
+      for (let i = _childrenArrays.length - 1; i >= 1; i--) {
+        if (_childrenArrays[i])
+          external_big_div.removeChild(_childrenArrays[i]);
+      }
+      setTimeout(() => {
+        document.querySelector(".page-calculate").scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
     });
   }
 }
@@ -552,15 +609,21 @@ function calculateInternalRoomSummary() {
   const step_4_value_a = document.querySelector("#step_4_value_a");
   const step_4_value_b = document.querySelector("#step_4_value_b");
 
+  const result_top_1 = document.querySelector("#result-top-1");
+  const result_top_2 = document.querySelector("#result-top-2");
+  const summary_calculate = document.querySelector(".summary-calculate");
+
+  const result_bottom_1 = document.querySelector("#result-bottom-1");
+  const result_bottom_2 = document.querySelector("#result-bottom-2");
+
   [submit_all_calculate, reset_calculate].forEach((element) => {
     if (element) {
       submit_all_calculate.addEventListener("click", () => {
-        document.querySelector(".summary-calculate").style.display = "block";
-
-        const step_1_result_value = parseInt(step_1_result.innerHTML) || 0;
-        const step_2_result_value = parseInt(step_2_result.innerHTML) || 0;
-        const step_3_result_value = parseInt(step_3_result.innerHTML) || 0;
-        const step_4_result_value = parseInt(step_4_result.innerHTML) || 0;
+        summary_calculate.style.display = "block";
+        const step_1_result_value = +step_1_result.innerHTML;
+        const step_2_result_value = +step_2_result.innerHTML;
+        const step_3_result_value = +step_3_result.innerHTML;
+        const step_4_result_value = +step_4_result.innerHTML;
         const summary =
           step_1_result_value -
           step_2_result_value -
@@ -569,27 +632,45 @@ function calculateInternalRoomSummary() {
 
         summary_number_1.innerHTML = summary;
         summary_number_2.innerHTML = summary;
+        result_top_1.innerHTML = (summary / 30).toFixed(2);
+        result_top_2.innerHTML = (summary / 15).toFixed(2);
+        result_bottom_1.innerHTML = (summary / 30).toFixed(2);
+        result_bottom_2.innerHTML = (summary / 15).toFixed(2);
+        setTimeout(() => {
+          document.querySelector(".submit-calculate").scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 100);
       });
       reset_calculate.addEventListener("click", () => {
-        step_1_result.innerHTML = 0;
-        step_2_result.innerHTML = 0;
-        step_3_result.innerHTML = 0;
-        step_4_result.innerHTML = 0;
-        summary_number_1.innerHTML = 0;
-        summary_number_2.innerHTML = 0;
-        step_1_value_a.value = 0;
-        step_1_value_b.value = 0;
-        step_1_value_c.value = 0;
-        step_2_value_a.value = 0;
-        step_2_value_b.value = 0;
-        step_2_value_c.value = 0;
-        step_3_value_a.value = 0;
-        step_3_value_b.value = 0;
-        step_3_value_c.value = 0;
-        step_4_value_a.value = 0;
-        step_4_value_b.value = 0;
+        summary_calculate.style.display = "none";
+
+        step_1_result.innerHTML = "";
+        step_2_result.innerHTML = "";
+        step_3_result.innerHTML = "";
+        step_4_result.innerHTML = "";
+        summary_number_1.innerHTML = "";
+        summary_number_2.innerHTML = "";
+        step_1_value_a.value = "";
+        step_1_value_b.value = "";
+        step_1_value_c.value = "";
+        step_2_value_a.value = "";
+        step_2_value_b.value = "";
+        step_2_value_c.value = "";
+        step_3_value_a.value = "";
+        step_3_value_b.value = "";
+        step_3_value_c.value = "";
+        step_4_value_a.value = "";
+        step_4_value_b.value = "";
 
         document.querySelector(".summary-calculate").style.display = "none";
+        setTimeout(() => {
+          document.querySelector(".page-calculate").scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 100);
       });
     }
   });
@@ -613,6 +694,128 @@ function showMoreCalPageInternal() {
         content.className = "content ";
         clicked = false;
       }
+
+      setTimeout(() => {
+        document.querySelector("#show-more-cal").scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      });
     });
   }
+}
+
+function saveFavorites(user_id, post_id, type, index) {
+  const data = {
+    user_id: user_id.toString(),
+    post_id: post_id.toString(),
+    type,
+  };
+
+  const url = domain + "wp-json/api/v1/favorites";
+  const blogs_fav = document.querySelectorAll(".card-blog-save-favorites");
+
+  loadingOn();
+  fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((d) => {
+      // console.log({ d });
+      if (d.doing === "CREATED") {
+        blogs_fav[index].children[0].className = "favorites-button hide";
+        blogs_fav[index].children[1].className = "favorites-button-active show";
+      } else {
+        blogs_fav[index].children[0].className = "favorites-button show";
+        blogs_fav[index].children[1].className = "favorites-button-active hide";
+      }
+      loadingOff();
+    });
+}
+
+function productFavorites(user_id, post_id, type) {
+  const data = {
+    user_id: user_id.toString(),
+    post_id: post_id.toString(),
+    type,
+  };
+  const fav = document.querySelectorAll(
+    ".icon-compare-product-and-favorites i"
+  );
+  const url = domain + "wp-json/api/v1/favorites";
+  // const blogs_fav = document.querySelectorAll(".card-blog-save-favorites");
+
+  loadingOn();
+  fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((d) => {
+      // console.log({ d });
+      if (d.doing === "CREATED") {
+        fav[0].className = "heart outline icon hide_show";
+        fav[1].className = "heart icon show";
+      } else {
+        fav[0].className = "heart outline icon show";
+        fav[1].className = "heart icon hide_show";
+      }
+      loadingOff();
+    });
+}
+function removeFavoritesList(user_id, post_id, type, index, className) {
+  const data = {
+    user_id: user_id.toString(),
+    post_id: post_id.toString(),
+    type,
+  };
+  const cards = document.querySelectorAll("." + className);
+  const url = domain + "wp-json/api/v1/favorites";
+
+  loadingOn();
+  fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((d) => {
+      // console.log({ d });
+      cards[index].style.display = "none";
+
+      loadingOff();
+    });
+}
+function loadingOn() {
+  const loading = document.querySelector("#loading");
+  loading.style.display = "flex";
+}
+function loadingOff() {
+  const loading = document.querySelector("#loading");
+  loading.style.display = "none";
+}
+function onSelected(name, eleId, eleId1, eleId2) {
+  const _element = document.querySelector("#" + eleId);
+  const _eleId1 = document.querySelector("." + eleId1);
+  const _eleId2 = document.querySelector("." + eleId2);
+  _element.value = name;
+
+  _eleId1.className = _eleId1.className
+    .split(" ")
+    .filter((c) => c !== "active")
+    .join(" ");
+  _eleId2.className = _eleId2.className
+    .split(" ")
+    .filter((c) => c !== "active");
+  console.log({ d: _eleId1.className, h: _eleId2.className });
+}
+
+function onSelectedShowList(elementId, elementId2) {
+  const _element = document.querySelector("." + elementId);
+  const _element2 = document.querySelector("." + elementId2);
+  console.log({ d: _element.className });
+  if (_element.className.match(/active/)) _element.className = elementId;
+  else _element.className = elementId + " " + "active";
+  if (_element2.className.match(/active/)) _element2.className = elementId2;
+  else _element2.className = elementId2 + " " + "active";
 }

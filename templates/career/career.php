@@ -1,17 +1,15 @@
 <?php 
 
-$page = 9;
 $seeMore = "";
+$page = 9;
 if(isset($_GET['paged_show'])):
     $page = intval($_GET['paged_show']);
-  
 
 endif;
 
 $argc = [
-    "post_type" => 'page',
+    "post_type" => 'careers_list',
     'post_status' => 'publish',
-    "post_parent" => get_the_ID(),
     "posts_per_page" => $page
 ];
 $search = "";
@@ -111,3 +109,4 @@ $count = $query->found_posts;
     <div class="margin-page"></div>
     
 </div>
+ 

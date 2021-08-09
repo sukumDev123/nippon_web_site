@@ -5,21 +5,20 @@ require_once( ABSPATH . 'wp-admin/includes/file.php' );
 function load_stylesheets() {
      
   
-    wp_register_style("stylesheet" , get_template_directory_uri() . '/style.css' , '' , 1 , 'all');
+    wp_register_style("stylesheet" , get_template_directory_uri() . '/style.css');
     wp_enqueue_style("stylesheet");
-    wp_register_style("swiper" ,'https://unpkg.com/swiper@5.3.8/css/swiper.min.css' , '' , 1 , 'all');
+    wp_register_style("swiper" , get_template_directory_uri() . '/assets/swiper.min.css');
     wp_enqueue_style("swiper");
-    wp_register_style("custom" , get_template_directory_uri() . '/assets/css/main.css' , '' , 1 , 'all');
+    wp_register_style("custom" , get_template_directory_uri() . '/assets/css/main.css');
     wp_enqueue_style("custom");
-    wp_register_style("bootstrap" , 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css' , '' , 1 , 'all');
+    wp_register_style("bootstrap" , get_template_directory_uri() . '/assets/bootstrap.bundle.min.css');
     wp_enqueue_style("bootstrap");
  
     // // 
     wp_register_style("semantic" , get_template_directory_uri() . '/assets/semantic/semantic.min.css'  );
     wp_enqueue_style("semantic");
 
-    // wp_register_style("fontawesome" , get_template_directory_uri() . '/assets/fontawesome/css/all.min.css' , '' , 1 , 'all');
-    // wp_enqueue_style("fontawesome");
+ 
 
 
    
@@ -30,23 +29,19 @@ add_action('wp_enqueue_scripts' , "load_stylesheets");
 function load_js() {
     wp_register_script("custom" ,  get_template_directory_uri() . '/app.js' , 'jquery' , 1 , true);
     wp_enqueue_script("custom");
-
-    wp_register_script("jquery" , 'https://code.jquery.com/jquery-3.1.1.min.js' , 'jquery' , 1 , true);
-    wp_enqueue_script("jquery");
-    wp_register_script("swiper" , 'https://unpkg.com/swiper@5.3.8/js/swiper.min.js' , 'jquery' , 1 , true);
+ 
+    wp_register_script("swiper" , get_template_directory_uri() . '/assets/swiper.min.js' , 'swiper' , 1 , true);
     wp_enqueue_script("swiper");
-    wp_register_script("bootstrap" , 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js' , 'jquery' , 1 , true);
+    wp_register_script("bootstrap" ,  get_template_directory_uri() . '/assets/bootstrap.bundle.min.js' , 'bootstrap' , 1 , true);
     wp_enqueue_script("bootstrap");
-    wp_register_script("semantic" , get_template_directory_uri() . '/assets/semantic/semantic.min.js' , '' , 1 , 'all');
-    wp_enqueue_script("semantic");
-    // wp_register_script("se" , get_template_directory_uri() . '/assets/semantic/se.js' , '' , 1 , 'all');
-    // wp_enqueue_script("se");
+    // wp_register_script("semantic" , get_template_directory_uri() . '/assets/semantic/semantic.min.js' , '' , 1 , 'all');
+    // wp_enqueue_script("semantic");
+ 
     wp_register_script("fontawesome" , get_template_directory_uri() . '/assets/fontawesome/js/all.min.js' , '' , 1 , 'all');
     wp_enqueue_script("fontawesome");
     wp_register_script("form" ,  get_template_directory_uri() . '/src/form.js' , '' , 1 , true);
     wp_enqueue_script("form");
-    wp_register_script("capcha" , "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explici" , '' , 1 , true);
-    wp_enqueue_script("capcha");
+  
 }
 add_action('wp_enqueue_scripts' , "load_js");
 
@@ -70,11 +65,20 @@ add_action("init" , function() {
 });
 
 add_action("init" , function() {
-	register_post_type("Careers" , [
+	register_post_type("career_submit" , [
 	'public' => true ,
-	"labels" => ['name' => "Careers"   , "singular_name" => "Career"],
+	"labels" => ['name' => "CareersSubmit"   , "singular_name" => "CareerSubmit"],
     'hierarchical' => true
  
+	]);
+	register_post_type("careers_list" , [
+	'public' => true ,
+	"labels" => ['name' => "Careers List"   , "singular_name" => "Career List"],
+   'hierarchical' => true,
+    'has_archive'  => true,
+    'supports'		=> array('title', 'editor', 'thumbnail' ),
+    'show_in_rest' => true ,
+    'rewrite' => array('slug' => 'career-show',),
 	]);
 });
 
@@ -97,10 +101,61 @@ add_action("init" , function() {
 
 
 });
+ 
+
+add_action("init" , function() {
+	register_post_type("problem_and_solution" , [
+        'public' => true ,
+        "labels" => ['name' => "ProblemAndSolutions"   , "singular_name" => "ProblemAndSolution"],
+        // 'hierarchical' => true,
+        "rewrite" => array("slug" => "problems-and-solution") ,
+        'has_archive'  => true,
+        'supports'		=> array('title', 'editor', 'thumbnail' ),
+        'show_in_rest' => true ,
+        'taxonomies'   => array(   'problem_and_solution_cate'  ),
+
+ 
+	]);
+
+    register_taxonomy( 'problem_and_solution_cate', 'problem_and_solution', array(
+        'hierarchical' => true, 
+        'label' => 'ProgramAndSolutionCategories', 
+        "show_in_rest"=> true,
+        'singular_label' => 'ProgramAndSolutionCategory', 
+        'rewrite' => array( 'slug' => 'problem_and_solution_cate', 'with_front'=> true )
+        )
+    );
+    //register_taxonomy_for_object_type("problem_and_solution_cate" , "problem_and_solution");
+});
+add_action("init" , function() {
+	register_post_type("how_to_paint" , [
+        'public' => true ,
+        "labels" => ['name' => "HowToPaint"   , "singular_name" => "HowToPaint"],
+        'hierarchical' => true,
+        "rewrite" => array("slug" => "how-to-paint") ,
+        'supports'		=> array('title', 'editor', 'thumbnail'),
+ 
+	]);
+
+    register_taxonomy( 'how_to_paint_cate', array('how_to_paint'), array(
+        'hierarchical' => true, 
+        'label' => 'HowToPaintCategories', 
+        'singular_label' => 'HowToPaintCategory', 
+        'rewrite' => array( 'slug' => 'how_to_paint_cate', 'with_front'=> false )
+        )
+    );
+});
 add_action("init" , function() {
 	register_post_type("FAQsForms" , [
         'public' => true ,
         "labels" => ['name' => "FAQsForm"   , "singular_name" => "FAQsForm"],
+        'hierarchical' => true
+	]);
+});
+add_action("init" , function() {
+	register_post_type("favorites_user" , [
+        'public' => true ,
+        "labels" => ['name' => "Favorites User"   , "singular_name" => "Favorite User"],
         'hierarchical' => true
 	]);
 });
@@ -476,6 +531,7 @@ add_action( 'rest_api_init', function () {
           }
         ),
       ),
+      'permission_callback' => '__return_true'
     ) );
   } );
  function save_users($request) {
@@ -503,17 +559,20 @@ add_action( 'rest_api_init', function () {
 function upload_file($request) {
     $data = $request->get_body();
     $toArray = json_decode($data);
-     
+    if( $_FILES["upfile"]["size"] > 1000000) {
+        return json_decode(json_encode(["message" => "MORE"]));
+    }
     if(isset($_FILES["upfile"]))
 {
 
+    
 	$extension = pathinfo($_FILES["upfile"]['name'], PATHINFO_EXTENSION);
 
 	$new_name = time() . '.' . $extension;
 
     $image=basename($_FILES['upfile']['name']);
-    $image=str_replace(' ','|',$image);
-    var_dump($image);
+    $image=str_replace(' ','_',$image);
+    
     $tmppath=SITE_ROOT.'/assets/uploads/'.$image;
     $data = move_uploaded_file($_FILES['upfile']['tmp_name'],$tmppath);
     $id_file_post = null;
@@ -535,7 +594,7 @@ function upload_file($request) {
              echo "fail";
             }
 
-            return json_decode( json_encode(["id" => $id_file_post]));
+            return json_decode( json_encode(["id" => $id_file_post , "size" => $_FILES["upfile"]["size"] ]));
 }
 //     if(isset($_FILES['sample_image']))
 // {
@@ -560,14 +619,122 @@ add_action( 'rest_api_init', function () {
     register_rest_route( 'api/v1', '/upload_file/', array(
       'methods' => 'post',
       'callback' => 'upload_file',
-      
+      'permission_callback' => '__return_true'
     ) );
   } );
 add_action( 'rest_api_init', function () {
     register_rest_route( 'api/v1', '/save_user_info/', array(
       'methods' => 'post',
       'callback' => 'save_users',
-      
+      'permission_callback' => '__return_true'
+    ) );
+  } );
+ 
+ 
+ 
+function send_email() {
+    
+  
+    // require '/wp/vendor/autoload.php';
+    global $phpmailer;
+ 
+    try {
+       
+    
+         
+        // $phpmailer->isSMTP();
+        // $phpmailer->Host       = '203.151.41.6';
+        // $phpmailer->Port       = '25';
+        // // $phpmailer->SMTPSecure = 'tls';
+        // $phpmailer->SMTPAuth   = false;
+        // $phpmailer->SMTPDebug  = 1; 
+
+        // // // // $phpmailer->From       = 'sukhum.n@likemeasia.com';
+        // // // // $phpmailer->FromName   = 'Sukhum';
+        // $phpmailer->setFrom('nipponpaintnoreply@nipponpaint.co.th', 'Nippon Paint No Reply');
+        // $phpmailer->addAddress('nilpech.sukhum@gmail.com', 'Sukhum Nilpech');
+        // $phpmailer->Subject = "test email wordpress";
+        // $phpmailer->Body = "test email wordpress";
+        // $test = $phpmailer->Send();
+        $test = 1;
+//    var_dump($phpmailer);
+        return json_decode(json_encode(["test" => $test] ));
+    }catch (Exception $e) {
+        // // echo 'Caught exception: ',  $e->getMessage(), "\n";
+        // var_dump($e);
+  
+        return  json_decode(json_encode(["error" => $e->getMessage(),] ));
+    }
+    // remove_filter( 'wp_mail_content_type','set_my_mail_content_type' )
+    // remove_action( 'phpmailer_init', 'send_smtp_email' );
+
+}
+
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/email/', array(
+      'methods' => 'get',
+      'callback' => 'send_email',
+      'permission_callback' => '__return_true'
+    ) );
+  } );
+
+
+  function favorites_user_func($request) {
+    $data = $request->get_body();
+    $toArray = json_decode($data);
+    $info = [
+        "post_id" =>  $toArray->post_id,
+        "type" =>  $toArray->type,
+        "user_id" =>  $toArray->user_id,
+        
+
+    ];
+    $postArr = [
+        'post_title' =>$toArray->user_id,
+        "meta_input" => $info,
+        "post_type" => "favorites_user",
+        "post_status" => "publish"
+    ];
+    $createNew = TRUE;
+    $doing = "CREATED";
+    $queryFav = new WP_Query([
+        "post_type" => "favorites_user",
+        "meta_query" => [
+            [
+            "key" => "user_id",
+            "value"  => $toArray->user_id ,
+            "compare" => "LIKE"
+            ],
+            [
+            "key" => "post_id",
+            "value"  => $toArray->post_id,
+            "compare" => "LIKE"
+            ]
+        ] 
+            ]);
+ 
+    if($queryFav->have_posts()):
+        while($queryFav->have_posts()):
+            $queryFav->the_post();
+            wp_delete_post(get_the_ID() , TRUE);
+            $doing = "DELETED";
+            $createNew = FALSE;
+
+        endwhile;
+    endif;
+    wp_reset_query();
+
+
+    if( $createNew == TRUE):
+        $create =   wp_insert_post($postArr);
+    endif;
+    return json_decode(json_encode(["message" => "success" ,"doing" => $doing ]));
+  }
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/favorites/', array(
+      'methods' => 'post',
+      'callback' => 'favorites_user_func',
+      'permission_callback' => '__return_true'
     ) );
   } );
 
@@ -589,7 +756,7 @@ add_action( 'rest_api_init', function () {
     $postArr = [
         'post_title' =>$toArray->email,
         "meta_input" => $info,
-        "post_type" => "careers",
+        "post_type" => "career_submit",
         "post_status" => "publish"
     ];
    $create =   wp_insert_post($postArr);
@@ -600,7 +767,7 @@ add_action( 'rest_api_init', function () {
     register_rest_route( 'api/v1', '/career/save/', array(
       'methods' => 'post',
       'callback' => 'save_career',
-      
+      'permission_callback' => '__return_true'
     ));
   } );
 
@@ -677,6 +844,7 @@ add_action( 'rest_api_init', function () {
           }
         ),
       ),
+      'permission_callback' => '__return_true'
     ) );
   } );
 
@@ -819,7 +987,7 @@ add_action( 'rest_api_init', function () {
     register_rest_route( 'api/v1', '/user/create', array(
       'methods' => 'post',
       'callback' => 'register_user',
-      
+      'permission_callback' => '__return_true'
     ) );
   } );
 
@@ -892,3 +1060,70 @@ function add_login_redirect() {
 }
 
 add_filter( 'login_redirect', "add_login_redirect");
+
+
+
+
+
+
+function getFavoritesData($type , $post_id = FALSE , $posts_per_page = FALSE ) {
+    $data_favorites = [];
+
+if(get_current_user_id()):
+    $meta_query = [
+        [
+        "key" => "user_id",
+        "value"  => get_current_user_id() ,
+        "compare" => "LIKE"
+        ],
+        [
+        "key" => "type",
+        "value"  => $type,
+        "compare" => "LIKE"
+        ]
+        ];
+        if($post_id != FALSE):            
+            $meta_query[count($meta_query)] = [
+                "key" => "post_id",
+                "value"  => $post_id,
+                "compare" => "LIKE"
+            ];
+        endif;
+      
+    $arg = [
+        "post_type" => "favorites_user",
+        "meta_query" => $meta_query
+      
+    ];
+    if($posts_per_page != FALSE):
+        $arg["posts_per_page"] = $posts_per_page;
+         
+    endif;
+    $queryFav = new WP_Query($arg);
+
+    if($queryFav->have_posts()):
+        while($queryFav->have_posts()):
+            $queryFav->the_post();
+            $id = get_the_ID();
+            $probId = get_field("post_id" , $id);
+            $data_favorites[$probId] = [
+                "post_id" =>  $probId ,
+            ];
+        endwhile;
+    endif;
+    
+    wp_reset_query();
+    
+endif;
+ 
+return [
+    "datas" => $data_favorites,
+    "count" => $queryFav->found_posts
+];
+}
+
+add_action('wp_enqueue_scripts', 'no_more_jquery');
+function no_more_jquery(){
+    wp_deregister_script('jquery');
+    // wp_deregister_style('dashicons');
+}

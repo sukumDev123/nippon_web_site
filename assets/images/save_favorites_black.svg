@@ -1,0 +1,10 @@
+<svg id="Component_31_5" data-name="Component 31 – 5" xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41">
+  <g id="bookmark_add_black_24dp">
+    <rect id="Rectangle_6342" data-name="Rectangle 6342" width="41" height="41" fill="none"/>
+    <path id="Path_29346" data-name="Path 29346" d="M20.909,13.606v9.241L14.281,20.01,7.652,22.847V5.652h7.955V3H7.652A2.659,2.659,0,0,0,5,5.652V26.864l9.281-3.977,9.281,3.977V13.606Zm5.3-5.3H23.561v2.652H20.909V8.3H18.258V5.652h2.652V3h2.652V5.652h2.652Z" transform="translate(6.561 5.53)" fill="#454545"/>
+  </g>
+  <g id="turned_in_black_24dp">
+    <path id="Path_29347" data-name="Path 29347" d="M0,0H40.925V40.925H0Z" fill="none"/>
+    <path id="Path_29348" data-name="Path 29348" d="M23.306,3H8.051A3.047,3.047,0,0,0,5.015,6.051L5,30.46l10.679-4.577L26.357,30.46V6.051A3.06,3.06,0,0,0,23.306,3Z" transform="translate(5.784 3.733)" fill="#d7373f" opacity="0"/>
+  </g>
+</svg>

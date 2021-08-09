@@ -2,6 +2,7 @@
 
 <?php
     get_template_part("headers/header-product");
+    get_template_part("other/loading");
     $lang=get_bloginfo("language");  
     $text_static = [
         "en" => [
@@ -67,6 +68,9 @@ $word_selected = "";
                 endif;
             endforeach;
         endif;
+
+        $getFavs = getFavoritesData("product" , get_the_ID());
+        $data_favorites =  $getFavs["datas"];
     ?>
 
 
@@ -120,25 +124,35 @@ $word_selected = "";
         
         <?php 
            $featured_img_url = get_the_post_thumbnail_url( get_the_ID(),'full'); 
+           $userId = FALSE;
+           if(get_current_user_id()):
+               $userId = get_current_user_id();
+           endif;
+           $prod_id = get_the_ID();
+        //    $data_favorites
+           $heart_outline_class_name = "heart outline icon show";
+           $heart_class_name= "heart icon hide_show";
+
+           if(isset($data_favorites[$prod_id])):
+            $heart_outline_class_name = "heart outline icon hide_show";
+           $heart_class_name= "heart icon show";
+
+           endif;
         ?>
        <div>
            <img  src="<?php echo $featured_img_url ?>" />
-           <?php  echo do_shortcode('[yith_wcwl_add_to_wishlist]');  ?>
-           <div class="yith-wcwl-add-button">
-	        <a href="<?php echo esc_url( add_query_arg( 'add_to_wishlist', get_the_ID(), get_permalink() ) ); ?>" rel="nofollow" data-product-id="<?php echo esc_attr( $product_id ); ?>" data-product-type="<?php echo esc_attr( $product_type ); ?>" data-original-product-id="<?php echo esc_attr( $parent_product_id ); ?>" class="<?php echo esc_attr( $link_classes ); ?>" data-title="<?php echo esc_attr( apply_filters( 'yith_wcwl_add_to_wishlist_title', $label ) ); ?>">
-		     <i class="heart outline icon"></i>
-		  
-             <?php  var_dump(YITH_WCWL_Session()->has_session()) // echo YITH_WCWL()->is_product_in_wishlist( get_the_ID() )  ?>
-	</a>
-
-
-    <div class="yith-wcwl-add-to-wishlist add-to-wishlist-<?php echo esc_attr( $product_id ); ?> <?php echo esc_attr( $container_classes ); ?> wishlist-fragment on-first-load" data-fragment-ref="<?php echo esc_attr( $product_id ); ?>" data-fragment-options="<?php echo esc_attr( json_encode( $fragment_options ) ); ?>">
-	 
-</div>
-
-</div>
-
-           </div>
+            <div class="icon-compare-product-and-favorites">
+            <button 
+  	            class="ui button submit primary"  >เปรียบเทียบ></button>
+            <?php if( $userId !=  FALSE): ?>
+                
+		        <i onclick="productFavorites(<?php echo $userId ?> ,  <?php  echo $prod_id ?> , 'product')" class="<?php echo $heart_outline_class_name  ?>"></i>
+		        <i onclick="productFavorites(<?php echo $userId ?> ,  <?php  echo $prod_id ?> , 'product')" class="<?php echo $heart_class_name  ?>"></i>
+            <?php endif; ?>
+                
+            </div>
+ 
+        </div>
    </div>
    <div class="right-side">
        <h1> <?php the_title() ?> </h1>
