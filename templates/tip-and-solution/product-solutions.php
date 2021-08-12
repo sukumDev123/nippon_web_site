@@ -113,7 +113,7 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
     <div class="container">
         <a class="active"  href="<?php echo get_site_url() ?>/tips-and-solutions/product-solutions/">  Product Solutions </a>
         <a href="<?php echo get_site_url() ?>/tips-and-solutions/problems-and-solutions/"> Problems and Solutions</a>
-        <a  href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">  How-to-Paintc</a>
+        <a  href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">  How to Paint</a>
         
        
     </div>
@@ -139,7 +139,7 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
             </li>
             <li  class="dropdown-item"  >
             <a href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">
-            How-to-Paint
+            How to Paint
 
                 </a>
             </li>

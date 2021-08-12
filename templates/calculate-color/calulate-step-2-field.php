@@ -7,11 +7,11 @@
                 <div class="ui three columns grid">
                     <div class="column cal-div">
                             <h5 for="A1"> <?php echo $args["choice_1"] ?></h5>
-                            <input type="text" id="<?php echo $args["input_1"] ?>">
+                            <input class="isNumber" type="number" id="<?php echo $args["input_1"] ?>">
                     </div>
                     <div class="column  cal-div">
                             <h5 for="A1"><?php echo $args["choice_2"] ?></h5>
-                            <input type="text" id="<?php echo $args["input_2"] ?>">
+                            <input class="isNumber" type="number" id="<?php echo $args["input_2"] ?>">
                     </div>
                     <div class="column ">
                         <div class="cal-result-step4">

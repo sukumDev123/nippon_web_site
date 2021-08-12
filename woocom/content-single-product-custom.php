@@ -113,8 +113,7 @@ $word_selected = "";
 <div  class="arrow-back">
                 <a href="<?php echo get_term_link( $termId ) ?>">
                     <img src="<?php echo  get_bloginfo("template_directory");  ?>/assets/images/arrow-g.svg" alt="arrow-g.svg" />
-
-                <!-- <i class="fas fa-arrow-left"></i> -->
+ 
                 </a>
 
 
@@ -135,20 +134,19 @@ $word_selected = "";
 
            if(isset($data_favorites[$prod_id])):
             $heart_outline_class_name = "heart outline icon hide_show";
-           $heart_class_name= "heart icon show";
+            $heart_class_name= "heart icon show";
 
            endif;
         ?>
        <div>
            <img  src="<?php echo $featured_img_url ?>" />
             <div class="icon-compare-product-and-favorites">
-            <button 
-  	            class="ui button submit primary"  >เปรียบเทียบ></button>
-            <?php if( $userId !=  FALSE): ?>
-                
-		        <i onclick="productFavorites(<?php echo $userId ?> ,  <?php  echo $prod_id ?> , 'product')" class="<?php echo $heart_outline_class_name  ?>"></i>
-		        <i onclick="productFavorites(<?php echo $userId ?> ,  <?php  echo $prod_id ?> , 'product')" class="<?php echo $heart_class_name  ?>"></i>
-            <?php endif; ?>
+                <button  class="ui button submit primary"  >เปรียบเทียบ></button>
+                <?php if( $userId !=  FALSE): ?>
+                    
+                    <i onclick="productFavorites(<?php echo $userId ?> ,  <?php  echo $prod_id ?> , 'product')" class="<?php echo $heart_outline_class_name  ?>"></i>
+                    <i onclick="productFavorites(<?php echo $userId ?> ,  <?php  echo $prod_id ?> , 'product')" style="color:#D7373F" class="<?php echo $heart_class_name  ?>"></i>
+                <?php endif; ?>
                 
             </div>
  

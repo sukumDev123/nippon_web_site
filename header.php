@@ -18,6 +18,7 @@ $title_static = [
 $search  =  get_site_url() . "/search/";
  
 ?>
+
 <!doctype html>
  
 <head>

@@ -42,6 +42,9 @@ function load_js() {
     wp_register_script("form" ,  get_template_directory_uri() . '/src/form.js' , '' , 1 , true);
     wp_enqueue_script("form");
   
+    wp_register_script("compare_js" ,  get_template_directory_uri() . '/src/compare_product.js' , '' , 1 , true);
+    wp_enqueue_script("compare_js");
+  
 }
 add_action('wp_enqueue_scripts' , "load_js");
 
@@ -86,15 +89,18 @@ add_action("init" , function() {
 	register_post_type("FAQs" , [
         'public' => true ,
         "labels" => ['name' => "FAQs"   , "singular_name" => "FAQ"],
-        'hierarchical' => true
+        'hierarchical' => true,
  
 	]);
 
     register_taxonomy( 'FAQsCate', array('faqs'), array(
-        'hierarchical' => true, 
-        'label' => 'FAQsCate', 
-        'singular_label' => 'FAQCate', 
-        'rewrite' => array( 'slug' => 'faqs_cate', 'with_front'=> false )
+        'label'                 => 'FAQ Categories', 
+        'singular_label'        => 'FAQ Category', 
+        'rewrite'               => array( 'slug' => 'faqs_cate' ),
+        'hierarchical'          => true,
+        'show_ui'               => true,
+		'show_admin_column'     => true,
+
         )
     );
 
@@ -122,7 +128,7 @@ add_action("init" , function() {
         'label' => 'ProgramAndSolutionCategories', 
         "show_in_rest"=> true,
         'singular_label' => 'ProgramAndSolutionCategory', 
-        'rewrite' => array( 'slug' => 'problem_and_solution_cate', 'with_front'=> true )
+        'rewrite' => array( 'slug' => 'problem_and_solution_cate', 'with_front'=> true , 'hierarchical' => true  )
         )
     );
     //register_taxonomy_for_object_type("problem_and_solution_cate" , "problem_and_solution");
@@ -146,9 +152,9 @@ add_action("init" , function() {
     );
 });
 add_action("init" , function() {
-	register_post_type("FAQsForms" , [
+	register_post_type("faqs_form" , [
         'public' => true ,
-        "labels" => ['name' => "FAQsForm"   , "singular_name" => "FAQsForm"],
+        "labels" => ['name' => "FAQs Form"   , "singular_name" => "FAQs Form"],
         'hierarchical' => true
 	]);
 });
@@ -156,6 +162,13 @@ add_action("init" , function() {
 	register_post_type("favorites_user" , [
         'public' => true ,
         "labels" => ['name' => "Favorites User"   , "singular_name" => "Favorite User"],
+        'hierarchical' => true
+	]);
+});
+add_action("init" , function() {
+	register_post_type("user_custom_field" , [
+        'public' => true ,
+        "labels" => ['name' => "Users Custom Field"   , "singular_name" => "User Custom Field"],
         'hierarchical' => true
 	]);
 });
@@ -622,10 +635,111 @@ add_action( 'rest_api_init', function () {
       'permission_callback' => '__return_true'
     ) );
   } );
+  
+  
+function product_cate_func($request) {
+    $data = $request->get_body();
+    $toArray = json_decode($data);
+    $product_cat = $toArray->product_cat;
+   $terms = get_terms('product_cat', array('hide_empty' => false, 'parent' => intval($product_cat) , "name" => "เกรด"  ));
+ 
+   if(count($terms )== 0):
+    return json_decode(json_encode(["product_term" =>   []   ]));
+   endif;
+    $terms_children = get_terms('product_cat', array('hide_empty' => false, 'parent' =>  $terms[0]->term_id  ));
+ 
+    return json_decode(json_encode(["product_term" =>   $terms_children   ]));
+    
+}
+
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/product_cate/', array(
+      'methods' => 'post',
+      'callback' => 'product_cate_func',
+      'permission_callback' => '__return_true'
+    ) );
+  } );
+  
+function product_from_cate_name($request) {
+    $data = $request->get_body();
+    $toArray = json_decode($data);
+    $product_cat = $toArray->product_cat;
+    $products = [];
+    $query = new WP_Query([
+        "post_type" => "product",
+        "posts_per_page" => -1,
+        "tax_query" => [
+            [
+                'taxonomy' => 'product_cat',
+                'field' => 'term_id',
+                'terms' =>    [$product_cat],
+                'include_children' => true,
+                'operator' => 'IN'
+             ]
+        ]
+            ]);
+            $index = 0;
+            if($query->have_posts()):
+                while($query->have_posts()):
+                    $query->the_post();
+                    $products[$index] =  [
+                        "product_id" => get_the_ID(),
+                        "name" => get_the_title()
+                    ];
+                    $index++;
+                endwhile;
+            endif;
+    return json_decode(json_encode(["products" =>   $products   ]));
+    
+}
+
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/find_product/', array(
+      'methods' => 'post',
+      'callback' => 'product_from_cate_name',
+      'permission_callback' => '__return_true'
+    ) );
+  } );
+
+
 add_action( 'rest_api_init', function () {
     register_rest_route( 'api/v1', '/save_user_info/', array(
       'methods' => 'post',
       'callback' => 'save_users',
+      'permission_callback' => '__return_true'
+    ) );
+  } );
+
+
+  function save_faq($request) {
+    $data = $request->get_body();
+    $toArray = json_decode($data);
+    // var_dump($toArray);
+    if( !$toArray->accept) {
+        return json_decode(json_encode(["message" => "accept_not_found"]));
+    }
+    $info = [
+        "first_name" =>  $toArray->first_name,
+        "last_name" =>  $toArray->last_name,
+        "email" =>  $toArray->emailVal,
+        "tel" =>  $toArray->tel ,
+        "detail" =>  $toArray->detail ,
+    ];
+    $postArr = [
+        'post_title' => $toArray->email,
+        "meta_input" => $info,
+        "post_type" => "faqs_form",
+        "post_status" => "publish"
+    ];
+    wp_insert_post($postArr);
+
+    return json_decode(json_encode(["message" => "success"]));
+  }
+
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/save_faq/', array(
+      'methods' => 'post',
+      'callback' => 'save_faq',
       'permission_callback' => '__return_true'
     ) );
   } );
@@ -1126,4 +1240,22 @@ add_action('wp_enqueue_scripts', 'no_more_jquery');
 function no_more_jquery(){
     wp_deregister_script('jquery');
     // wp_deregister_style('dashicons');
+}
+
+
+function checkUserIsAddedUserData() {
+    $query = new WP_Query([
+        'post_type' => "user_custom_field",
+        "meta_query" => [
+            [
+                [
+                    "key" => "user_id",
+                    "value"  => get_current_user_id() ,
+                    "compare" => "LIKE"
+                ],
+            ]
+        ]
+    ]);
+    $found_posts = $query->found_posts;
+    return $found_posts;
 }

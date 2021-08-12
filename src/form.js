@@ -139,67 +139,67 @@ function uploadFile() {
   }
 }
 
-function saveData1() {
-  const button = document.querySelector("#wp-pass-signup");
-  const register = document.querySelector("#wp-register");
-  const sign_in_step1 = document.querySelector("#sign_in_step1");
-  const emailEle = document.querySelector("#emailVal");
-  const name = document.querySelector("#name");
-  const lastname = document.querySelector("#lastname");
-  const password = document.querySelector("#pwd");
-  const passwordConfirm = document.querySelector("#pwd_confirm");
+// function saveData1() {
+//   const button = document.querySelector("#wp-pass-signup");
+//   const register = document.querySelector("#wp-register");
+//   const sign_in_step1 = document.querySelector("#sign_in_step1");
+//   const emailEle = document.querySelector("#emailVal");
+//   const name = document.querySelector("#name");
+//   const lastname = document.querySelector("#lastname");
+//   const password = document.querySelector("#pwd");
+//   const passwordConfirm = document.querySelector("#pwd_confirm");
 
-  if (button)
-    button.addEventListener("click", (e) => {
-      if (emailEle.value && password.value) {
-        e.preventDefault();
-        if (password.value === passwordConfirm.value) {
-          sign_in_step1.style.display = "none";
-        }
-      }
-    });
-  if (register)
-    register.addEventListener("click", (e) => {
-      // alert("test");
-      const passwordVal = password.value;
-      const emailVal = emailEle.value;
-      const nameVal = name.value;
-      const lastNameVal = lastname.value;
-      if (nameVal && lastNameVal) {
-        e.preventDefault();
+//   if (button)
+//     button.addEventListener("click", (e) => {
+//       if (emailEle.value && password.value) {
+//         e.preventDefault();
+//         if (password.value === passwordConfirm.value) {
+//           sign_in_step1.style.display = "none";
+//         }
+//       }
+//     });
+//   if (register)
+//     register.addEventListener("click", (e) => {
+//       // alert("test");
+//       const passwordVal = password.value;
+//       const emailVal = emailEle.value;
+//       const nameVal = name.value;
+//       const lastNameVal = lastname.value;
+//       if (nameVal && lastNameVal) {
+//         e.preventDefault();
 
-        const data = {
-          password: passwordVal,
-          email: emailVal,
-          first_name: nameVal,
-          last_name: lastNameVal,
-        };
+//         const data = {
+//           password: passwordVal,
+//           email: emailVal,
+//           first_name: nameVal,
+//           last_name: lastNameVal,
+//         };
 
-        // fetch(domain + "wp-json/api/v1/user/create", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify(data),
-        // })
-        //   .then((data) => data.json())
-        //   .then((d) => {
-        //     // const fm = document.querySelector(".form-message");
-        //     // fm.className = "form-message show";
+//         // fetch(domain + "wp-json/api/v1/user/create", {
+//         //   method: "POST",
+//         //   headers: {
+//         //     "Content-Type": "application/json",
+//         //   },
+//         //   body: JSON.stringify(data),
+//         // })
+//         //   .then((data) => data.json())
+//         //   .then((d) => {
+//         //     // const fm = document.querySelector(".form-message");
+//         //     // fm.className = "form-message show";
 
-        //     // fullname.value = "";
-        //     // email.value = "";
+//         //     // fullname.value = "";
+//         //     // email.value = "";
 
-        //     // contact.value = "";
-        //     // career.value = "";
-        //     // careerV.value = "";
-        //     // email_t.value = "";
-        //     console.log({ d });
-        //   })
-        //   .catch((err) => console.log({ err }));
-      }
-    });
-}
+//         //     // contact.value = "";
+//         //     // career.value = "";
+//         //     // careerV.value = "";
+//         //     // email_t.value = "";
+//         //     console.log({ d });
+//         //   })
+//         //   .catch((err) => console.log({ err }));
+//       }
+//     });
+// }
 
 function faqOnHeaderClicked() {
   const card_faqs = document.querySelectorAll(".card-faq");
@@ -220,13 +220,15 @@ function faqOnHeaderClicked() {
 }
 
 function IsNumber() {
-  const isNumber = document.querySelector(".isNumber");
-  isNumber &&
-    isNumber.addEventListener("keypress", (event) => {
-      if (!/[0-9]/.test(event.key)) {
-        event.preventDefault();
-      }
-    });
+  const isNumber = document.querySelectorAll(".isNumber");
+  Array.from(isNumber).forEach((isN) => {
+    isN &&
+      isN.addEventListener("keypress", (event) => {
+        if (!/[0-9]/.test(event.key)) {
+          event.preventDefault();
+        }
+      });
+  });
 }
 function validateEmail(email) {
   const re =
@@ -470,11 +472,11 @@ function addPlusButton() {
             <div class="ui three columns grid">
                 <div class="column cal-div">
                         <h5 for="A1"> ความกว้างของผนัง (เมตร)</h5>
-                        <input type="text" id="${inputId}">
+                        <input class="isNumber" type="number" id="${inputId}">
                 </div>
                 <div class="column  cal-div">
                         <h5 for="A1">ความสูงของผนัง (เมตร)</h5>
-                        <input type="text" id="${input2Id}">
+                        <input class="isNumber" type="number" id="${input2Id}">
                 </div>
                 <div class="column ">
                     <div class="cal-result-step4">
@@ -734,35 +736,52 @@ function saveFavorites(user_id, post_id, type, index) {
     });
 }
 
-function productFavorites(user_id, post_id, type) {
+function productFavorites(user_id, post_id, type, index = null) {
   const data = {
     user_id: user_id.toString(),
     post_id: post_id.toString(),
     type,
   };
-  const fav = document.querySelectorAll(
-    ".icon-compare-product-and-favorites i"
-  );
+  const fav = document.querySelectorAll("i.heart");
   const url = domain + "wp-json/api/v1/favorites";
   // const blogs_fav = document.querySelectorAll(".card-blog-save-favorites");
+  console.log({ fav, index });
+  // if (d.doing === "CREATED") {
+  fav[index - 1].className = "heart outline icon hide_show";
+  fav[index].className = "heart icon show";
+  // } else {
+  //   fav[index].className = "heart outline icon show";
+  //   fav[index + 1].className = "heart icon hide_show";
+  // }
+  // }
+  // loadingOn();
+  // fetch(url, {
+  //   method: "POST",
+  //   body: JSON.stringify(data),
+  // })
+  //   .then((response) => response.json())
+  //   .then((d) => {
+  //     // console.log({ d });
+  //     if (index === null) {
+  //       if (d.doing === "CREATED") {
+  //         fav[0].className = "heart outline icon hide_show";
+  //         fav[1].className = "heart icon show";
+  //       } else {
+  //         fav[0].className = "heart outline icon show";
+  //         fav[1].className = "heart icon hide_show";
+  //       }
+  //     } else {
+  //       if (d.doing === "CREATED") {
+  //         fav[index].className = "heart outline icon hide_show";
+  //         fav[index + 1].className = "heart icon show";
+  //       } else {
+  //         fav[index].className = "heart outline icon show";
+  //         fav[index + 1].className = "heart icon hide_show";
+  //       }
+  //     }
 
-  loadingOn();
-  fetch(url, {
-    method: "POST",
-    body: JSON.stringify(data),
-  })
-    .then((response) => response.json())
-    .then((d) => {
-      // console.log({ d });
-      if (d.doing === "CREATED") {
-        fav[0].className = "heart outline icon hide_show";
-        fav[1].className = "heart icon show";
-      } else {
-        fav[0].className = "heart outline icon show";
-        fav[1].className = "heart icon hide_show";
-      }
-      loadingOff();
-    });
+  //     loadingOff();
+  //   });
 }
 function removeFavoritesList(user_id, post_id, type, index, className) {
   const data = {
@@ -794,7 +813,7 @@ function loadingOff() {
   const loading = document.querySelector("#loading");
   loading.style.display = "none";
 }
-function onSelected(name, eleId, eleId1, eleId2) {
+function onSelected(name, eleId, eleId1, eleId2, url = null) {
   const _element = document.querySelector("#" + eleId);
   const _eleId1 = document.querySelector("." + eleId1);
   const _eleId2 = document.querySelector("." + eleId2);
@@ -807,7 +826,8 @@ function onSelected(name, eleId, eleId1, eleId2) {
   _eleId2.className = _eleId2.className
     .split(" ")
     .filter((c) => c !== "active");
-  console.log({ d: _eleId1.className, h: _eleId2.className });
+  // console.log({ d: _eleId1.className, h: _eleId2.className });
+  if (url) window.location.href = url;
 }
 
 function onSelectedShowList(elementId, elementId2) {
@@ -818,4 +838,92 @@ function onSelectedShowList(elementId, elementId2) {
   else _element.className = elementId + " " + "active";
   if (_element2.className.match(/active/)) _element2.className = elementId2;
   else _element2.className = elementId2 + " " + "active";
+}
+
+function checkFieldRequired() {
+  let checkErr = true;
+  const _keysId = [];
+  const fieldRequired = document.querySelectorAll(".field.required");
+  // const textAreaFieldRequired = document.querySelectorAll(".field.required");
+  // Array.from().map(f => {
+  //   if(!f.value) checkErr
+  // })
+  let data = {};
+  for (let i = 0; i < Array.from(fieldRequired).length; i++) {
+    const input = fieldRequired[i].querySelector("input");
+    if (!input) continue;
+    if (input.value === "on") {
+      if (!input.checked) {
+        fieldRequired[i].className += " error";
+        checkErr = false;
+      } else {
+        fieldRequired[i].className = fieldRequired[i].className
+          .split(" ")
+          .filter((c) => c !== "error")
+          .join(" ");
+        data[input.id] = input.value;
+        _keysId.push("#" + input.id);
+      }
+    } else {
+      if (!input.value) {
+        fieldRequired[i].className += " error";
+        checkErr = false;
+      } else {
+        fieldRequired[i].className = fieldRequired[i].className
+          .split(" ")
+          .filter((c) => c !== "error")
+          .join(" ");
+        _keysId.push("#" + input.id);
+        data[input.id] = input.value;
+      }
+    }
+  }
+
+  function clearData() {
+    _keysId.forEach((k) => {
+      document.querySelector(k).value = "";
+      if (document.querySelector(k).value === "on")
+        document.querySelector(k).checked = false;
+    });
+  }
+
+  return {
+    fieldRequired,
+    checkErr,
+    data,
+    clear: clearData,
+  };
+}
+
+function saveFaqForm() {
+  const faqForm = checkFieldRequired();
+  // console.log({ tt });
+  // const url = "";
+  if (faqForm.checkErr) {
+    const url = domain + "wp-json/api/v1/save_faq";
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(faqForm.data),
+    })
+      .then((d) => d.json())
+      .then((d) => {
+        alert("success");
+        faqForm.clear();
+      });
+  }
+}
+
+function registerForm() {
+  const inputRegis = checkFieldRequired();
+
+  // if()
+  // const keys = Object.keys(inputRegis.data);
+  let checkPhase1 = ["emailVal", "pwd", "confirm_password"].filter(
+    (c) => inputRegis.data[c]
+  ).length;
+  console.log({ checkPhase1 });
+  // console.log({ keys });
 }

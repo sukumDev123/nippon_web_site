@@ -18,6 +18,17 @@ $title_static = [
 ][$lang];
 $search  =  get_site_url() . "/search/";
 ?>
+ <?php
+ 
+ if(get_current_user_id()):
+     
+    // $found_posts = checkUserIsAddedUserData();
+    // echo "asdascasds" .$found_posts;
+    // if($found_posts == 0):
+    //     wp_redirect('http://localhost/nippon/wp-login.php?action=register');
+    // endif;
+endif;
+ ?>
 <!doctype html>
  
 <head>

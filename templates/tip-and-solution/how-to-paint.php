@@ -39,7 +39,7 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
     <div class="container">
         <a href="<?php echo get_site_url() ?>/tips-and-solutions/product-solutions/">  Product Solutions </a>
         <a  href="<?php echo get_site_url() ?>/tips-and-solutions/problems-and-solutions/"> Problems and Solutions</a>
-        <a class="active" href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">  How-to-Paintc</a>
+        <a class="active" href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">  How to Paint</a>
         
        
     </div>
@@ -65,7 +65,7 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
             </li>
             <li  class="dropdown-item"  >
             <a href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">
-            How-to-Paint
+            How to Paint
 
                 </a>
             </li>
@@ -86,12 +86,11 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
 </div>
 <?php 
  
-if(isset($_GET['scroll'])):
+ if(isset($_GET['cate'])):
     echo '<script> setTimeout(() => {
-        document.querySelector("#solutions").scrollIntoView({behavior: "smooth" , block: "center"})
+        document.querySelector(".menus-solution").scrollIntoView({behavior: "smooth" , block: "start"})
     } , 1000)</script>';
 endif;
-
 ?>
 
 
@@ -105,13 +104,16 @@ $problem_and_solution_cate = get_terms('how_to_paint_cate', array('hide_empty' =
 <div class="mt-4"></div>
  
  <?php
- 
-//  get_template_part("components/select-custom" , null , [
-//      "input_id" => "cate_id",
-//      "url_redirect" => "",
-//      "categories" => $problem_and_solution_cate,
-//      "value" => ""
-//  ]);
+ $cate = "";
+ if(isset($_GET['cate'])):
+$cate  = $_GET['cate']; 
+endif;
+ get_template_part("components/select-custom" , null , [
+     "input_id" => "cate_id",
+     "url_redirect" => "",
+     "categories" => $problem_and_solution_cate,
+     "value" => ""
+ ]);
  
  
  ?>
@@ -126,6 +128,19 @@ $problem_and_solution_cate = get_terms('how_to_paint_cate', array('hide_empty' =
                 "orderby" => "order",
                 'order' => 'ASC' 
             ];
+            if($cate != ""):
+                $cate  = $cate;
+                $args["tax_query"]  = [
+                    [
+                    'taxonomy' => 'problem_and_solution_cate',
+                    'field' => 'name',
+                    'terms' =>   $cate,
+                    'include_children' => true,
+                    'operator' => 'IN'
+                 ]
+                ];
+               
+            endif;
             $solutions = [];
             $query = new WP_Query($args);
             $count = $query->found_posts;   

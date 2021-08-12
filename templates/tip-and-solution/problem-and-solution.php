@@ -53,7 +53,7 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
     <div class="container">
         <a href="<?php echo get_site_url() ?>/tips-and-solutions/product-solutions/">  Product Solutions </a>
         <a  class="active" href="<?php echo get_site_url() ?>/tips-and-solutions/problems-and-solutions/"> Problems and Solutions</a>
-        <a  href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">  How-to-Paintc</a>
+        <a  href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">  How to Paint</a>
         
        
     </div>
@@ -79,7 +79,7 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
             </li>
             <li  class="dropdown-item"  >
             <a href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">
-            How-to-Paint
+            How to Paint
 
                 </a>
             </li>
@@ -112,19 +112,33 @@ endif;
  
 $getFavs = getFavoritesData("problem-and-solution");  
 $data_favorites = $getFavs["datas"];  
-$problem_and_solution_cate = get_terms('how_to_paint_cate', array('hide_empty' => false, 'parent' => 0));
+$problem_and_solution_cate = get_terms('problem_and_solution_cate', array('hide_empty' => false, 'parent' => 0));
  
 ?>
 <div class="mt-4"></div>
  
  <?php
+
+
+
  
-//  get_template_part("components/select-custom" , null , [
-//      "input_id" => "cate_id",
-//      "url_redirect" => "",
-//      "categories" => $problem_and_solution_cate,
-//      "value" => ""
-//  ]);
+if(isset($_GET['cate'])):
+    echo '<script> setTimeout(() => {
+        document.querySelector(".menus-solution").scrollIntoView({behavior: "smooth" , block: "start"})
+    } , 1000)</script>';
+endif;
+$cate = "";
+if(isset($_GET["cate"])):
+    $cate  = $_GET["cate"];
+endif;
+ 
+ get_template_part("components/select-custom" , null , [
+     "input_id" => "cate_id",
+    
+     "categories" => $problem_and_solution_cate,
+     "value" => $cate,
+     "url_redirect" => get_permalink()
+ ]);
  
  
  ?>
@@ -133,7 +147,7 @@ $problem_and_solution_cate = get_terms('how_to_paint_cate', array('hide_empty' =
      
      <div class="card-blogs-div ui stackable three column grid">
             <?php 
-            
+         
             $args = [
                 "post_type" => 'problem_and_solution',
                 'post_status' => 'publish',
@@ -142,7 +156,20 @@ $problem_and_solution_cate = get_terms('how_to_paint_cate', array('hide_empty' =
                 'order' => 'ASC' 
                 
             ];
-            // $thisPostId
+            if($cate != ""):
+                $cate  = $cate;
+                $args["tax_query"]  = [
+                    [
+                    'taxonomy' => 'problem_and_solution_cate',
+                    'field' => 'name',
+                    'terms' =>  $cate,
+                    'include_children' => true,
+                    'operator' => 'IN'
+                 ]
+                ];
+               
+            endif;
+            
             $solutions = [];
             $query = new WP_Query($args);
             $count = $query->found_posts;

@@ -260,8 +260,6 @@ $word_selected = "เลือกประเภทสินค้า";
             if(count($_slugs) > 0):
                 $tax_query = [
                     'relation' => 'AND',
-                    
-                     
                     [
                         'taxonomy' => 'product_cat',
                         'field' => 'term_id',
@@ -318,33 +316,29 @@ $word_selected = "เลือกประเภทสินค้า";
         }
         
       
-        
+        $getFav = getFavoritesData("product" , );
+        $index = 0;
         $loop = new WP_Query( $args );
         if ( $loop->have_posts() ) {
             while ( $loop->have_posts() ) : $loop->the_post();
                 $featured_img_url = get_the_post_thumbnail_url( get_the_ID(),'full');
                 $link = get_permalink(get_the_ID());
-                $aTag = '<a  href="'.$link.'">';
+                $target = "_self";
                 if(get_field("external_link")) {
                     $link =  get_field("external_link");
-                    $aTag = '<a target="_blank"  href="'.$link.'">';
+                    $target = "_blank";
                 }
-               ?>
-                        <div class="product-card">
-                                <?php echo  $aTag; ?>
-                                <img src="<?php echo $featured_img_url ?>" alt="image"  />
-                                <h2><?php echo get_the_title() ?></h2>
-                                <p><?php echo get_the_excerpt() ?></p>
-                                <h5 class="arrow">
-                                    <img  
-                                        class="arrow-left-white" 
-                                        src="<?php echo get_bloginfo("template_directory") ?>/assets/images/arrow-blue.svg" 
-                                        alt="">
-                                </h5>
-                            </a>
-                        </div>
-
-                <?php 
+                get_template_part("components/products-component" , null , [
+                    "target" =>  $target,
+                    "title" => get_the_title() ,
+                    "featured_img_url" => $featured_img_url,
+                    "detail" => get_the_excerpt(),
+                    "href" => $link,
+                    "user" => get_current_user_id(),
+                    "data_favorites" => $getFav['datas'],
+                    "prod_id" => get_the_ID(),
+                    "index" => ++$index 
+                ]);
             endwhile;
         } else {
             echo __( 'No products found' );

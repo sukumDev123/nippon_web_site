@@ -1,6 +1,6 @@
 // const { babelConfig } = require("laravel-mix");
-const domain = "https://staging.tanpong.me/";
-// const domain = "http://localhost/nippon/";
+// const domain = "https://staging.tanpong.me/";
+const domain = "http://localhost/nippon/";
 const loading = document.querySelector("#loading");
 let searchType = "rgb-div";
 let product_suggestion = [];
@@ -928,7 +928,7 @@ window.onload = () => {
   loadLocation();
   saveUserInfo();
   saveCareer();
-  saveData1();
+
   IsNumber();
   uploadFile();
   showMoreCalPageInternal();
@@ -940,6 +940,7 @@ window.onload = () => {
   addPlusButton();
   summaryExternalCal();
   faqOnHeaderClicked();
+
   const message_right = document.querySelector(".message-right");
   const contact_message_box = document.querySelector(".contact-message-box");
   const arrow_up_to_top = document.querySelector(".arrow-up-to-top");
@@ -1375,7 +1376,6 @@ function saveUserInfo() {
 
           fullname.value = "";
           email.value = "";
-
           contact.value = "";
           career.value = "";
           careerV.value = "";
