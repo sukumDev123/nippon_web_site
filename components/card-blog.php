@@ -10,29 +10,16 @@
             endif;
         
         endif; ?>
-
+       
         <?php if(isset($args['user_id'])) :  
-            if($args["user_id"] != FALSE):
-                $userId = $args["user_id"];
-                $postId = $args["id"];
-                $favorite = $args["favorite"];
-                $checkF = $favorite;
-                $index = $args["index"];
-                $type_blog = $args["type_blog"];
-            ?>
-                <div onclick="saveFavorites(<?php echo $userId ?>  , <?php echo $postId ?> , '<?php echo $type_blog ?>' , <?php echo $index ?>  )" class="card-blog-save-favorites">
-                    <img 
-                    class="favorites-button <?php if($checkF === TRUE): echo "hide"; else : echo "show";  endif; ?>"
-                        src="<?php echo get_bloginfo("template_directory") ?>/assets/images/save-favorties-blog.svg" 
-                        alt="" />
-                    <img 
-                    class="favorites-button-active <?php if($checkF === TRUE): echo "show"; else : echo "hide";  endif; ?>"
-                        src="<?php echo get_bloginfo("template_directory") ?>/assets/images/saved_favorites.svg" 
-                        alt="" />
-                </div>
-            <?php 
-            endif;
-        
+             do_action("make_favorites_blogs" , [
+                "user_id" =>  $args['user_id'],
+                "id" =>  $args["id"],
+                "favorite" =>  $args["favorite"],
+                "index" =>  $args["index"],
+                "type_blog" =>  $args["type_blog"],
+                "nameClass" => "card-blog-fav-" .  $args["index"]
+            ]);  
         endif; ?>
 
 <a href="<?php echo get_permalink($args["id"]) ?>" style="display:block">

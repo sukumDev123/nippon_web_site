@@ -298,11 +298,8 @@ if($count_new > 0):
                             <?php the_title(); ?>
                         </a>
                     </h1>
-                    
                     <p><?php echo  $modal_header;  ?></p> 
                     <h5> <i class="far fa-calendar-alt"></i> <?php " ".the_date("d/M/Y"); ?></h5>
-                
-                
                 </div>
                 </div>
             

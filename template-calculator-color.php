@@ -24,14 +24,14 @@ if(!$page_name) {
 ?>
 <div class="container page-calculate">
     <div class="margin-page"></div>
-<h2 class="ui header primary-text center aligned mb-3 mt-3">
+<h1 class="ui header primary-text center aligned mb-3 mt-3">
     
 <?php echo  $parent_title ?>
 
 <div class="sub header">
     <?php echo $short_text ?>
 </div>
-</h2>
+</h1>
 <div class="margin-page"></div>
 
     <div class="ui fluid two item  secondary pointing menu">
@@ -43,7 +43,7 @@ if(!$page_name) {
                 "post_type" => "page",
                 'post_parent' =>  $post_parent,
                 'orderby' => 'order',
-'order' => 'ASC'
+                'order' => 'ASC'
             ]);
             if($query->have_posts()): while($query->have_posts()): $query->the_post(); ?>
             

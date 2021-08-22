@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21.6" height="22.041" viewBox="0 0 21.6 22.041">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Icon_simple-google" data-name="Icon simple-google" d="M11.38,9.445v3.779h6.25a5.95,5.95,0,0,1-6.25,4.752,6.957,6.957,0,0,1,0-13.911,6.2,6.2,0,0,1,4.394,1.7l2.988-2.882A10.574,10.574,0,0,0,11.38,0a11.02,11.02,0,0,0,0,22.04c6.36,0,10.579-4.471,10.579-10.769a10.04,10.04,0,0,0-.174-1.827Z" transform="translate(-0.36)"/>
+    </clipPath>
+  </defs>
+  <g id="Mask_Group_8" data-name="Mask Group 8" clip-path="url(#clip-path)">
+    <g id="search" transform="translate(0 0.22)">
+      <path id="Path_16" data-name="Path 16" d="M4.787,13.053,4.035,15.86l-2.748.058a10.819,10.819,0,0,1-.08-10.085h0l2.446.449L4.726,8.713a6.445,6.445,0,0,0,.061,4.339Z" fill="#fbbb00"/>
+      <path id="Path_17" data-name="Path 17" d="M21.411,8.782a10.8,10.8,0,0,1-3.85,10.44h0l-3.081-.157-.436-2.723a6.437,6.437,0,0,0,2.769-3.287H11.037V8.782H21.411Z" fill="#518ef8"/>
+      <path id="Path_18" data-name="Path 18" d="M17.56,19.221h0a10.8,10.8,0,0,1-16.274-3.3l3.5-2.865a6.423,6.423,0,0,0,9.256,3.289Z" fill="#28b446"/>
+      <path id="Path_19" data-name="Path 19" d="M17.693,2.486l-3.5,2.864A6.422,6.422,0,0,0,4.726,8.713L1.208,5.833h0A10.8,10.8,0,0,1,17.693,2.486Z" fill="#f14336"/>
+    </g>
+  </g>
+</svg>

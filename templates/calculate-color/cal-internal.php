@@ -58,36 +58,45 @@
 
 
 <div class="cal-internal-other">
-    <div id="show-more-cal" class="ui accordion">
-        <div class="title ">
-            <h2>ส่วนเพิ่มเติม	</h2>
-            <!-- <i class="dropdown icon"></i> -->
-            <?php get_template_part("components/icon" , null , ["icon" => "arrow-top"]) ?>
-        </div>
-        <div class="content ">
-            <div class="text-center">
-                    <img src="<?php  bloginfo("template_directory") ?>/assets/images/room-internal-bottom.jpg" alt="">
+<div class="accordion" id="accordionExample">
 
-            </div>
- 
 
-                    <?php 
-            
-                    get_template_part("templates/calculate-color/calulate-step-2-field" , null , [
-                        "title" => "ฝ้า",
-                        "choice_1" => "ความกว้างของห้อง (เมตร)",
-                        "choice_2" => "ความยาวของห้อง (เมตร)",
+                        <div id="show-more-cal"  class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo_1">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo_1" aria-expanded="false" aria-controls="collapseTwo_1">
+                                <h2>ส่วนเพิ่มเติม	</h2>
+                                </button>
+                                </h2>
+                            <div id="collapseTwo_1" class="accordion-collapse collapse" aria-labelledby="headingTwo_1" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                <div class="text-center">
+                                <img src="<?php  bloginfo("template_directory") ?>/assets/images/room-internal-bottom.jpg" alt="">
+
+                                    </div>
                         
-                        "input_1" => "step_4_value_a",
-                        "input_2" => "step_4_value_b",
-                        "result_id" => "step_4_result"
-                    ]);
-                
-            ?>
-  
-        </div>
-        
-    </div>
+
+                                            <?php 
+                                    
+                                            get_template_part("templates/calculate-color/calulate-step-2-field" , null , [
+                                                "title" => "ฝ้า",
+                                                "choice_1" => "ความกว้างของห้อง (เมตร)",
+                                                "choice_2" => "ความยาวของห้อง (เมตร)",
+                                                
+                                                "input_1" => "step_4_value_a",
+                                                "input_2" => "step_4_value_b",
+                                                "result_id" => "step_4_result"
+                                            ]);
+                                        
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+   
+</div>
 </div>
 
 

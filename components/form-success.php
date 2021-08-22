@@ -18,12 +18,16 @@ $idForm = $args["id_form"];
 				<div class="sub header primary-text"><?php echo $subTitle ?></div>
 			</h2>
 
-			<button 
-                class="ui mt-5 button submit primary fluid" 
-                name="wp-submit" 
-                id="wp-register" 
-                type="submit"
-				
-				><?php echo $btnTitle ?></button>
+			<?php if(isset($args["link"])): ?>
+			<a href="<?php echo $args["link"] ?>">
+				<button 
+					class="ui mt-5 button submit primary fluid" 
+					name="wp-submit" 
+					id="wp-register" 
+					type="submit"
+					
+					><?php echo $btnTitle ?></button>
+			</a>
+			<?php endif; ?>
 	</div>
 </div>

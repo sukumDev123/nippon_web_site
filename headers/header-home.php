@@ -1,5 +1,7 @@
 <?php 
-
+do_action("save_current_url");
+do_action("check_user_add_info");
+ 
 $parent_title = get_the_title($post->post_parent);
 $title = get_the_content();
 if($parent_title) {
@@ -13,8 +15,16 @@ endif;
 $lang=get_bloginfo("language");  
 $photos = acf_photo_gallery("banners" , get_the_ID());
 $title_static = [
-    "en" => " - Nippon Paint The Coatings Expert",
-    "th" => " - นิปปอนเพนต์ ผู้ชี่ยวชาญทุกงานสี"
+    "en" => [
+        "title" =>  " - Nippon Paint The Coatings Expert",
+        "link" => get_site_url() . "/edit-account"
+
+    ],
+    "th" => [
+        "title" => " - นิปปอนเพนต์ ผู้ชี่ยวชาญทุกงานสี" ,
+        "link" => get_site_url() . "/edit-account"
+    ],
+    
 ][$lang];
 $search  =  get_site_url() . "/search/";
 ?>
@@ -36,7 +46,7 @@ endif;
  
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php wp_head(); ?>
-    <title><?php echo get_the_title() . $title_static; ?></title>
+    <title><?php echo get_the_title() . $title_static["title"]; ?></title>
     <link 
         rel="icon" 
         href="<?php bloginfo("template_directory");  ?>/assets/images/favicon.svg" 
@@ -79,13 +89,16 @@ endif;
                             
                             ?>
                                 <!-- </div>    -->
-                            <div class="user-div">
-                                <h5><i class="fas fa-user"></i></h5>
-                            </div>    
+                                
+                                <div class="user-div">
+                               <a href="<?php echo $title_static["link"] ?>">
+                               <h5><i class="bi bi-person-fill"></i> บัญชีของฉัน</h5>
+                               </a>
+                            </div>   
                         </div>
                </div>
                 <div class="header-top">
-                        <?php 
+                <?php 
                             wp_nav_menu(
                                 [
                                     "theme_location" => 'top-menu'
@@ -93,7 +106,6 @@ endif;
                             )
                         
                         ?>
-                        
                         <div id="login-right" class="login">
                         <a class="contact-button" href="/contact-us/">ติดต่อเรา</a>
 

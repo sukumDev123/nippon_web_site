@@ -14,7 +14,10 @@ function load_stylesheets() {
     wp_register_style("bootstrap" , get_template_directory_uri() . '/assets/bootstrap.bundle.min.css');
     wp_enqueue_style("bootstrap");
  
-    // // 
+    wp_register_style("bootstrap-icon" , "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");
+    wp_enqueue_style("bootstrap-icon");
+ 
+    // // <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     wp_register_style("semantic" , get_template_directory_uri() . '/assets/semantic/semantic.min.css'  );
     wp_enqueue_style("semantic");
 
@@ -44,6 +47,10 @@ function load_js() {
   
     wp_register_script("compare_js" ,  get_template_directory_uri() . '/src/compare_product.js' , '' , 1 , true);
     wp_enqueue_script("compare_js");
+    wp_register_script("get_idea_js" ,  get_template_directory_uri() . '/src/get_idea.js' , '' , 1 , true);
+    wp_enqueue_script("get_idea_js");
+    wp_register_script("register" ,  get_template_directory_uri() . '/src/register.js' , '' , 1 , true);
+    wp_enqueue_script("register");
   
 }
 add_action('wp_enqueue_scripts' , "load_js");
@@ -90,6 +97,7 @@ add_action("init" , function() {
         'public' => true ,
         "labels" => ['name' => "FAQs"   , "singular_name" => "FAQ"],
         'hierarchical' => true,
+        "show_in_rest" => true
  
 	]);
 
@@ -100,6 +108,7 @@ add_action("init" , function() {
         'hierarchical'          => true,
         'show_ui'               => true,
 		'show_admin_column'     => true,
+        "show_in_rest" => true
 
         )
     );
@@ -138,6 +147,7 @@ add_action("init" , function() {
         'public' => true ,
         "labels" => ['name' => "HowToPaint"   , "singular_name" => "HowToPaint"],
         'hierarchical' => true,
+        'show_in_rest' => true ,
         "rewrite" => array("slug" => "how-to-paint") ,
         'supports'		=> array('title', 'editor', 'thumbnail'),
  
@@ -147,7 +157,8 @@ add_action("init" , function() {
         'hierarchical' => true, 
         'label' => 'HowToPaintCategories', 
         'singular_label' => 'HowToPaintCategory', 
-        'rewrite' => array( 'slug' => 'how_to_paint_cate', 'with_front'=> false )
+        'rewrite' => array( 'slug' => 'how_to_paint_cate', 'with_front'=> false ),
+        'show_in_rest' => true ,
         )
     );
 });
@@ -237,6 +248,44 @@ function shadeAndFamilyColor() {
 
 add_action("init" , "shadeAndFamilyColor");
  
+
+function get_idea_func() {
+    register_post_type("get_idea" , [
+        'public' => true ,
+        'labels' => array('name' => 'Get Ideas' , 'singular_name' => 'Get Idea'),
+        'hierarchical' => true ,
+        'has_archive' => true,
+        'show_in_rest' => true ,
+        'supports'		=> array('title', 'editor', 'thumbnail' ),
+
+        // 'taxonomies'          => array( 'category' , 'post_tag'  ),
+        ]);
+
+
+        register_taxonomy( 'get_idea_cate', array('get_idea'), array(
+            'hierarchical' => true, 
+            'label' => 'Get Idea Categories', 
+            'singular_label' => 'Get Idea Category', 
+            'show_in_rest' => true ,
+            
+            'hierarchical' => true,
+	       
+            'sort' => "order",
+            "supports" => array('title', 'editor', 'thumbnail', 'author', 'excerpt', 'revisions', 'page-attributes'),
+            'rewrite' => array( 'slug' => 'get_idea_cate', 'with_front'=> false )
+            )
+        );
+        register_taxonomy( 'get_id_user_type', array('get_idea'), array(
+            'hierarchical' => true, 
+            'label' => 'Get Idea User Type', 
+            'singular_label' => 'Get Idea User Type', 
+            'show_in_rest' => true ,
+
+            'rewrite' => array( 'slug' => 'get_id_user_type', 'with_front'=> false )
+            )
+        );
+}
+add_action("init" , "get_idea_func");
  
 function initProject() {
  
@@ -663,20 +712,37 @@ add_action( 'rest_api_init', function () {
 function product_from_cate_name($request) {
     $data = $request->get_body();
     $toArray = json_decode($data);
-    $product_cat = $toArray->product_cat;
+    $cate_main = $toArray->cate_main;
+    $sub_cate = $toArray->sub_cate;
     $products = [];
+$tax_query = [
+    
+    [
+        'taxonomy' => 'product_cat',
+        'field' => 'term_id',
+        'terms' =>    [$cate_main],
+        'include_children' => true,
+        'operator' => 'IN'
+     ]
+    ];
+    if($sub_cate):
+$tax_query[1]  = [
+    'taxonomy' => 'product_cat',
+    'field' => 'name',
+    'terms' =>    [$sub_cate],
+    'include_children' => true,
+    'operator' => 'IN'
+];
+    endif;
+
+
     $query = new WP_Query([
         "post_type" => "product",
         "posts_per_page" => -1,
-        "tax_query" => [
-            [
-                'taxonomy' => 'product_cat',
-                'field' => 'term_id',
-                'terms' =>    [$product_cat],
-                'include_children' => true,
-                'operator' => 'IN'
-             ]
-        ]
+        'meta_key'	=> 'priority',
+        'orderby'   => 'meta_value_num',
+        'order'		=> 'ASC',
+        "tax_query" => $tax_query
             ]);
             $index = 0;
             if($query->have_posts()):
@@ -697,6 +763,68 @@ add_action( 'rest_api_init', function () {
     register_rest_route( 'api/v1', '/find_product/', array(
       'methods' => 'post',
       'callback' => 'product_from_cate_name',
+      'permission_callback' => '__return_true'
+    ) );
+  } );
+  
+function product_from_cate_name_grade($request) {
+    $data = $request->get_body();
+    $toArray = json_decode($data);
+    $cate_main = $toArray->cate_main;
+    $sub_cate = $toArray->cate_sub;
+    $products = [];
+$tax_query = [
+    'relation' => 'AND',
+    [
+        'taxonomy' => 'product_cat',
+        'field' => 'term_id',
+        'terms' =>    [$cate_main],
+        'include_children' => true,
+        'operator' => 'IN'
+    
+    
+    ],
+    [
+        'taxonomy' => 'product_cat',
+        'field' => 'name',
+        'terms' =>    $sub_cate,
+        'include_children' => true,
+        'operator' => 'IN'
+     ]
+    ];
+    
+
+
+    $query = new WP_Query([
+        "post_type" => "product",
+        "posts_per_page" => -1,
+        'meta_key'	=> 'priority',
+        'orderby'   => 'meta_value_num',
+        'order'		=> 'ASC',
+        "tax_query" => $tax_query
+    ]);
+ 
+
+            $index = 0;
+            if($query->have_posts()):
+                while($query->have_posts()):
+                    $query->the_post();
+                 
+                    $products[$index] =  [
+                        "product_id" => get_the_ID(),
+                        "name" => get_the_title()
+                    ];
+                    $index++;
+                endwhile;
+            endif;
+    return json_decode(json_encode(["products" =>   $products   ]));
+    
+}
+
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/find_product_grade/', array(
+      'methods' => 'post',
+      'callback' => 'product_from_cate_name_grade',
       'permission_callback' => '__return_true'
     ) );
   } );
@@ -726,7 +854,7 @@ add_action( 'rest_api_init', function () {
         "detail" =>  $toArray->detail ,
     ];
     $postArr = [
-        'post_title' => $toArray->email,
+        'post_title' => $toArray->emailVal,
         "meta_input" => $info,
         "post_type" => "faqs_form",
         "post_status" => "publish"
@@ -746,51 +874,7 @@ add_action( 'rest_api_init', function () {
  
  
  
-function send_email() {
-    
-  
-    // require '/wp/vendor/autoload.php';
-    global $phpmailer;
- 
-    try {
-       
-    
-         
-        // $phpmailer->isSMTP();
-        // $phpmailer->Host       = '203.151.41.6';
-        // $phpmailer->Port       = '25';
-        // // $phpmailer->SMTPSecure = 'tls';
-        // $phpmailer->SMTPAuth   = false;
-        // $phpmailer->SMTPDebug  = 1; 
 
-        // // // // $phpmailer->From       = 'sukhum.n@likemeasia.com';
-        // // // // $phpmailer->FromName   = 'Sukhum';
-        // $phpmailer->setFrom('nipponpaintnoreply@nipponpaint.co.th', 'Nippon Paint No Reply');
-        // $phpmailer->addAddress('nilpech.sukhum@gmail.com', 'Sukhum Nilpech');
-        // $phpmailer->Subject = "test email wordpress";
-        // $phpmailer->Body = "test email wordpress";
-        // $test = $phpmailer->Send();
-        $test = 1;
-//    var_dump($phpmailer);
-        return json_decode(json_encode(["test" => $test] ));
-    }catch (Exception $e) {
-        // // echo 'Caught exception: ',  $e->getMessage(), "\n";
-        // var_dump($e);
-  
-        return  json_decode(json_encode(["error" => $e->getMessage(),] ));
-    }
-    // remove_filter( 'wp_mail_content_type','set_my_mail_content_type' )
-    // remove_action( 'phpmailer_init', 'send_smtp_email' );
-
-}
-
-add_action( 'rest_api_init', function () {
-    register_rest_route( 'api/v1', '/email/', array(
-      'methods' => 'get',
-      'callback' => 'send_email',
-      'permission_callback' => '__return_true'
-    ) );
-  } );
 
 
   function favorites_user_func($request) {
@@ -1072,30 +1156,62 @@ function complete_registration(
     return json_decode(json_encode(["message" => "success" , "user" => json_encode($user) , "dd" => $toArray->$email]));
 
 }
-function register_user(
-    $request
-) {
+function register_user($request) {
     $data = $request->get_body();
     $toArray = json_decode($data);
-    $userdata = array(
-        'user_login'    =>    $toArray->email,
-        'user_email'    =>    $toArray->email,
-        'user_pass'     =>    $toArray->password,
-        // 'user_url'      =>   $website,
-        'first_name'    =>    $toArray->first_name,
-        'last_name'     =>    $toArray->last_name,
-        // 'nickname'      =>   $nickname,
-        // 'description'   =>   $bio,
-        );
-    $user = wp_insert_user( $userdata );
-
-    if ( is_wp_error( $userdata ) ) {
-        return json_decode(json_encode(["message" =>  $userdata ]));
-
-    }  
- 
-    return json_decode(json_encode(["message" => "success" , "user" => json_encode($user) , "dd" => $toArray->$email]));
-
+    $user = false;
+    $email = "";
+    if(isset($toArray->userId)):
+        $currentUser = get_user_by("ID",$toArray->userId);
+        $user = $currentUser->ID;
+        $email = $currentUser->data->user_email;
+        $userdata = array(
+            'first_name'    =>    $toArray->name,
+            'last_name'     =>    $toArray->lastname,
+            );
+        $updateUser = wp_update_user( $userdata );
+    else:
+        $userdata = array(
+            'user_login'    =>    $toArray->emailVal,
+            'user_email'    =>    $toArray->emailVal,
+            'user_pass'     =>    $toArray->pwd,
+            'first_name'    =>    $toArray->name,
+            'last_name'     =>    $toArray->lastname,
+            );
+        $user = wp_insert_user( $userdata );
+        $email = $toArray->emailVal;
+        $creds['user_login'] = $toArray->emailVal;
+        $creds['user_password'] = $toArray->pwd;
+        $creds['remember'] = true;
+        $autologin_user = wp_signon( $creds, false );
+    endif;
+    if ( is_wp_error( $user ) ) {
+        return json_decode(json_encode(["message" =>  $user ]));
+    }   else {
+        $phpmailer = send_email();
+        $displayName = $toArray->name . " ". $toArray->lastname;
+        registerSuccess($phpmailer, $email, $displayName  );
+        $info = [
+            "first_name" =>  $toArray->name,
+            "last_name" =>  $toArray->lastname,
+            "email" =>   $email,
+            "birthday" =>  $toArray->birthday,
+            "type_of_user" =>  $toArray->type_user,
+            "user_id" =>   $user,
+            "accept_email_send" =>  $toArray->accept_email,
+            "accept_pdpa" =>  $toArray->accept_pdpa,
+            "phone_number" =>  $toArray->phone_number,
+            "other" =>  $toArray->other,
+        ];
+        $postArr = [
+            'post_title' => $email,
+            "meta_input" => $info,
+            "post_type" => "user_custom_field",
+            "post_status" => "publish"
+        ];
+       $create =   wp_insert_post($postArr);
+    }
+    return json_decode(json_encode(["message" => "success" , "user" => json_encode($user) ]));
 }
 add_action( 'rest_api_init', function () {
     register_rest_route( 'api/v1', '/user/create', array(
@@ -1104,6 +1220,122 @@ add_action( 'rest_api_init', function () {
       'permission_callback' => '__return_true'
     ) );
   } );
+function update_user(
+    $request
+) {
+    $data = $request->get_body();
+    $toArray = json_decode($data);
+    $userdata = array(
+        "ID" => $toArray->userId,
+        // 'user_login'    =>    $toArray->emailVal,
+        'user_email'    =>    $toArray->emailVal,
+        'first_name'    =>    $toArray->name,
+        'last_name'     =>    $toArray->lastname,
+        // 'nickname'      =>   $nickname,
+        // 'description'   =>   $bio,
+        );
+    $user = wp_update_user( $userdata );
+
+    // $toArray = json_decode($data);
+
+
+
+
+    if ( is_wp_error( $user ) ) {
+        return json_decode(json_encode(["message" =>  $user ]));
+
+    }   else {
+        $findProfile = new WP_Query([
+
+            "post_type" => "user_custom_field",
+            "meta_query" => [
+                [
+                    "key" => "user_id",
+                    "value"  => $toArray->userId,
+                    "compare" => "LIKE"
+                    ],
+            ]
+        ]);
+        if($findProfile->found_posts):
+            $info = [
+                "first_name" =>  $toArray->name,
+                "last_name" =>  $toArray->lastname,
+                "email" =>  $toArray->emailVal,
+                "birthday" =>  $toArray->birthday,
+                "type_of_user" =>  $toArray->type_user,
+                "user_id" =>   $toArray->userId,
+             
+                "phone_number" =>  $toArray->phone_number,
+             
+        
+            ];
+            $postArr = [
+                "ID" => $toArray->postId,
+                "meta_input" => $info,
+                "post_type" => "user_custom_field",
+                
+            ];
+     
+           $update =   wp_update_post($postArr);
+
+        else:
+$info = [
+            "first_name" =>  $toArray->name,
+            "last_name" =>  $toArray->lastname,
+            "email" =>  $toArray->emailVal,
+            "birthday" =>  $toArray->birthday,
+            "type_of_user" =>  $toArray->type_user,
+            "user_id" =>  $toArray->userId,
+            "accept_email_send" =>  TRUE,
+            "accept_pdpa" =>  TRUE,
+            "phone_number" =>  $toArray->phone_number,
+            "other" =>  "",
+    
+        ];
+        $postArr = [
+            'post_title' =>$toArray->emailVal,
+            "meta_input" => $info,
+            "post_type" => "user_custom_field",
+            "post_status" => "publish"
+        ];
+        $create =   wp_insert_post($postArr);
+       
+        endif;
+        
+    }
+ 
+    return json_decode(json_encode(["message" => "success" , "user" => json_encode($user) , "dd" => $toArray->$email]));
+
+}
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/user/update', array(
+      'methods' => 'post',
+      'callback' => 'update_user',
+      'permission_callback' => '__return_true'
+    ) );
+  } );
+
+function change_password($request) {
+    $data = $request->get_body();
+    $toArray = json_decode($data);
+    $user = get_user_by( 'id',$toArray->userId );
+    $checkPasswordOld = wp_check_password( $toArray->oldPassword , $user->data->user_pass , $user->ID ) ;
+    if($checkPasswordOld) {
+        wp_set_password($toArray->newPassword , $user->ID);
+        return json_decode(json_encode(["message" => "OK"] ));
+    } else {
+        return json_decode(json_encode(["message" => "password_not_match_old"]));
+    }
+    
+}
+  add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/user/change-password', array(
+      'methods' => 'post',
+      'callback' => 'change_password',
+      'permission_callback' => '__return_true'
+    ) );
+  } );
+
 
 function custom_registration_function() {
     if ( isset($_POST['submit'] ) ) {
@@ -1157,18 +1389,11 @@ function custom_registration_function() {
 
 
 function add_login_redirect() {
-     if(!is_user_logged_in()):
-
-        setcookie("latest_page" , get_permalink()  , time() * 300 , "/");
-    endif;
-    echo  get_permalink();
-
-
     $redi =  get_site_url();
-    if(isset($_COOKIE["latest_page"])):
-        $redi = $_COOKIE["latest_page"];
+    if(isset($_COOKIE['url_latest'])):
+        $redi = $_COOKIE['url_latest'];
     endif;
-    echo $redi; ;
+//      
     return $redi;
          
 }
@@ -1229,20 +1454,32 @@ if(get_current_user_id()):
     wp_reset_query();
     
 endif;
+
+
+$count = 0;
+if(isset($queryFav->found_posts)):
+    $count = $queryFav->found_posts;
+endif;
  
 return [
     "datas" => $data_favorites,
-    "count" => $queryFav->found_posts
+    "count" => $count
 ];
 }
 
 add_action('wp_enqueue_scripts', 'no_more_jquery');
+ 
 function no_more_jquery(){
     wp_deregister_script('jquery');
+   
     // wp_deregister_style('dashicons');
 }
-
-
+ 
+add_action( 'login_init', function() {
+    wp_deregister_style( 'login' );
+    wp_deregister_style( 'form' );
+ 
+} );
 function checkUserIsAddedUserData() {
     $query = new WP_Query([
         'post_type' => "user_custom_field",
@@ -1259,3 +1496,720 @@ function checkUserIsAddedUserData() {
     $found_posts = $query->found_posts;
     return $found_posts;
 }
+
+
+
+function returnProduct($product_id) {
+    $query = new WP_Query([
+        "post_type" => 'product',
+        "p" => $product_id ,
+    ]);
+    $select_cate = "";
+    $selected1_id = "";
+    $selected1_cate_id = "";
+    $product = [];
+    if($query->have_posts()):
+        while($query->have_posts()):
+            $query->the_post();
+            $product_categories =   get_the_terms(get_the_ID() , "product_cat");
+            $grade = "-";
+            $grade_parent = "";
+            $type_film_parent = "";
+            $type_film = "-";
+            $application_area_parent = "";
+            $application_area = "-";
+            $application_area_parent = "";
+            $area = "-";
+            $use_area_parent = "";
+            $use_area = "-";
+            $texture_parent  = "";
+            $texture  = "-";
+            $word_group_parent  = "";
+            $word_group  = "-";
+            $function_parent  = "";
+            $function_group  = "-";
+            $is_green_product = 0;
+            $innovative_product  = 0;
+            $is_suggestion = "";
+            foreach($product_categories as $product_cat):
+                if($product_cat->parent == 0):
+                    $selected1_id = $product_cat->term_id;
+                endif;
+                if(trim($product_cat->name) == "เกรด"):
+                    $grade_parent = $product_cat->term_id;
+                    $select_cate = $product_cat->term_id;
+
+                endif;
+                if(trim($product_cat->name) == "ชนิดฟิล์มสี"):
+                    $type_film_parent = $product_cat->term_id;
+                endif;
+                if(trim($product_cat->name) == "พื้นที่การทา"):
+                    $application_area_parent = $product_cat->term_id;
+                endif;
+                if(trim($product_cat->name) == "พื้นที่ใช้งาน"):
+                    $use_area_parent = $product_cat->term_id;
+                    
+                endif;
+                if(trim($product_cat->name) == "พื้นผิว"):
+                    $texture_parent = $product_cat->term_id;
+                    
+                endif;
+                if(trim($product_cat->name) == "กลุ่มงาน"):
+                    $word_group_parent = $product_cat->term_id;
+                    
+                endif;
+                if(trim($product_cat->name) == "ฟังก์ชั่น"):
+                    $function_parent = $product_cat->term_id;
+                    
+                endif;
+                if(trim($product_cat->name) == "GEEN PRODUCT"):
+                    $is_suggestion = $product_cat->term_id;
+                    $is_green_product = 1;
+                    
+                endif;
+                if(trim($product_cat->name) == "ผลิตภัณฑ์นวัตกรรม"):
+                   
+                    $innovative_product = 1;
+                    
+                endif;
+            endforeach;
+            foreach($product_categories as $pc):
+                
+                if( $grade_parent != ""):
+                    if($pc->parent ==  $grade_parent):
+                        $grade  = $pc->name;
+                        $selected1_cate_id = $pc->term_id;
+                    endif;
+                endif;
+
+                if($application_area_parent != ""):
+                    if($pc->parent ==   $application_area_parent):
+                        $application_area  = $pc->name;
+                    
+                    endif;
+                endif;
+
+                if($use_area_parent != ""):
+                    if($pc->parent ==   $use_area_parent):
+                        $use_area  = $pc->name;
+                    
+                    endif;
+                endif;
+                if($texture_parent):
+                    if($pc->parent ==   $texture_parent):
+                        $texture  = $pc->name;
+                    
+                    endif;
+                endif;
+                if($word_group_parent):
+                    if($pc->parent ==    $word_group_parent):
+                        $word_group   = $pc->name;
+                    
+                    endif;
+                endif;
+                if($function_parent):
+                    if($pc->parent ==    $function_parent):
+                        $function_group   = $pc->name;
+                        
+                    endif;
+                endif;
+                // if($pc->parent ==    $is_suggestion):  
+                //     if(trim($pc->name) == "GREEN PRODUCT"):
+                //         $is_green_product = TRUE;
+                //     endif;
+                //     if(trim($pc->name) == "สินค้านวัตกรรม"):
+                //         $innovative_product  = TRUE;
+                //     endif;
+                // endif;
+            endforeach;
+            $title = "";
+            $content = "-";
+            $paint_brush = "-";
+            $standard = "-";
+            $persistence = "-";
+            $solvent = "-";
+            $special_look = "-";
+
+            $image = get_bloginfo("template_directory")."/assets/images/_product_.jpg";
+            if(get_the_title()) : $title = get_the_title() ; endif;
+            if(get_the_content()) : $content = get_the_content() ; endif; 
+            if(get_field("paint_brush" , get_the_ID())): $paint_brush = get_field("paint_brush" , get_the_ID());endif;
+            if(get_field("standard" , get_the_ID())): $standard = get_field("standard" , get_the_ID()); endif; 
+            if(get_field("persistence" , get_the_ID())): $persistence=get_field("persistence" , get_the_ID()); endif;
+            if(get_field("solvent" , get_the_ID())): $solvent  = get_field("solvent" , get_the_ID());  endif;
+            if(get_field("special_look " , get_the_ID())): $special_look  = get_field("special_look" , get_the_ID());  endif;
+            if(get_the_post_thumbnail_url(get_the_ID() , "full")) : $image =get_the_post_thumbnail_url(get_the_ID() , "full") ; endif; 
+            $product = [
+                "id" => get_the_ID(),
+                "title" => $title,
+                "image" => $image,
+                "grade" =>  $grade,
+                "type_film" => $type_film,
+                "feature" => $content,
+                "paint_brush" => $paint_brush,
+                "standard" => $standard,
+                "persistence" => $persistence,
+                "solvent" => $solvent,
+                "application_area" => $application_area,
+                "use_area" => $use_area,
+                "texture" => $texture,
+                "word_group" =>$word_group,
+                "function_group" =>  $function_group,
+                "is_green_product" => $is_green_product,
+                "innovative_product" => $innovative_product,
+                "special_look"=> $special_look
+
+            ];
+ 
+
+        endwhile  ;
+    endif;
+ 
+    wp_reset_query();
+
+    return [
+        "products" => $product,
+        "select_id" =>  $selected1_id,
+        "selected1_cate_id" => $selected1_cate_id,
+        "select_cate" => $select_cate
+
+    ];
+}
+
+function get_idea_card($args) {
+    $AIndex = $args['index'];
+    $index =$AIndex  + 0;
+    $tax_query = [
+        [
+            'taxonomy' => 'get_idea_cate',
+            'field' => 'term_id',
+            'terms' =>    [$args["term"]],
+            'include_children' => true,
+            'operator' => 'IN'
+        ]
+    ] ;
+    $user_type = "";
+    if(isset($_GET["user_type"])):
+      $user_type = $_GET['user_type'];
+      $tax_query[1] =  [
+        'taxonomy' => 'get_id_user_type',
+        'field' => 'term_id',
+        'terms' =>    [$user_type],
+        'include_children' => true,
+        'operator' => 'IN'
+      ];
+    endif;
+
+    $argc = [
+        "post_type" => "get_idea",
+        "posts_per_page" => 9,
+        "tax_query" => $tax_query,
+        "orderby" => "date",
+        "order" => "DESC"
+    ];
+    if(isset($_GET["order_by"])):
+        $order_by = $_GET['order_by'];
+        if($order_by == "most_view"):
+          $argc["orderby"] = "post_views";
+      endif;
+      endif;
+
+    $query = new WP_Query($argc);
+    
+
+
+
+        $favorite = getFavoritesData("get_idea");
+
+
+        if($query->found_posts == 0):
+        
+           do_action("empty_page" , ["count" => $query->found_posts ]);
+        
+        
+        
+        endif;
+
+    if( $query->have_posts()): while($query->have_posts()): $query->the_post(); 
+        $featured_img_url = get_the_post_thumbnail_url(get_the_ID(),'full');    
+        $checkF  = FALSE;
+        if(isset($favorite["datas"][get_the_ID()])):
+            $checkF = TRUE;
+        endif;
+
+    echo "<div class='swiper-slide card-get-idea-control-width'>";
+    
+        get_template_part("templates/get_idea/card" , null , [
+            "featured_img_url" =>  $featured_img_url,
+            "title" => get_the_title( get_the_ID()) , 
+            "short_text" => get_field("short_text"),
+            "checked" => $checkF,
+            "link" => get_permalink(),
+            "user_id" => get_current_user_id(),
+            "id" => get_the_ID() ,
+            "favorite" =>     $checkF,
+            "index" => $index++ ,
+            "type_blog" => "get_idea" ,
+            "nameClass" => "card-get-idea-".$AIndex,
+                
+        ]); 
+    
+    echo "</div>";
+
+ 
+
+;endwhile;endif ;  wp_reset_query(); 
+
+    
+   
+}
+
+
+add_action ('get_idea_card', 'get_idea_card', 10, 1);
+
+
+
+function create_empty_page($args) {
+    $count = $args['count'];
+   $className = "empty_data_page hide";
+    if($count == 0):
+        $className = "empty_data_page";
+    endif;
+    //if($count == 0):
+        echo '  
+            <div class="'. $className.'">
+                <h1>
+                    <i class="sticky note outline icon"></i>    
+                </h1>
+                <h3 class="ui header text-center">
+                    Empty Data 
+                </h3>
+            </div>
+        ';
+  //  endif;
+}
+
+add_action ('empty_page', 'create_empty_page', 10, 1);
+
+
+
+function relationPost($args) {
+
+   $related_query = new WP_Query(array(
+        'post_type' => $args['post_type'] ,// 'problem_and_solution',
+        'category__in' => $args['category__in'] , // wp_get_post_categories(get_the_ID()),
+        'post__not_in' => $args["post__not_in"] , // array(get_the_ID()),
+        'posts_per_page' => 9,
+        'orderby' => 'date',
+        'order' => 'ASC' 
+  ));
+  $data_favorites = $args["data_favorites"];
+  $index = 0;
+  if($related_query->found_posts == 0):
+    echo "";
+  else:
+   echo ' <div class="swiper-blog-div">
+    <h1 class="primary-text text-center ui header">บทความเพิ่มเติม</h1>
+    <div class="swiper-container swiper-blog">
+          <div class="swiper-wrapper">';
+                            while( $related_query->have_posts()):
+                                  $related_query->the_post();
+                                  $featured_img_url = get_the_post_thumbnail_url(get_the_ID(),'full');
+                                  $userId = FALSE;
+                                  if(get_current_user_id()):
+                                  $userId = get_current_user_id();
+                                  endif;
+                                  $checkFav = FALSE;
+                                  if(isset($data_favorites[get_the_ID()])):
+                                  $checkFav = TRUE;
+                                  endif;
+                                echo  '<div class="swiper-slide card-get-idea-control-width">';
+                                        
+                                              get_template_part("components/card-blog" , null , [
+                                                    "title" => get_the_title(),
+                                                    "detail" => get_field("short_text"),
+                                                    "image" => $featured_img_url,
+                                                    "user_id" => $userId,
+                                                    "id" => get_the_ID(),
+                                                    "favorite" =>  $checkFav,
+                                                    "index" => $index,
+                                                    "type_blog" => "problem-and-solution",
+                                              ]);
+                                              $index += 1;
+                                echo '</div>';
+                                  
+                            endwhile;
+                            wp_reset_query();
+
+    echo '                      
+                </div>
+            </div>
+        <div class="pagination-blog">
+                <div class="swiper-pagination"></div>
+        </div>
+        </div>';
+    endif;
+}
+
+add_action ('relation_post', 'relationPost', 10, 1);
+
+
+
+function addFavoritesForBlog2($args) {
+ $typeFav = $args['typeFav']; // problem-and-solution
+
+    $getFavs = getFavoritesData( $typeFav);  
+    $data_favorites = $getFavs["datas"]; 
+    $icon1 = "save_favorites_black";
+    $icon2 = 'saved_favorites hide';
+    if(isset($data_favorites[$args['postId']])):
+      $icon1 = "save_favorites_black hide";
+      $icon2 = "saved_favorites";
+endif;
+    
+    $title= $args["title"];
+    $postId= $args["postId"];
+    $userId = NULL;
+    if(get_current_user_id()):
+      $userId = get_current_user_id();
+      endif;
+    echo '
+    <div class="header-title-and-save-favorites-2">
+    <h1>'.$title.'</h1>';
+    if($userId):
+        echo '<div onclick="saveFavoritesOnePost('.$userId.' , '.$postId.' , '.  "'" . $typeFav .  "'" .', '."'save_favorites_black'".' , '."'saved_favorites'".' )" class="favorites-button"> ';
+        get_template_part("components/icon" , null , ["icon" => "save_favorites_black" , "class" => $icon1]) ;
+        get_template_part("components/icon" , null , ["icon" => "saved_favorites" , "class" => $icon2] ) ;
+        echo '</div>';
+      endif; 
+    echo '</div>';
+}
+
+
+add_action("favorites_blog_h2" , "addFavoritesForBlog2" , 10 , 1);
+
+
+function functionMakeFav($args) {
+   if(isset($args['user_id'])) :  
+        if($args["user_id"] != FALSE):
+            $userId = $args["user_id"];
+            $postId = $args["id"];
+            $favorite = $args["favorite"];
+            $checkF = $favorite;
+            $index = $args["index"];
+            $type_blog = $args["type_blog"];
+            $nameClass = $args["nameClass"];
+            $makeFav1 ="";
+            $makeFav2 ="";
+            if($checkF === TRUE): $makeFav1 =  "hide"; else : $makeFav1 =  "show";  endif;
+            if($checkF === TRUE): $makeFav2=  "show"; else : $makeFav2  = "hide";  endif; 
+            echo '<div onclick="saveFavorites('.$userId.'  , '.$postId.' , '."'".$type_blog."'".' , '."'".$nameClass."'".'  )" class="card-blog-save-favorites '.$nameClass.'">
+                <img 
+                class="favorites-button '.$makeFav1.'"
+                    src="'. get_bloginfo("template_directory").'/assets/images/save-favorties-blog.svg" 
+                    alt="" />
+                <img 
+                class="favorites-button-active '.$makeFav2.'"
+                    src="'. get_bloginfo("template_directory").'/assets/images/saved_favorites.svg" 
+                    alt="" />
+            </div>';
+       
+        endif;
+    endif;
+ 
+}
+
+add_action("make_favorites_blogs" , "functionMakeFav" , 10 , 1);
+
+
+
+
+
+function addSelectGetIdea($args) {
+    $termUserType = $args["termUserType"];
+    $url = get_permalink();
+    $url_default = get_permalink();
+    $chekedFirst = 0;
+    $chekedTwo = 0;
+   
+      if(isset($_GET["slide"]) && isset($_GET["scroll"])):
+        $url .=  "?slide=".$_GET['slide']."&scroll=".$_GET['scroll'];
+        $chekedFirst = 1;
+
+    else:
+        if(isset($_GET["slide"])):
+            $url .= "?slide=".$_GET['slide'];
+        $chekedFirst = 1;
+        endif;
+        if(isset($_GET['scroll'])):
+            $url .= "?scroll=".$_GET['scroll'];
+            $chekedFirst = 1;
+    
+        endif;
+      endif;
+
+ 
+
+    $user_type = "";
+    if(isset($_GET["user_type"])):
+      $user_type = $_GET['user_type'];
+    endif;
+    if(isset($_GET["order_by"])):
+      $orderby = $_GET['order_by'];
+    endif;
+
+    // $url .= "";
+  echo '  <div class="select-group-user">
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">ประเภทกลุ่ม</label>
+      <select  onchange="selectCateGetIdeaChanged('. "'" . $url. "'".' , '.$chekedFirst.', '."'" . $url_default. "'".' )" id="select_get_idea_all" class="menu" >
+      <option value="">ล่าุสุด</option>';
+     foreach($termUserType as $TUT):
+        $selected = "";
+        if($TUT->term_id == $user_type):
+            $selected = "selected";
+        endif;
+        echo '<option '.$selected.'  value="'.$TUT->term_id.'">'. $TUT->name.'</option>';
+    endforeach; 
+
+    if(isset($_GET['user_type'])):
+        // $url .= "?scroll=".$_GET['scroll'];
+        // $chekedFirst = 1;
+        if($chekedFirst == 1):
+        $url .= "&user_type=".$_GET['user_type'];
+        else :
+            $url .= "?user_type=".$_GET['user_type'];
+
+        endif;
+        $chekedTwo  = 1;
+    endif;
+
+    $most_view = "";
+    $date = "selected";
+    if($orderby == "most_view" ):
+        $most_view = "selected";
+        $date = "";
+    endif;
+    echo '</select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">เรียงตาม</label>
+      <select id="orderby_get_idea"  onchange="selectMostViewOrDateOrder('. "'" . $url. "'".' , '.$chekedFirst.', '."'" . $url_default. "'".'  , '.$chekedTwo.')" class="menu" >
+          <option '.$date.' value="date">ล่าุสุด</option>
+          <option '.$most_view.' value="most_view">ความนิยมสูงสุด</option>
+      </select>
+    </div>
+  </div>
+ 
+</div>';
+
+}
+add_action("select_get_idea" , "addSelectGetIdea" , 10 , 1);
+
+
+
+
+
+
+
+
+
+function EmailBodyRegister($name) {
+ 
+   $body  = <<<text
+        <!DOCTYPE html><html lang="en"> <head> <meta charset="UTF-8" /> <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Document</title> <link rel="preconnect" href="https://fonts.googleapis.com" /> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;800&display=swap" rel="stylesheet" /> <style> .content-text ul { text-align: left; padding: 0px 0px 0px 20px; } .content-text ul li {list-style: decimal; } .primary { color: red } .image-content { overflow: hidden; border-radius: 20px; height: 200px; margin: 20px 0; } .image-content img { width: 100%; object-fit: cover; border-radius: 20px; } .btn { padding: 10px 30px; width: 100%; border-radius: 4px; max-width: 300px; margin-top: 30px; background-color:#03428E ; color:white;border:0px; font-weight: 300; font-family: 'Kanit', sans-serif; } .text-primary { color:#03428E ; font-weight: 500; } .text-center { align-items: center; } </style> </head> <body> <div style=" background-color: #f7f7f7; padding: 0px; margin: 0px; position: fixed; top: 0; bottom: 0; left: 0; width: 100%; font-family: 'Kanit', sans-serif; font-weight: 300; " > <div style=" background: white; border: 1px solid rgba(0, 0, 0, 0.1); width: 100%; height: fit-content; max-width: 600px; margin: 20px auto; border-radius: 5px; padding-bottom: 30px; " > <div style="background-color: #03428e; width: 100%; height: 20px"></div> <div style="padding: 20px 50px 0px; color: #03428e; margin-bottom: 0"> <div style=" border-bottom: 1px solid rgba(0, 0, 0, 0.1); width: 100%; padding-bottom: 20px; " > <div style="width: 128px"> <img src="cid:logo" alt="Nippon Image" style="width: 100%" /> </div> </div> </div> <div style="padding: 20px 50px; text-align: center"> <!-- CONTENT --> <div class="image-content"><img src="cid:image" alt="image"> </div> <div class="content-text"> <h1 class="text-primary text-center">ยินดีต้อนรับ คุณ $name </h1> <ul> ตอนนี้คุณเป็นส่วนหนึ่งของ นิปปอนเพนต์ และคุณยังได้รับสิทธิพิเศษอีกมากมายดังนี้ <li> ได้รับสิทธิ์ในการดาวน์โหลดโปรแกรมจากเมนู Colour Library </li> <li> สามารถเลือกเก็บผลิตภัณฑ์ และเนื้อหาที่น่าสนใจไว้ดูภายหลังได้ </li> <li> รับคูปองส่วนลดพิเศษในการเลือกซื้อผลิตภัณฑ์จากนิปปอนเพนต์</li> </ul> </div> <a href="https://staging.tanpong.me"> <button class="btn btn-primary">เข้าสู่เว็บไซต์</button> </a> </div> </div> </div> </div> </body></html>
+    text; 
+    return $body;
+}
+
+
+function send_email() {
+    
+  
+    // require '/wp/vendor/autoload.php';
+    global $phpmailer;
+ 
+    try {
+       
+    
+         
+        $phpmailer->isSMTP();
+        $phpmailer->CharSet = "utf-8";
+        $phpmailer->Host       = 'smtp-relay.sendinblue.com';
+        $phpmailer->Port       = '587';
+        $phpmailer->SMTPSecure = 'tls';
+        $phpmailer->SMTPAuth   = true;
+        // $phpmailer->SMTPDebug  = 1; 
+        $phpmailer->Username   = 'tanpong.s@ku.th'; 
+        $phpmailer->Password = 'b3WdvfD92J8VwgzS'; 
+
+        // // // $phpmailer->From       = 'sukhum.n@likemeasia.com';
+        // // // $phpmailer->FromName   = 'Sukhum';
+        $phpmailer->setFrom('nipponpaintnoreply@nipponpaint.co.th', 'Nippon Paint No Reply');
+        // $phpmailer->Subject = "test email wordpress";
+       
+        // $phpmailer->Body = EmailBody();
+        // $test = $phpmailer->Send();
+        // $mail->IsHTML(true); 
+        // $test = 1;
+
+        // print_r( EmailBody());
+//    var_dump($phpmailer
+        // return json_decode(json_encode(["test" =>  $logo ] ));
+        return $phpmailer;
+    }catch (Exception $e) {
+        // // echo 'Caught exception: ',  $e->getMessage(), "\n";
+        // var_dump($e);
+  
+        return  json_decode(json_encode(["error" => $e->getMessage(),] ));
+    }
+    // remove_filter( 'wp_mail_content_type','set_my_mail_content_type' )
+    // remove_action( 'phpmailer_init', 'send_smtp_email' );
+
+}
+
+function registerSuccess( $phpmailer , $email , $name) {
+    $phpmailer->addAddress($email, $name);
+    $phpmailer->Subject = "ยินดีต้อนรับ! ตอนนี้คุณได้เป็นสมาชิกของนิปปอนเพนต์ พร้อมรับสิทธิพิเศษอีกมากมาย";
+    $logo = dirname(__FILE__) . '/assets/images/logo_png.png';
+    $bk = dirname(__FILE__) . '/assets/images/image-email-register.jpg';
+    $phpmailer->AddEmbeddedImage($logo, 'logo' ,  "logo.png" ); 
+    $phpmailer->AddEmbeddedImage($bk, 'image' ,  "image-email-register.png" ); 
+    $phpmailer->IsHTML(true); 
+    $phpmailer->Body = EmailBodyRegister($name);
+    $test = $phpmailer->Send();
+}
+
+function send_email_resgister($request) {
+    $phpmailer = send_email();
+    registerSuccess( $phpmailer , "sukhum.n@likemeasia.com" ,  "Sukuhm Nilpech");
+}
+
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/email/', array(
+      'methods' => 'get',
+      'callback' => 'send_email_resgister',
+      'permission_callback' => '__return_true'
+    ) );
+  } );
+
+
+  function EmailBodyResetPassword($name , $link) {
+    $body  = <<<text
+        <!DOCTYPE html><html lang="en"> <head> <meta charset="UTF-8" /> <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Document</title> <link rel="preconnect" href="https://fonts.googleapis.com" /> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;800&display=swap" rel="stylesheet" /> <style> .content-text ul { text-align: left; padding: 0px 0px 0px 20px; } .content-text ul li {list-style: decimal; } .primary { color: red } .image-content { overflow: hidden; border-radius: 20px; height: 200px; margin: 20px 0; } .image-content img { width: 100%; object-fit: cover; border-radius: 20px; } .btn { padding: 10px 30px; width: 100%; border-radius: 4px; max-width: 300px; margin-top: 30px; background-color:#03428E ; color:white;border:0px; font-weight: 300; font-family: 'Kanit', sans-serif; } .text-primary { color:#03428E ; font-weight: 500; } .text-center { align-items: center; } </style> </head> <body> <div style=" background-color: #f7f7f7; padding: 0px; margin: 0px; position: fixed; top: 0; bottom: 0; left: 0; width: 100%; font-family: 'Kanit', sans-serif; font-weight: 300; " > <div style=" background: white; border: 1px solid rgba(0, 0, 0, 0.1); width: 100%; height: fit-content; max-width: 600px; margin: 20px auto; border-radius: 5px; padding-bottom: 30px; " > <div style="background-color: #03428e; width: 100%; height: 20px"></div> <div style="padding: 20px 50px 0px; color: #03428e; margin-bottom: 0"> <div style=" border-bottom: 1px solid rgba(0, 0, 0, 0.1); width: 100%; padding-bottom: 20px; " > <div style="width: 128px"> <img src="cid:logo" alt="Nippon Image" style="width: 100%" /> </div> </div> </div> <div style="padding: 20px 50px; text-align: center"> <!-- CONTENT --> <div class="content-text"> <h1 class="text-primary text-center">ยินดีต้อนรับ คุณ $name </h1> <p style="text-align: left;"> เราได้รับแจ้งการลืมรหัสผ่านของคุณ หากคุณต้องการรีเซ็ตรหัสผ่านใหม่ สามารถกดปุ่มด้านล่างเพื่อรีเซ็ตได้ทันที </p> </div> <a href="$link"> <button class="btn btn-primary">รีเซ็ตรหัสผ่าน</button> </a> </div> </div> </div> </div> </body></html>
+    text; 
+
+    return $body;
+
+  }
+
+
+
+  function send_email_lost_password($request){ 
+    $data = $request->get_body();
+    $toArray = json_decode($data);
+    if(!isset($toArray->emailVal)):
+        status_header(400);
+        return json_decode(json_encode(["message" => "email_empty"]));
+    endif;
+    $user = get_user_by( 'email',$toArray->emailVal );
+    $token = get_password_reset_key($user  );
+    $phpmailer = send_email();
+    $phpmailer->addAddress($toArray->emailVal,   $user->data->display_name);
+    $phpmailer->Subject = "นิปปินเพนต์ เข้าสู่ระบบ - รีเซตรหัสผ่าน";
+    $logo = dirname(__FILE__) . '/assets/images/logo_png.png';
+    $phpmailer->AddEmbeddedImage($logo, 'logo' ,  "logo.png" ); 
+    $phpmailer->IsHTML(true); 
+    $link = get_site_url()  . "/reset-password?token=". $token . "&user_login=".$user->data->user_login;
+    $phpmailer->Body = EmailBodyResetPassword($user->data->display_name , $link);
+    $phpmailer->Send();
+    return json_decode(json_encode(["link" =>   $link  , "message" => "OK"]));
+
+  }
+
+
+
+  add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/lost_password/', array(
+      'methods' => 'post',
+      'callback' => 'send_email_lost_password',
+      'permission_callback' => '__return_true'
+    ) );
+  } );
+ 
+ function func_reset_password($request) {
+    $data = $request->get_body();
+    $toArray = json_decode($data);
+    $user = get_user_by( 'login',$toArray->emailVal );
+    reset_password($user , $toArray->password);
+    return json_decode(json_encode([
+        "message" => "OK"
+    ]));
+ }
+  add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/reset_password/', array(
+      'methods' => 'post',
+      'callback' => 'func_reset_password',
+      'permission_callback' => '__return_true'
+    ) );
+  } );
+ 
+ 
+
+
+  function saveCurrent() {
+    global $wp;
+    $current_url = home_url(add_query_arg(array(), $wp->request));
+    $match = "";
+    $checkWpLoginPageg = in_array($GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php'));
+
+    if(!$checkWpLoginPageg):
+        setcookie('url_latest',$current_url , time()+3600 , "/");
+
+    endif;
+  }
+
+
+  add_action("save_current_url" , "saveCurrent");
+  function checkUserAddedInfoSuccess() {
+    global $wp;
+    $current_url = home_url(add_query_arg(array(), $wp->request));
+    $checkWpLoginPageg = in_array($GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php'));
+    if(!$checkWpLoginPageg):
+        if(is_user_logged_in()):
+            // echo "check_user_add_info";
+            $userId = get_current_user_id();
+            if(isset($_COOKIE["check_info_user"])):
+                if($userId == $_COOKIE['check_info_user']):
+                    echo "";
+
+                else:
+                    $query = new WP_Query([
+                        'post_type' => "user_custom_field",
+                        "meta_query" => [
+                            [
+                                [
+                                    "key" => "user_id",
+                                    "value"  => get_current_user_id() ,
+                                    "compare" => "LIKE"
+                                ],
+                            ]
+                        ]
+                    ]);
+                    $found_posts = $query->found_posts;
+                    if($found_posts == 0):
+                        wp_redirect(get_site_url()."/wp-login.php?action=register");
+                    else:
+                        setcookie("check_info_user" , get_current_user_id() , time() * 3600 , "/");
+                    endif;
+                endif;
+            endif;
+            
+        endif;
+     
+   endif;
+  }
+
+
+  add_action("check_user_add_info" , "checkUserAddedInfoSuccess");

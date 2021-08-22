@@ -1,9 +1,19 @@
 <?php 
-$lang=get_bloginfo("language");  
+do_action("save_current_url");
+do_action("check_user_add_info");
 
+$lang=get_bloginfo("language");  
 $title_static = [
-    "en" => " - Nippon Paint The Coatings Expert",
-    "th" => " - นิปปอนเพนต์ ผู้ชี่ยวชาญทุกงานสี"
+    "en" => [
+        "title" =>  " - Nippon Paint The Coatings Expert",
+        "link" => get_site_url() . "/edit-account"
+
+    ],
+    "th" => [
+        "title" => " - นิปปอนเพนต์ ผู้ชี่ยวชาญทุกงานสี" ,
+        "link" => get_site_url() . "/edit-account"
+    ],
+    
 ][$lang];
 $search  =  get_site_url() . "/search/";
 
@@ -14,7 +24,7 @@ $search  =  get_site_url() . "/search/";
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<?php wp_head(); ?>
-    <title><?php the_title().$title_static; ?></title>
+    <title><?php the_title().$title_static["title"]; ?></title>
     <link 
         rel="icon" 
         href="<?php bloginfo("template_directory");  ?>/assets/images/favicon.svg" 

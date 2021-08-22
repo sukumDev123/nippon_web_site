@@ -80,8 +80,13 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
 <div id="solution-pages" >
         <div class="margin-page"></div>
         <div class="content">
-            <h1><?php echo get_the_title() ?></h1>
-            <p><?php echo get_field("short_text") ?> </p>
+            <h1  class="ui header"><?php echo get_the_title() ?>
+                <div class="sub header">
+                <?php echo get_field("short_text") ?>
+                </div>
+            </h1>
+        </h1>
+            
         </div>
 </div>
 <?php 
@@ -110,9 +115,10 @@ $cate  = $_GET['cate'];
 endif;
  get_template_part("components/select-custom" , null , [
      "input_id" => "cate_id",
-     "url_redirect" => "",
+     "url_redirect" => get_permalink(),
      "categories" => $problem_and_solution_cate,
-     "value" => ""
+     "value" => $cate,
+
  ]);
  
  
@@ -168,7 +174,7 @@ endif;
                 "favorite" =>  $checkFav,
                 "index" => $index,
                 "type_blog" => "problem-and-solution",
-                "new" => TRUE
+                "new" => TRUE,
             ]);
             $index += 1;
             }
@@ -182,6 +188,8 @@ endif;
             <a  href="<?php $page = $page +  6;  echo  get_permalink(get_the_ID())."?paged_show=".$page ?>">ดูเพิ่มเติม</a>
         </div>
         <?php endif; ?>
+
+        <?php do_action("empty_page" , ["count" => $count ]) ?>
 
      
  </div>

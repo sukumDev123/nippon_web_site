@@ -24,9 +24,10 @@
 
         ]
     ][$lang];
+ $grade = "";
+
 ?>
  
-<!-- Paint brush -->
 
 <?php
 $word_selected = "";
@@ -39,10 +40,16 @@ $word_selected = "";
         $termId = 0;
         $allTerms = [];
         $terms_post = get_the_terms( $post->cat_ID , 'product_cat' );
-       
+        $gradeParent = "";
+        $termID = [];
+        // var_dump($terms_post);
         if($terms_post):
             foreach ($terms_post as $term_cat):
                 $term_cat_id = $term_cat->term_id;
+           
+                if($term_cat->name == "เกรด"):
+                    $gradeParent = $term_cat->term_id;
+                endif;
                 if($term_cat->parent == 0) :
                     if( $termId == 0 ):
                         $termId = $term_cat->term_id;
@@ -50,10 +57,27 @@ $word_selected = "";
                     endif;
                 endif;
             endforeach;
-            
+            for($i = 0 ; $i < count($terms_post);$i++):
+                $term_cat = $terms_post[$i];
+                if($term_cat->name == "เกรด"):
+                    $gradeParent = $term_cat->term_id;
+                    break;
+                endif;
+            endfor;
+            for($i = 0 ; $i < count($terms_post);$i++):
+                $term_cat = $terms_post[$i];
+                if($term_cat->parent ==  $gradeParent):
+                    $grade = $term_cat->name;
+                    break;
+                endif;
+            endfor;
+ 
             foreach ($terms_post as $term_cat):
+                if($term_cat->parent ==  $gradeParent):
+                    $grade = $term_cat->name;
+                endif;
                 if($term_cat->parent == $termId) :
-                    $termSubCate[$term_cat->term_id] =  ["name" => $term_cat->name , "ID" => $term_cat->term_id];
+                    $termSubCate[$term_cat->term_id] =  ["name" => $term_cat->name , "ID" => $term_cat->term_id , "PARENT" => $term_cat->parent];
                 endif;
             endforeach;
             foreach ($terms_post as $term_cat):
@@ -74,7 +98,7 @@ $word_selected = "";
     ?>
 
 
- 
+ <div class="nav-single-products"></div>
 <div   id="nav-products">
     <ul class="desktop">
         <?php if(count($terms) > 0): ?>
@@ -141,7 +165,22 @@ $word_selected = "";
        <div>
            <img  src="<?php echo $featured_img_url ?>" />
             <div class="icon-compare-product-and-favorites">
-                <button  class="ui button submit primary"  >เปรียบเทียบ></button>
+            <?php   
+                // $gradeParent = ""; 
+                // foreach( $termSubCate as  $termShow): 
+                //     if($termShow['name'] == "เกรด"):
+                //         $gradeParent =  $termShow['PARENT'];
+                //     endif;
+                // endforeach;
+                // foreach( $termSubCate as  $termShow): 
+                //     if($gradeParent == $termShow['ID']):
+                //         $grade =  $termShow['name'];
+                //     endif;
+                // endforeach;
+                ?>
+                <a href="<?php echo  get_site_url() ?>/compare-product/?product_1=<?php echo get_the_ID() ?>&mainCate=<?php echo  $termId ?><?php if($grade): echo  "&cate1=".$grade ; endif; ?>">
+                    <button  class="ui button submit primary"  >เปรียบเทียบ</button>
+                </a>
                 <?php if( $userId !=  FALSE): ?>
                     
                     <i onclick="productFavorites(<?php echo $userId ?> ,  <?php  echo $prod_id ?> , 'product')" class="<?php echo $heart_outline_class_name  ?>"></i>
@@ -164,7 +203,12 @@ $word_selected = "";
        <?php the_content() ?>  
 
        <div class="categories">
-               <?php foreach( $termSubCate as  $termShow): ?>
+               <?php foreach( $termSubCate as  $termShow): 
+                    if($termShow['name'] == "เกรด"):
+                        $grade =  $termShow['ID'];
+                    endif;
+                    
+                ?>
                <div class='category'>
                    <h5 class='title'><?php  echo $termShow['name']; ?></h5>
                    <h5 class="value"><?php  echo  $termSubCate2[$termShow['ID']] ?></h5>
@@ -240,7 +284,7 @@ $word_selected = "";
 
         <div class="container"><div style="border-top: 1px solid rgba(0,0,0,0.1);padding-top:5em"></div></div>
 	 
-		<!-- <div class="mt-5" style="height:20px;" ></div> -->
+ 
        
 <div  class="product-padding">
 <?php get_template_part("other/products" , null , [

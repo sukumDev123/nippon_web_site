@@ -1,6 +1,4 @@
-<?php 
-get_template_part("other/loading");
-?>
+
 
 
 <div class="ui fluid three item  secondary pointing menu">
@@ -52,10 +50,10 @@ $index = 0;
      
       ?>
   
-    <div class="column column-product-card">
+    <div class="column column-product-card column-product-card-<?php echo $index; ?>">
       <div class=" ui segment height-card-eq">
         <div class="cancel-icon"> 
-            <a onclick="removeFavoritesList(<?php echo get_current_user_id() ?> , <?php echo $prodId ?> , 'product'  , <?php echo $index++; ?> , 'column-product-card' )" class="remove_from_wishlist"  >
+            <a onclick="removeFavoritesList(<?php echo get_current_user_id() ?> , <?php echo $prodId ?> , 'product'  , '<?php echo 'column-product-card-' .$index  ?>'  , 'column-product-card' )" class="remove_from_wishlist"  >
               <?php  get_template_part("components/icon" ,null, ["icon" => "icon-cancel"]); ?>
             </a>
         </div>
@@ -75,6 +73,7 @@ $index = 0;
       
     </div>
     <?php 
+    $index += 1;
       endif;
       
     endforeach;
@@ -98,3 +97,4 @@ $index = 0;
         </h3>
         <?php endif; ?>
 
+        <?php do_action("empty_page" , ["count" => $count ]) ?>

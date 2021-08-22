@@ -151,8 +151,12 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
 <div id="solution-pages" >
     <div class="margin-page"></div>
     <div class="content">
-            <h1><?php echo get_the_title() ?></h1>
-            <p><?php echo get_field("short_text") ?> </p>
+            <h1  class="ui header"><?php echo get_the_title() ?>
+                <div class="sub header">
+                <?php echo get_field("short_text") ?>
+                </div>
+            </h1>
+             
         </div>
 
 
@@ -190,6 +194,7 @@ $args = [
 $solutions = [];
 $query = new WP_Query($args);
 $solution_id = 0;
+$product_s = $query->found_posts;
 while ($query->have_posts()) {
     $query->the_post();
     $id = get_the_ID();
@@ -215,6 +220,7 @@ while ($query->have_posts()) {
     <?php
     // the_excerpt();
 }
+
 wp_reset_query();
  
 ?>

@@ -93,8 +93,11 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
 <div id="solution-pages" >
         <div class="margin-page"></div>
         <div class="content">
-            <h1><?php echo get_the_title() ?></h1>
-            <p><?php echo get_field("short_text") ?> </p>
+            <h1  class="ui header"><?php echo get_the_title() ?>
+                <div class="sub header">
+                <?php echo get_field("short_text") ?>
+                </div>
+            </h1>
         </div>
 </div>
 <?php 
@@ -161,7 +164,7 @@ endif;
                 $args["tax_query"]  = [
                     [
                     'taxonomy' => 'problem_and_solution_cate',
-                    'field' => 'name',
+                    'field' => 'term_id',
                     'terms' =>  $cate,
                     'include_children' => true,
                     'operator' => 'IN'
@@ -211,8 +214,7 @@ endif;
             <a  href="<?php $page = $page +  6;  echo  get_permalink(get_the_ID())."?paged_show=".$page ?>">ดูเพิ่มเติม</a>
         </div>
         <?php endif; ?>
-
-     
+        <?php do_action("empty_page" , ["count" => $count ]) ?>
  </div>
 <div class="mt-10rem"></div>
  

@@ -1,3 +1,5 @@
+// const { isNumber } = require("lodash");
+
 function uploadFile() {
   const resume_upload = document.querySelector("#resume_upload");
   const transcript_upload = document.querySelector("#transcript_upload");
@@ -224,7 +226,23 @@ function IsNumber() {
   Array.from(isNumber).forEach((isN) => {
     isN &&
       isN.addEventListener("keypress", (event) => {
+        // if (+event.key < 0) event.preventDefault();
         if (!/[0-9]/.test(event.key)) {
+          event.preventDefault();
+        }
+      });
+  });
+}
+function isPhone() {
+  const isNumber = document.querySelectorAll(".isPhone");
+  Array.from(isNumber).forEach((isN) => {
+    isN &&
+      isN.addEventListener("keypress", (event) => {
+        if (!/[0-9]/.test(event.key)) {
+          event.preventDefault();
+        }
+        // console.log({ d: isN.value });
+        if (isN.value.length >= 10) {
           event.preventDefault();
         }
       });
@@ -472,11 +490,11 @@ function addPlusButton() {
             <div class="ui three columns grid">
                 <div class="column cal-div">
                         <h5 for="A1"> ความกว้างของผนัง (เมตร)</h5>
-                        <input class="isNumber" type="number" id="${inputId}">
+                        <input class="isNumber" type="text" id="${inputId}">
                 </div>
                 <div class="column  cal-div">
                         <h5 for="A1">ความสูงของผนัง (เมตร)</h5>
-                        <input class="isNumber" type="number" id="${input2Id}">
+                        <input class="isNumber" type="text" id="${input2Id}">
                 </div>
                 <div class="column ">
                     <div class="cal-result-step4">
@@ -489,7 +507,6 @@ function addPlusButton() {
       
       </div>
       `;
-
       external_big_div.appendChild(addExternal);
       const _input1 = document.querySelector("#" + inputId);
       const _input2 = document.querySelector("#" + input2Id);
@@ -499,7 +516,9 @@ function addPlusButton() {
           behavior: "smooth",
           block: "center",
         });
-      })[(_input1, _input2)].forEach((element) => {
+        IsNumber();
+      }, 100);
+      [_input1, _input2].forEach((element) => {
         element &&
           element.addEventListener("keyup", (e) => {
             const _input1Val = parseInt(_input1.value) || 0;
@@ -680,34 +699,34 @@ function calculateInternalRoomSummary() {
 }
 
 function showMoreCalPageInternal() {
-  const show_more_cal = document.querySelector("#show-more-cal .title");
+  const show_more_cal = document.querySelector("#show-more-cal");
   let clicked = false;
   if (show_more_cal) {
     show_more_cal.addEventListener("click", () => {
-      const title = document.querySelector("#show-more-cal .title");
-      const content = document.querySelector("#show-more-cal .content");
+      // const title = document.querySelector("#show-more-cal .title");
+      // const content = document.querySelector("#show-more-cal .content");
 
-      if (clicked === false) {
-        title.className = "title active";
-        content.className = "content active";
-        clicked = true;
-      } else {
-        title.className = "title ";
-        content.className = "content ";
-        clicked = false;
-      }
+      // if (clicked === false) {
+      //   title.className = "title active";
+      //   content.className = "content active";
+      //   clicked = true;
+      // } else {
+      //   title.className = "title ";
+      //   content.className = "content ";
+      //   clicked = false;
+      // }
 
       setTimeout(() => {
         document.querySelector("#show-more-cal").scrollIntoView({
           behavior: "smooth",
           block: "center",
         });
-      });
+      }, 100);
     });
   }
 }
 
-function saveFavorites(user_id, post_id, type, index) {
+function saveFavorites(user_id, post_id, type, name_class_fav) {
   const data = {
     user_id: user_id.toString(),
     post_id: post_id.toString(),
@@ -715,7 +734,7 @@ function saveFavorites(user_id, post_id, type, index) {
   };
 
   const url = domain + "wp-json/api/v1/favorites";
-  const blogs_fav = document.querySelectorAll(".card-blog-save-favorites");
+  const blogs_fav = document.querySelector("." + name_class_fav);
 
   loadingOn();
   fetch(url, {
@@ -726,11 +745,41 @@ function saveFavorites(user_id, post_id, type, index) {
     .then((d) => {
       // console.log({ d });
       if (d.doing === "CREATED") {
-        blogs_fav[index].children[0].className = "favorites-button hide";
-        blogs_fav[index].children[1].className = "favorites-button-active show";
+        blogs_fav.children[0].className = "favorites-button hide";
+        blogs_fav.children[1].className = "favorites-button-active show";
       } else {
-        blogs_fav[index].children[0].className = "favorites-button show";
-        blogs_fav[index].children[1].className = "favorites-button-active hide";
+        blogs_fav.children[0].className = "favorites-button show";
+        blogs_fav.children[1].className = "favorites-button-active hide";
+      }
+      loadingOff();
+    });
+}
+
+function saveFavoritesOnePost(user_id, post_id, type, ele1, ele2) {
+  const data = {
+    user_id: user_id.toString(),
+    post_id: post_id.toString(),
+    type,
+  };
+
+  const url = domain + "wp-json/api/v1/favorites";
+
+  const _ele1 = document.querySelector("." + ele1);
+  const _ele2 = document.querySelector("." + ele2);
+  loadingOn();
+  fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((d) => {
+      // console.log({ d });
+      if (d.doing === "CREATED") {
+        _ele1.className = "save_favorites_black hide";
+        _ele2.className = "saved_favorites ";
+      } else {
+        _ele1.className = "save_favorites_black ";
+        _ele2.className = "saved_favorites  hide";
       }
       loadingOff();
     });
@@ -742,55 +791,9 @@ function productFavorites(user_id, post_id, type, index = null) {
     post_id: post_id.toString(),
     type,
   };
-  const fav = document.querySelectorAll("i.heart");
-  const url = domain + "wp-json/api/v1/favorites";
-  // const blogs_fav = document.querySelectorAll(".card-blog-save-favorites");
-  console.log({ fav, index });
-  // if (d.doing === "CREATED") {
-  fav[index - 1].className = "heart outline icon hide_show";
-  fav[index].className = "heart icon show";
-  // } else {
-  //   fav[index].className = "heart outline icon show";
-  //   fav[index + 1].className = "heart icon hide_show";
-  // }
-  // }
-  // loadingOn();
-  // fetch(url, {
-  //   method: "POST",
-  //   body: JSON.stringify(data),
-  // })
-  //   .then((response) => response.json())
-  //   .then((d) => {
-  //     // console.log({ d });
-  //     if (index === null) {
-  //       if (d.doing === "CREATED") {
-  //         fav[0].className = "heart outline icon hide_show";
-  //         fav[1].className = "heart icon show";
-  //       } else {
-  //         fav[0].className = "heart outline icon show";
-  //         fav[1].className = "heart icon hide_show";
-  //       }
-  //     } else {
-  //       if (d.doing === "CREATED") {
-  //         fav[index].className = "heart outline icon hide_show";
-  //         fav[index + 1].className = "heart icon show";
-  //       } else {
-  //         fav[index].className = "heart outline icon show";
-  //         fav[index + 1].className = "heart icon hide_show";
-  //       }
-  //     }
 
-  //     loadingOff();
-  //   });
-}
-function removeFavoritesList(user_id, post_id, type, index, className) {
-  const data = {
-    user_id: user_id.toString(),
-    post_id: post_id.toString(),
-    type,
-  };
-  const cards = document.querySelectorAll("." + className);
   const url = domain + "wp-json/api/v1/favorites";
+  const fav = document.querySelectorAll(`.heart`);
 
   loadingOn();
   fetch(url, {
@@ -800,34 +803,159 @@ function removeFavoritesList(user_id, post_id, type, index, className) {
     .then((response) => response.json())
     .then((d) => {
       // console.log({ d });
-      cards[index].style.display = "none";
+      if (index === null) {
+        if (d.doing === "CREATED") {
+          fav[0].className = "heart outline icon hide_show";
+          fav[1].className = "heart icon show";
+        } else {
+          fav[0].className = "heart outline icon show";
+          fav[1].className = "heart icon hide_show";
+        }
+      } else {
+        if (d.doing === "CREATED") {
+          fav[index].className = "heart outline icon hide_show";
+          fav[index + 1].className = "heart icon show";
+        } else {
+          fav[index].className = "heart outline icon show";
+          fav[index + 1].className = "heart icon hide_show";
+        }
+      }
 
       loadingOff();
     });
 }
+// function productFavorites(user_id, post_id, type, index = null) {
+//   const data = {
+//     user_id: user_id.toString(),
+//     post_id: post_id.toString(),
+//     type,
+//   };
+
+//   const url = domain + "wp-json/api/v1/favorites";
+
+//   loadingOn();
+//   fetch(url, {
+//     method: "POST",
+//     body: JSON.stringify(data),
+//   })
+//     .then((response) => response.json())
+//     .then((d) => {
+//       // console.log({ d });
+//       if (index === null) {
+//         if (d.doing === "CREATED") {
+//           fav[0].className = "heart outline icon hide_show";
+//           fav[1].className = "heart icon show";
+//         } else {
+//           fav[0].className = "heart outline icon show";
+//           fav[1].className = "heart icon hide_show";
+//         }
+//       } else {
+//         if (d.doing === "CREATED") {
+//           fav[index].className = "heart outline icon hide_show";
+//           fav[index + 1].className = "heart icon show";
+//         } else {
+//           fav[index].className = "heart outline icon show";
+//           fav[index + 1].className = "heart icon hide_show";
+//         }
+//       }
+
+//       loadingOff();
+//     });
+// }
+function productFavoritesList(user_id, post_id, type, index = null) {
+  const data = {
+    user_id: user_id.toString(),
+    post_id: post_id.toString(),
+    type,
+  };
+
+  const fav1 = document.querySelector(`#product-favorites-tag-${index}`);
+  const fav2 = document.querySelector(`#product-saved-favorites-tag-${index}`);
+  const url = domain + "wp-json/api/v1/favorites";
+  // const blogs_fav = document.querySelectorAll(".card-blog-save-favorites");
+
+  // }
+  // }
+  loadingOn();
+  fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((d) => {
+      if (d.doing === "CREATED") {
+        fav1.className = "heart outline icon hide_show";
+        fav2.className = "heart icon show";
+      } else {
+        fav1.className = "heart outline icon show";
+        fav2.className = "heart icon hide_show";
+      }
+
+      loadingOff();
+    });
+}
+function removeFavoritesList(user_id, post_id, type, nameClass, classCount) {
+  const data = {
+    user_id: user_id.toString(),
+    post_id: post_id.toString(),
+    type,
+  };
+  const cards = document.querySelector("." + nameClass);
+  const checkCardLength = document.querySelectorAll("." + classCount);
+  const url = domain + "wp-json/api/v1/favorites";
+
+  loadingOn();
+
+  fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((d) => {
+      // console.log({ d });
+      // cards[index].style.display = "none";
+      cards.remove();
+
+      if (checkCardLength.length === 1) {
+        onEmptyCardShow();
+      }
+      loadingOff();
+    });
+}
+function onEmptyCardShow() {
+  document.querySelector(".empty_data_page.hide").className = "empty_data_page";
+}
 function loadingOn() {
   const loading = document.querySelector("#loading");
-  loading.style.display = "flex";
+  const loading_new = document.querySelector("#loading-new");
+
+  if (loading) {
+    loading.style.display = "flex";
+  }
+  if (loading_new) {
+    loading_new.style.display = "flex";
+  }
 }
 function loadingOff() {
   const loading = document.querySelector("#loading");
-  loading.style.display = "none";
+  const loading_new = document.querySelector("#loading-new");
+  if (loading) {
+    loading.style.display = "none";
+    // loading.style.display = "flex";
+  }
+  if (loading_new) {
+    loading_new.style.display = "none";
+    // loading.style.display = "flex";
+  }
 }
-function onSelected(name, eleId, eleId1, eleId2, url = null) {
+function onSelected(eleId, url = null) {
   const _element = document.querySelector("#" + eleId);
-  const _eleId1 = document.querySelector("." + eleId1);
-  const _eleId2 = document.querySelector("." + eleId2);
-  _element.value = name;
-
-  _eleId1.className = _eleId1.className
-    .split(" ")
-    .filter((c) => c !== "active")
-    .join(" ");
-  _eleId2.className = _eleId2.className
-    .split(" ")
-    .filter((c) => c !== "active");
-  // console.log({ d: _eleId1.className, h: _eleId2.className });
-  if (url) window.location.href = url;
+  console.log({ v: _element.value, url });
+  if (url) {
+    //
+    if (_element.value) window.location.href = url + "/?cate=" + _element.value;
+    else window.location.href = url;
+  }
 }
 
 function onSelectedShowList(elementId, elementId2) {
@@ -840,10 +968,12 @@ function onSelectedShowList(elementId, elementId2) {
   else _element2.className = elementId2 + " " + "active";
 }
 
-function checkFieldRequired() {
+function checkFieldRequired(checkedField = undefined, bigDiv = "") {
   let checkErr = true;
   const _keysId = [];
-  const fieldRequired = document.querySelectorAll(".field.required");
+  const fieldRequired = bigDiv
+    ? document.querySelectorAll(bigDiv + " .field.required")
+    : document.querySelectorAll(".field.required");
   // const textAreaFieldRequired = document.querySelectorAll(".field.required");
   // Array.from().map(f => {
   //   if(!f.value) checkErr
@@ -851,30 +981,204 @@ function checkFieldRequired() {
   let data = {};
   for (let i = 0; i < Array.from(fieldRequired).length; i++) {
     const input = fieldRequired[i].querySelector("input");
-    if (!input) continue;
-    if (input.value === "on") {
-      if (!input.checked) {
-        fieldRequired[i].className += " error";
-        checkErr = false;
+    const select = fieldRequired[i].querySelector("select");
+    const textarea = fieldRequired[i].querySelector("textarea");
+    // console.log({ textarea });
+    if (select) {
+      if (!select.value) {
+        // if(checkedField[select.id])
+        if (checkedField) {
+          if (checkedField[select.id]) {
+            fieldRequired[i].className += " error";
+            checkErr = false;
+          }
+        } else {
+          fieldRequired[i].className += " error";
+          checkErr = false;
+        }
       } else {
         fieldRequired[i].className = fieldRequired[i].className
           .split(" ")
           .filter((c) => c !== "error")
           .join(" ");
-        data[input.id] = input.value;
-        _keysId.push("#" + input.id);
+        _keysId.push("#" + select.id);
+        data[select.id] = select.value;
+      }
+    }
+    if (textarea) {
+      if (!textarea.value) {
+        if (checkedField) {
+          if (checkedField[textarea.id]) {
+            fieldRequired[i].className += " error";
+            checkErr = false;
+          }
+        } else {
+          fieldRequired[i].className += " error";
+          checkErr = false;
+        }
+      } else {
+        fieldRequired[i].className = fieldRequired[i].className
+          .split(" ")
+          .filter((c) => c !== "error")
+          .join(" ");
+        _keysId.push("#" + textarea.id);
+        data[textarea.id] = textarea.innerHTML;
       }
     } else {
-      if (!input.value) {
-        fieldRequired[i].className += " error";
-        checkErr = false;
+      if (!input) continue;
+      if (input.value === "on") {
+        if (!input.checked) {
+          if (checkedField) {
+            if (checkedField[input.id]) {
+              fieldRequired[i].className += " error";
+              checkErr = false;
+            }
+          } else {
+            fieldRequired[i].className += " error";
+            checkErr = false;
+          }
+        } else {
+          fieldRequired[i].className = fieldRequired[i].className
+            .split(" ")
+            .filter((c) => c !== "error")
+            .join(" ");
+          data[input.id] = input.checked;
+          _keysId.push("#" + input.id);
+        }
+      } else {
+        if (!input.value) {
+          if (checkedField) {
+            if (checkedField[input.id]) {
+              fieldRequired[i].className += " error";
+              checkErr = false;
+            }
+          } else {
+            fieldRequired[i].className += " error";
+            checkErr = false;
+          }
+        } else {
+          fieldRequired[i].className = fieldRequired[i].className
+            .split(" ")
+            .filter((c) => c !== "error")
+            .join(" ");
+          _keysId.push("#" + input.id);
+          data[input.id] = input.value;
+        }
+      }
+    }
+  }
+
+  function clearData() {
+    _keysId.forEach((k) => {
+      document.querySelector(k).value = "";
+      if (document.querySelector(k).value === "on")
+        document.querySelector(k).checked = false;
+    });
+  }
+
+  return {
+    fieldRequired,
+    checkErr,
+    data,
+    clear: clearData,
+  };
+}
+function checkField(checkedField = undefined, bigDiv = "") {
+  let checkErr = true;
+  const _keysId = [];
+  const fieldRequired = bigDiv
+    ? document.querySelectorAll(bigDiv + " .field")
+    : document.querySelectorAll(".field");
+  // const textAreaFieldRequired = document.querySelectorAll(".field.required");
+  // Array.from().map(f => {
+  //   if(!f.value) checkErr
+  // })
+  let data = {};
+  for (let i = 0; i < Array.from(fieldRequired).length; i++) {
+    const input = fieldRequired[i].querySelector("input");
+    const select = fieldRequired[i].querySelector("select");
+    const textarea = fieldRequired[i].querySelector("textarea");
+    // console.log({ textarea });
+    if (select) {
+      if (!select.value) {
+        // if(checkedField[select.id])
+        if (checkedField) {
+          if (checkedField[select.id]) {
+            fieldRequired[i].className += " error";
+            checkErr = false;
+          }
+        } else {
+          fieldRequired[i].className += " error";
+          checkErr = false;
+        }
       } else {
         fieldRequired[i].className = fieldRequired[i].className
           .split(" ")
           .filter((c) => c !== "error")
           .join(" ");
-        _keysId.push("#" + input.id);
-        data[input.id] = input.value;
+        _keysId.push("#" + select.id);
+        data[select.id] = select.value;
+      }
+    }
+    if (textarea) {
+      if (!textarea.value) {
+        if (checkedField) {
+          if (checkedField[textarea.id]) {
+            fieldRequired[i].className += " error";
+            checkErr = false;
+          }
+        } else {
+          fieldRequired[i].className += " error";
+          checkErr = false;
+        }
+      } else {
+        fieldRequired[i].className = fieldRequired[i].className
+          .split(" ")
+          .filter((c) => c !== "error")
+          .join(" ");
+        _keysId.push("#" + textarea.id);
+        data[textarea.id] = textarea.innerHTML;
+      }
+    } else {
+      if (!input) continue;
+      if (input.value === "on") {
+        if (!input.checked) {
+          if (checkedField) {
+            if (checkedField[input.id]) {
+              fieldRequired[i].className += " error";
+              checkErr = false;
+            }
+          } else {
+            fieldRequired[i].className += " error";
+            checkErr = false;
+          }
+        } else {
+          fieldRequired[i].className = fieldRequired[i].className
+            .split(" ")
+            .filter((c) => c !== "error")
+            .join(" ");
+          data[input.id] = input.checked;
+          _keysId.push("#" + input.id);
+        }
+      } else {
+        if (!input.value) {
+          if (checkedField) {
+            if (checkedField[input.id]) {
+              fieldRequired[i].className += " error";
+              checkErr = false;
+            }
+          } else {
+            fieldRequired[i].className += " error";
+            checkErr = false;
+          }
+        } else {
+          fieldRequired[i].className = fieldRequired[i].className
+            .split(" ")
+            .filter((c) => c !== "error")
+            .join(" ");
+          _keysId.push("#" + input.id);
+          data[input.id] = input.value;
+        }
       }
     }
   }
@@ -897,8 +1201,9 @@ function checkFieldRequired() {
 
 function saveFaqForm() {
   const faqForm = checkFieldRequired();
-  // console.log({ tt });
+
   // const url = "";
+  popUpSuccessOff();
   if (faqForm.checkErr) {
     const url = domain + "wp-json/api/v1/save_faq";
     fetch(url, {
@@ -910,20 +1215,19 @@ function saveFaqForm() {
     })
       .then((d) => d.json())
       .then((d) => {
-        alert("success");
+        // alert("success");
+        //document.querySelector(".popup-show").style.display = "flex";
+        popUpSuccessOn();
         faqForm.clear();
       });
   }
 }
-
-function registerForm() {
-  const inputRegis = checkFieldRequired();
-
-  // if()
-  // const keys = Object.keys(inputRegis.data);
-  let checkPhase1 = ["emailVal", "pwd", "confirm_password"].filter(
-    (c) => inputRegis.data[c]
-  ).length;
-  console.log({ checkPhase1 });
-  // console.log({ keys });
+function popUpSuccessOff() {
+  const icon_cancel = document.querySelector(".icon-cancel");
+  icon_cancel.addEventListener("click", (e) => {
+    document.querySelector(".popup-show").style.display = "none";
+  });
+}
+function popUpSuccessOn() {
+  document.querySelector(".popup-show").style.display = "flex";
 }

@@ -4,14 +4,23 @@ function compareProduct(e, url) {
   e.preventDefault();
   let _product_url = "";
   let _index = 0;
-  ["product_1", "product_2", "product_3"].map((id, ind) => {
+  [
+    "product_1",
+    "product_2",
+    "product_3",
+    "mainCate",
+    "cate1",
+    "cate2",
+    "cate3",
+  ].map((id, ind) => {
     const element = document.querySelector("#" + id);
-    console.log({ [id]: element.value });
-    if (element.value) {
-      if (_index == 0) _product_url += `?${[id]}=${element.value}`;
-      else _product_url += `&${[id]}=${element.value}`;
-      _index++;
-    }
+    // console.log({ [id]: element.value });
+    if (element)
+      if (element.value) {
+        if (_index == 0) _product_url += `?${[id]}=${element.value}`;
+        else _product_url += `&${[id]}=${element.value}`;
+        _index++;
+      }
   });
   // console.log({  });
   if (_product_url) {
@@ -22,7 +31,8 @@ function compareProduct(e, url) {
 }
 
 function removeChildElementSelect(_cate, ele) {
-  $index = _cate.children.length;
+  // $index = _cate.children.length;
+
   while (_cate.firstChild) {
     _cate.removeChild(_cate.firstChild);
     // --$index;
@@ -48,30 +58,51 @@ function mainCateChanged() {
       ["product_1", "product_2", "product_3"].forEach((element) => {
         const _cate = document.querySelector("#" + element);
         removeChildElementSelect(_cate, element);
-        createOption(_cate, "", "", "Select");
+        createOption(_cate, "", "", "เลือกเกรด");
       });
-
-      ["cate1", "cate2", "cate3"].forEach((ele, index) => {
-        const _cate = document.querySelector("#" + ele);
-        // removeChildElementSelect(product_2);
-
-        removeChildElementSelect(_cate, ele);
-        createOption(_cate, "", "", "Select");
-        if (d.product_term.length) {
-          compare_cate_2.style.display = "flex";
-        } else {
-          compare_cate_2.style.display = "none";
-        }
-        d.product_term.forEach((term) => {
-          console.log({ term });
-
-          createOption(_cate, "cate_grade_" + index, term.term_id, term.name);
+      // console.log({ d: d.product_term.length });
+      if (d.product_term.length) {
+        compare_cate_2.style.display = "flex";
+        ["cate1", "cate2", "cate3"].forEach((ele, index) => {
+          const _cate = document.querySelector("#" + ele);
+          removeChildElementSelect(_cate, ele);
+          createOption(_cate, "", "", "เลือกเกรด");
+          d.product_term.forEach((term) => {
+            console.log({ term });
+            createOption(_cate, "cate_grade_" + index, term.name, term.name);
+          });
         });
-      });
+      } else {
+        const url2 = domain + "/wp-json/api/v1/find_product";
+        ["cate1", "cate2", "cate3"].forEach((element) => {
+          const _cate = document.querySelector("#" + element);
+          _cate.style.display = "none";
+          _cate.value = "";
+        });
+        const data = {
+          cate_main: mainCate.value,
+          // sub_cate: mainCate.value,
+        };
+        fetchFunctionCate(url2, data).then((d) => {
+          const { products = [] } = d;
+          console.log({ products });
+          ["product_1", "product_2", "product_3"].forEach((ele, i) => {
+            const product_1 = document.querySelector("#" + ele);
+            removeChildElementSelect(product_1);
+            createOption(product_1, "", "", "เลือกเกรด");
+            products.forEach((product, i) => {
+              createOption(
+                product_1,
+                `product-option-${ele}-i`,
+                product.product_id,
+                product.name
+              );
+            });
+          });
+        });
+      }
     })
     .catch((error) => console.log({ error }));
-  console.log(mainCate.value);
-  //   });
 }
 
 function fetchFunctionCate(url, data) {
@@ -89,7 +120,7 @@ function fetchFunctionCate(url, data) {
         loadingOff();
         res(d);
       })
-      .catch((e) => rej(errpr));
+      .catch((e) => rej(e));
   });
 }
 
@@ -103,65 +134,96 @@ function createOption(mainElement, id, value, text) {
 
 function onProductCate1Changed(selected2_id) {
   const cate1 = document.querySelector("#cate1");
-  const cate2 = document.querySelector("#cate2");
-  const cate3 = document.querySelector("#cate3");
-  console.log({ selected2_id });
-  // compare-product-body
-  // console.log({ c: cate1.value });
-  if (!cate1.value) return;
-  const url = domain + "/wp-json/api/v1/find_product";
-  const data = {
-    product_cat: cate1.value,
-  };
-  createOption(product_1, "", "", "select");
-  fetchFunctionCate(url, data).then((d) => {
-    // console.log({ d });
-    const { products = [] } = d;
-    const product_1 = document.querySelector("#product_1");
+  const mainCate = document.querySelector("#mainCate");
 
-    removeChildElementSelect(product_1);
-    createOption(product_1, "", "", "select");
+  if (!cate1.value) return;
+  const url = domain + "/wp-json/api/v1/find_product_grade";
+  const data = {
+    cate_main: mainCate.value,
+    cate_sub: cate1.value,
+  };
+  const product_1 = document.querySelector("#product_1");
+
+  removeChildElementSelect(product_1);
+  createOption(product_1, "", "", "เลือกผลิตภัณฑ์");
+  fetchFunctionCate(url, data).then((d) => {
+    const { products = [] } = d;
+
     products.forEach((product, i) => {
-      createOption(product_1, "product_" + i, product.product_id, product.name);
-      cate2.disabled = false;
-      cate3.disabled = false;
+      createOption(
+        product_1,
+        "product-option-" + i,
+        product.product_id,
+        product.name
+      );
     });
   });
 }
 function onProductCate2Changed() {
   const cate2 = document.querySelector("#cate2");
-  const url = domain + "/wp-json/api/v1/find_product";
+  const url = domain + "/wp-json/api/v1/find_product_grade";
   const data = {
-    product_cat: cate2.value,
+    cate_main: mainCate.value,
+    cate_sub: cate2.value,
   };
+  const product_2 = document.querySelector("#product_2");
+  removeChildElementSelect(product_2);
+  createOption(product_2, "", "", "เลือกผลิตภัณฑ์");
   fetchFunctionCate(url, data).then((d) => {
-    // console.log({ d });
     const { products = [] } = d;
-    const product_2 = document.querySelector("#product_2");
-    removeChildElementSelect(product_2);
-    createOption(product_2, "", "", "select");
     products.forEach((product, i) => {
-      createOption(product_2, "product_" + i, product.product_id, product.name);
+      createOption(
+        product_2,
+        "product-option-2-" + i,
+        product.product_id,
+        product.name
+      );
     });
   });
 }
 function onProductCate3Changed() {
   const cate3 = document.querySelector("#cate3");
-  const url = domain + "/wp-json/api/v1/find_product";
+  const url = domain + "/wp-json/api/v1/find_product_grade";
   const data = {
-    product_cat: cate3.value,
+    cate_main: mainCate.value,
+    cate_sub: cate3.value,
   };
-  createOption(product_3, "", "", "select");
-
+  const product_3 = document.querySelector("#product_3");
+  removeChildElementSelect(product_3);
+  createOption(product_3, "", "", "เลือกผลิตภัณฑ์");
   fetchFunctionCate(url, data).then((d) => {
-    // console.log({ d });
     const { products = [] } = d;
-    const product_3 = document.querySelector("#product_3");
-    removeChildElementSelect(product_3);
-    createOption(product_3, "", "", "select");
-
     products.forEach((product, i) => {
-      createOption(product_3, "product_" + i, product.product_id, product.name);
+      createOption(
+        product_3,
+        "product-option-3-" + i,
+        product.product_id,
+        product.name
+      );
     });
   });
+}
+
+function onProduct1Selected() {
+  const product_1 = document.querySelector("#product_1");
+  const cate2 = document.querySelector("#cate2");
+  const cate3 = document.querySelector("#cate3");
+  const product_2 = document.querySelector("#product_2");
+  const product_3 = document.querySelector("#product_3");
+  console.log({ c: product_1.value });
+  if (product_1.value) {
+    cate3.disabled = false;
+    cate2.disabled = false;
+    product_2.disabled = false;
+    product_3.disabled = false;
+  } else {
+    cate3.value = "";
+    cate2.value = "";
+    product_2.value = "";
+    product_3.value = "";
+    product_2.disabled = true;
+    product_3.disabled = true;
+    cate3.disabled = true;
+    cate2.disabled = true;
+  }
 }

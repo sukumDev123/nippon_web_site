@@ -1,7 +1,8 @@
 // const { babelConfig } = require("laravel-mix");
-// const domain = "https://staging.tanpong.me/";
-const domain = "http://localhost/nippon/";
+const domain = "https://staging.tanpong.me/";
+// const domain = "http://localhost/nippon/";
 const loading = document.querySelector("#loading");
+const loading_news = document.querySelector("#loading-new");
 let searchType = "rgb-div";
 let product_suggestion = [];
 // let family_colors = [];
@@ -52,6 +53,8 @@ function showListOfFamilyColorThisShade(shadeId) {
     `;
       }
       if (loading) loading.className = "hide";
+      if (loading_news) loading_news.className = "hide";
+
       document.querySelector(".shade-color-div").scrollIntoView({
         behavior: "smooth",
         block: "start",
@@ -59,6 +62,7 @@ function showListOfFamilyColorThisShade(shadeId) {
     })
     .catch((e) => {
       if (loading) loading.className = "hide";
+      if (loading_news) loading_news.className = "hide";
     });
   // if (shade[shadeId]) {
   //   if (shade[shadeId].length) {
@@ -160,6 +164,7 @@ function findColorClose(value, type, familyColors) {
     // console.log({ _sort });
   }
   if (loading) loading.className = "hide";
+  if (loading_news) loading_news.className = "hide";
 }
 function distanceOfColor(rgbA, rgbB) {
   let labA = rgb2lab(rgbA);
@@ -300,6 +305,8 @@ function loadSolutionFromPage(id) {
       .then((d) => d.json())
       .then((page) => {
         loading.className = "hide";
+        if (loading_news) loading_news.className = "hide";
+
         product_suggestion = page.products_suggestion;
 
         if (page.solutions)
@@ -361,6 +368,13 @@ function homePageInitSwiper() {
       nextEl: ".swiper-image-next",
       prevEl: ".swiper-image-prev",
     },
+  });
+  const colours_library_swiper = new Swiper(".colours-library-swiper", {
+    slidesPerView: 1,
+    pagination: {
+      el: ".swiper-pagination",
+    },
+    // spaceBetween: 50,
   });
   // const swiper_product_cate = new Swiper(".swiper-product-cate", {
   //   slidesPerView: 3,
@@ -429,6 +443,11 @@ function homePageInitSwiper() {
       el: ".shade-pagination",
     },
   });
+  const swiperSingleGetIdea = new Swiper(".swiper-single-get-idea", {
+    pagination: {
+      el: ".swiper-pagination",
+    },
+  });
   const newsSwiper = new Swiper(".news-swiper", {
     loop: true,
     speed: 1000,
@@ -454,39 +473,91 @@ function homePageInitSwiper() {
       prevEl: ".swiper-button-prev",
     },
   });
+  [1, 2, 3, 4].forEach((runNumber) => {
+    const get_idea_swiper = new Swiper(".get_idea_swiper_" + runNumber, {
+      // loop: true,
+      speed: 1000,
+      // autoplay: {
+      //     delay: 3000,
+      // },
+      slidesPerView: 3,
+      spaceBetween: 30,
+      slidesPerGroup: 3,
+      slidesPerView: "auto",
+
+      // Navigation arrows
+      navigation: {
+        nextEl: ".swiper-button-next-" + runNumber,
+        prevEl: ".swiper-button-prev-" + runNumber,
+      },
+    });
+  });
+
+  const swiper_bog = new Swiper(".swiper-blog", {
+    // loop: true,
+    speed: 1000,
+    // autoplay: {
+    //     delay: 3000,
+    // },
+    slidesPerView: 3,
+    spaceBetween: 30,
+    slidesPerGroup: 3,
+    slidesPerView: "auto",
+
+    // Navigation arrows
+    navigation: {
+      // nextEl: ".swiper-button-next-" + runNumber,
+      // prevEl: ".swiper-button-prev-" + runNumber,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+    },
+  });
+
   const swiper_project = new Swiper(".swiper-project", {
     pagination: {
       el: ".swiper-pagination",
     },
   });
-  // const swiper_projects = new Swiper(".swiper-projects", {
-  //   loop: true,
-  //   speed: 1000,
-  //   // autoplay: {
-  //   //     delay: 3000,
-  //   // },
-  //   effect: "coverflow",
-  //   grabCursor: true,
-  //   centeredSlides: true,
-  //   slidesPerView: "auto",
+  const header_get_idea_images_swiper = new Swiper(
+    ".header_get_idea_images_swiper",
+    {
+      pagination: {
+        el: ".swiper-pagination-get-idea",
+      },
+      onAny(eventName, ...args) {
+        console.log("Event: ", eventName);
+        console.log("Event data: ", args);
+      },
+    }
+  );
 
-  //   coverflowEffect: {
-  //     rotate: 0,
-  //     stretch: -100,
-  //     depth: 0,
-  //     modifier: 1,
-  //     slideShadows: true,
-  //   },
+  const header_get_idea_images_swiper_slide = document.querySelectorAll(
+    ".header_get_idea_images_swiper .swiper-slide"
+  );
+  if (header_get_idea_images_swiper) {
+    const url = window.location.href.match(/slide=\d+/);
+    let slideDefault = 0;
+    // const realIndex = localStorage.getItem("realIndex");
+    // if (url && url.length) {
+    //   const _url = url[0].split("=");
+    const order_page = document.querySelector("#order-page-slider");
+    if (order_page) {
+      const slideTo = +order_page.value !== 0 ? +order_page.value - 1 : 0;
+      header_get_idea_images_swiper.slideTo(slideTo, false, false);
+    }
 
-  //   // Navigation arrows
-  //   navigation: {
-  //     nextEl: ".swiper-button-next",
-  //     prevEl: ".swiper-button-prev",
-  //   },
-  //   // pagination: {
-  //   //   el: ".swiper-pagination",
-  //   // },
-  // });
+    // localStorage.removeItem("realIndex");
+    // }
+
+    header_get_idea_images_swiper.on("slideChange", function () {
+      loadingOn();
+      const realIndex = header_get_idea_images_swiper.realIndex;
+      const element = header_get_idea_images_swiper_slide[realIndex];
+      window.location.href =
+        element.querySelector("a").href + "?slide=" + realIndex;
+    });
+  }
 
   const projectG2 = new Swiper(".project-swiper2", {
     loop: true,
@@ -508,17 +579,7 @@ function homePageInitSwiper() {
     },
   });
   if (loading) loading.className = "hide";
-
-  // const prev_id = document.querySelector("#prev-id");
-  // const next_id = document.querySelector("#next-id");
-  // if (prev_id && next_id) {
-  //   prev_id.addEventListener("click", () => {});
-  //   next_id.addEventListener("click", () => {
-  //     // product_card_swiper.slideNext();
-  //     // product_card_swiper.slick("slickNext");
-  //     console.log({ product_card_swiper: product_card_swiper });
-  //   });
-  // }
+  if (loading_news) loading_news.className = "hide";
 }
 const homePageHeaderOnFixed = () => {
   //   // window.addEventListener("scroll", () => {
@@ -587,26 +648,25 @@ const headerClicked = () => {
     bk_header.addEventListener("click", () => {
       onClickedHeader();
     });
+    const buttons = document.createElement("div");
+    buttons.className = "compare-and-cal";
+    buttons.innerHTML = `
+      <a href="${domain}/calculate-product/"><button class="go-to-compare-page">คำนวณปริมาณการใช้สี</button></a>
+      <a   href="${domain}/compare-product/" ><button class="go-to-cal-page">เปรียบเทียบผลิตภัณฑ์</button></a>
+      `;
+    Array.from(menuTop).forEach((menu, index) => {
+      if (index == 0) menu.children[1].appendChild(buttons);
 
-    Array.from(menuTop).forEach((menu) => {
-      // if (menu.children[1])
-      //   menu.children[1].addEventListener("mouseleave", (event) => {
-      //     // console.log({ event });
-      //     const ddd = menu.className
-      //       .split(" ")
-      //       .filter((c) => c != "menu-active")
-      //       .join(" ");
-      //     menu.className = ddd;
-      //     // const timeOut = setTimeout(() => {
-      //     //   clearTimeout(timeOut);
-      //     // }, 1000);
-      //   });
       menu.querySelector("a").addEventListener("mouseenter", (event) => {
-        // if (menu.querySelector("a").href.match("#"))
-        // if (menu.querySelector("a").href.match(/#/)) {
-        // event.preventDefault();
-        // console.log({ l:  });
         if (menu.children[1]) {
+          // sub-menus list
+          if (Array.from(menu.children[1].children).length > 6)
+            menu.children[1].style.justifyContent = "flex-start";
+          else menu.children[1].style.justifyContent = "center";
+
+          // Array.from(
+          // sub-menus list
+
           Array.from(menuTop).forEach((_menu) => {
             if (_menu.className.match("menu-active")?.length) {
               const ddd = _menu.className
@@ -623,11 +683,6 @@ const headerClicked = () => {
               .filter((c) => c != "menu-active")
               .join(" ");
             menu.className = ddd;
-            // const _ddd = header.className
-            //   .split(" ")
-            //   .filter((c) => c != "home_header_fixed")
-            //   .join(" ");
-            // header.className = _ddd;
           } else {
             menu.className += " menu-active";
             header.className += " header-active";
@@ -830,7 +885,13 @@ const handleMenuClickedShowSubMenu = () => {
   const menu_top_menu_online = document.querySelectorAll(
     "#menu-top-menu-online > li"
   );
+  // console.log({
+  //   menu_top_menu_online: ,
+  // });
   if (menu_top_menu_online) {
+    // console.log({ menusMain });
+    // if (Array.from(menu_top_menu_online).length > 6) {
+    // }
     Array.from(menu_top_menu_online).map((menu) => {
       // menu.className += " active";
       menu.addEventListener("click", (event) => {
@@ -914,6 +975,20 @@ function handleFooterMenuClicked() {
 function togglePasswordEvent() {
   console.log({ asdasdsad: "Saassd" });
 }
+function view_more_info_on_click() {
+  const view_more_info = document.querySelectorAll(".view_more_info");
+  const view_more_infos = Array.from(view_more_info);
+  view_more_infos.map((v) => {
+    v &&
+      v.addEventListener("click", (e) => {
+        console.log("asdsd");
+        document.querySelector(".header_get_idea_menus").scrollIntoView({
+          behavior: "smooth",
+          top: "start",
+        });
+      });
+  });
+}
 window.onload = () => {
   homePageInitSwiper();
   headerClicked();
@@ -928,7 +1003,7 @@ window.onload = () => {
   loadLocation();
   saveUserInfo();
   saveCareer();
-
+  isPhone();
   IsNumber();
   uploadFile();
   showMoreCalPageInternal();
@@ -940,7 +1015,8 @@ window.onload = () => {
   addPlusButton();
   summaryExternalCal();
   faqOnHeaderClicked();
-
+  view_more_info_on_click();
+  onResetButtonInit();
   const message_right = document.querySelector(".message-right");
   const contact_message_box = document.querySelector(".contact-message-box");
   const arrow_up_to_top = document.querySelector(".arrow-up-to-top");
@@ -1114,6 +1190,7 @@ function solutionChange(id, load_product = true) {
         }
       }
       if (loading) loading.className = "hide";
+      if (loading_news) loading_news.className = "hide";
 
       // console.log({ data });
     })

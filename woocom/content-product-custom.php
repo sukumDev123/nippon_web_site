@@ -182,7 +182,7 @@ $word_selected = "เลือกประเภทสินค้า";
 
 
  
-<div id="product-container" >
+<div  class="container" id="product-container" >
     <div class="product-cate-div">
         
     <?php

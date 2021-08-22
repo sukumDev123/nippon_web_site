@@ -16,14 +16,14 @@
 
 
 
-<div class="ui stackable two column grid">
+<div class="row">
 
 
 
 
 
 <?php 
-get_template_part("other/loading");
+ 
 $limit = 9;
 if(isset($_GET['limit'])):
   $limit = $_GET['limit'];
@@ -44,10 +44,10 @@ $index = 0;
      
       ?>
   
-    <div class="column column-problem-card">
+    <div class="col-12 col-md-6 column-problem-card column-problem-card-<?php echo $index ?>">
       <div class=" fav-problem-card ">
         <div class="cancel-icon"> 
-            <a onclick="removeFavoritesList(<?php echo get_current_user_id() ?> , <?php echo $prodId ?> , 'problem-and-solution'  , <?php echo $index++; ?> , 'column-favorites-card' )" class="remove_from_wishlist"  >
+            <a onclick="removeFavoritesList(<?php echo get_current_user_id() ?> , <?php echo $prodId ?> , 'problem-and-solution'  , '<?php echo 'column-problem-card-' . $index; ?>'   , 'column-problem-card' )" class="remove_from_wishlist"  >
               <?php  get_template_part("components/icon" ,null, ["icon" => "close"]); ?>
             </a>
         </div>
@@ -68,6 +68,7 @@ $index = 0;
       
     </div>
     <?php 
+    $index++;
       endif;
       
     endforeach;
@@ -89,4 +90,4 @@ $index = 0;
             </a>
         </h3>
         <?php endif; ?>
-
+        <?php do_action("empty_page" , ["count" => $count ]) ?>

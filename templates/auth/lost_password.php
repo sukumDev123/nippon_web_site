@@ -1,35 +1,68 @@
 
 
-<div  id="sign_in_step2" clas="login-form">
-    <form 
+<div    clas="login-form">
+    <div 
+
         class="ui form loginform" 
         name="loginform" 
-        id="loginform" 
-        action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" 
+        id="lost_password_form" 
+        action="<?php // echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" 
         method="post">
         <div class="field">
-            <h1 class="ui header primary-text" style="margin:0px;">
+            <h1 class="ui header primary-text text-center" style="margin:0px;">
                 ลืมรหัสผ่าน?
-                
-            </h1>
-            <h5 class="ui header centered" style="margin:0px;">
                 <div class="sub header">โปรดระบุอีเมลที่ต้องการรีเซ็ตรหัสผ่าน</div>
-            </h5>
+            </h1>
+           
         </div>
 
-        <div class="required field ">
-            <label for="user_login"><?php _e( 'Email' ); ?></label>
-            <input 
-                type="email" 
-                placeholder="<?php  _e( 'Email' ); ?>" 
-                name="email" 
-       
-                />
+     
+	<?php  get_template_part("components/input_exclamation" , null ,  [
+		"placeholder" => "Email",
+		"name" => "log",
+		"label" => "Email",
+		"id" => "emailVal",
+		"value" => "",
+		"class"=>"input" 
+	]); ?>
+    <div id="email_format_error" class="ui pointing red basic label pointing-alert">
+                        รูปแบบอีเมลผิดพลาด
+                    </div>
+        <div class="field mt-4">
+            <div class='range-button  button-normal'>
+                <input onmouseenter="onResetKeyDown(event)" onchange="onResetPasswordSubmit(event)" id="btn-slide-reset-password" type="range" name=""  value="0"   id="">
+                <h5>สไลด์เพื่อยืนยัน</h5>
+                <div class="rage-button_box">
+                    <i class="bi bi-chevron-double-right"></i>
+                </div>
+            </div>
+            <div class="button-loading">
+						<div class="d-grid gap-2  ">
+							<button
+
+							class="btn btn-primary btn-block" type="button" disabled>
+								<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+								Loading...
+							</button>
+						</div>
+					</div>
+            <!-- <button class="ui button submit primary fluid"></button> -->
         </div>
        
-         
+
+        
  
  
  
-    </form>
+    </div>
+      
+    <?php  get_template_part("components/form-success" , null ,  [
+		 "title" => "ตรวจสอบอีเมล",
+		 "sub_title" => "ระบบทำการส่งลิงก์เพื่อใช้รีเซ็ตรหัสผ่าน <br />
+         ไปทางอีเมลของคุณ",
+		 "btn_title" => "ตกลง",
+		 "id_form" => "lost_password_success",
+		 "link" => get_site_url(). "/wp-login.php"
+	]); ?>
+
 </div>

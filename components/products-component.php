@@ -21,8 +21,8 @@ endif;
 
                 <?php if( $userId !=  FALSE): ?>
                     
-                    <i onclick="productFavorites(<?php echo $userId ?> ,  <?php  echo $prod_id ?> , 'product' , <?php echo $args['index'] ?> )" class="<?php echo $heart_outline_class_name  ?>"></i>
-                    <i onclick="productFavorites(<?php echo $userId ?> ,  <?php  echo $prod_id ?> , 'product'  ,  <?php echo $args['index'] ?>)" style="color:#D7373F" class="<?php echo $heart_class_name  ?>"></i>
+                    <i id="product-favorites-tag-<?php echo $args['index'] ?>" onclick="productFavoritesList(<?php echo $userId ?> ,  <?php  echo $prod_id ?> , 'product' , <?php echo $args['index'] ?> )" class="<?php echo $heart_outline_class_name  ?>"></i>
+                    <i  id="product-saved-favorites-tag-<?php echo $args['index'] ?>"  onclick="productFavoritesList(<?php echo $userId ?> ,  <?php  echo $prod_id ?> , 'product'  , <?php echo $args['index'] ?>)" style="color:#D7373F" class="<?php echo $heart_class_name  ?>"></i>
                 <?php endif; ?>
 
 

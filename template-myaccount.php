@@ -1,6 +1,9 @@
+
+
 <?php
 
-
+get_template_part("other/loading");
+wp_logout();
 if ( ! is_user_logged_in() ) {
     wp_safe_redirect( wp_login_url() );
     exit;

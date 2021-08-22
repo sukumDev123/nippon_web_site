@@ -25,6 +25,7 @@ if($red == false) {
 				type="text" 
 				placeholder="<?php echo $placeholder ?>" 
 				name="<?php echo $name ?>" 
+				value="<?php echo $value  ?>"
 				id="<?php echo $id ?>"
 				class="<?php echo $class ?>" 
 				 

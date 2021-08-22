@@ -130,7 +130,7 @@ $word_selected = "เลือกประเภทสินค้า";
 
 
 
-<div id="product-container" >
+<div class="container" id="product-container" >
 <div class="product-cate-div">
     
 <?php
@@ -224,11 +224,11 @@ $word_selected = "เลือกประเภทสินค้า";
     
    
     endif;
-    $args = array(
-        'post_type' => 'product',
-        'posts_per_page' => 15,
-        "tax_query" =>  $tax_query,
-        'meta_key'	=> 'priority',
+        $args = array(
+            'post_type' => 'product',
+            'posts_per_page' => 15,
+            "tax_query" =>  $tax_query,
+            'meta_key'	=> 'priority',
             'orderby'   => 'meta_value_num',
             'order'		=> 'ASC'
         

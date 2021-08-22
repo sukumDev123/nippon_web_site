@@ -1,6 +1,6 @@
 <?php 
 
- 
+//  wp_logout();
  get_template_part("headers/header-home");
  get_template_part("other/loading");
 ?>
@@ -49,9 +49,7 @@
 
    
  <?php  get_template_part("other/group_find_location_footer_banner"); ?>
- 
 
- 
       
   
 </section>

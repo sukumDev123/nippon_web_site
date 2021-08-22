@@ -39,14 +39,7 @@ $aria_describedby_error = $args['aria_describedby_error'];
 				id="pwd_user_pass" <?php echo $aria_describedby_error; ?>  
 				placeholder="<?php  _e( 'Password' ); ?>" 
 				size="20"
-				/>
-
-
-	 
-
-    
-	
-    
+				/>    
   </div>
  
  <div class="field required">
@@ -59,6 +52,11 @@ $aria_describedby_error = $args['aria_describedby_error'];
 	id="wp-submit" 
 	type="submit"><?php esc_attr_e( 'Log In' ); ?></button>
   
+
+<?php get_template_part("components/login-social-button") ?>
+
+
+
 </form>		
 <!-- 
 

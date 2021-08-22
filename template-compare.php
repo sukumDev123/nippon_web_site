@@ -7,11 +7,25 @@ $sub_terms = [];
 get_template_part("other/loading");
 function defaultProduct() {
     return [
-        "id" => "",
-        "title" => "",
-        "image" => "",
+   
+        "id" => "" ,
+        "title" => "" ,
+        "image" => "" ,
         "grade" => "",
-        "feature" => ""
+        "type_film" => "" ,
+        "feature" => "" ,
+        "paint_brush" => "",
+        "standard" => "" ,
+        "persistence" => "",
+        "solvent" => "" ,
+        "application_area" => "" ,
+        "use_area" => "" ,
+        "texture" => "" ,
+        "word_group" => "" ,
+        "function_group" => "" ,
+        "is_green_product" => "" ,
+        "innovative_product" => "" ,
+        "special_look" => "" ,
     ];
 }
 
@@ -23,158 +37,71 @@ $product1_id = "";
 $product2_id = "";
 $product3_id = "";
 $select_cate = "";
+$select_product_id = "";
 $product_form_cate = "";
 $selected1_cate_id = "";
 $selected2_cate_id = "";
 $selected3_cate_id = "";
 $selected2_id = "";
 $product_query = [];
+$typeIs1= "";
+$typeIs2= "";
+$typeIs3= "";
 if(isset($_GET['product_1'])):
     $product1_id = $_GET['product_1'];
-    // array_push($product_query , $product1_id);
-    $query = new WP_Query([
-        "post_type" => 'product',
-        "p" => $product1_id ,
-    ]);
-  
-    if($query->have_posts()):
-        while($query->have_posts()):
-            $query->the_post();
-            $product_categories =   get_the_terms(get_the_ID() , "product_cat");
-            $grade = "";
-            $grade_parent = "";
-            $type_film_parent = "";
-            $type_film = "";
-            foreach($product_categories as $product_cat):
-                if($product_cat->parent == 0):
-                    $selected1_id = $product_cat->term_id;
-                endif;
-                if($product_cat->name == "เกรด"):
-                    $grade_parent = $product_cat->term_id;
-                    $select_cate = $product_cat->term_id;
-
-                endif;
-                if($product_cat->name == "ชนิดฟิล์มสี"):
-                    $type_film_parent = $product_cat->term_id;
-                endif;
-            endforeach;
-            foreach($product_categories as $pc):
-                if($pc->parent ==  $grade_parent):
-                    $grade  = $pc->name;
-                    $selected1_cate_id = $pc->term_id;
-                endif;
-            endforeach;
-            $product1 = [
-                "id" => get_the_ID(),
-                "title" => get_the_title(),
-                "image" => get_the_post_thumbnail_url(get_the_ID() , "full"),
-                "grade" =>  $grade,
-                "type_film" => $type_film,
-                "feature" => get_the_content()
-            ];
- 
-
-        endwhile  ;
-    endif;
- 
-    wp_reset_query();
+    $product1_db = returnProduct($product1_id);
+    $selected1_id =  $product1_db["select_id"];
+    $product1 =  $product1_db["products"];
+    $selected1_cate_id =  $product1_db["selected1_cate_id"];
+    $select_cate = $product1_db['select_cate'];
+    echo '<script> setTimeout(() => {
+        document.querySelector("#button_search").scrollIntoView({behavior: "smooth" , block: "start"})
+    } , 1000)</script>';
 endif;
 
  
 if(isset($_GET['product_2'])):
     $product2_id = $_GET['product_2'];
-    
-    $query = new WP_Query([
-        "post_type" => 'product',
-        "p" => $product2_id ,
-    ]);
-    if($query->have_posts()):
-        while($query->have_posts()):
-            $query->the_post();
-            $product_categories =   get_the_terms(get_the_ID(), "product_cat");
-            $grade = "";
-            $grade_parent = "";
-            $type_film_parent = "";
-            $type_film = "";
-            foreach($product_categories as $product_cat):
-                if($product_cat->name == "เกรด"):
-                    $grade_parent = $product_cat->term_id;
-                endif;
-                if($product_cat->name == "ชนิดฟิล์มสี"):
-                    $type_film_parent = $product_cat->term_id;
-                endif;
-            endforeach;
-            foreach($product_categories as $pc):
-                if($pc->parent ==  $grade_parent):
-                    $grade  = $pc->name;
-                  
-                    $selected2_cate_id = $pc->term_id;
+  
+    $product2_db = returnProduct($product2_id);
+    $selected2_id =  $product2_db["select_id"];
+    $product2 =  $product2_db["products"];
+    $selected2_cate_id =  $product2_db["selected1_cate_id"];
 
-                endif;
-            endforeach;
-            $product2 = [
-                "id" => get_the_ID(),
-                "title" => get_the_title(),
-                "image" => get_the_post_thumbnail_url(get_the_ID() , "full"),
-                "grade" =>  $grade,
-                "type_film" => $type_film,
-                "feature" => get_the_content()
-
-            ];
- 
-
-        endwhile  ;
-    endif;
-    wp_reset_query();
-
+    echo '<script> setTimeout(() => {
+        document.querySelector("#button_search").scrollIntoView({behavior: "smooth" , block: "start"})
+    } , 1000)</script>';
 endif;
+ 
 if(isset($_GET['product_3'])):
     $product3_id = $_GET['product_3'];
-    
-    $query = new WP_Query([
-        "post_type" => 'product',
-        "p" => $product3_id ,
-    ]);
-    if($query->have_posts()):
-        while($query->have_posts()):
-            $query->the_post();
-            $product_categories =   get_the_terms(get_the_ID() , "product_cat");
-            $grade = "";
-            $grade_parent = "";
-            $type_film_parent = "";
-            $type_film = "";
-            foreach($product_categories as $product_cat):
-                if($product_cat->name == "เกรด"):
-                    $grade_parent = $product_cat->term_id;
-                endif;
-                if($product_cat->name == "ชนิดฟิล์มสี"):
-                    $type_film_parent = $product_cat->term_id;
-                endif;
-            endforeach;
-            foreach($product_categories as $pc):
-                if($pc->parent ==  $grade_parent):
-                    $grade  = $pc->name;
-                    $selected3_cate_id = $pc->term_id;
+    $product3_db = returnProduct($product3_id);
+    $selected3_id =  $product3_db["select_id"];
+    $product3 =  $product3_db["products"];
+    $selected3_cate_id =  $product3_db["selected1_cate_id"];
 
-                endif;
-            endforeach;
-            $product3 = [
-                "id" => get_the_ID(),
-                "title" => get_the_title(),
-                "image" => get_the_post_thumbnail_url(get_the_ID() , "full"),
-                "grade" =>  $grade,
-                "type_film" => $type_film,
-                "feature" => get_the_content()
-
-            ];
+    echo '<script> setTimeout(() => {
+        document.querySelector("#button_search").scrollIntoView({behavior: "smooth" , block: "start"})
+    } , 1000)</script>';
+endif;
+$mainCate = "";
+if(isset($_GET['mainCate'])):
+    $mainCate = $_GET['mainCate'];
+endif;
+$cate1 = "";
+if(isset($_GET['cate1'])):
+    $cate1 = $_GET['cate1'];
+endif;
+$cate2 = "";
+if(isset($_GET['cate2'])):
+    $cate2 = $_GET['cate2'];
+endif;
+$cate3 = "";
+if(isset($_GET['cate3'])):
+    $cate3 = $_GET['cate3'];
+endif;
  
 
-        endwhile  ;
-    endif;
-    wp_reset_query();
-
-
-endif;
 if( $select_cate ):
     $sub_terms = get_terms('product_cat', array('hide_empty' => false, 'parent' => $select_cate ));
 endif;
@@ -185,6 +112,10 @@ $query3 = "";
 if($selected1_cate_id):
     $query1 = new WP_Query([
         "post_type" => "product",
+        "posts_per_page" => -1,
+        'meta_key'	=> 'priority',
+        'orderby'   => 'meta_value_num',
+        'order'		=> 'ASC',
         "tax_query" => [
             [
                 'taxonomy' => 'product_cat',
@@ -195,10 +126,33 @@ if($selected1_cate_id):
              ]
         ]
     ]);
+
+else:
+    $query1 = new WP_Query([
+        "post_type" => "product",
+        "posts_per_page" => -1,
+        'meta_key'	=> 'priority',
+        'orderby'   => 'meta_value_num',
+        'order'		=> 'ASC',
+        "tax_query" => [
+            [
+                'taxonomy' => 'product_cat',
+                'field' => 'term_id',
+                'terms' =>    [$mainCate],
+                'include_children' => true,
+                'operator' => 'IN'
+             ]
+        ]
+    ]);
 endif;
+ 
 if($selected2_cate_id):
     $query2 = new WP_Query([
         "post_type" => "product",
+        "posts_per_page" => -1,
+        'meta_key'	=> 'priority',
+        'orderby'   => 'meta_value_num',
+        'order'		=> 'ASC',
         "tax_query" => [
             [
                 'taxonomy' => 'product_cat',
@@ -209,10 +163,33 @@ if($selected2_cate_id):
              ]
         ]
     ]);
+    // var_dump($query2->have_posts());
+else:
+    $query2 = new WP_Query([
+        "post_type" => "product",
+        "posts_per_page" => -1,
+        'meta_key'	=> 'priority',
+        'orderby'   => 'meta_value_num',
+        'order'		=> 'ASC',
+        "tax_query" => [
+            [
+                'taxonomy' => 'product_cat',
+                'field' => 'term_id',
+                'terms' =>    [$mainCate],
+                'include_children' => true,
+                'operator' => 'IN'
+             ]
+        ]
+    ]);
 endif;
+
 if($selected3_cate_id):
     $query3 = new WP_Query([
         "post_type" => "product",
+        "posts_per_page" => -1,
+        'meta_key'	=> 'priority',
+        'orderby'   => 'meta_value_num',
+        'order'		=> 'ASC',
         "tax_query" => [
             [
                 'taxonomy' => 'product_cat',
@@ -223,12 +200,26 @@ if($selected3_cate_id):
              ]
         ]
     ]);
+else:
+    $query3 = new WP_Query([
+        "post_type" => "product",
+        "posts_per_page" => -1,
+        'meta_key'	=> 'priority',
+        'orderby'   => 'meta_value_num',
+        'order'		=> 'ASC',
+        "tax_query" => [
+            [
+                'taxonomy' => 'product_cat',
+                'field' => 'term_id',
+                'terms' =>    [$mainCate],
+                'include_children' => true,
+                'operator' => 'IN'
+             ]
+        ]
+    ]);
 endif;
-
-?>
-
-
-<!-- compare-product-body -->
+ 
+ ?>
 <?php // if($_GET[]) ?>
 
 
@@ -250,21 +241,39 @@ endif;
             class="select-product-custom form-select" 
             
             >
-                <option value="">Open this select menu</option>
+                <option value="">เลือกประเภทผลิตภัณฑ์</option>
                 <?php foreach($terms as $term): ?>
-                    <option <?php if($term->term_id == $selected1_id): echo  "selected"; endif; ?> value="<?php echo $term->term_id ?>"><?php echo $term->name ?></option>
+                    <option <?php if($term->term_id == $mainCate): 
+                        if(isset($_GET['product_1'])):
+ 
+                            $typeIs1 = $term->name;
+                        
+                        endif;
+                        // $cate2 = "";
+                        if(isset($_GET['product_2'])):
+                            $typeIs2 =  $term->name;
+                            
+                        endif;
+                        // $cate3 = "";
+                        if(isset($_GET['product_3'])):
+                            $typeIs3 =  $term->name;
+                        
+                        endif;
+
+
+                        ; echo  "selected"; endif; ?> value="<?php echo $term->term_id ?>"><?php echo $term->name ?></option>
                 <?php endforeach; ?>
             </select>
        
             <div <?php if(!$select_cate): echo "style='display:none'"; endif; ?> id="compare_cate_2" class="row mt-3">
                 <div class="col-12 col-md-4">
                     <select onchange="onProductCate1Changed()"   id="cate1" class="select-product-custom form-select" aria-label="Default select example">
-                        <option value=""  >Select</option>
+                        <option value=""  >เลือกเกรด</option>
                         <?php
                         if(count($sub_terms)):
                             foreach(  $sub_terms as   $sub_term):
                                 ?>
-                            <option <?php if($sub_term->term_id ==  $selected1_cate_id): echo "selected"; endif; ?> value="<?php echo $sub_term->term_id ?>"><?php echo $sub_term->name ?></option>
+                            <option <?php if($sub_term->name ==  $cate1): echo "selected"; endif; ?> value="<?php echo $sub_term->name ?>"><?php echo $sub_term->name ?></option>
                                 <?php 
                             endforeach;
                           
@@ -273,13 +282,13 @@ endif;
                     </select>
                 </div>
                 <div class="col-12 col-md-4">
-                    <select  onchange="onProductCate2Changed()"  <?php if(!$product1_id): echo "disabled"; endif; ?>  id="cate2" class="select-product-custom form-select" aria-label="Default select example">
-                        <option  value="" >Select</option>
+                    <select value="<?php echo $cate2; ?>"  onchange="onProductCate2Changed()"  <?php if(!$product1_id): echo "disabled"; endif; ?>  id="cate2" class="select-product-custom form-select" aria-label="Default select example">
+                        <option  value="" >เลือกเกรด</option>
                         <?php
                         if(count($sub_terms)):
                             foreach(  $sub_terms as   $sub_term):
                                 ?>
-                            <option <?php if($sub_term->term_id ==  $selected2_cate_id): echo "selected"; endif; ?> value="<?php echo $sub_term->term_id ?>"><?php echo $sub_term->name ?></option>
+                            <option <?php if($sub_term->name ==  $cate2): echo "selected"; endif; ?> value="<?php echo $sub_term->name ?>"><?php echo $sub_term->name ?></option>
                                 <?php 
                             endforeach;
                           
@@ -289,12 +298,12 @@ endif;
                 </div>
                 <div class="col-12 col-md-4">
                     <select  onchange="onProductCate3Changed()"  <?php if(!$product1_id): echo "disabled"; endif; ?> id="cate3" class="select-product-custom form-select" aria-label="Default select example">
-                        <option   value="" >Select</option>
+                        <option   value="" >เลือกเกรด</option>
                         <?php
                         if(count($sub_terms)):
                             foreach(  $sub_terms as   $sub_term):
                                 ?>
-                            <option <?php if($sub_term->term_id ==  $selected3_cate_id): echo "selected"; endif; ?> value="<?php echo $sub_term->term_id ?>"><?php echo $sub_term->name ?></option>
+                            <option <?php if($sub_term->name ==  $cate3): echo "selected"; endif; ?> value="<?php echo $sub_term->name ?>"><?php echo $sub_term->name ?></option>
                                 <?php 
                             endforeach;
                           
@@ -308,8 +317,8 @@ endif;
                <div id="show_product_filter_from_cate">
                 <div class="row mt-3">
                         <div class="col-12 col-md-4">
-                        <select   id="product_1" class="select-product-custom form-select" aria-label="Default select example">
-                            <option  value="" selected>Select</option>
+                        <select onchange="onProduct1Selected()"  id="product_1" class="select-product-custom form-select" aria-label="Default select example">
+                            <option  value="" selected>เลือกผลิตภัณฑ์</option>
                             <?php
                                 if($query1):
                                     if($query1->have_posts()):
@@ -320,14 +329,14 @@ endif;
                                             <?php 
                                         endwhile;
                                     endif;
+                                    wp_reset_query();
                                 endif;
-                                wp_reset_query();
                             ?>
                         </select>
                         </div>
                         <div class="col-12 col-md-4">
-                            <select  id="product_2" class="select-product-custom form-select" aria-label="Default select example">
-                                <option value="" selected>Select</option>
+                            <select <?php if(!$product1_id): echo "disabled"; endif; ?>  id="product_2" class="select-product-custom form-select" aria-label="Default select example">
+                                <option value=""  selected>เลือกผลิตภัณฑ์</option>
                                 <?php
                                 if($query2):
                                     if($query2->have_posts()):
@@ -338,16 +347,17 @@ endif;
                                             <?php 
                                         endwhile;
                                     endif;
+                                    wp_reset_query();
                                 endif;
-                                wp_reset_query();
                             
                             ?>
                             </select>
                         </div>
                         <div class="col-12 col-md-4">
-                            <select  id="product_3" class="select-product-custom form-select" aria-label="Default select example">
-                                <option value=""  selected>Select</option>
+                            <select   <?php if(!$product1_id): echo "disabled"; endif; ?>  id="product_3" class="select-product-custom form-select" aria-label="Default select example">
+                                <option value=""   selected>เลือกผลิตภัณฑ์</option>
                                 <?php 
+                                
                                 if($query3):
                                     if($query3->have_posts()):
                                         while($query3->have_posts()):
@@ -357,8 +367,8 @@ endif;
                                             <?php 
                                         endwhile;
                                     endif;
+                                    wp_reset_query();
                                 endif;
-                                wp_reset_query();
                                 ?>
                             </select>
                         </div>
@@ -377,7 +387,7 @@ endif;
         </div>
     </div>
   
-
+ 
     <?php if(isset($_GET['product_1'])): ?>
    <div id="compare-product-body">
    <h1 class="ui header text-center primary-text mt-4 mb-4">ผลการเปรียบเทียบผลิตภัณฑ์</h1>
@@ -403,14 +413,14 @@ endif;
                             src="<?php echo  $product1["image"] ?>" 
                             alt="<?php echo $product1["title"] ?>">
                     </div>
-                    <?php if($product2["image"]): ?>
+                    <?php if( isset($_GET['product_2'])): ?>
                         <div class="image two">
                                 <img  
                                 src="<?php  echo  $product2["image"] ?>" 
                                 alt="<?php echo $product2["title"] ?>">
                         </div>
                     <?php endif; ?>
-                    <?php if($product3["image"]): ?>
+                    <?php if(  isset($_GET['product_3'])): ?>
                         <div class="image two">
                                 <img  
                                 src="<?php  echo  $product3["image"] ?>" 
@@ -420,6 +430,7 @@ endif;
                     
             </div>
             
+ 
         
             <?php 
             
@@ -435,36 +446,36 @@ endif;
             
                     get_template_part('components/compare-product' , null , [
                         "title"  => "ชนิดฟิล์มสี",
-                        "product1" => $product1["grade"],
-                        "product2" => $product2["grade"],
-                        "product3" => $product3["grade"],
+                        "product1" => $product1["type_film"],
+                        "product2" => $product2["type_film"],
+                        "product3" => $product3["type_film"],
                     ]);
             ?>
             <?php 
             
                     get_template_part('components/compare-product' , null , [
                         "title"  => "พื้นที่การทา",
-                        "product1" => $product1["grade"],
-                        "product2" => $product2["grade"],
-                        "product3" => $product3["grade"],
+                        "product1" => $product1["application_area"],
+                        "product2" => $product2["application_area"],
+                        "product3" => $product3["application_area"],
                     ]);
             ?>
             <?php 
             
                     get_template_part('components/compare-product' , null , [
                         "title"  => "ประเภทผลิตภัณฑ์",
-                        "product1" => $product1["grade"],
-                        "product2" => $product2["grade"],
-                        "product3" => $product3["grade"],
+                        "product1" => $typeIs1,
+                        "product2" => $typeIs2,
+                        "product3" => $typeIs3,
                     ]);
             ?>
             <?php 
             
                     get_template_part('components/compare-product' , null , [
                         "title"  => "พื้นที่ใช้งาน",
-                        "product1" => $product1["grade"],
-                        "product2" => $product2["grade"],
-                        "product3" => $product3["grade"],
+                        "product1" => $product1["use_area"],
+                        "product2" => $product2["use_area"],
+                        "product3" => $product3["use_area"],
                     ]);
             ?>
         
@@ -472,9 +483,9 @@ endif;
             
                     get_template_part('components/compare-product' , null , [
                         "title"  => "พื้นผิว",
-                        "product1" => $product1["grade"],
-                        "product2" => $product2["grade"],
-                        "product3" => $product3["grade"],
+                        "product1" => $product1["texture"],
+                        "product2" => $product2["texture"],
+                        "product3" => $product3["texture"],
                     ]);
             ?>
         
@@ -482,55 +493,104 @@ endif;
             
                     get_template_part('components/compare-product' , null , [
                         "title"  => "กลุ่มงาน",
-                        "product1" => $product1["grade"],
-                        "product2" => $product2["grade"],
-                        "product3" => $product3["grade"],
+                        "product1" => $product1["word_group"],
+                        "product2" => $product2["word_group"],
+                        "product3" => $product3["word_group"],
                     ]);
             ?>
             <?php 
             
                     get_template_part('components/compare-product' , null , [
                         "title"  => "ฟังก์ชั่น",
-                        "product1" => $product1["grade"],
-                        "product2" => $product2["grade"],
-                        "product3" => $product3["grade"],
+                        "product1" => $product1["function_group"],
+                        "product2" => $product2["function_group"],
+                        "product3" => $product3["function_group"],
                     ]);
             ?>
         
             <?php 
-            
-                    get_template_part('components/compare-product' , null , [
+                    // $dataGreen = [ ];
+                    $dataGreen = [
                         "title"  => "GREEN PRODUCT",
-                        "product1" => $product1["grade"],
-                        "product2" => $product2["grade"],
-                        "product3" => $product3["grade"],
-                    ]);
+                        "product1" => "",
+                        "product2" => "",
+                        "product3" => "",
+                    ];
+                    if(isset($_GET['product_1'])):
+                        if($product1["is_green_product"]) {
+                            $dataGreen["product1"] =$product1["is_green_product"];
+                        } else{ 
+                            $dataGreen["product1"] = "-";
+                        }
+                    endif;
+                    if(isset($_GET['product_2'])):
+                        if($product2["is_green_product"]) {
+                            $dataGreen["product2"] = $product2["is_green_product"];
+                        } else{ 
+                            $dataGreen["product2"] = "-";
+
+                        }
+                    endif;
+                    if(isset($_GET['product_3'])):
+                        if($product3["is_green_product"]) {
+                            $dataGreen["product3"] = $product3["is_green_product"];
+                        } else{ 
+                            $dataGreen["product3"] = "-";
+
+                        }
+                    endif;
+            
+                    get_template_part('components/compare-product-checked' , null ,  $dataGreen );
             ?>
             <?php 
-            
-                    get_template_part('components/compare-product' , null , [
-                        "title"  => "สินค้านวัตกรรม",
-                        "product1" => $product1["grade"],
-                        "product2" => $product2["grade"],
-                        "product3" => $product3["grade"],
-                    ]);
+             $dataInnovative = [
+                "title"  => "สินค้านวัตกรรม",
+                "product1" => "",
+                "product2" => "",
+                "product3" => "",
+            ];
+            if(isset($_GET['product_1'])):
+                if($product1["innovative_product"]) {
+                    $dataInnovative["product1"] =$product1["innovative_product"];
+                } else{ 
+                    $dataInnovative["product1"] = "-";
+                }
+            endif;
+            if(isset($_GET['product_2'])):
+                if($product2["innovative_product"]) {
+                    $dataInnovative["product2"] = $product2["innovative_product"];
+                } else{ 
+                    $dataInnovative["product2"] = "-";
+
+                }
+            endif;
+            if(isset($_GET['product_3'])):
+                if($product3["innovative_product"]) {
+                    $dataInnovative["product3"] = $product3["innovative_product"];
+                } else{ 
+                    $dataInnovative["product3"] = "-";
+
+                }
+            endif;
+  
+                    get_template_part('components/compare-product-checked' , null , $dataInnovative);
             ?>
             <?php 
             
                     get_template_part('components/compare-product' , null , [
                         "title"  => "รูปลักษณ์พิเศษ",
-                        "product1" => $product1["grade"],
-                        "product2" => $product2["grade"],
-                        "product3" => $product3["grade"],
+                        "product1" => $product1["special_look"],
+                        "product2" => $product2["special_look"],
+                        "product3" => $product3["special_look"],
                     ]);
             ?>
             <?php 
             
                     get_template_part('components/compare-product' , null , [
                         "title"  => "ขนาดบรรจุ",
-                        "product1" => $product1["grade"],
-                        "product2" => $product2["grade"],
-                        "product3" => $product3["grade"],
+                        "product1" => $product1["paint_brush"],
+                        "product2" => $product2["paint_brush"],
+                        "product3" => $product3["paint_brush"],
                     ]);
             ?>
         
@@ -538,18 +598,18 @@ endif;
             
                     get_template_part('components/compare-product' , null , [
                         "title"  => "มาตรฐานมอก.",
-                        "product1" => $product1["grade"],
-                        "product2" => $product2["grade"],
-                        "product3" => $product3["grade"],
+                        "product1" => $product1["standard"],
+                        "product2" => $product2["standard"],
+                        "product3" => $product3["standard"],
                     ]);
             ?>
             <?php 
             
                     get_template_part('components/compare-product' , null , [
                         "title"  => "ความคงทน",
-                        "product1" => $product1["grade"],
-                        "product2" => $product2["grade"],
-                        "product3" => $product3["grade"],
+                        "product1" => $product1["persistence"],
+                        "product2" => $product2["persistence"],
+                        "product3" => $product3["persistence"],
                     ]);
             ?>
             <?php 
@@ -564,9 +624,9 @@ endif;
             
                     get_template_part('components/compare-product' , null , [
                         "title"  => "ตัวทำละลาย",
-                        "product1" => $product1["grade"],
-                        "product2" => $product2["grade"],
-                        "product3" => $product3["grade"],
+                        "product1" => $product1["solvent"],
+                        "product2" => $product2["solvent"],
+                        "product3" => $product3["solvent"],
                     ]);
             ?>
         

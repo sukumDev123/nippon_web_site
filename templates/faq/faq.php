@@ -13,7 +13,7 @@ $faqs_cate = get_terms('FAQsCate', array('hide_empty' => false, 'parent' => 0));
 <div class="container">
 
 
-<div class="container mt-5">
+<div class="mt-5 fav_big">
     <div class="ui stackable grid list-faq">
         <div class="four wide column">
             <ul class="faq-navbar">
@@ -46,7 +46,7 @@ $faqs_cate = get_terms('FAQsCate', array('hide_empty' => false, 'parent' => 0));
                         if(count($sub_cate)):
                         ?>
                         
-                        <div class="sub-type-headers">
+                        <div class="sub-type-headers row ">
                             <?php foreach($sub_cate as $sub): 
                                 $checkActive = "";    
                                 if(isset($_GET["sub_cate"])):
@@ -55,12 +55,14 @@ $faqs_cate = get_terms('FAQsCate', array('hide_empty' => false, 'parent' => 0));
                                     endif;
                                 endif;
                             ?>
+                               <div class="col-12 col-md-4 mb-3">
                                 <h4 class="sub-type-header <?php echo $checkActive ?> ">
-                                <a 
-                                    class="account-a  <?php echo $checkActive ?>"
-                                    href="<?php echo  get_permalink(get_the_ID())."?cate=".$cate."&sub_cate=". $sub->term_id ?>"><?php echo $sub->name ?></a>
-                            
-                            </h4>
+                                    <a 
+                                        class="account-a  <?php echo $checkActive ?>"
+                                        href="<?php echo  get_permalink(get_the_ID())."?cate=".$cate."&sub_cate=". $sub->term_id ?>"><?php echo $sub->name ?></a>
+                                
+                                </h4>
+                               </div>
                             <?php endforeach; ?>
  
                         </div>
@@ -73,7 +75,10 @@ $faqs_cate = get_terms('FAQsCate', array('hide_empty' => false, 'parent' => 0));
             ?>
            
             <h3 class="ui header">คำถามที่พบบ่อย</h3>
+<div class="accordion" id="accordionExample">
+            
                 <?php 
+                $index = 0;
                     $tax_query= [
                         [
                             'taxonomy' => 'FAQsCate',
@@ -106,6 +111,9 @@ $faqs_cate = get_terms('FAQsCate', array('hide_empty' => false, 'parent' => 0));
                         "post_type" => "FAQs",
                         'posts_per_page' => 9,
                         "tax_query" =>  $tax_query,
+                        'orderby' => 'date',
+                        'order'		=> 'ASC',
+
                     ];
 
                     $query = new WP_Query($argc);
@@ -114,19 +122,24 @@ $faqs_cate = get_terms('FAQsCate', array('hide_empty' => false, 'parent' => 0));
                             $query->the_post();
 
                 ?>
-                        <div class="card-faq">
-                            <div class="card-faq-header">
-                                <h3><?php echo get_the_title() ?></h3>
-                                <?php get_template_part("components/icon" , null , ["icon" => "arrow-top"]) ?>
-                            </div>
-                            <div class="content">
+                      
+                        <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo_<?php echo  $index;?>">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo_<?php echo  $index;?>" aria-expanded="false" aria-controls="collapseTwo_<?php echo  $index;?>">
+                                <?php echo get_the_title() ?>
+                                </button>
+                                </h2>
+                            <div id="collapseTwo_<?php echo  $index;?>" class="accordion-collapse collapse" aria-labelledby="headingTwo_<?php echo  $index++; ?>" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
                                 <?php the_content() ?>
+                                </div>
                             </div>
                         </div>
                 <?php 
                     endwhile;
                 endif;
                 ?>
+</div>
              
         </div>
         </div>
@@ -138,3 +151,6 @@ $faqs_cate = get_terms('FAQsCate', array('hide_empty' => false, 'parent' => 0));
 <?php get_template_part("templates/faq/faq_form") ?>
 </div>
 
+
+
+ 
