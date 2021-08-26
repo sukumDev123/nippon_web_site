@@ -99,7 +99,7 @@
            <h1 class="font-service">
                <a href="tel:024631899">02 463 1899</a>
            </h1>
-           <h1 class=' footer-title'>
+           <h1 class='footer-title title-contactus'>
            ติดตามเราได้ที่นี่
            </h1>
            <div class="social-div">

@@ -67,7 +67,7 @@ $search  =  get_site_url() . "/search/";
                         <a class="contact-button" href="/contact-us/">ติดต่อเรา</a>
 
 
-                            <h5>
+                            <h5  class="search-menu">
                                 <a href="<?php echo $search ?>">
                                     <i class="fas fa-search"></i>
                                 </a>    
@@ -84,12 +84,10 @@ $search  =  get_site_url() . "/search/";
                             
                             ?>
                                 <!-- </div>    -->
-                                <div class="user-div">
-                               <a href="<?php echo $title_static["link"] ?>">
-                               <h5><i class="bi bi-person-fill"></i> บัญชีของฉัน</h5>
-                               </a>
-                            </div>   
-                               
+                              
+                               <?php do_action("header-user-nav"  , [
+                                   "link" => $title_static['link']
+                               ]) ?>
                         </div>
                </div>
                 <div class="header-top">
@@ -105,23 +103,12 @@ $search  =  get_site_url() . "/search/";
                         <div id="login-right" class="login">
                         <a class="contact-button" href="/contact-us/">ติดต่อเรา</a>
 
-                            <h5>
+                            <h5 class="search-menu">
                                 <a href="/search/">
                                     <i class="fas fa-search"></i>
                                 </a>    
                             </h5>
-                            <!-- <div class="th_en"> -->
-                                <!-- <h5>TH|</h5>
-                                <h5>EN</h5> -->
-                            <?php 
-                            // wp_nav_menu(
-                            //     [
-                            //         "theme_location" => 'language'
-                            //     ]
-                            // )
-                            
-                            ?>
-                                <!-- </div>    -->
+               
                             <div class="user-div">
                                 <h5><i class="fas fa-user"></i></h5>
                             </div>    

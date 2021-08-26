@@ -73,6 +73,16 @@ add_action("init" , function() {
  
 	]);
 });
+add_action("init" , function() {
+	register_post_type("product_banner" , [
+	'public' => true ,
+	"labels" => ['name' => "Product banners"   , "singular_name" => "Product banner"],
+	 
+ 
+    'hierarchical' => true
+ 
+	]);
+});
 
 add_action("init" , function() {
 	register_post_type("career_submit" , [
@@ -193,6 +203,8 @@ function intiNews() {
         'has_archive' => true,
         'show_in_rest' => true ,
         'taxonomies'          => array( 'category'  ),
+        'supports'		=> array('title', 'editor', 'thumbnail'),
+
         ]);
    
 }
@@ -204,6 +216,7 @@ function initTypeUser() {
         'labels' => array('name' => 'User Types' , 'singular_name' => 'User TYpe'),
         'hierarchical' => true,
         'has_archive' => true,
+        'show_in_rest' => true ,
  
         
         ]);
@@ -298,7 +311,7 @@ function initProject() {
             'has_archive'  => true,
             'show_in_rest' => true ,
             'taxonomies'   => array(  'tags' , 'project_cate'   ),
-            // 'supports'		=> array('title', 'editor', 'thumbnail'),
+            'supports'		=> array('title', 'editor', 'thumbnail'),
             // 'hierarchical' => false,
             "show_in_menu" => true,
             'show_in_nav_menus' => true,
@@ -336,6 +349,8 @@ function initProject() {
             'show_ui' => true,
             'show_admin_column' => true,
             'query_var' => true,
+            'show_in_rest' => true ,
+
             )
         );
    
@@ -2213,3 +2228,39 @@ add_action( 'rest_api_init', function () {
 
 
   add_action("check_user_add_info" , "checkUserAddedInfoSuccess");
+
+
+  function registerHeader($args) {
+    $link = $args['link'];
+    $site = get_site_url();
+
+    if(is_user_logged_in()):
+
+        echo   <<<text
+            <div class="user-div">
+                <a href="$link">
+                <h5><i class="bi bi-person-fill"></i> บัญชีของฉัน</h5>
+                </a>
+            </div>   
+        text;
+
+    else:
+        echo <<<text
+            <div class="header-login-register row">
+                <div class="col-6">
+                    <a href='$site/wp-login.php?action=register'>
+                        <button>ลงทะเบียน</button>
+                    </a>
+                </div>
+                <div class="col-6">
+                    <a  href='$site/wp-login.php'>
+                        <button>
+                        <i class="bi bi-person-fill"></i> 
+                        เข้าสู่ระบบ</button>
+                    </a>
+                </div>
+            </div>
+        text;
+    endif;
+  }
+  add_action("header-user-nav" , "registerHeader" , 10, 1);                 

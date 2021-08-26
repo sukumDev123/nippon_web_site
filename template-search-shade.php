@@ -3,9 +3,8 @@
 <?php 
  
  /** Template Name: Search Shade */
-// get_header();
-// $shade_class = "search-shade";
-get_template_part("headers/header-shade");
+ get_header();
+ get_template_part("other/page-bk-shade");
 
 get_template_part("other/loading");
 $lang=get_bloginfo("language");  

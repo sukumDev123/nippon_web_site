@@ -1,5 +1,5 @@
 <?php   /** Template Name: Project */ ?>
-<?php get_header(); ?>
+<?php get_header(); get_template_part("other/loading"); ?>
 <?php 
 $first_page = 0;
 $size_data = 0;
@@ -17,8 +17,8 @@ $text_static = [
         "search" => "ค้นหา"
     ]
 ][$lang];
-if(isset($_GET["limit"])) {
-    $limit_page = $_GET["limit"];
+if(isset($_GET["paged_show"])) {
+    $limit_page = $_GET["paged_show"];
 }
 $product_value = "";
 $project_value = "";
@@ -48,6 +48,9 @@ if(isset($_GET['type'])):
         $project_value =   get_term_by('term_id',  intval( $filter_type), 'project_cate');
     endif;
 endif;
+
+$getFavs = getFavoritesData("problem-and-solution");  
+$data_favorites = $getFavs["datas"];  
 ?>
 <?php get_template_part("pages/page-bk");  ?>
 <div class="page-filter">
@@ -128,120 +131,119 @@ endif;
 </div>
 
 
-<div id="news" class="container">
 
- 
-    <div class="margin-page"></div>
-    <div class="news-div">
-    <?php 
-        $filter_product  = '';
-        $meta_query = [];
-        $argc = [
-            "post_type"  => "project" , 
-            'posts_per_page' => $limit_page  , 
-            
-        ];   
-        if(isset($_GET["filter_product"])) :
-            if($_GET['filter_product']) :
-                $filter_product = $_GET['filter_product'];
-                $product_relation = [
-                    "key" => "products",
-                    "value"  => '"'. $filter_product .'"',
-                    'compare' => "LIKE"
-                ];
+
+<div id="news" class="container">
+    <div class="card-blogs-div ui stackable three column grid">
+        <?php 
+            // $args = [
+            //     "post_type" => 'how_to_paint',
+            //     'post_status' => 'publish',
+            //     "posts_per_page" =>  $page,
+            //     "orderby" => "order",
+            //     'order' => 'ASC' 
+            // ];
+            // if($cate != ""):
+            //     $cate  = $cate;
+            //     $args["tax_query"]  = [
+            //         [
+            //         'taxonomy' => 'problem_and_solution_cate',
+            //         'field' => 'name',
+            //         'terms' =>   $cate,
+            //         'include_children' => true,
+            //         'operator' => 'IN'
+            //      ]
+            //     ];
+               
+            // endif;
+            // $solutions = [];
+            $filter_product  = '';
+            $meta_query = [];
+            $argc = [
+                "post_type"  => "project" , 
+                'posts_per_page' => $limit_page  , 
                 
-                array_push($meta_query ,  $product_relation);
-            endif;   
-        endif;
-     
-        if(isset($_GET['type'])) :
-            if($_GET['type']):
-              
-                $argc["tax_query"]  =  [
-                    [
-                        'taxonomy' => 'project_cate',
-                        'field' => 'term_id',
-                        'terms' =>  [intval($_GET["type"])],
-                        'include_children'  => true,
-                        'operator' => 'IN' 
-                    ]
-                ];  
+            ];   
+            if(isset($_GET["filter_product"])) :
+                if($_GET['filter_product']) :
+                    $filter_product = $_GET['filter_product'];
+                    $product_relation = [
+                        "key" => "products",
+                        "value"  => '"'. $filter_product .'"',
+                        'compare' => "LIKE"
+                    ];
+                    
+                    array_push($meta_query ,  $product_relation);
+                endif;   
             endif;
-        endif;
-        if(count($meta_query) ) :
-            $argc["meta_query"] = $meta_query;
-        endif;
-        $query = new WP_Query($argc);
-    ?>
-    <?php 
-    if($query->have_posts()): while($query->have_posts()) : $query->the_post(); 
-        $size_data += 1;
-        $modal_header    = get_field('text_example');
-        $photos = acf_photo_gallery("photos" , get_the_ID());
+         
+            if(isset($_GET['type'])) :
+                if($_GET['type']):
+                  
+                    $argc["tax_query"]  =  [
+                        [
+                            'taxonomy' => 'project_cate',
+                            'field' => 'term_id',
+                            'terms' =>  [intval($_GET["type"])],
+                            'include_children'  => true,
+                            'operator' => 'IN' 
+                        ]
+                    ];  
+                endif;
+            endif;
+            if(count($meta_query) ) :
+                $argc["meta_query"] = $meta_query;
+            endif;
+            $query = new WP_Query($argc);
+            $count = $query->found_posts;   
+            $solution_id = 0;
+            $index = 0;
+            while ($query->have_posts()) {
+            $query->the_post();
+         
     
-        $_image = false;
-        // echo $photos[0]["thumbnail_image_url"]; 
-        foreach($photos as $image):
-            $full_image_url= $image['full_image_url']; 
-            $thumbnail_image_url=  acf_photo_gallery_resize_image($full_image_url, 403, 271);
-            $_image =  $thumbnail_image_url;
-            break;
-        endforeach;
-        ?>
-            <div>
-            <a href="<?php  echo get_permalink(); ?>">
-          
-            <?php 
-            if($_image):
-                ?>
-                <img src="<?php echo $_image; ?>" alt ="image" />
-                <?php 
-            endif;
+            $featured_img_url = get_the_post_thumbnail_url( get_the_ID(),'full');
+
+                $userId = FALSE;
+                if(get_current_user_id()):
+                    $userId = get_current_user_id();
+                endif;
+                $checkFav = FALSE;
+                if(isset($data_favorites[get_the_ID()])):
+                    $checkFav = TRUE;
+
+                endif;
+                
+            get_template_part("components/card-blog" , null , [
+                "title" => get_the_title(),
+                "detail" => get_field("short_text"),
+                "image" =>  $featured_img_url,
+                "user_id" => $userId,
+                "id" => get_the_ID(),
+                "favorite" =>  $checkFav,
+                "index" => $index,
+                "type_blog" => "problem-and-solution",
+                "new" => FALSE,
+            ]);
+            $index += 1;
+            }
+            wp_reset_query();
             
             ?>
-                <div class="content">
-                <div>
-                        <h1>
-                                <?php the_title(); ?>
-                            <!-- </a> -->
-                        </h1>
-                        <?php echo get_field("short_text" , get_the_ID());  ?> 
-                </div>
-                    <div  class="d-flex  justify-content-between button-love-share">
-                    <div class="d-flex  align-items-center">
-                        <h5 class="me-4">
-                                <i class="fas fa-eye"></i>
-                                <?php echo   pvc_get_post_views(get_the_ID()) ?>
-                            </h5>
-                            <h5>
-                                <i  class="fas fa-share"></i>
-                            <?php if( get_post_meta( get_the_ID(), 'shares', true)):  echo get_post_meta( get_the_ID(), 'shares', true); else: echo 0;  endif; ?>
-                            </h5>
-                    </div>
-                    <i style="cursor:pointer" id="heart<?php echo get_the_ID() ?>" onclick="onLikeClicked(<?php echo get_the_ID() ?>)" class="far fa-heart"></i>
-                    </div>
-                
-                </div>
-            </a>
-            </div>
-        
-            <?php endwhile; else: endif;  wp_reset_query();
-        ?>    
-    </div>
-    <?php 
-    if($size_data >= 9) {
-        ?>
+     </div>
+   
+     <?php if($count >  $limit_page):   ?>
+        <div class="see_more">
+            <a  href="<?php $limit_page = $limit_page +  6;  echo  get_permalink(get_the_ID())."?paged_show=".$limit_page ?>">ดูเพิ่มเติม</a>
+        </div>
+        <?php endif; ?>
 
-        <h5 class="see-more">
-            <?php $limit_p = $limit_page + 3; ?>
-            <a href="<?php echo  get_permalink() . "?limit=" .  $limit_p ?>" >See more</a>
-        </h5>
-        <?php 
-    }
-    ?>
-    <div class="margin-page"></div>
-    
+        <?php do_action("empty_page" , ["count" => $count ]) ?>
+
+     
+ </div>
 </div>
+ 
  
 <script>
 <?php 

@@ -3,9 +3,8 @@
 get_template_part("other/loading");
 get_header();
 $featured_img_url = get_the_post_thumbnail_url( get_the_ID(),'full'); 
-
- 
-
+$getFavs = getFavoritesData("problem-and-solution" , get_the_ID());
+$data_favorites =  $getFavs["datas"];
 ?>
 
 <div class="container single-page"  >

@@ -376,6 +376,13 @@ function homePageInitSwiper() {
     },
     // spaceBetween: 50,
   });
+  const productsListSwiper = new Swiper(".products-list-swiper", {
+    slidesPerView: 1,
+    pagination: {
+      el: ".swiper-pagination",
+    },
+    // spaceBetween: 50,
+  });
   // const swiper_product_cate = new Swiper(".swiper-product-cate", {
   //   slidesPerView: 3,
   //   spaceBetween: 20,

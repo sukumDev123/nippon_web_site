@@ -24,6 +24,7 @@
 
 <a href="<?php echo get_permalink($args["id"]) ?>" style="display:block">
         <img 
+        class="card-blog-image-bk"
             src="<?php echo $args["image"] ?>" 
             alt="<?php echo $args["title"] ?>" />
 

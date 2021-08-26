@@ -1,7 +1,8 @@
 
 
 <?php
-    get_template_part("headers/header-product");
+  
+    get_header();
     get_template_part("other/loading");
     $lang=get_bloginfo("language");  
     $text_static = [

@@ -3,7 +3,10 @@
 <?php
 
 get_template_part("other/loading");
-wp_logout();
+if(isset($_GET['logout'])) {
+    wp_logout();
+        
+    }
 if ( ! is_user_logged_in() ) {
     wp_safe_redirect( wp_login_url() );
     exit;
@@ -39,6 +42,9 @@ if ( ! is_user_logged_in() ) {
                 </li>
                 <li>
                 <a class="account-a  <?php echo  $checkedActive2  ?>" href="<?php echo  get_site_url() ."/favorites-products" ?>">เนื้อหาที่น่าสนใจ</a>
+                </li>
+                <li>
+                <a class="account-a text-danger  <?php echo  $checkedActive2  ?>" href="<?php echo  get_permalink() ."?logout=true" ?>">ออกจากระบบ</a>
                 </li>
             </ul>
         </div>

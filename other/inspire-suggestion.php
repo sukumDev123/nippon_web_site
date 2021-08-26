@@ -44,12 +44,14 @@ $projects = get_field("projects");
         <div class="swiper-wrapper">
             <?php if(!empty($projects)): ?>
                 <?php foreach($projects as $project):  
-                        $photos = acf_photo_gallery("photos" , $project->ID);
+                       
+            $featured_img_url = get_the_post_thumbnail_url( $project->ID,'full');
+
                 ?>
                     <div class="swiper-slide">
                     <a   href="<?php echo get_permalink($project->ID) ?>">
                     <div>
-                            <img src="<?php echo $photos[0]['full_image_url']; ?>" alt="" />
+                            <img src="<?php echo $featured_img_url ?>" alt="<?php echo get_the_title($project->ID) ?>" />
                             <div class="content">
                                 <h1>
                                     <a   href="<?php echo get_permalink($project->ID) ?>"><?php echo get_the_title($project->ID) ?></a>

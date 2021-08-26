@@ -30,7 +30,7 @@ $word_selected = "เลือกประเภทสินค้า";
     $termShow = get_terms('product_cat', array('hide_empty' => false, 'parent' =>$termId));
     if(isset($_GET['slug']) || isset($_GET['scroll'])  || isset($_GET['search'])):
         echo '<script> setTimeout(() => {
-            document.querySelector(".search-filter").scrollIntoView({behavior: "smooth" , block: "start"})
+            document.querySelector("#nav-products").scrollIntoView({behavior: "smooth" , block: "start"})
         } , 100)</script>';
     endif;
     
@@ -112,33 +112,74 @@ $word_selected = "เลือกประเภทสินค้า";
 
 </div>
 
+<?php
+        $termData = get_term_by("term_id" , $termId , "product_cat");
+        
+        $query_product_banner = new WP_Query([
+            "post_type" => "product_banner",
+            "meta_query" => [
+               [
+                "key" => "category",
+                "value"  => $termData->name  ,
+                "compare" => "LIKE"
+               ]
+            ],
+            "posts_per_page" => 1
+        ]);
+ 
+        $product_banners  = [];
+        if($query_product_banner->have_posts()):
+            while($query_product_banner->have_posts()):
+                $query_product_banner->the_post();
+                $product_banners = acf_photo_gallery("product_banners" , get_the_ID());
+            endwhile;
+        endif;
+ 
+
+        wp_reset_query();
+        ?>
+
 <div class="page-bk-product">
 
 
     <!-- <div class="page-bk-image"> -->
-    <img alt="logo" src="<?php echo $featured_img_url  ?>"  class="image-logo" />
-    <div class="image-logo-bk"> </div>
-    <!-- </div> -->
-    <div class="page-detail">
-    <?php $query =  new WP_Query($argc) ?>
-    <?php if($query->have_posts()): while($query->have_posts()): $query->the_post(); ?>
-        <h1><?php echo get_the_title() ?></h1>
-        <p><?php echo get_field("short_text") ?></p>
-        <form   method="get" class="search-filter">
-        <?php 
-        $slug = "";
-        if(isset($_GET["slug"]) ) :  
-            $slug = $_GET["slug"];  
-       
-        endif;
+    <div class="swiper-container products-list-swiper">
+        <div class="swiper-wrapper">
+
+      
+
+        <?php
         
+        if(count( $product_banners) > 0):
+            foreach( $product_banners as  $product_banner):
+                $image_product_banner = $product_banner['full_image_url'];
+                ?>
+                <div class="swiper-slide">
+                    <div class="image-logo-bk"> </div>
+                    <img alt="logo" src="<?php echo $image_product_banner ?>"  class="image-logo" />
+                </div>
+                <?php 
+            endforeach;
+
+        else:
+            ?>
+
+                <div class="swiper-slide">
+                    <div class="image-logo-bk"> </div>
+                    <img alt="logo" src="<?php echo $featured_img_url ?>"  class="image-logo" />
+                </div>
+
+            <?php 
+        endif;
         ?>
-        <input type="hidden" value="<?php echo  $slug ?>" name="<?php  if( $slug) : echo  "slug"; else : echo "" ; endif; ?>" />
-        <i class="fas fa-search"></i>
-            <input type="text" name="search" value="<?php if(isset($_GET["search"])): echo $_GET["search"]; endif; ?>" placeholder="Search..." />
-        </form>
-    <?php endwhile;endif; wp_reset_query(); ?>
+
+
+         
+        </div>
+        <div class="swiper-pagination"></div>
     </div>
+    <!-- </div> -->
+   
 </div>
 
 <div  id="nav-products">
@@ -181,6 +222,28 @@ $word_selected = "เลือกประเภทสินค้า";
 </div>
 
 
+<div class="container"  id="product-title" >
+    <div class="page-detail">
+        <?php $query =  new WP_Query($argc) ?>
+        <?php if($query->have_posts()): while($query->have_posts()): $query->the_post(); ?>
+            <h1><?php echo get_the_title() ?></h1>
+            <p><?php echo get_field("short_text") ?></p>
+            <form   method="get" class="search-filter">
+            <?php 
+            $slug = "";
+            if(isset($_GET["slug"]) ) :  
+                $slug = $_GET["slug"];  
+        
+            endif;
+            
+            ?>
+            <input type="hidden" value="<?php echo  $slug ?>" name="<?php  if( $slug) : echo  "slug"; else : echo "" ; endif; ?>" />
+            <i class="fas fa-search"></i>
+                <input type="text" name="search" value="<?php if(isset($_GET["search"])): echo $_GET["search"]; endif; ?>" placeholder="Search..." />
+            </form>
+        <?php endwhile;endif; wp_reset_query(); ?>
+        </div>
+</div>
  
 <div  class="container" id="product-container" >
     <div class="product-cate-div">

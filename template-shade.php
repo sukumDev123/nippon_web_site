@@ -3,17 +3,14 @@
 <?php 
  
  /** Template Name: Shade */
-//  $shade_class = "shade";
-// if(isset($_GET["shade"])): 
-//     return json_encode($response);
-
-
-
-// endif;
+ 
  
  ?>
  <?php 
-    get_template_part("headers/header-shade");
+ 
+    get_header();
+    get_template_part("other/page-bk-shade");
+ 
     get_template_part("other/loading");
    
  ?>

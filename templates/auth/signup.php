@@ -71,7 +71,7 @@ $found_posts = checkUserIsAddedUserData();
 		if( $query->have_posts()):
 			while($query->have_posts()):
 				$query->the_post();
-				echo get_the_ID();
+				 
 				the_content();
 			endwhile;
 		endif;
@@ -285,7 +285,7 @@ $found_posts = checkUserIsAddedUserData();
 			</div>
         
 			<div id="accept_field" class="field required">
-				<div class="ui checkbox">
+				<div class="ui checkbox mt-2">
 				<input type="checkbox" name="accept_pdpa" id="accept_pdpa" tabindex="0" >
 				<label>ยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน <a href="/">นโยบายคุ้มครองข้อมูลส่วนบุคคล</a> </label>
 			</div>
