@@ -23,8 +23,8 @@ if(!$page_name) {
 
 ?>
 <div class="container page-calculate">
-    <div class="margin-page"></div>
-<h1 class="ui header primary-text center aligned mb-3 mt-3">
+<div class="header-title-page">
+<h1 class="ui header primary-text center aligned ">
     
 <?php echo  $parent_title ?>
 
@@ -32,7 +32,9 @@ if(!$page_name) {
     <?php echo $short_text ?>
 </div>
 </h1>
-<div class="margin-page"></div>
+</div>
+
+ 
 
     <div class="ui fluid two item  secondary pointing menu">
       

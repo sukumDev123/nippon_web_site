@@ -100,39 +100,13 @@ $word_selected = "";
 
 
  <div class="nav-single-products"></div>
-<div   id="nav-products">
-    <ul class="desktop">
-        <?php if(count($terms) > 0): ?>
-            <?php foreach($terms as  $term): if($term->name != "all"):  $className = ""; ?>
-            <?php  if($term->term_id ==  $termId): $className = "cate-active" ;$word_selected =  $term->name;  endif; ?>
-                <li class="<?php echo $className ?>"> 
-                    <a href="<?php echo get_term_link($term->term_id) ?>"><?php echo $term->name ?></a>
-                </li>
-            <?php endif; endforeach; ?>
-        <?php endif; ?>
-       
-    </ul>
-    <button 
-            id="productCate" 
-            type="button" 
-            class="btn  dropdown-toggle" 
-            data-bs-toggle="dropdown" 
-            aria-expanded="false"
-        >
-        <?php echo $word_selected ?>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="productCate">
-        <?php foreach($terms as  $term): if($term->name != "all"):  $className = ""; if($termId == $term->term_id): $className="cate-active"; endif;  ?>
-                <li > 
-                    <a 
-                        class="dropdown-item"  
-                        href="<?php echo get_term_link($term->term_id)  ?>"><?php echo $term->name ?></a>
-                </li>
-            <?php endif; endforeach; ?>
-            
-        </ul>
 
-</div>
+ <?php get_template_part("woocom/nav_products" , null , [
+     "word_selected" => $word_selected,
+     "terms" => $terms,
+     "termId" => $termId 
+ ]) ?>
+
 
 <div class='container' id="single-product">
 <div  class="arrow-back">
@@ -180,7 +154,7 @@ $word_selected = "";
                 // endforeach;
                 ?>
                 <a href="<?php echo  get_site_url() ?>/compare-product/?product_1=<?php echo get_the_ID() ?>&mainCate=<?php echo  $termId ?><?php if($grade): echo  "&cate1=".$grade ; endif; ?>">
-                    <button  class="ui button submit primary"  >เปรียบเทียบ</button>
+                    <button  class="btn btn-block primary" style="color:white"  >เปรียบเทียบ</button>
                 </a>
                 <?php if( $userId !=  FALSE): ?>
                     

@@ -233,7 +233,7 @@ endif;
             <?php echo get_the_title() ?>
             <div class="sub header"><?php echo get_field("short_text") ?></div>
         </h1>
-        <div   class="header-product-categories mt-5">
+        <div   class="header-product-categories">
             <select 
             
             onchange="mainCateChanged()" 
@@ -265,7 +265,10 @@ endif;
                 <?php endforeach; ?>
             </select>
        
-            <div <?php if(!$select_cate): echo "style='display:none'"; endif; ?> id="compare_cate_2" class="row mt-3">
+         
+            <!-- <form action=""> -->
+               <div id="show_product_filter_from_cate">
+               <div <?php if(!$select_cate): echo "style='display:none'"; endif; ?> id="compare_cate_2" class="row mt-3">
                 <div class="col-12 col-md-4">
                     <select onchange="onProductCate1Changed()"   id="cate1" class="select-product-custom form-select" aria-label="Default select example">
                         <option value=""  >เลือกเกรด</option>
@@ -313,8 +316,6 @@ endif;
                 </div>
             </div>
       
-            <!-- <form action=""> -->
-               <div id="show_product_filter_from_cate">
                 <div class="row mt-3">
                         <div class="col-12 col-md-4">
                         <select onchange="onProduct1Selected()"  id="product_1" class="select-product-custom form-select" aria-label="Default select example">
@@ -390,7 +391,7 @@ endif;
  
     <?php if(isset($_GET['product_1'])): ?>
    <div id="compare-product-body">
-   <h1 class="ui header text-center primary-text mt-4 mb-4">ผลการเปรียบเทียบผลิตภัณฑ์</h1>
+   <h1 class="ui header text-center primary-text ">ผลการเปรียบเทียบผลิตภัณฑ์</h1>
 
     <div class="compare-product-content">       
             <?php 

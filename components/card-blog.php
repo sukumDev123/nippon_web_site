@@ -35,9 +35,7 @@
         <h5 class="ui header pointer">
         <?php echo $args["title"] ?>
         </h5>
-        <p>
         <?php echo $args["detail"] ?>
-        </p>
     </div>
     </a>
 </div>

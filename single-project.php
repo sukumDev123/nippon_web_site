@@ -4,7 +4,7 @@ get_template_part("other/loading");
 get_header();
 $featured_img_url = get_the_post_thumbnail_url( get_the_ID(),'full'); 
 
-$getFavs = getFavoritesData("problem-and-solution" , get_the_ID());
+$getFavs = getFavoritesData("problem-and-solution" );
 $data_favorites =  $getFavs["datas"];
 
 ?>
@@ -25,10 +25,17 @@ $data_favorites =  $getFavs["datas"];
 
       <img class='thumbnail-image' src="<?php echo $featured_img_url ?>" alt="<?php echo get_the_title() ?>">
 
-      <?php the_content() ?>
- 
-      <?php 
-            do_action("relation_post" , [
+      <?php the_content() ; ?>
+  
+      <?php
+             do_action("share-button" , [
+                  "title" => get_the_title(),
+                  "link" => get_permalink(),
+                  "sub_title" => "Share",
+             ]);
+      ?>
+           
+      <?php  do_action("relation_post" , [
                   "post_type" => 'project',
                   "category__in" => wp_get_post_categories(get_the_ID()),
                   "post__not_in" => array(get_the_ID()),

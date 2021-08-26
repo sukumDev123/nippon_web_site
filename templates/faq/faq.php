@@ -10,7 +10,7 @@ $faqs_cate = get_terms('FAQsCate', array('hide_empty' => false, 'parent' => 0));
  
 ?>
 
-<div class="container">
+<div class="container fav_big_container">
 
 
 <div class="mt-5 fav_big">
@@ -56,12 +56,9 @@ $faqs_cate = get_terms('FAQsCate', array('hide_empty' => false, 'parent' => 0));
                                 endif;
                             ?>
                                <div class="col-12 col-md-4 mb-3">
-                                <h4 class="sub-type-header <?php echo $checkActive ?> ">
-                                    <a 
-                                        class="account-a  <?php echo $checkActive ?>"
-                                        href="<?php echo  get_permalink(get_the_ID())."?cate=".$cate."&sub_cate=". $sub->term_id ?>"><?php echo $sub->name ?></a>
-                                
-                                </h4>
+                                <a  href="<?php echo  get_permalink(get_the_ID())."?cate=".$cate."&sub_cate=". $sub->term_id ?>" class="sub-type-header <?php echo $checkActive ?> ">
+                                    <h4 class="account-a  <?php echo $checkActive ?>" ><?php echo $sub->name ?></h4>
+                                </a>
                                </div>
                             <?php endforeach; ?>
  

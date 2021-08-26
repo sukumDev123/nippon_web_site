@@ -40,12 +40,12 @@ $aria_describedby_error = $args['aria_describedby_error'];
 				placeholder="<?php  _e( 'Password' ); ?>" 
 				size="20"
 				/>    
+
+ <a class="primary-text primary-text-mt " href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?' ); ?></a>
+
   </div>
  
- <div class="field required">
- <a class="primary-text" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?' ); ?></a>
- </div>
-
+ 
   <button 
   	class="ui button submit primary fluid" 
 	name="wp-submit" 

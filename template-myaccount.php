@@ -33,7 +33,7 @@ if ( ! is_user_logged_in() ) {
             <div class="sub header"> คุณสามารถดูภาพรวมบัญชีล่าสุดของคุณ และอัปเดตข้อมูลเกี่ยวกับบัญชี </div>
         </h1>
     </div>
-    <div class="container mt-5">
+    <div class="container">
     <div class="ui stackable grid">
         <div class="four wide column">
             <ul class="account-navbar">

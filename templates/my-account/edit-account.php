@@ -188,7 +188,7 @@ setTimeout(() => {
 
 
         </div>
-        <div class="field mt-5">
+        <div class="field">
             <button 
             class="ui button submit primary fluid button-normal" 
             name="wp-submit" 
@@ -213,7 +213,7 @@ setTimeout(() => {
 
 
 
-    <div class="border mt-5 mb-5"></div>
+    <div class="border border-my-account"></div>
 
     <form  onsubmit="resetPassword(event)" class="ui equal width form reset-password-form">
         <div class="field">
@@ -227,14 +227,14 @@ setTimeout(() => {
 
         <input type="hidden" id="userId" value="<?php echo $user["userId"] ?>">
        <div class="fields">
-        <div class="field required old-password-div">
+            <div class="field required old-password-div">
                 <label for="password_current">รหัสผ่านปัจจุบัน</label>
                 <input type="password" class="woocommerce-Input woocommerce-Input--password input-text" name="password_current" id="password_old" autocomplete="off" />
                 <div id="password_not_match_old"  class="ui pointing red basic label pointing-alert">
                     รหัสผ่านไม่ตรงกับรหัสผ่านเก่า
                 </div>
             </div>
-           
+            <div class="field"></div>
        </div>
       <div class="fields">
         <div class="field required">
@@ -253,7 +253,7 @@ setTimeout(() => {
                 </div>
             </div>
       </div>
-        <div class="field mt-4">
+        <div class="field">
         
                 <button 
                 class="ui button submit primary fluid button-normal" 

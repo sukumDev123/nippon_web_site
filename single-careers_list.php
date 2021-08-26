@@ -32,14 +32,14 @@ get_template_part("other/loading");
 <div class="margin-page"></div>
  
 
-<div  class="ui mt-4 stackable grid ">
-  <div class="eight wide column">
+<div  class="ui mt-4 stackable grid  ">
+  <div class="eight wide column content-career">
       <?php the_content() ?>
   </div>
   <div class="eight wide column form-career ">
      <!-- <div class=""> -->
          
-        <h2 class="ui head center aligned container primary-text mb-4">กรอกข้อมูลสมัครงาน</h2>
+        <h2 class="ui head center aligned container primary-text text-title">กรอกข้อมูลสมัครงาน</h2>
  
         <form class="ui form">
             <input  type="hidden" id="career_name" value="<?php echo get_the_title() ?>">

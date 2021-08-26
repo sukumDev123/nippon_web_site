@@ -3,8 +3,8 @@
 get_template_part("other/loading");
 get_header();
 $featured_img_url = get_the_post_thumbnail_url( get_the_ID(),'full'); 
-$getFavs = getFavoritesData("problem-and-solution");  
-$data_favorites = $getFavs["datas"]; 
+$getFavs = getFavoritesData("problem-and-solution" );
+$data_favorites =  $getFavs["datas"];
 $icon1 = "save_favorites_black";
 $icon2 = 'saved_favorites hide';
 if(isset($data_favorites[get_the_ID()])):
@@ -36,6 +36,13 @@ if(get_current_user_id()):
 
       <?php the_content() ?>
  
+      <?php
+             do_action("share-button" , [
+                  "title" => get_the_title(),
+                  "link" => get_permalink(),
+                  "sub_title" => "Share",
+             ]);
+      ?>
       <?php 
             do_action("relation_post" , [
                   "post_type" => 'how_to_paint',

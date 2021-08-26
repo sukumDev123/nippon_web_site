@@ -62,7 +62,13 @@ endif;
         </div>
         <!-- <div class="content-get-idea"> -->
         <?php the_content() ?>
-
+        <?php
+             do_action("share-button" , [
+                  "title" => get_the_title(),
+                  "link" => get_permalink(),
+                  "sub_title" => "Share",
+             ]);
+        ?>
         <div class="footer-content">
             <div class="footer-content-prev-and-next">
 

@@ -182,44 +182,11 @@ $word_selected = "เลือกประเภทสินค้า";
    
 </div>
 
-<div  id="nav-products">
-    <ul class="desktop">
-        <?php if(count($terms) > 0): ?>
-            <?php foreach($terms as  $term): $className = ""; if($term->name != "all"): if($termId == $term->term_id): $className="cate-active";$word_selected=$term->name; endif;  ?>
-                <li class="<?php  echo $className ?>"> 
-                    <a href="<?php echo get_term_link($term->term_id)  ?>/?scroll=true"><?php echo $term->name ?></a>
-                </li>
-            <?php endif; endforeach; ?>
-        <?php endif; ?>
-    </ul>
-    
-        <button 
-            id="productCate" 
-            type="button" 
-            class="btn  dropdown-toggle" 
-            data-bs-toggle="dropdown" 
-            aria-expanded="false"
-        >
-        <?php echo $word_selected ?>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="productCate">
-        <li>
-            <a class="dropdown-item"  >
-                        เลือกประเภทสินค้า
-                    </a>    
-            </li>
-        <?php foreach($terms as  $term): if($term->name != "all"): $className = "";  if($termId == $term->term_id): $className="cate-active"; endif;  ?>
-                <li > 
-                    <a 
-                        class="dropdown-item"  
-                        href="<?php echo get_term_link($term->term_id)  ?>/?scroll=true"><?php echo $term->name ?></a>
-                </li>
-            <?php endif; endforeach; ?>
-            
-        </ul>
-
- 
-</div>
+ <?php get_template_part("woocom/nav_products" , null , [
+     "word_selected" => $word_selected,
+     "terms" => $terms,
+     "termId" => $termId 
+ ]) ?>
 
 
 <div class="container"  id="product-title" >
@@ -254,20 +221,24 @@ $word_selected = "เลือกประเภทสินค้า";
             foreach($termShow as $t) {
                 $termShowData = get_terms('product_cat', array('hide_empty' => false, 'parent' => $t->term_id));
                 if($t->description != "0"):
-                
                     echo '<div class="product-cate-card"><h2>'.$t->name.'</h2>';
                     $_slugs = "";
+                    $cateThisCounted = ""; //เช็คว่า ตัวเลือกชนิดนี้ถูกเลือก filter แล้ว
                     foreach ($termShowData as  $category) {
                         if(isset($_GET['slug'])) {
                             $get_S = $_GET["slug"];
                             $_slugs = explode(",",$_GET['slug']);
                             $slug = "'" .  $get_S."'";
-                     
-                         
+                            foreach( $_slugs as $_slug) {
+                                if(trim($_slug) == trim($category->name)) {
+                                    $cateThisCounted = $_slug;
+                                }
+                            }
                         } else { 
                             $slug = "''"; 
                         }
-                    
+                    }
+                    foreach ($termShowData as  $category) {
                         $checked = "";
                         if($_slugs):
                             if(count($_slugs) > 0) :
@@ -281,23 +252,20 @@ $word_selected = "เลือกประเภทสินค้า";
                                 endforeach;
                             endif;
                         endif;
-                    
                         $thisCate = "'".$category->name."'";
                         if($category->description != "0"):
-                        echo '
+                        echo <<<html
                             <h5>
-                                <a>'. $category->name .' </a>
-                                <div class="box-check" onclick="getChecked('.$slug.' , '. $thisCate.')" >
-                                    <div class=" '.$checked.'"></div>
+                                <a>$category->name </a>
+                                <div class="box-check" onclick="getChecked($slug ,  $thisCate , '$cateThisCounted')" >
+                                    <div class="$checked"></div>
                                 </div>
                             </h5>
 
-                            ';
+                            html;
                         endif;
                     }
-
                     echo '</div>';
-
                 endif;
 
             }
@@ -379,7 +347,7 @@ $word_selected = "เลือกประเภทสินค้า";
         }
         
       
-        $getFav = getFavoritesData("product" , );
+        $data_favorites = getFavoritesData("product");
         $index = 0;
         $loop = new WP_Query( $args );
         if ( $loop->have_posts() ) {
@@ -398,7 +366,7 @@ $word_selected = "เลือกประเภทสินค้า";
                     "detail" => get_the_excerpt(),
                     "href" => $link,
                     "user" => get_current_user_id(),
-                    "data_favorites" => $getFav['datas'],
+                    "data_favorites" => $data_favorites['datas'],
                     "prod_id" => get_the_ID(),
                     "index" => ++$index 
                 ]);
@@ -442,25 +410,43 @@ $word_selected = "เลือกประเภทสินค้า";
 <div class="mt-5rem"></div>
 
 <script>
-    function getChecked(slug , _slug_ ) {
+    function getChecked(slug , _slug_ , oldSlug ) {
         let _slug = "";
-        
-            if(slug.match(_slug_)) {
-            _slug = slug.split(",").filter(s => s != _slug_).join(",")
-            // console.log({_slug})
+        let elseCase = true
+        let checkWordEq = false
+
+        if(slug.match(_slug_)) {
+            _slug = slug.split(",").filter(s => s.trim() != _slug_.trim()).join(",")
+          
             if(_slug == "") {
                 window.location.href = '<?php echo get_term_link($termId) ; ?>';
             }
-        } else {
+            elseCase = false
+            checkWordEq = true
+        } 
+
+
+        if(oldSlug && !checkWordEq) {
+                slug = slug.split(",").filter(s => s.trim() != oldSlug.trim()).join(",")
+                elseCase = true
+
+            }
+        
+        
+       
+        console.log({slug , oldSlug  , _slug_ , ll:slug.match(_slug_)})
+        
+        if(elseCase) {
+             
             _slug = slug ? slug + "," + _slug_ : _slug_;
         }
-        <?php  if($search) { ?>
+    
+      console.log({la: _slug})
+      <?php  if($search) { ?>
                 <?php echo  "if(_slug) window.location.assign('?search=".$search."&slug=' + _slug)"; ?> 
             <?php } else{  ?>
                 <?php echo  "if(_slug) window.location.assign('?slug=' + _slug)";     ?>    
         <?php } ?>
-        
-      
         
      
     }

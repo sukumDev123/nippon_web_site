@@ -32,6 +32,8 @@ add_action('wp_enqueue_scripts' , "load_stylesheets");
 function load_js() {
     wp_register_script("custom" ,  get_template_directory_uri() . '/app.js' , 'jquery' , 1 , true);
     wp_enqueue_script("custom");
+    wp_register_script("domain" ,  get_template_directory_uri() . '/domain.js' , 'jquery' , 1 , true);
+    wp_enqueue_script("domain");
  
     wp_register_script("swiper" , get_template_directory_uri() . '/assets/swiper.min.js' , 'swiper' , 1 , true);
     wp_enqueue_script("swiper");
@@ -1904,6 +1906,40 @@ endif;
 add_action("favorites_blog_h2" , "addFavoritesForBlog2" , 10 , 1);
 
 
+function addFavoritesForBlog($args) {
+ $typeFav = $args['typeFav']; // problem-and-solution
+
+    $getFavs = getFavoritesData( $typeFav);  
+    $data_favorites = $getFavs["datas"]; 
+    $icon1 = "save_favorites_black";
+    $icon2 = 'saved_favorites hide';
+    if(isset($data_favorites[$args['postId']])):
+      $icon1 = "save_favorites_black hide";
+      $icon2 = "saved_favorites";
+endif;
+    
+    $title= $args["title"];
+    $postId= $args["postId"];
+    $userId = NULL;
+    if(get_current_user_id()):
+      $userId = get_current_user_id();
+      endif;
+    echo '
+    <div class="header-title-and-save-favorites">
+    <h1>'.$title.'</h1>';
+    if($userId):
+        echo '<div onclick="saveFavoritesOnePost('.$userId.' , '.$postId.' , '.  "'" . $typeFav .  "'" .', '."'save_favorites_black'".' , '."'saved_favorites'".' )" class="favorites-button"> ';
+        get_template_part("components/icon" , null , ["icon" => "save_favorites_black" , "class" => $icon1]) ;
+        get_template_part("components/icon" , null , ["icon" => "saved_favorites" , "class" => $icon2] ) ;
+        echo '</div>';
+      endif; 
+    echo '</div>';
+}
+
+
+add_action("favorites_blog" , "addFavoritesForBlog" , 10 , 1);
+
+
 function functionMakeFav($args) {
    if(isset($args['user_id'])) :  
         if($args["user_id"] != FALSE):
@@ -2264,3 +2300,39 @@ add_action( 'rest_api_init', function () {
     endif;
   }
   add_action("header-user-nav" , "registerHeader" , 10, 1);                 
+
+
+
+
+  function shareButton($args) {
+    $tb =  get_bloginfo("template_directory");
+    $fb = $tb . "/assets/images/FB-black.svg";
+    $line = $tb . "/assets/images/Line-black.svg";
+    $tw = $tb . "/assets/images/Twitter-black.svg";
+    $in = $tb . "/assets/images/Linkin-black.svg";
+    $pt = $tb . "/assets/images/print_t_b.svg";
+    $cp = $tb . "/assets/images/copy.svg";
+    $per_link = $args["link"];
+    $title =  $args["title"];
+    $sub_title =  $args["sub_title"];
+    $linkFb = "https://www.facebook.com/sharer/sharer.php?u=$per_link";
+    $linkLine = "https://social-plugins.line.me/lineit/share?url=$per_link";
+    $linkTW = "https://twitter.com/intent/tweet?text=$title&url=$per_link";
+    $linkIN = "https://www.linkedin.com/shareArticle?mini=true&url=$per_link&title=$title";
+    echo <<<txt
+        <div class="share-box">
+            <h4 class="text-center">$sub_title</h4>
+            <div class="social-div">
+                <a target="_blank"  href="$linkFb"><img src="$fb" alt=""></a>
+                <a target="_blank"  href="$linkLine"><img src="$line" alt=""></a>
+                <a target="_blank"  href="$linkTW"><img src="$tw" alt=""></a>
+                <a target="_blank"  href="$linkIN"><img src="$in" alt=""></a>
+                <a target="_blank" class="copyLink" onclick="copyThisLink('$per_link')"><img src="$cp" alt=""></a>
+            </div>
+        </div>
+    txt;
+
+  }
+
+  add_action("share-button" , "shareButton" , 10, 1);                 
+

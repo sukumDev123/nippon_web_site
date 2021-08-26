@@ -42,7 +42,7 @@ $count = $query->found_posts;
 
               
                 <div class="four wide column">
-                    <button type="submit" class="large fluid ui button btn-primary border-r-20">Search</button>
+                    <button type="submit" class="search-button-career">ค้นหา</button>
                 </div>
             </form>
         </div>
@@ -81,7 +81,7 @@ $count = $query->found_posts;
                             </div>
                         </div>
                         <div class="six wide column center aligned">
-                        <button class="ui btn-primary button">
+                        <button class="btn-primary btn btn-block">
                         <a href="<?php echo get_permalink(get_the_ID()); ?>">
                         ดูรายละเอียดเพิ่มเติม
                     </a>   
