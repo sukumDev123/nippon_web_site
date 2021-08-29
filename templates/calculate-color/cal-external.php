@@ -1,7 +1,7 @@
 <div class="mt-5">
-    <h3 class="ui header">
-        ป้อนข้อมูลพื้นที่ห้อง
-    </h3>
+    <h2 class="ui header">
+        ป้อนข้อมูลพื้นที่ผนังภายนอก
+    </h2>
 
     <div class="text-center">
         <img src="<?php  bloginfo("template_directory") ?>/assets/images/external-room-top.jpg" alt="">
@@ -16,7 +16,7 @@
                         "title" => "ผนังด้านที่ 1",
                         "choice_1" => "ความกว้างของรั้ว (เมตร)",
                         "choice_2" => "ความสูงของรั้ว (เมตร)",
-                        
+                        "button_text" => "พื้นที่ทาผนังด้านที่ 1",
                         "input_1" => "external_input_1_1",
                         "input_2" => "external_input_2_1",
                         "result_id" => "result_external_1"
@@ -62,6 +62,7 @@
                                         "title" => "รั้ว",
                                         "choice_1" => "ความกว้างของรั้ว (เมตร)",
                                         "choice_2" => "ความสูงของรั้ว (เมตร)",
+                                        "button_text" => "พื้นที่ทารั้ว",
                                         
                                         "input_1" => "external_other_value_a",
                                         "input_2" => "external_other_value_b",
@@ -84,6 +85,10 @@
 
 
 <div class="submit-calculate">
+    <div class="notes-1">
+        <P>หมายเหตุ สีทาภายนอก ใช้การคำนวณทีละผนัง เนื่องจากภายนอกบ้านมักมีพื้นที่ผนังแต่ละด้านไม่เท่ากัน <br />
+หากมีผนังด้านที่ไม่เท่าจำนวนมากกว่า 4 ด้าน ให้คำนวณโดยสูตร (กว้าง x สูง) เพิ่มเข้าไป</P>
+    </div>
     <div class="show-result-m">
         <h2>พื้นที่ทาสีทั้งหมด</h2>
         <h1 id="summary_number_1">0</h1>
@@ -108,13 +113,13 @@
     </h3>
     <div class="header-summary">
         <div class="text-center">
-            <h5 class="primary-text">พื้นที่ทาสี</h5>
+            <h3 class="primary-text">พื้นที่ทาสี</h3>
         </div>
         <div class="text-center">
-            <h5 class="primary-text">ประเภท</h5>
+            <h3 class="primary-text">ประเภท</h3>
         </div>
         <div class="text-center">
-            <h5 class="primary-text">ปริมาณสีที่ต้องใช้</h5>
+            <h3 class="primary-text">ปริมาณสีที่ต้องใช้</h3>
         </div>
     </div>
     <div class="body-summary">
@@ -123,13 +128,16 @@
             <h5 class="ui header">(สีน้ำ)</h5>
         </div>
         <div class="header-2">
-            <h3 class="ui header">1. สีรองพื้นปูน <span>(ทา 1 รอบ)</span></h3>
-            <h3 class="ui header">2. สีทับหน้า <span>(ทา 2 รอบ)</span></h3>
-          
+        <div class="header-wrapper">
+                <h3 class="ui header">1. สีรองพื้นปูน <span>(ทา 1 รอบ)</span></h3>
+                <h3 class="ui header">2. สีทับหน้า <span>(ทา 2 รอบ)</span></h3>
+           </div>
         </div>
         <div class="header-3">
-            <h3 id="result-top-1"  class="ui header"></h3>
-            <h3 id="result-top-2" class="ui header"></h3>
+        <div class="header-wrapper-end">
+                <h3 id="result-top-1"  class="ui header"></h3>
+                <h3 id="result-top-2" class="ui header"></h3>
+            </div>
         </div>
     </div>
     <div class="body-summary">
@@ -138,20 +146,29 @@
             <h5 class="ui header">(สีน้ำ)</h5>
         </div>
         <div class="header-2">
-            <h3 class="ui header">1. สีรองพื้นปูน <span>(ทา 1 รอบ)</span></h3>
-            <h3 class="ui header">2. สีทับหน้า <span>(ทา 2 รอบ)</span></h3>
+ 
+            <div class="header-wrapper">
+                <h3 class="ui header">1. สีรองพื้นปูน <span>(ทา 1 รอบ)</span></h3>
+                <h3 class="ui header">2. สีทับหน้า <span>(ทา 2 รอบ)</span></h3>
+           </div>
         </div>
         <div class="header-3">
-            <h3 id="result-bottom-1"  class="ui header"></h3>
-            <h3 id="result-bottom-2" class="ui header"></h3>
+
+            <div class="header-wrapper-end">
+                    <h3 id="result-bottom-1"  class="ui header"></h3>
+                    <h3 id="result-bottom-2" class="ui header"></h3>
+            </div>
+           
         </div>
     </div>
 
-    <h5 class="ui red header">
-    หมายเหตุ
-    </h5>
-    <p>*พื้นที่การใช้งานนี้เป็นข้อมูลจากการคำนวณทางทฤษฎีเท่านั้น ปริมาณการใช้งานจริงขึ้นอยู่กับวิธีการทำงาน สภาพพื้นผิว สภาพหน้างาน ความหนาในการเคลือบสี และปัจจัยอื่น ๆ 
-ที่อาจเกี่ยวข้อง</p>
+    <div class="notes_need_to_know">
+        <h3 class="ui red header">
+        หมายเหตุ
+        </h3>
+        <p>*พื้นที่การใช้งานนี้เป็นข้อมูลจากการคำนวณทางทฤษฎีเท่านั้น ปริมาณการใช้งานจริงขึ้นอยู่กับวิธีการทำงาน สภาพพื้นผิว สภาพหน้างาน ความหนาในการเคลือบสี และปัจจัยอื่น ๆ 
+    ที่อาจเกี่ยวข้อง</p>
+    </div>
 </div>
 
 <div class="mt-5rem"></div>

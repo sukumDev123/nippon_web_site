@@ -14,7 +14,7 @@ $aria_describedby_error = $args['aria_describedby_error'];
 	<div class="field">
 		<h2 class="ui header centered  primary-text">
 			<?php _e("Log In") ?>
-			<div class="sub header">	สมาชิกใหม่?  <a class="primary-text" href="wp-login.php?action=register" > <?php echo _e("Register") ?> </a></div>
+			<div class="sub header">	สมาชิกใหม่?  <a class="primary-text" href="wp-login.php?action=register" > ลงทะเบียนฟรี </a></div>
 		</h2>
 	
 	</div>
@@ -32,26 +32,29 @@ $aria_describedby_error = $args['aria_describedby_error'];
   
   <div class="field required">
   	<label for="user_pass"><?php _e( 'Password' ); ?></label>
-  
+	  <div class="ui icon-password">
 		<input 
-				type="password" 
-				name="pwd" 
-				id="pwd_user_pass" <?php echo $aria_describedby_error; ?>  
-				placeholder="<?php  _e( 'Password' ); ?>" 
-				size="20"
-				/>    
+			type="password" 
+			name="pwd" 
+			id="pwd_user_pass" <?php echo $aria_describedby_error; ?>  
+			placeholder="<?php  _e( 'Password' ); ?>" 
+			size="20"
+		/>    
+		<i onclick="passwordEyeChanged('#pwd_user_pass' , '.password-eye')"  class=" bi bi-eye password-eye   " ></i>
 
- <a class="primary-text primary-text-mt " href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?' ); ?></a>
-
+   		</div>
   </div>
  
- 
-  <button 
-  	class="ui button submit primary fluid" 
+ <div class="filed">
+ <a class="primary-text remember-link" href="<?php echo esc_url( wp_lostpassword_url() ); ?>">ลืมรหัสผ่าน?</a>
+ <button 
+  	class="ui button submit primary fluid button-sign" 
 	name="wp-submit" 
 	id="wp-submit" 
 	type="submit"><?php esc_attr_e( 'Log In' ); ?></button>
   
+ </div>
+ 
 
 <?php get_template_part("components/login-social-button") ?>
 

@@ -90,8 +90,8 @@ $args = array(
         <h2 class="text-center white">
         บทความไอเดียการตกแต่ง <?php        
         ?>
-        <div class="sub header white">ทุกแรงบันดาลใจในการแต่งบ้าน นิปปอนต์เพนต์รวบรวมมาไว้ให้คุณที่นี่</div>
         </h2>
+        <h4 class="ui header white sub_title">ทุกแรงบันดาลใจในการแต่งบ้าน นิปปอนต์เพนต์รวบรวมมาไว้ให้คุณที่นี่</h4>
 
         <div class="menus-tax-ideas container">
             <a href="<?php echo  get_site_url() ?>/get-idea/?scroll=true">

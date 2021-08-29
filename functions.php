@@ -35,6 +35,9 @@ function load_js() {
     wp_register_script("domain" ,  get_template_directory_uri() . '/domain.js' , 'jquery' , 1 , true);
     wp_enqueue_script("domain");
  
+    wp_register_script("signin" ,  get_template_directory_uri() . '/src/signin.js' , 'jquery' , 1 , true);
+    wp_enqueue_script("signin");
+ 
     wp_register_script("swiper" , get_template_directory_uri() . '/assets/swiper.min.js' , 'swiper' , 1 , true);
     wp_enqueue_script("swiper");
     wp_register_script("bootstrap" ,  get_template_directory_uri() . '/assets/bootstrap.bundle.min.js' , 'bootstrap' , 1 , true);
@@ -46,6 +49,8 @@ function load_js() {
     wp_enqueue_script("fontawesome");
     wp_register_script("form" ,  get_template_directory_uri() . '/src/form.js' , '' , 1 , true);
     wp_enqueue_script("form");
+    wp_register_script("recaptcha" , 'https://www.google.com/recaptcha/api.js' , '' , 1 , true);
+    wp_enqueue_script("recaptcha");
   
     wp_register_script("compare_js" ,  get_template_directory_uri() . '/src/compare_product.js' , '' , 1 , true);
     wp_enqueue_script("compare_js");
@@ -859,26 +864,43 @@ add_action( 'rest_api_init', function () {
   function save_faq($request) {
     $data = $request->get_body();
     $toArray = json_decode($data);
+    $responseKey = $toArray->g_recaptcha_response;
+    // $responseKey = $toArray[]
+    $secret = "6LdjuzAcAAAAAD0QJsA4yAxHZKijR5pKy_qdRNp2";
+    $remoteip=  $toArray->ip_user;
+    $urlChaptcha = "https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$responseKey&remoteip=$remoteip";
     // var_dump($toArray);
-    if( !$toArray->accept) {
-        return json_decode(json_encode(["message" => "accept_not_found"]));
-    }
-    $info = [
-        "first_name" =>  $toArray->first_name,
-        "last_name" =>  $toArray->last_name,
-        "email" =>  $toArray->emailVal,
-        "tel" =>  $toArray->tel ,
-        "detail" =>  $toArray->detail ,
-    ];
-    $postArr = [
-        'post_title' => $toArray->emailVal,
-        "meta_input" => $info,
-        "post_type" => "faqs_form",
-        "post_status" => "publish"
-    ];
-    wp_insert_post($postArr);
+    $response = file_get_contents($urlChaptcha);
+    
+    $responseToArray = json_decode($response);
+    if($responseToArray->success):
+            if( !$toArray->acceptValue) {
+                return json_decode(json_encode(["message" => "accept_not_found"]));
+            }
+            $info = [
+                "first_name" =>  $toArray->first_name,
+                "last_name" =>  $toArray->last_name,
+                "email" =>  $toArray->emailVal,
+                "tel" =>  $toArray->tel ,
+                "detail" =>  $toArray->detail ,
+            ];
+            $postArr = [
+                'post_title' => $toArray->emailVal,
+                "meta_input" => $info,
+                "post_type" => "faqs_form",
+                "post_status" => "publish"
+            ];
+            wp_insert_post($postArr);
 
-    return json_decode(json_encode(["message" => "success"]));
+            return json_decode(json_encode(["message" => "success"]));
+    else:
+        header("HTTP/1.1 500 Internal Server Error");
+        return json_decode(json_encode(["message" => "FAILED"]));
+
+    endif;
+
+    // var_dump();
+   
   }
 
 add_action( 'rest_api_init', function () {
@@ -890,8 +912,24 @@ add_action( 'rest_api_init', function () {
   } );
  
  
- 
-
+  function getIPAddress(){
+    $ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if(getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if(getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if(getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if(getenv('HTTP_FORWARDED'))
+       $ipaddress = getenv('HTTP_FORWARDED');
+    else if(getenv('REMOTE_ADDR'))
+        $ipaddress = getenv('REMOTE_ADDR');
+    else
+        $ipaddress = 'UNKNOWN';
+    return $ipaddress;
+}
 
 
   function favorites_user_func($request) {
@@ -956,6 +994,19 @@ add_action( 'rest_api_init', function () {
   function save_career($request) {
     $data = $request->get_body();
     $toArray = json_decode($data);
+
+    $responseKey = $toArray->g_recaptcha_response;
+    // $responseKey = $toArray[]
+    $secret = "6LdjuzAcAAAAAD0QJsA4yAxHZKijR5pKy_qdRNp2";
+    $remoteip=  $toArray->ip_user;
+    $urlChaptcha = "https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$responseKey&remoteip=$remoteip";
+    // var_dump($toArray);
+    $response = file_get_contents($urlChaptcha);
+    
+    $checkStatus = json_decode($response);
+ 
+    if(!$checkStatus->success) return json_decode(json_encode(["message" => "failed"]));
+
     $info = [
         "first_name" =>  $toArray->first_name,
         "last_name" =>  $toArray->last_name,
@@ -1207,7 +1258,7 @@ function register_user($request) {
     }   else {
         $phpmailer = send_email();
         $displayName = $toArray->name . " ". $toArray->lastname;
-        registerSuccess($phpmailer, $email, $displayName  );
+        // /registerSuccess($phpmailer, $email, $displayName  );
         $info = [
             "first_name" =>  $toArray->name,
             "last_name" =>  $toArray->lastname,
@@ -1296,7 +1347,7 @@ function update_user(
            $update =   wp_update_post($postArr);
 
         else:
-$info = [
+        $info = [
             "first_name" =>  $toArray->name,
             "last_name" =>  $toArray->lastname,
             "email" =>  $toArray->emailVal,
@@ -1321,7 +1372,7 @@ $info = [
         
     }
  
-    return json_decode(json_encode(["message" => "success" , "user" => json_encode($user) , "dd" => $toArray->$email]));
+    return json_decode(json_encode(["message" => "success" , "user" => json_encode($user) , "dd" => $user]));
 
 }
 add_action( 'rest_api_init', function () {
@@ -2015,7 +2066,7 @@ function addSelectGetIdea($args) {
     <div class="form-group col-md-6">
       <label for="inputEmail4">ประเภทกลุ่ม</label>
       <select  onchange="selectCateGetIdeaChanged('. "'" . $url. "'".' , '.$chekedFirst.', '."'" . $url_default. "'".' )" id="select_get_idea_all" class="menu" >
-      <option value="">ล่าุสุด</option>';
+      <option value="">ทั้งหมด</option>';
      foreach($termUserType as $TUT):
         $selected = "";
         if($TUT->term_id == $user_type):
@@ -2288,7 +2339,7 @@ add_action( 'rest_api_init', function () {
                         <button>ลงทะเบียน</button>
                     </a>
                 </div>
-                <div class="col-6">
+                <div class="col-6 login-link">
                     <a  href='$site/wp-login.php'>
                         <button>
                         <i class="bi bi-person-fill"></i> 
@@ -2336,3 +2387,28 @@ add_action( 'rest_api_init', function () {
 
   add_action("share-button" , "shareButton" , 10, 1);                 
 
+
+
+  // test_clickup
+
+
+
+function check_user_exists($request) {
+
+    $parameters = json_decode($request->get_body());
+    $user =  get_user_by("email" ,  $parameters->emailVal);
+    if($user) {
+        return json_decode(json_encode(["message" => "user_exists" ]));
+    }
+        return json_decode(json_encode(["message" => "OK" ]));
+}
+
+
+  add_action( 'rest_api_init', function () {
+    register_rest_route( 'api/v1', '/user/check_user_exists/', array(
+      'methods' => 'POST',
+      'callback' => 'check_user_exists',
+      
+      'permission_callback' => '__return_true'
+    ) );
+  } );

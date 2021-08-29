@@ -702,10 +702,10 @@ const headerClicked = () => {
 };
 
 const searchShade = () => {
-  const search_selected = document.querySelector("#search-select");
+  const search_selected = document.querySelector("#selected_shade_color");
   if (search_selected) {
     document.querySelector(".select-input").addEventListener("click", () => {
-      if (search_selected.className.match(/selected-active/)) {
+      if (search_selected.className?.match(/active-ul/)) {
         const _className = search_selected.className
           .split(" ")
           .filter((c) => c !== "selected-active")
@@ -720,6 +720,7 @@ const searchShade = () => {
         document.querySelector("#selected_shade_color").className =
           "select-custom active-ul";
       }
+      console.log({ select: search_selected.className });
     });
   }
 };
@@ -735,14 +736,13 @@ const onChangeColorFilter = (type, value) => {
 
     document.querySelector(`#${type}`).className = "active";
     document.querySelector("#search_type").value = value;
-    const search_selected = document.querySelector("#search-select");
-    if (search_selected.className.match(/selected-active/)) {
+    const search_selected = document.querySelector("#selected_shade_color");
+    if (search_selected.className.match(/active-ul/)) {
       const _className = search_selected.className
         .split(" ")
         .filter((c) => c !== "selected-active")
         .join(" ");
 
-      // console.log({ _className });
       search_selected.className = _className;
       document.querySelector("#selected_shade_color").className =
         "select-custom";
@@ -995,68 +995,6 @@ function view_more_info_on_click() {
       });
   });
 }
-window.onload = () => {
-  homePageInitSwiper();
-  headerClicked();
-  homePageHeaderOnFixed();
-  searchShade();
-  onHideShowVDOLink();
-  onSelectedFilterOnClick();
-  handleHeaderMobile();
-  handleMenuClickedShowSubMenu();
-  handleFilterProductMobile();
-  handleFooterMenuClicked();
-  loadLocation();
-  saveUserInfo();
-  saveCareer();
-  isPhone();
-  IsNumber();
-  uploadFile();
-  showMoreCalPageInternal();
-  calculateInternalRoomStep1();
-  calculateInternalRoomStep2();
-  calculateInternalRoomStep3();
-  calculateInternalRoomStep4();
-  calculateInternalRoomSummary();
-  addPlusButton();
-  summaryExternalCal();
-  faqOnHeaderClicked();
-  view_more_info_on_click();
-  onResetButtonInit();
-  const message_right = document.querySelector(".message-right");
-  const contact_message_box = document.querySelector(".contact-message-box");
-  const arrow_up_to_top = document.querySelector(".arrow-up-to-top");
-  const closeEmailF = document.querySelector(".icon-items");
-  if (closeEmailF) {
-    closeEmailF.addEventListener("click", (event) => {
-      const user_info = document.querySelector("#user_info");
-      user_info.className = "";
-    });
-  }
-  if (message_right && contact_message_box) {
-    contact_message_box.addEventListener("click", () => {
-      if (message_right.className == "message-right active") {
-        message_right.className = "message-right";
-        contact_message_box.className = "contact-message-box ";
-      } else {
-        message_right.className = "message-right active";
-        contact_message_box.className = "contact-message-box active";
-      }
-    });
-    arrow_up_to_top.addEventListener("click", () => {
-      window.scrollTo(0, 0);
-    });
-  }
-  try {
-    if (family_colors) {
-      if (family_colors.length) findColorClose([0, 0, 0], "rgb", family_colors);
-    }
-
-    if (firstPostId) {
-      onPageShadeInit();
-    }
-  } catch (error) {}
-};
 
 function solutionChange(id, load_product = true) {
   if (loading) loading.className = "";
@@ -1529,3 +1467,6 @@ function copyTextToClipboard(text) {
 function copyThisLink(text) {
   copyTextToClipboard(text);
 }
+// function loadImageColoursLib() {
+//   const imageBanner = document.querySelector(".image-banner");
+// }

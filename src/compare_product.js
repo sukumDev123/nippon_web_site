@@ -65,6 +65,8 @@ function mainCateChanged() {
         compare_cate_2.style.display = "flex";
         ["cate1", "cate2", "cate3"].forEach((ele, index) => {
           const _cate = document.querySelector("#" + ele);
+          _cate.style.display = "block";
+
           removeChildElementSelect(_cate, ele);
           createOption(_cate, "", "", "เลือกเกรด");
           d.product_term.forEach((term) => {

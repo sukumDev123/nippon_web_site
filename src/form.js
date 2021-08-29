@@ -227,7 +227,7 @@ function IsNumber() {
     isN &&
       isN.addEventListener("keypress", (event) => {
         // if (+event.key < 0) event.preventDefault();
-        if (!/[0-9]/.test(event.key)) {
+        if (!/[0-9.]/.test(event.key)) {
           event.preventDefault();
         }
       });
@@ -268,6 +268,8 @@ function saveCareer() {
   if (career_send)
     career_send.addEventListener("click", (e) => {
       e.preventDefault();
+      const checkRecapCha = grecaptcha.getResponse();
+      if (!checkRecapCha) return;
       const data = {
         first_name: firstName.value,
         last_name: lastName.value,
@@ -322,7 +324,12 @@ function saveCareer() {
       const accept = document.querySelector("#accept").checked;
       if (!accept)
         document.querySelector("#accept_field").className = "field error";
-      console.log({ dd: validateEmail(email.value) });
+      console.log({
+        dd: validateEmail(email.value),
+        accept,
+        c: checkAllField(),
+        checkRecapCha,
+      });
       if (!validateEmail(email.value)) {
         _listInp[2].className = "field required error";
       } else {
@@ -334,13 +341,18 @@ function saveCareer() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify({
+            ...data,
+            ip_user: document.querySelector("#ip_user").value,
+            g_recaptcha_response: checkRecapCha,
+          }),
         })
           .then((data) => data.json())
           .then((d) => {
             console.log({ d });
+            if (d.message == "failed") return;
             document.querySelector(".popup-show").style.display = "flex";
-
+            grecaptcha.reset();
             firstName.value = "";
             lastName.value = "";
             email.value = "";
@@ -376,7 +388,7 @@ function calculateInternalRoomStep1() {
         const step_1_value_bV = +step_1_value_b.value;
         const step_1_value_cV = +step_1_value_c.value;
         const sum = 2 * (step_1_value_aV + step_1_value_bV) * step_1_value_cV;
-        step_1_result.innerHTML = sum;
+        step_1_result.innerHTML = (sum || 0).toFixed(2);
       });
   });
 }
@@ -397,7 +409,7 @@ function calculateInternalRoomStep2() {
           : +step_2_value_c.value;
         const sum = step_2_value_aV * step_2_value_bV * step_2_value_cV;
         console.log({ step_2_value_cV });
-        step_2_result.innerHTML = sum;
+        step_2_result.innerHTML = (sum || 0).toFixed(2);
       });
   });
 }
@@ -418,7 +430,7 @@ function calculateInternalRoomStep3() {
           : +step_3_value_c.value;
         const sum = step_3_value_aV * step_3_value_bV * step_3_value_cV;
         console.log({ step_3_value_cV });
-        step_3_result.innerHTML = sum;
+        step_3_result.innerHTML = (sum || 0).toFixed(2);
       });
   });
 }
@@ -437,7 +449,7 @@ function calculateInternalRoomStep4() {
 
         const sum = step_4_value_aV * step_4_value_bV;
 
-        step_4_result.innerHTML = sum;
+        step_4_result.innerHTML = (sum || 0).toFixed(2);
       });
   });
 }
@@ -489,18 +501,18 @@ function addPlusButton() {
             </h2>
             <div class="ui three columns grid">
                 <div class="column cal-div">
-                        <h5 for="A1"> ความกว้างของผนัง (เมตร)</h5>
+                        <h4 for="A1"> ความกว้างของผนัง (เมตร)</h4>
                         <input class="isNumber" type="text" id="${inputId}">
                 </div>
                 <div class="column  cal-div">
-                        <h5 for="A1">ความสูงของผนัง (เมตร)</h5>
+                        <h4 for="A1">ความสูงของผนัง (เมตร)</h4>
                         <input class="isNumber" type="text" id="${input2Id}">
                 </div>
                 <div class="column ">
                     <div class="cal-result-step4">
-                        <h5>พื้นที่ทาฝ้า</h5> 
+                        <h4>พื้นที่ทาผนังด้านที่ ${_countE}</h4> 
                         <h1 id="${result}">0</h1>   
-                        <h5>ตารางเมตร</h5>   
+                        <h4>ตารางเมตร</h4>   
                     </div>
                 </div>
             </div>
@@ -530,6 +542,7 @@ function addPlusButton() {
   }
 }
 function summaryExternalCal() {
+  console.log("summaryExternalCal");
   const submit_all_calculate_external = document.querySelector(
     "#submit_all_calculate_external"
   );
@@ -546,6 +559,8 @@ function summaryExternalCal() {
   );
   if (submit_all_calculate_external && reset_calculate_external) {
     submit_all_calculate_external.addEventListener("click", (e) => {
+      console.log("submit_all_calculate_external");
+
       const children = external_big_div.children;
       const _childrenArrays = Array.from(children);
       summary_calculate.style.display = "block";
@@ -565,12 +580,14 @@ function summaryExternalCal() {
 
       allResult += +external_other_result.innerHTML;
 
-      result_top_1.innerHTML = (+allResult / 30).toFixed(2);
-      result_top_2.innerHTML = (+allResult / 15).toFixed(2);
-      result_bottom_1.innerHTML = (+allResult / 30).toFixed(2);
-      result_bottom_2.innerHTML = (+allResult / 15).toFixed(2);
-      document.querySelector("#summary_number_2").innerHTML = allResult;
-      document.querySelector("#summary_number_1").innerHTML = allResult;
+      result_top_1.innerHTML = `${(+allResult / 30).toFixed(2)} แกลลอน`;
+      result_top_2.innerHTML = `${(+allResult / 15).toFixed(2)} แกลลอน`;
+      result_bottom_1.innerHTML = `${(+allResult / 30).toFixed(2)} แกลลอน`;
+      result_bottom_2.innerHTML = `${(+allResult / 15).toFixed(2)} แกลลอน`;
+      document.querySelector("#summary_number_2").innerHTML =
+        allResult.toFixed(2);
+      document.querySelector("#summary_number_1").innerHTML =
+        allResult.toFixed(2);
       setTimeout(() => {
         document.querySelector(".submit-calculate").scrollIntoView({
           behavior: "smooth",
@@ -651,12 +668,16 @@ function calculateInternalRoomSummary() {
           step_3_result_value -
           step_4_result_value;
 
-        summary_number_1.innerHTML = summary;
-        summary_number_2.innerHTML = summary;
-        result_top_1.innerHTML = (summary / 30).toFixed(2);
-        result_top_2.innerHTML = (summary / 15).toFixed(2);
-        result_bottom_1.innerHTML = (summary / 30).toFixed(2);
-        result_bottom_2.innerHTML = (summary / 15).toFixed(2);
+        summary_number_1.innerHTML = (summary || 0).toFixed(2);
+        summary_number_2.innerHTML = (summary || 0).toFixed(2);
+        // result_top_1.innerHTML = (summary / 30).toFixed(2);
+        // result_top_2.innerHTML = (summary / 15).toFixed(2);
+        // result_bottom_1.innerHTML = (summary / 30).toFixed(2);
+        // result_bottom_2.innerHTML = (summary / 15).toFixed(2);
+        result_top_1.innerHTML = `${(+summary / 30).toFixed(2)} แกลลอน`;
+        result_top_2.innerHTML = `${(+summary / 15).toFixed(2)} แกลลอน`;
+        result_bottom_1.innerHTML = `${(+summary / 30).toFixed(2)} แกลลอน`;
+        result_bottom_2.innerHTML = `${(+summary / 15).toFixed(2)} แกลลอน`;
         setTimeout(() => {
           document.querySelector(".submit-calculate").scrollIntoView({
             behavior: "smooth",
@@ -667,11 +688,11 @@ function calculateInternalRoomSummary() {
       reset_calculate.addEventListener("click", () => {
         summary_calculate.style.display = "none";
 
-        step_1_result.innerHTML = "";
-        step_2_result.innerHTML = "";
-        step_3_result.innerHTML = "";
-        step_4_result.innerHTML = "";
-        summary_number_1.innerHTML = "";
+        step_1_result.innerHTML = "0";
+        step_2_result.innerHTML = "0";
+        step_3_result.innerHTML = "0";
+        step_4_result.innerHTML = "0";
+        summary_number_1.innerHTML = "0";
         summary_number_2.innerHTML = "";
         step_1_value_a.value = "";
         step_1_value_b.value = "";
@@ -971,6 +992,7 @@ function onSelectedShowList(elementId, elementId2) {
 function checkFieldRequired(checkedField = undefined, bigDiv = "") {
   let checkErr = true;
   const _keysId = [];
+  console.log({ bigDiv });
   const fieldRequired = bigDiv
     ? document.querySelectorAll(bigDiv + " .field.required")
     : document.querySelectorAll(".field.required");
@@ -978,6 +1000,7 @@ function checkFieldRequired(checkedField = undefined, bigDiv = "") {
   // Array.from().map(f => {
   //   if(!f.value) checkErr
   // })
+  console.log({ fieldRequired, fd: bigDiv + " .field.required" });
   let data = {};
   for (let i = 0; i < Array.from(fieldRequired).length; i++) {
     const input = fieldRequired[i].querySelector("input");
@@ -1200,25 +1223,39 @@ function checkField(checkedField = undefined, bigDiv = "") {
 }
 
 function saveFaqForm() {
+  // const recaptcha = document.querySelector(".g-recaptcha");
+  const checkRecapCha = grecaptcha.getResponse();
+  if (!checkRecapCha) return;
   const faqForm = checkFieldRequired();
 
-  // const url = "";
+  console.log({ faqForm });
   popUpSuccessOff();
   if (faqForm.checkErr) {
+    buttonLoadingShow();
     const url = domain + "wp-json/api/v1/save_faq";
     fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(faqForm.data),
+      body: JSON.stringify({
+        ...faqForm.data,
+        ip_user: document.querySelector("#ip_user").value,
+        g_recaptcha_response: checkRecapCha,
+        acceptValue: document.querySelector("#acceptValue").checked,
+      }),
     })
-      .then((d) => d.json())
       .then((d) => {
-        // alert("success");
-        //document.querySelector(".popup-show").style.display = "flex";
-        popUpSuccessOn();
-        faqForm.clear();
+        if (d.status === 200) return d.json();
+        console.log({ d });
+      })
+      .then((d) => {
+        if (d.message !== "FAILED" && d.message !== "accept_not_found") {
+          popUpSuccessOn();
+          faqForm.clear();
+          grecaptcha.reset();
+        }
+        buttonLoadingHide();
       });
   }
 }

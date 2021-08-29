@@ -635,9 +635,9 @@ endif;
             
                     get_template_part('components/compare-product-button' , null , [
                         "title"  => "",
-                        "product1" => "รายละเอียด",
-                        "product2" => "รายละเอียด",
-                        "product3" => "รายละเอียด",
+                        "product1" => "รายละเอียดเพิ่มเติม",
+                        "product2" => "รายละเอียดเพิ่มเติม",
+                        "product3" => "รายละเอียดเพิ่มเติม",
                         "product_id_1" => $product1["id"] ,
                         "product_id_2" =>  $product2["id"],
                         "product_id_3" =>  $product3["id"] ,

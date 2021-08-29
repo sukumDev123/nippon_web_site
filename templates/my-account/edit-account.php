@@ -191,9 +191,7 @@ setTimeout(() => {
         <div class="field">
             <button 
             class="ui button submit primary fluid button-normal" 
-            name="wp-submit" 
-            id="wp-submit" 
-            onclick="editProfileInfo(event)"
+      
             type="submit"
             ><?php esc_attr_e( 'Save' ); ?></button>
 
@@ -215,7 +213,7 @@ setTimeout(() => {
 
     <div class="border border-my-account"></div>
 
-    <form  onsubmit="resetPassword(event)" class="ui equal width form reset-password-form">
+    <form  onsubmit="newPasswordForm(event)" class="ui equal width form reset-password-form">
         <div class="field">
             <h3 class="ui header  ">
                 <?php esc_html_e( 'Password change', 'woocommerce' ); ?>
@@ -229,7 +227,19 @@ setTimeout(() => {
        <div class="fields">
             <div class="field required old-password-div">
                 <label for="password_current">รหัสผ่านปัจจุบัน</label>
-                <input type="password" class="woocommerce-Input woocommerce-Input--password input-text" name="password_current" id="password_old" autocomplete="off" />
+               
+
+                <div class="ui icon-password">
+                <input type="password" name="password_old"   id="password_old"  />
+
+		            <i onclick="passwordEyeChanged('#password_old' , '.pwd_old')"  class=" bi bi-eye password-eye pwd_old " ></i>
+
+   		            </div>
+
+
+
+
+
                 <div id="password_not_match_old"  class="ui pointing red basic label pointing-alert">
                     รหัสผ่านไม่ตรงกับรหัสผ่านเก่า
                 </div>
@@ -239,7 +249,16 @@ setTimeout(() => {
       <div class="fields">
         <div class="field required">
                     <label for="password_1">รหัสผ่านใหม่</label>
-                    <input type="password"  class="woocommerce-Input woocommerce-Input--password input-text" name="password_1" id="password_1" autocomplete="off" />
+
+                    <div class="ui icon-password">
+                    <input type="password"  name="password_1"  id="password_1"  />
+		            <i onclick="passwordEyeChanged('#password_1', '.pwd_new')"  class=" bi bi-eye password-eye  pwd_new " ></i>
+
+   		            </div>
+
+
+                    
+                    
                     <h5 class="ui header" >
 			<div class="sub header">ใช้อักขระ 8 ตัวขึ้นไปที่มีทั้งตัวอักษร ตัวเลข และสัญลักษณ์ผสมกัน</div>
 		</h5>
@@ -247,7 +266,20 @@ setTimeout(() => {
                 
             <div class="field required">
                 <label for="password_2">ยืนยันรหัสผ่านใหม่</label>
-                <input type="password" class="woocommerce-Input woocommerce-Input--password input-text" name="password_2" id="password_2" autocomplete="off" />
+              
+
+
+                <div class="ui icon-password">
+                <input type="password"   name="password_2"   id="password_2"  />
+
+		            <i onclick="passwordEyeChanged('#password_2' , '.conf_pwd')"  class=" bi bi-eye password-eye conf_pwd " ></i>
+
+   		            </div>
+
+
+
+
+
                 <div id="password_new_and_password_confirm"  class="ui pointing red basic label pointing-alert">
                     รหัสผ่านไม่ตรงกัน
                 </div>
@@ -257,10 +289,8 @@ setTimeout(() => {
         
                 <button 
                 class="ui button submit primary fluid button-normal" 
-                name="wp-submit" 
-                id="wp-submit" 
-                onclick="resetPassword(event)"
-                type="submit"><?php esc_attr_e( 'Save' ); ?></button>
+               
+                ><?php esc_attr_e( 'Save' ); ?></button>
                 <div class="button-loading">
 						<div class="d-grid gap-2  ">
 							<button
@@ -277,3 +307,8 @@ setTimeout(() => {
     
  </div>
 
+
+
+
+
+ 

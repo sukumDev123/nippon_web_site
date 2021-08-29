@@ -3,8 +3,9 @@
 get_header();
 get_template_part("other/loading");
 
-
-
+ 
+$ip = getIPAddress();
+ 
 
 
 ?>
@@ -156,14 +157,38 @@ get_template_part("other/loading");
                 </div>
             </div>
         
-            <div class="field mt-5">
+
+
+
+            <div class="reChapcha">
+                <div class="g-recaptcha" data-sitekey="6LdjuzAcAAAAAEBGh0lefbwuyop5lH8LIUNuy8D-"></div>
+                </div>
+
+
+                <input type="hidden" id="ip_user" value="<?php  echo $ip ?>">
+
+
+            <div class="field">
             <button 
-                class="ui button submit primary fluid" 
-                name="wp-submit" 
+                class="ui button button-normal submit primary fluid" 
+                name="wp-submit"  
                 id="career_send" 
                 type="submit">สมัครงาน</button>
              
             </div>
+
+            <div class="button-loading button-loading-form">
+                            <div class="d-grid gap-2  ">
+                                <button
+
+                                class="btn btn-primary btn-block" type="button" disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Loading...
+                                </button>
+                            </div>
+                        </div>
+
+
 
         </form>
  

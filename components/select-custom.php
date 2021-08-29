@@ -21,13 +21,15 @@
                     class="select-product-custom form-select" 
                     
                     >
-                        <option value="">Open this select menu</option>
+                        <option value=""><?php echo $args["label"] ?></option>
                         <?php foreach($args["categories"]  as $term): ?>
                             <option <?php if($term->term_id == $args["value"]): echo  "selected"; endif; ?> value="<?php echo $term->term_id ?>"><?php echo $term->name ?></option>
                         <?php endforeach; ?>
                     </select>
                 
             </div>
+
+            
 
 </div>
 <?php endif; ?>

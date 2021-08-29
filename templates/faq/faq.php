@@ -2,11 +2,13 @@
 <?php 
 
 $cate = null;
+$faqs_cate = get_terms('FAQsCate', array('hide_empty' => false, 'parent' => 0));
+
 if(isset($_GET['cate'])):
 $cate = $_GET['cate'];
-
+else :
+    $cate  = $faqs_cate[0]->term_id;
 endif;
-$faqs_cate = get_terms('FAQsCate', array('hide_empty' => false, 'parent' => 0));
  
 ?>
 
@@ -114,6 +116,8 @@ $faqs_cate = get_terms('FAQsCate', array('hide_empty' => false, 'parent' => 0));
                     ];
 
                     $query = new WP_Query($argc);
+                    $count = $query->found_posts;
+
                     if($query->have_posts()):
                         while($query->have_posts()):
                             $query->the_post();
@@ -136,6 +140,9 @@ $faqs_cate = get_terms('FAQsCate', array('hide_empty' => false, 'parent' => 0));
                     endwhile;
                 endif;
                 ?>
+
+        <?php do_action("empty_page" , ["count" => $count ]) ?>
+
 </div>
              
         </div>

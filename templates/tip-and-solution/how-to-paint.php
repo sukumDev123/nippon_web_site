@@ -118,6 +118,8 @@ endif;
      "url_redirect" => get_permalink(),
      "categories" => $problem_and_solution_cate,
      "value" => $cate,
+    "label" => "ปัญหาทั้งหมด",
+
 
  ]);
  

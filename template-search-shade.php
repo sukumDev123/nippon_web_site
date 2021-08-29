@@ -78,7 +78,11 @@ $num = $query->post_count;
  <div>
   
  
+ 
+
     <div id="selected_shade_color" class="select-custom">
+
+
         <div class="select-input">
             <input type="text" id="search_type"  placeholder="" value="RGB" />
             <i id="search-select" class="fas fa-chevron-down"></i>

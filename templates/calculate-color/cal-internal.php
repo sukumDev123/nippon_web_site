@@ -1,7 +1,7 @@
 <div class="mt-5">
-    <h3 class="ui header">
+    <h2 class="ui header">
         ป้อนข้อมูลพื้นที่ห้อง
-    </h3>
+    </h2>
 
     <div class="text-center">
         <img src="<?php  bloginfo("template_directory") ?>/assets/images/internal-room-top.jpg" alt="">
@@ -12,9 +12,9 @@
     
         get_template_part("templates/calculate-color/calulate-step" , null , [
             "title" => "ภายในผนังห้อง",
-            "choice_1" => "A ความกว้างของห้อง (เมตร)",
-            "choice_2" => "B ความยาวของห้อง (เมตร)",
-            "choice_3" => "C ความสูงของห้อง (เมตร)",
+            "choice_1" => "<strong>A</strong>  ความกว้างของห้อง (เมตร)",
+            "choice_2" => "<strong>B</strong>  ความยาวของห้อง (เมตร)",
+            "choice_3" => "<strong>C</strong>  ความสูงของห้อง (เมตร)",
             "input_1" => "step_1_value_a",
             "input_2" => "step_1_value_b",
             "input_3" => "step_1_value_c",
@@ -26,8 +26,8 @@
     
         get_template_part("templates/calculate-color/calulate-step" , null , [
             "title" => "ประตู",
-            "choice_1" => "D ความกว้างของประตู (เมตร)",
-            "choice_2" => "E ความสูงของประตู (เมตร)",
+            "choice_1" => "<strong>D</strong>  ความกว้างของประตู (เมตร)",
+            "choice_2" => "<strong>E</strong>  ความสูงของประตู (เมตร)",
             "choice_3" => "จำนวนประตู",
             "input_1" => "step_2_value_a",
             "input_2" => "step_2_value_b",
@@ -40,8 +40,8 @@
     
         get_template_part("templates/calculate-color/calulate-step" , null , [
             "title" => "หน้าต่าง",
-            "choice_1" => "F ความกว้างของหน้าต่าง(เมตร)",
-            "choice_2" => "G ความสูงของหน้าต่าง (เมตร)",
+            "choice_1" => "<strong>F</strong>  ความกว้างของหน้าต่าง(เมตร)",
+            "choice_2" => "<strong>G</strong>  ความสูงของหน้าต่าง (เมตร)",
             "choice_3" => "จำนวนหน้าต่าง",
             "input_1" => "step_3_value_a",
             "input_2" => "step_3_value_b",
@@ -79,9 +79,9 @@
                                     
                                             get_template_part("templates/calculate-color/calulate-step-2-field" , null , [
                                                 "title" => "ฝ้า",
-                                                "choice_1" => "ความกว้างของห้อง (เมตร)",
-                                                "choice_2" => "ความยาวของห้อง (เมตร)",
-                                                
+                                                "choice_1" => "<strong>H</strong>  ความกว้างของห้อง (เมตร)",
+                                                "choice_2" => "<strong>I</strong>  ความยาวของห้อง (เมตร)",
+                                                "button_text" => "พื้นที่ทารั้ว",
                                                 "input_1" => "step_4_value_a",
                                                 "input_2" => "step_4_value_b",
                                                 "result_id" => "step_4_result"
@@ -125,13 +125,13 @@
     </h3>
     <div class="header-summary">
         <div class="text-center">
-            <h5 class="primary-text">พื้นที่ทาสี</h5>
+            <h2 class="primary-text">พื้นที่ทาสี</h2>
         </div>
         <div class="text-center">
-            <h5 class="primary-text">ประเภท</h5>
+            <h2 class="primary-text">ประเภท</h2>
         </div>
         <div class="text-center">
-            <h5 class="primary-text">ปริมาณสีที่ต้องใช้</h5>
+            <h2 class="primary-text">ปริมาณสีที่ต้องใช้</h2>
         </div>
     </div>
     <div class="body-summary">
@@ -140,13 +140,17 @@
             <h5 class="ui header">(สีน้ำ)</h5>
         </div>
         <div class="header-2">
-            <h3 class="ui header">1. สีรองพื้นปูน <span>(ทา 1 รอบ)</span></h3>
-            <h3 class="ui header">2. สีทับหน้า <span>(ทา 2 รอบ)</span></h3>
-          
+           <div class="header-wrapper">
+                <h3 class="ui header">1. สีรองพื้นปูน <span>(ทา 1 รอบ)</span></h3>
+                <h3 class="ui header">2. สีทับหน้า <span>(ทา 2 รอบ)</span></h3>
+           </div>
         </div>
         <div class="header-3">
-            <h3 id="result-top-1"  class="ui header"></h3>
-            <h3 id="result-top-2" class="ui header"></h3>
+            <div class="header-wrapper-end">
+                <h3 id="result-top-1"  class="ui header"></h3>
+                <h3 id="result-top-2" class="ui header"></h3>
+            </div>
+          
         </div>
     </div>
     <div class="body-summary">
@@ -155,20 +159,28 @@
             <h5 class="ui header">(สีน้ำ)</h5>
         </div>
         <div class="header-2">
-            <h3 class="ui header">1. สีรองพื้นปูน <span>(ทา 1 รอบ)</span></h3>
-            <h3 class="ui header">2. สีทับหน้า <span>(ทา 2 รอบ)</span></h3>
+        
+            <div class="header-wrapper">
+                <h3 class="ui header">1. สีรองพื้นปูน <span>(ทา 1 รอบ)</span></h3>
+                <h3 class="ui header">2. สีทับหน้า <span>(ทา 2 รอบ)</span></h3>
+           </div>
         </div>
         <div class="header-3">
-            <h3 id="result-bottom-1"  class="ui header"></h3>
-            <h3 id="result-bottom-2" class="ui header"></h3>
+          
+            <div class="header-wrapper-end">
+                <h3 id="result-bottom-1"  class="ui header"></h3>
+                <h3 id="result-bottom-2" class="ui header"></h3>
+            </div>
         </div>
     </div>
 
-    <h5 class="ui red header">
-    หมายเหตุ
-    </h5>
-    <p>*พื้นที่การใช้งานนี้เป็นข้อมูลจากการคำนวณทางทฤษฎีเท่านั้น ปริมาณการใช้งานจริงขึ้นอยู่กับวิธีการทำงาน สภาพพื้นผิว สภาพหน้างาน ความหนาในการเคลือบสี และปัจจัยอื่น ๆ 
-ที่อาจเกี่ยวข้อง</p>
+    <div class="notes_need_to_know">
+        <h3 class="ui red header">
+        หมายเหตุ
+        </h3>
+        <p>*พื้นที่การใช้งานนี้เป็นข้อมูลจากการคำนวณทางทฤษฎีเท่านั้น ปริมาณการใช้งานจริงขึ้นอยู่กับวิธีการทำงาน สภาพพื้นผิว สภาพหน้างาน ความหนาในการเคลือบสี และปัจจัยอื่น ๆ 
+    ที่อาจเกี่ยวข้อง</p>
+    </div>
 </div>
 
 <div class="mt-5rem"></div>

@@ -151,9 +151,20 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
 <div id="solution-pages" >
     <div class="margin-page"></div>
     <div class="content">
-            <h1  class="ui header"><?php echo get_the_title() ?>
+        <?php
+            $title = get_the_title();
+            $short_text =  get_field("short_text" );
+            if($post->post_parent != $postId):
+                $title = get_the_title($post->post_parent);
+                $short_text =  get_field("short_text" , $post->post_parent );
+            endif;
+
+
+        ?>
+            <h1  class="ui header">
+                <?php echo $title ?>
                 <div class="sub header">
-                <?php echo get_field("short_text") ?>
+                <?php echo $short_text?>
                 </div>
             </h1>
              

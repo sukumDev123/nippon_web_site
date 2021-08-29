@@ -35,10 +35,20 @@ $found_posts = checkUserIsAddedUserData();
 	)
  ]);
  
- 
  ?>
 
 <style>
+	<?php 
+	if($found_posts  > 0):
+?>
+#sign_in_step1 , #sign_in_step2 {
+			display: none;
+		}
+<?php
+
+	endif;
+	
+	?>
  <?php if(!is_user_logged_in()): ?>
 		#sign_in_step2 , #sign_in_step3 {
 			display: none;
@@ -101,9 +111,9 @@ $found_posts = checkUserIsAddedUserData();
    
    
 	<?php  get_template_part("components/input_exclamation" , null ,  [
-		"placeholder" => "Email",
+		"placeholder" => "อีเมล",
 		"name" => "log",
-		"label" => "Email",
+		"label" => "อีเมล",
 		"id" => "emailVal",
 		"value" => "",
 		"class"=>"input" 
@@ -114,14 +124,24 @@ $found_posts = checkUserIsAddedUserData();
   
   
   <div class="required field">
-		<label for="user_pass"><?php _e( 'Password' ); ?></label>
-		<input 
+		<label for="user_pass">รหัสผ่าน</label>
+		 
+
+
+			<div class="ui icon-password">
+			<input 
 				type="password" 
 				name="pwd"
 				id="pwd" 
 				size="20"
 				placeholder="Password"
 			/>
+
+		            <i onclick="passwordEyeChanged('#pwd' , '.pwd-eye')"  class=" bi bi-eye password-eye pwd-eye  " ></i>
+
+   		            </div>
+
+
 
 			<div id="password_more_8_length"  class="ui pointing red basic label pointing-alert">
                     รหัสผ่านต้องมีจำนวน 8 ตัวอักษรขึ้นไป
@@ -130,14 +150,25 @@ $found_posts = checkUserIsAddedUserData();
   </div>
  
   <div class="required field">
-		<label for="user_pass"><?php _e( 'Password' ); ?></label>
-		<input 
+		<label for="user_pass">ยืนยันรหัสผ่าน</label>
+		
+
+			<div class="ui icon-password">
+			<input 
 				type="password" 
 				name="confirm_password"
 				id="confirm_password" 
 				size="20"
 				placeholder="Confirm Password"
 			/>
+
+		            <i onclick="passwordEyeChanged('#confirm_password' , '.confirm_pwd')"  class=" bi bi-eye password-eye confirm_pwd " ></i>
+
+   		            </div>
+
+
+
+
 			<div id="password_new_and_password_confirm"  class="ui pointing red basic label pointing-alert">
                     รหัสผ่านไม่ตรงกัน
                 </div>
@@ -154,18 +185,35 @@ $found_posts = checkUserIsAddedUserData();
  
  
   <button 
-  	class="ui button submit primary fluid" 
+  	class="ui button submit primary fluid button-normal" 
 	  name="wp-submit" 
 	id="wp-pass-signup" 
 	onclick="registerStep1(event)"
 	type="submit"><?php esc_attr_e( 'Register' ); ?></button>
+	<div class="button-loading">
+						<div class="d-grid gap-2  ">
+							<button
 
+							class="btn btn-primary btn-block" type="button" disabled>
+								<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+								Loading...
+							</button>
+						</div>
+					</div>
+				
 	
 	
 	<?php get_template_part("components/login-social-button") ?>
 
 
   
+	<div id="message_error_exists_user" class="mt-3 alert alert-danger d-flex align-items-center" role="alert">
+			<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+			<div>
+				ผู้ใช้งานคนนี้มีอยู่ในระบบแล้ว
+			</div>
+		</div>
+ 
 </form>		
   </div>
 </div>
@@ -316,7 +364,9 @@ $found_posts = checkUserIsAddedUserData();
         </div>
     
  
- 
+
+
+
  
     </div>
 </div>
@@ -327,12 +377,14 @@ $found_posts = checkUserIsAddedUserData();
    
 
 
-<?php  get_template_part("components/form-success" , null ,  [
+<?php  
+$redLatest = add_login_redirect();
+get_template_part("components/form-success" , null ,  [
 		 "title" => "ลงทะเบียนสำเร็จ",
 		 "sub_title" => "การลงทะเบียนสมบูรณ์ คุณสามารถใช้งานได้ทันที",
 		 "btn_title" => "กลับสู่หน้าหลัก",
 		 "id_form" => "sign_in_step3",
-		 "link" => get_site_url()
+		 "link" => $redLatest 
 	]); ?>
  
  <script>

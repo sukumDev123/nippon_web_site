@@ -6,18 +6,18 @@
                 </h2>
                 <div class="ui three columns grid">
                     <div class="column cal-div">
-                            <h5 for="A1"> <?php echo $args["choice_1"] ?></h5>
+                            <h4 for="A1"> <?php echo $args["choice_1"] ?></h5>
                             <input class="isNumber" type="text" id="<?php echo $args["input_1"] ?>">
                     </div>
                     <div class="column  cal-div">
-                            <h5 for="A1"><?php echo $args["choice_2"] ?></h5>
+                            <h4 for="A1"><?php echo $args["choice_2"] ?></h4>
                             <input class="isNumber" type="text" id="<?php echo $args["input_2"] ?>">
                     </div>
                     <div class="column ">
                         <div class="cal-result-step4">
-                            <h5>พื้นที่ทาฝ้า</h5> 
+                            <h4><?php echo $args['button_text'] ?></h4> 
                             <h1 id="<?php echo $args["result_id"] ?>">0</h1>   
-                            <h5>ตารางเมตร</h5>   
+                            <h4>ตารางเมตร</h4>   
                         </div>
                     </div>
                 </div>

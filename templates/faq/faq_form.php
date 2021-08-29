@@ -1,3 +1,8 @@
+<?php 
+
+$ip = getIPAddress();
+?>
+
 <div class="ui stackable grid  faq-form">
     <div class="four wide column">
        <h3 class="ui header">มีคำถามเพิ่มเติม</h3>
@@ -79,17 +84,33 @@
                 </div>
                 <div id="accept_field" class="field required">
                     <div class="ui checkbox">
-                    <input type="checkbox" name="accept" id="accept" tabindex="0" >
+                    <input type="checkbox" name="acceptValue" id="acceptValue" tabindex="0" >
                     <label>ยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน <a href="/">นโยบายคุ้มครองข้อมูลส่วนบุคคล</a> </label>
                 </div>
+
+                <div class="reChapcha">
+                <div class="g-recaptcha" data-sitekey="6LdjuzAcAAAAAEBGh0lefbwuyop5lH8LIUNuy8D-"></div>
+                </div>
+                <input type="hidden" id="ip_user" value="<?php  echo $ip ?>">
                 <div class="field mt-4">
                     <!-- <button></button> -->
-                    <button 
-                class="ui button submit primary fluid" 
-                name="wp-submit" 
-              
-                onclick="saveFaqForm()"
-                type="submit">ส่งคำถาม</button>
+                        <button 
+                    class="ui button submit primary fluid faq_button_submit button-normal" 
+                    name="wp-submit" 
+                
+                    onclick="saveFaqForm()"
+                    type="submit">ส่งคำถาม</button>
+                    <div class="button-loading button-loading-form">
+                            <div class="d-grid gap-2  ">
+                                <button
+
+                                class="btn btn-primary btn-block" type="button" disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Loading...
+                                </button>
+                            </div>
+                        </div>
+				
                 </div>
             </div>
             </div>

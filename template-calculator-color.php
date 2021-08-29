@@ -50,7 +50,9 @@ if(!$page_name) {
             if($query->have_posts()): while($query->have_posts()): $query->the_post(); ?>
             
             <a href="<?php echo get_permalink(get_the_ID() )?>" class="<?php if( $page_name  === get_field("page_name" , get_the_ID())): echo "active" ;endif; ?> item">
+                    <h1 class="ui header center aligned">
                     <?php echo get_the_Title() ?>
+                    </h1>
             </a>
         
             <?php endwhile;endif; wp_reset_query(); ?>

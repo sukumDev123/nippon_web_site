@@ -37,8 +37,29 @@ function registerStep1(e) {
     showPointingShow("#password_new_and_password_confirm");
     return;
   }
-  sign_in_step1.style.display = "none";
-  sign_in_step2.style.display = "block";
+  buttonLoadingShow();
+
+  fetch(domain + "wp-json/api/v1/user/check_user_exists", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      emailVal: inputRegis.data["emailVal"],
+    }),
+  })
+    .then((data) => data.json())
+    .then((d) => {
+      // console.log({ d });
+      buttonLoadingHide();
+      if (d.message == "user_exists") {
+        document.querySelector("#message_error_exists_user").style.opacity =
+          "1";
+      } else {
+        sign_in_step1.style.display = "none";
+        sign_in_step2.style.display = "block";
+      }
+    });
 }
 function buttonLoadingShow() {
   const bn = document.querySelectorAll(".button-normal");
@@ -157,8 +178,17 @@ function registerForm() {
         .then((data) => data.json())
         .then((d) => {
           buttonLoadingHide();
-          sign_in_step2.style.display = "none";
-          sign_in_step3.style.display = "block";
+          // if (d.message?.errors) {
+          //   const { errors } = d.message;
+          //   if (errors.existing_user_login) {
+          //   }
+          // } else {
+          //   sign_in_step2.style.display = "none";
+          //   sign_in_step3.style.display = "block";
+          // }
+          window.location = domain + "/wp-login.php?action=register";
+
+          console.log({ d });
         })
         .catch((err) => {
           buttonLoadingHide();
@@ -263,7 +293,7 @@ function showPointingShow(elementHash) {
     console.log({ elementHash });
   }
 }
-
+checkFieldRequired;
 function editProfileInfo(e) {
   e.preventDefault();
   const inputRegis = checkFieldRequired(undefined, ".edit-account-form");
@@ -334,9 +364,11 @@ function editProfileInfo(e) {
   }
 }
 
-function resetPassword(e) {
+function newPasswordForm(e) {
   e.preventDefault();
   const inputRegis = checkFieldRequired(undefined, ".reset-password-form");
+
+  console.log({ inputRegis: inputRegis, test: ".reset-password-form" });
   const userId = document.querySelector("#userId");
   console.log({ inputRegis: inputRegis.data, userId: userId.value });
   clearPointingShow();

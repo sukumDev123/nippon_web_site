@@ -14,7 +14,7 @@ $download_file  = get_field("download_file");
 
 <div id="colours-lib" class="container">
     <div class="row template-single">
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-6 image-banner">
             <img src="<?php echo $featured_img_url  ?>" alt="<?php echo get_the_title() ?>">
         </div>
     <div class="col-12 col-md-6">

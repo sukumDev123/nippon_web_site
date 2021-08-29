@@ -137,7 +137,7 @@ endif;
  
  get_template_part("components/select-custom" , null , [
      "input_id" => "cate_id",
-    
+    "label" => "ปัญหาทั้งหมด",
      "categories" => $problem_and_solution_cate,
      "value" => $cate,
      "url_redirect" => get_permalink()

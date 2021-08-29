@@ -52,7 +52,7 @@
 <footer>
     <div  >
  
-        <div >
+        <div class="footer-header">
             <?php 
             
             
@@ -157,7 +157,6 @@
             ?>
         </div>
     </div>
-    <div class="border-bottom-footer"></div>
         <h5 class="copywrite text-center ps-2 pe-2">2021 - © Nippon Paint Decorative Coatings (Thailand) Co.,Ltd. All rights reserved.</h5>
 
 
