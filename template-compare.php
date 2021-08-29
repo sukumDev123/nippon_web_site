@@ -229,7 +229,7 @@ endif;
 
 <div class="container template-compare"  >
     <div class="compare-product-header">
-        <h1 class="text-center ui header primary-text">
+        <h1 class="text-center ui header primary-text title-header">
             <?php echo get_the_title() ?>
             <div class="sub header"><?php echo get_field("short_text") ?></div>
         </h1>
@@ -375,7 +375,7 @@ endif;
                         </div>
                     </div>
 
-                    <div class="mt-5 text-center">
+                    <div class="button-cal-calculate text-center">
                         <?php  get_template_part("components/button-primary" , null, [
                             "title" =>  get_the_title(),
                             "href" => "",

@@ -51,15 +51,42 @@ $user = check_password_reset_key($_GET['token'],$_GET['user_login']);
                 <input type="hidden" id="emailVal" value="<?php echo $_GET['user_login'] ?>">
                 <div class="field required">
                     <label for="">รหัสผ่านใหม่</label>
+
+
+                    <div class="ui icon-password">
                     <input type="password" id="password_1">
+
+		            <i onclick="passwordEyeChanged('#password_1' , '.pwd1')"  class=" bi bi-eye password-eye pwd1 " ></i>
+
+   		            </div>
+
+
+
+
+
+
+
                     <div id="password_more_8_length"  class="ui pointing red basic label pointing-alert">
-                        รหัสผ่านต้องมีจำนวน 8 ตัวอักษรขึ้นไป
+                    ใช้อักขระ 8 ตัวขึ้นไปที่มีทั้งตัวอักษร ตัวเลข และสัญลักษณ์ผสมกัน
                     </div>
 
                 </div>
                 <div class="field required">
                     <label for="">ยืนยันรหัสผ่านใหม่</label>
+
+
+
+                    
+                    <div class="ui icon-password">
                     <input type="password" id="password_2">
+
+
+		            <i onclick="passwordEyeChanged('#password_2' , '.pwd2')"  class=" bi bi-eye password-eye pwd2 " ></i>
+
+   		            </div>
+
+
+
                     <div id="password_new_and_password_confirm"  class="ui pointing red basic label pointing-alert">
                         รหัสผ่านไม่ตรงกัน
                     </div>

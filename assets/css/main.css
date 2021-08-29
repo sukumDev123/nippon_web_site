@@ -130,7 +130,7 @@ body::-webkit-scrollbar-thumb {
 }
 #solution-pages .content h1 {
   color: #1e4f92;
-  font-size: 36px;
+  font-size: 28px;
   font-weight: bold;
 }
 @media screen and (max-width: 1366px) {
@@ -248,7 +248,7 @@ body::-webkit-scrollbar-thumb {
 #solution-list-home-page .content > h1 {
   color: #1e4f92;
   font-weight: 800;
-  font-size: 36px;
+  font-size: 28px;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -487,6 +487,12 @@ div.loginform {
   max-width: 490px !important;
   padding: 40px 60px !important;
 }
+form.loginform .error-text,
+div.loginform .error-text {
+  padding: 0px;
+  margin: 0 0 10px 0 !important;
+  color: #c01315;
+}
 
 .flex-start {
   justify-content: flex-start !important;
@@ -494,7 +500,7 @@ div.loginform {
 
 #services > h2 {
   text-align: center;
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 800;
   margin-bottom: 50px;
   color: #1e4f92;
@@ -539,7 +545,7 @@ div.loginform {
 #services .services-card .service-card > div .link-image img {
   width: auto;
   z-index: 3;
-  height: 32px;
+  height: 47px;
   z-index: 3;
   position: absolute;
   bottom: 30px;
@@ -551,6 +557,7 @@ div.loginform {
   position: absolute;
   bottom: 30px;
   right: 30px;
+  text-decoration: underline;
 }
 #services .services-card .service-card img {
   position: absolute !important;
@@ -1208,6 +1215,8 @@ footer .arrow-up-to-top {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 10px 1px rgba(0, 0, 0, 0.1);
 }
 footer .arrow-up-to-top img {
   transform: rotate(-90deg);
@@ -2331,7 +2340,7 @@ footer .copywrite {
 .project-suggestion > h1 {
   text-align: center;
   font-weight: 600;
-  font-size: 36px;
+  font-size: 28px;
 }
 .project-suggestion > div {
   display: grid;
@@ -3168,7 +3177,7 @@ footer .copywrite {
   padding: 4em 0em;
 }
 #shade-center > h1 {
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 800;
   margin-bottom: 4rem;
 }
@@ -3753,6 +3762,7 @@ footer .copywrite {
 
 .margin-page {
   margin: 4em 0;
+  height: 1px;
 }
 @media screen and (max-width: 1366px) {
   .margin-page {
@@ -3890,7 +3900,7 @@ footer .copywrite {
 }
 #products-2 .product-content > h1,
 #products-3 .product-content > h1 {
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 800;
   margin-bottom: 30px;
   color: #3d464f;
@@ -4271,7 +4281,7 @@ footer .copywrite {
   margin-bottom: 50px;
 }
 #products-1 .title h1 {
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 800;
 }
 @media screen and (max-width: 1366px) {
@@ -4507,7 +4517,7 @@ footer .copywrite {
   margin-bottom: 30px;
   font-weight: 800;
   color: #3d464f;
-  font-size: 36px;
+  font-size: 28px;
 }
 #home_suggestion_shades .content p {
   color: #637381;
@@ -4991,7 +5001,7 @@ footer .copywrite {
 #project_suggestion .container h1 {
   font-weight: 800;
   color: #3d464f;
-  font-size: 36px;
+  font-size: 28px;
 }
 #project_suggestion .container p {
   color: #637381;
@@ -5134,7 +5144,7 @@ footer .copywrite {
   padding-right: 100px;
 }
 #location_and_footer_banner #find_location .find_location .content h1 {
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 800;
   color: #1e4f92;
   margin-bottom: 30px;
@@ -5215,7 +5225,7 @@ footer .copywrite {
 #footer_banner .footer_banner_title {
   text-align: center;
   color: #1e4f92;
-  font-size: 36px;
+  font-size: 28px;
   font-weight: bold;
   margin-bottom: 19px;
 }
@@ -6966,10 +6976,10 @@ body.login input[type=text] {
 .page-calculate .ui.three.columns.grid {
   justify-content: space-between;
 }
-.page-calculate .item h1 {
+.page-calculate .item h2 {
   color: #7d8b96 !important;
 }
-.page-calculate .active.item h1 {
+.page-calculate .active.item h2 {
   color: #1e4f92 !important;
 }
 
@@ -7091,7 +7101,7 @@ body.login input[type=text] {
   padding: 1em 20px;
   align-items: center;
   justify-content: space-around;
-  max-width: 840px;
+  max-width: 700px;
   margin: auto;
   margin-bottom: 4em;
 }
@@ -7124,7 +7134,7 @@ body.login input[type=text] {
 }
 
 .summary-calculate {
-  margin-top: 60px;
+  margin-top: 80px;
   padding-bottom: 80px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   display: none;
@@ -7545,7 +7555,7 @@ body.login input[type=text] {
 
 .tip-and-solution-container {
   max-width: 1170px;
-  margin-top: 50px;
+  margin-top: 6em;
 }
 
 .header-title-and-save-favorites {
@@ -7950,6 +7960,13 @@ body.login input[type=text] {
 }
 #show_product_filter_from_cate .row > div {
   max-width: 375px !important;
+}
+#show_product_filter_from_cate .button-cal-calculate {
+  margin-top: 4em;
+}
+
+.btn-detail-product-compare {
+  padding: 15px 0 !important;
 }
 
 #compare-product-body {
@@ -8910,11 +8927,38 @@ body.login input[type=text] {
 .get-idea-content .content-get-idea {
   max-height: calc(100vh - 166px);
   overflow: auto;
+  scroll-behavior: smooth;
 }
 .get-idea-content .content-get-idea::-webkit-scrollbar {
   width: 0;
   height: 0;
   opacity: 0;
+}
+.get-idea-content .content-get-idea .footer-content-arrow {
+  text-align: center;
+  padding: 2em 0 1em;
+  display: flex;
+  justify-content: center;
+}
+.get-idea-content .content-get-idea .footer-content-arrow .arrow-up-to-top {
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  cursor: pointer;
+}
+.get-idea-content .content-get-idea .footer-content-arrow .arrow-up-to-top img {
+  width: 24px;
+  height: 24px;
+  transform: rotate(-90deg);
+}
+
+.register-list {
+  padding-left: 14px !important;
 }
 
 .button-loading {
@@ -9404,6 +9448,10 @@ div.nsl-container.nsl-container-block .nsl-container-buttons {
 
 .primary-text-mt {
   margin-top: 0.2em !important;
+}
+
+.title-header {
+  font-size: 28px !important;
 }
 
 .header-title-page {

@@ -1470,3 +1470,8 @@ function copyThisLink(text) {
 // function loadImageColoursLib() {
 //   const imageBanner = document.querySelector(".image-banner");
 // }
+function goToTop(elementName) {
+  const elementTag = document.querySelector(elementName);
+  console.log(elementTag);
+  if (elementTag) elementTag.scrollTo(0, 0);
+}

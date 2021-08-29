@@ -29,7 +29,7 @@ $title_static = [
     
 ][$lang];
 $search  =  get_site_url() . "/search/";
- 
+ $titleHeader = preg_replace('/(\s*<(\/?p|br)\s*\/?>\s*)+/u' , " " , get_the_title());
 ?>
 
 <!doctype html>
@@ -39,7 +39,7 @@ $search  =  get_site_url() . "/search/";
  
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php wp_head(); ?>
-    <title><?php echo get_the_title().$title_static['title']; ?></title>
+    <title><?php echo  $titleHeader.$title_static['title']; ?></title>
     <link 
         rel="icon" 
         href="<?php bloginfo("template_directory");  ?>/assets/images/favicon.svg" 

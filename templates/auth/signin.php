@@ -2,7 +2,7 @@
 
 $user_login = $args['user_login'];
 $aria_describedby_error = $args['aria_describedby_error'];
-		
+$errors =  $args["errors"];
 ?>
  
  <form 
@@ -11,6 +11,28 @@ $aria_describedby_error = $args['aria_describedby_error'];
 	id="loginform" 
 	action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" 
 	method="post">
+	<div class="field">
+		<?php 
+		
+		
+	 
+			if($errors):
+				foreach($errors as $error):
+					foreach($error as $err):
+						foreach($err as $e):
+					?>
+					<h5 class="error-text"><?php echo $e ?></h5>
+					<?php 
+						endforeach;
+					endforeach;
+					
+				endforeach;
+
+			endif;
+		 
+		
+		?>
+	</div>
 	<div class="field">
 		<h2 class="ui header centered  primary-text">
 			<?php _e("Log In") ?>
@@ -21,9 +43,9 @@ $aria_describedby_error = $args['aria_describedby_error'];
 
 
 	<?php  get_template_part("components/input_exclamation" , null ,  [
-		"placeholder" => "Email",
+		"placeholder" => "อีเมล",
 		"name" => "log",
-		"label" => "Email",
+		"label" => "อีเมล",
 		"id" => "user_login",
 		"value" => esc_attr( $user_login ),
 		"class"=>"input" 

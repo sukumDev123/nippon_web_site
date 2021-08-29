@@ -80,7 +80,7 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
 <div id="solution-pages" >
         <div class="margin-page"></div>
         <div class="content">
-            <h1  class="ui header"><?php echo get_the_title() ?>
+            <h1  class="ui header title-header"><?php echo get_the_title() ?>
                 <div class="sub header">
                 <?php echo get_field("short_text") ?>
                 </div>

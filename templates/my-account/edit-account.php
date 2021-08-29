@@ -256,7 +256,9 @@ setTimeout(() => {
 
    		            </div>
 
-
+                       <div id="password_more_8_length"  class="ui pointing red basic label pointing-alert">
+			ใช้อักขระ 8 ตัวขึ้นไปที่มีทั้งตัวอักษร ตัวเลข และสัญลักษณ์ผสมกัน
+                </div>
                     
                     
                     <h5 class="ui header" >

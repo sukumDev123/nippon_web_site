@@ -22,7 +22,10 @@ endif;
 
 <div class="get-idea-content">
    <div class="container">
-    <div class="row">
+  
+
+
+   <div class="row">
         <div class="col-12 col-md-8 full-image" >
             <div class="swiper-container swiper-single-get-idea">
                 <div class="swiper-wrapper">
@@ -46,57 +49,70 @@ endif;
         </div>
         <div class="col-12 col-md-4 content-get-idea" >
 
-        <div class="header-get-content">
-                <div class="ui small breadcrumb">
-                    <a href="<?php echo get_site_url() ?>/get-idea" class="section">หน้าแรก</a>
-                    <i class="right chevron icon divider"></i>
-                 
-                    <div class="active section"><?php  echo get_the_title() ?></div>
+            <div class="header-get-content">
+                    <div class="ui small breadcrumb">
+                        <a href="<?php echo get_site_url() ?>/get-idea" class="section">หน้าแรก</a>
+                        <i class="right chevron icon divider"></i>
+                    
+                        <div class="active section"><?php  echo get_the_title() ?></div>
+                </div>
+                <?php do_action("favorites_blog_h2" , [
+                        "title" => get_the_title(),
+                        "postId" => get_the_ID(),
+                        "typeFav" => "get_idea",
+                            
+                    ]) ?>
             </div>
-            <?php do_action("favorites_blog_h2" , [
+      
+            <?php the_content() ?>
+            <?php
+                do_action("share-button" , [
                     "title" => get_the_title(),
-                    "postId" => get_the_ID(),
-                    "typeFav" => "get_idea",
-                        
-                ]) ?>
-        </div>
-        <!-- <div class="content-get-idea"> -->
-        <?php the_content() ?>
-        <?php
-             do_action("share-button" , [
-                  "title" => get_the_title(),
-                  "link" => get_permalink(),
-                  "sub_title" => "Share",
-             ]);
-        ?>
-        <div class="footer-content">
-            <div class="footer-content-prev-and-next">
+                    "link" => get_permalink(),
+                    "sub_title" => "Share",
+                ]);
+            ?>
 
-                <?php if($prev_post_id ): ?>
-                    <a  href="<?php echo get_permalink( $prev_post_id ) ?>"  class="prevButton"> <i class="bi bi-chevron-compact-left"></i> บทความก่อนหน้า</a>
+            <div class="footer-content-get-idea">
+                    <div class="footer-content-prev-and-next">
 
-                <?php else: ?>
-                    <a   class="prevButton disabled"> <i class="bi bi-chevron-compact-left "></i> บทความก่อนหน้า</a>
+                        <?php if($prev_post_id ): ?>
+                            <a  href="<?php echo get_permalink( $prev_post_id ) ?>"  class="prevButton"> <i class="bi bi-chevron-compact-left"></i> บทความก่อนหน้า</a>
 
-                <?php endif; ?>
+                        <?php else: ?>
+                            <a   class="prevButton disabled"> <i class="bi bi-chevron-compact-left "></i> บทความก่อนหน้า</a>
+
+                        <?php endif; ?>
 
 
-                <?php if($next_post_id ): ?>
-                    <a href="<?php echo get_permalink( $next_post_id ) ?>" class="nextButton">บทความถัดไป  <i class="bi bi-chevron-compact-right"></i></a>
-                <?php else: ?>
-                    <a  class="nextButton disabled">บทความถัดไป   <i class="bi bi-chevron-compact-right"></i>
-                <?php endif; ?>
+                        <?php if($next_post_id ): ?>
+                            <a href="<?php echo get_permalink( $next_post_id ) ?>" class="nextButton">บทความถัดไป  <i class="bi bi-chevron-compact-right"></i></a>
+                        <?php else: ?>
+                            <a  class="nextButton disabled">บทความถัดไป   <i class="bi bi-chevron-compact-right"></i> </a>
+                        <?php endif; ?>
+
+
+
+                    
+                    </div>
+                    <div class="footer-content-arrow">
+                            <div onclick="goToTop('.content-get-idea')" class="arrow-up-to-top">
+                                <img src="http://localhost/nippon/wp-content/themes/nippontheme/assets/images/arrow-g.svg" alt="">
+                            </div>
+                    </div>
             </div>
-            <div class="footer-content-arrow">
-
-            </div>
-        </div>
 
         </div>
     </div>
+
+
+
+
+
+
+
    </div>
 
-   
 </div>
 
 

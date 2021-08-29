@@ -28,7 +28,7 @@ if ( ! is_user_logged_in() ) {
 ?>
 <div class="template-myaccount">
     <div class="header-account">
-        <h1 class="primary-text ui header centered"> 
+        <h1 class="primary-text ui header centered title-header "> 
             บัญชีของฉัน  
             <div class="sub header"> คุณสามารถดูภาพรวมบัญชีล่าสุดของคุณ และอัปเดตข้อมูลเกี่ยวกับบัญชี </div>
         </h1>

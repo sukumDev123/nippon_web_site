@@ -35,7 +35,7 @@
                             if(get_the_ID() == 181):
                                ?>
                                     <a target="_blank" class="link-image"  href="https://bit.ly/NP-Rewards-website">
-                                        <img src="<?php bloginfo("template_directory");  ?>/assets/images/LineImage.png" alt="">
+                                        <img src="<?php bloginfo("template_directory");  ?>/assets/images/LineImageNew.png" alt="">
                                     </a>
                                <?php 
                             endif;

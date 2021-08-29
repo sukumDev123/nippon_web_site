@@ -134,7 +134,7 @@ $found_posts = checkUserIsAddedUserData();
 				name="pwd"
 				id="pwd" 
 				size="20"
-				placeholder="Password"
+				placeholder="รหัสผ่าน"
 			/>
 
 		            <i onclick="passwordEyeChanged('#pwd' , '.pwd-eye')"  class=" bi bi-eye password-eye pwd-eye  " ></i>
@@ -144,7 +144,7 @@ $found_posts = checkUserIsAddedUserData();
 
 
 			<div id="password_more_8_length"  class="ui pointing red basic label pointing-alert">
-                    รหัสผ่านต้องมีจำนวน 8 ตัวอักษรขึ้นไป
+			ใช้อักขระ 8 ตัวขึ้นไปที่มีทั้งตัวอักษร ตัวเลข และสัญลักษณ์ผสมกัน
                 </div>
 
   </div>
@@ -159,7 +159,7 @@ $found_posts = checkUserIsAddedUserData();
 				name="confirm_password"
 				id="confirm_password" 
 				size="20"
-				placeholder="Confirm Password"
+				placeholder="ยืนยันรหัสผ่าน"
 			/>
 
 		            <i onclick="passwordEyeChanged('#confirm_password' , '.confirm_pwd')"  class=" bi bi-eye password-eye confirm_pwd " ></i>

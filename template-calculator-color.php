@@ -24,7 +24,7 @@ if(!$page_name) {
 ?>
 <div class="container page-calculate">
 <div class="header-title-page">
-<h1 class="ui header primary-text center aligned ">
+<h1 class="ui header primary-text center aligned title-header ">
     
 <?php echo  $parent_title ?>
 
@@ -50,9 +50,9 @@ if(!$page_name) {
             if($query->have_posts()): while($query->have_posts()): $query->the_post(); ?>
             
             <a href="<?php echo get_permalink(get_the_ID() )?>" class="<?php if( $page_name  === get_field("page_name" , get_the_ID())): echo "active" ;endif; ?> item">
-                    <h1 class="ui header center aligned">
+                    <h2 class="ui header center aligned">
                     <?php echo get_the_Title() ?>
-                    </h1>
+                    </h2>
             </a>
         
             <?php endwhile;endif; wp_reset_query(); ?>

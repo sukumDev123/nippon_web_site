@@ -1147,9 +1147,11 @@ function add_login_form($params) {
     // echo "<h1>Test</h1>";
     $user_login  = $params["user_login"];
     $aria_describedby_error = $params["aria_describedby_error"];
+    $errors = $params["errors"];
     get_template_part("templates/auth/signin" , null , [
         "user_login" => $user_login,
-        "aria_describedby_error" => $aria_describedby_error
+        "aria_describedby_error" => $aria_describedby_error,
+        "errors" => $errors
     ]);
 }
 function add_register_form() {
@@ -1258,7 +1260,6 @@ function register_user($request) {
     }   else {
         $phpmailer = send_email();
         $displayName = $toArray->name . " ". $toArray->lastname;
-        // /registerSuccess($phpmailer, $email, $displayName  );
         $info = [
             "first_name" =>  $toArray->name,
             "last_name" =>  $toArray->lastname,
@@ -1278,6 +1279,8 @@ function register_user($request) {
             "post_status" => "publish"
         ];
        $create =   wp_insert_post($postArr);
+       registerSuccess($phpmailer, $email, $displayName  );
+
     }
     return json_decode(json_encode(["message" => "success" , "user" => json_encode($user) ]));
 }
@@ -1382,6 +1385,38 @@ add_action( 'rest_api_init', function () {
       'permission_callback' => '__return_true'
     ) );
   } );
+
+
+  function getErrors() {
+
+    // if ( ! is_wp_error( $wp_error ) ) {
+		$wp_error = new WP_Error();
+	// }
+    if ( $wp_error->has_errors() ) {
+		$errors   = '';
+		$messages = '';
+
+		foreach ( $wp_error->get_error_codes() as $code ) {
+			$severity = $wp_error->get_error_data( $code );
+			foreach ( $wp_error->get_error_messages( $code ) as $error_message ) {
+				if ( 'message' === $severity ) {
+					$messages .= '	' . $error_message . "<br />\n";
+				} else {
+					// $errors .= '	' . $error_message . "<br />\n";
+                    array_push($errors , ['message'=> $error_message ]);
+				}
+			}
+		}
+
+	 
+        return $errors;
+	}
+
+    return [];
+
+
+  }
+
 
 function change_password($request) {
     $data = $request->get_body();

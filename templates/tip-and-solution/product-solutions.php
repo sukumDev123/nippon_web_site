@@ -161,7 +161,7 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
 
 
         ?>
-            <h1  class="ui header">
+            <h1  class="ui header title-header">
                 <?php echo $title ?>
                 <div class="sub header">
                 <?php echo $short_text?>
