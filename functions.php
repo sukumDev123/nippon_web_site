@@ -1254,6 +1254,7 @@ function register_user($request) {
         $creds['user_password'] = $toArray->pwd;
         $creds['remember'] = true;
         $autologin_user = wp_signon( $creds, false );
+
     endif;
     if ( is_wp_error( $user ) ) {
         return json_decode(json_encode(["message" =>  $user ]));
@@ -1313,7 +1314,7 @@ function update_user(
 
 
     if ( is_wp_error( $user ) ) {
-        return json_decode(json_encode(["message" =>  $user ]));
+        return json_decode(json_encode(["message" => "error" , "detail" => $user ]));
 
     }   else {
         $findProfile = new WP_Query([
@@ -1375,7 +1376,7 @@ function update_user(
         
     }
  
-    return json_decode(json_encode(["message" => "success" , "user" => json_encode($user) , "dd" => $user]));
+    return json_decode(json_encode(["message" => "OK" , "user" => json_encode($user) , "dd" => $user]));
 
 }
 add_action( 'rest_api_init', function () {
@@ -1490,18 +1491,82 @@ function custom_registration_function() {
     //     );
 }
 
+function checkUserInfo($userId = "") {
+    if(!$userId) $userId  = get_current_user_id();
+    $checkUserAndCookies = false;
+    if(isset($_COOKIE["check_info_user"])):
+        $checkUserAndCookies = true;      
+    endif;
+    if($checkUserAndCookies) {
+        return [
+            "user" => $userId,
+            "success" => true,
+            "save_cookies" => false,
+        ];
+    }
+    $query = new WP_Query([
+        'post_type' => "user_custom_field",
+        "meta_query" => [
+            [
+                [
+                    "key" => "user_id",
+                    "value"  => $userId ,
+                    "compare" => "LIKE"
+                ],
+            ]
+        ]
+    ]);
+    $found_posts = $query->found_posts;
+    if($found_posts) {
+        return [
+            "user" => $userId,
+            "success" => true,
+            "save_cookies" => true,
+        ];
+    };
+    return [
+        "user" => "",
+        "success" => false,
+        "save_cookies" => false,
+    ];
+}
 
-function add_login_redirect() {
+function returnLatestUrl() {
     $redi =  get_site_url();
     if(isset($_COOKIE['url_latest'])):
         $redi = $_COOKIE['url_latest'];
     endif;
-//      
     return $redi;
+}
+
+
+function add_login_redirect( $redirect_to, $request, $user) {
+    $redi =  get_site_url();
+if(!empty($user->ID)):
+    $found_posts = checkUserInfo($user->ID);
+   
+    if($found_posts["save_cookies"]):
+        setcookie("check_info_user" , $user->ID , time() + 3600 , "/");
+    endif; 
+    if($found_posts["success"] == false):
+            $redi = get_site_url()."/wp-login.php?action=register";  
+            return $redi;        
+    endif; 
+    if(isset($_COOKIE['url_latest'])):
+        $redi = $_COOKIE['url_latest'];
+    endif;
+
+    if(isset($_COOKIE['url_latest'])):
+        $redi = $_COOKIE['url_latest'];
+    endif; 
+
+    return $redi;
+endif;
+return  $redi;
          
 }
 
-add_filter( 'login_redirect', "add_login_redirect");
+add_filter( 'login_redirect', "add_login_redirect" , 10, 3);
 
 
 
@@ -2313,35 +2378,45 @@ add_action( 'rest_api_init', function () {
     global $wp;
     $current_url = home_url(add_query_arg(array(), $wp->request));
     $checkWpLoginPageg = in_array($GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php'));
+    
     if(!$checkWpLoginPageg):
         if(is_user_logged_in()):
-            // echo "check_user_add_info";
-            $userId = get_current_user_id();
-            if(isset($_COOKIE["check_info_user"])):
-                if($userId == $_COOKIE['check_info_user']):
-                    echo "";
-
-                else:
-                    $query = new WP_Query([
-                        'post_type' => "user_custom_field",
-                        "meta_query" => [
-                            [
-                                [
-                                    "key" => "user_id",
-                                    "value"  => get_current_user_id() ,
-                                    "compare" => "LIKE"
-                                ],
-                            ]
-                        ]
-                    ]);
-                    $found_posts = $query->found_posts;
-                    if($found_posts == 0):
-                        wp_redirect(get_site_url()."/wp-login.php?action=register");
-                    else:
-                        setcookie("check_info_user" , get_current_user_id() , time() * 3600 , "/");
-                    endif;
-                endif;
+            $checkUserInfo = checkUserInfo();
+            if($checkUserInfo["save_cookies"]):
+                setcookie("check_info_user" , get_current_user_id() , time() + 3600 , "/");
+            endif; 
+            if($checkUserInfo['success']):
+                echo "";
+            else:
+                wp_logout();
             endif;
+            // $userId = get_current_user_id();
+            // if(isset($_COOKIE["check_info_user"])):
+            //     if($userId == $_COOKIE['check_info_user']):
+            //         echo "";
+            //     endif;
+            // else:
+               
+            //     $query = new WP_Query([
+            //         'post_type' => "user_custom_field",
+            //         "meta_query" => [
+            //             [
+            //                 [
+            //                     "key" => "user_id",
+            //                     "value"  => get_current_user_id() ,
+            //                     "compare" => "LIKE"
+            //                 ],
+            //             ]
+            //         ]
+            //     ]);
+            //     $found_posts = $query->found_posts;
+            //     if($found_posts == 0):
+            //         wp_logout();
+            //     else:
+                    
+            //         setcookie("check_info_user" , get_current_user_id() , time() + 3600 , "/");
+            //     endif;
+            // endif;
             
         endif;
      
@@ -2355,8 +2430,13 @@ add_action( 'rest_api_init', function () {
   function registerHeader($args) {
     $link = $args['link'];
     $site = get_site_url();
-
-    if(is_user_logged_in()):
+    $addInfoSuccess = "";
+    $checkUserInfo = checkUserInfo();
+   
+    if($checkUserInfo['success']):
+        $addInfoSuccess = $checkUserInfo['user'];
+    endif;
+    if(is_user_logged_in() &&  $addInfoSuccess):
 
         echo   <<<text
             <div class="user-div">

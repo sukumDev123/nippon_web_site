@@ -186,7 +186,7 @@ function registerForm() {
       })
         .then((data) => data.json())
         .then((d) => {
-          buttonLoadingHide();
+          // buttonLoadingHide();
           // if (d.message?.errors) {
           //   const { errors } = d.message;
           //   if (errors.existing_user_login) {
@@ -196,8 +196,6 @@ function registerForm() {
           //   sign_in_step3.style.display = "block";
           // }
           window.location = domain + "/wp-login.php?action=register";
-
-          console.log({ d });
         })
         .catch((err) => {
           buttonLoadingHide();
@@ -362,6 +360,19 @@ function editProfileInfo(e) {
         .then((data) => data.json())
         .then((d) => {
           buttonLoadingHide();
+
+          if (d.message === "OK") {
+            showElementAndTimeOut("#edit-account-success");
+            return;
+          } else {
+            if (d.detail) {
+              if (d.detail?.errors?.existing_user_email) {
+                showElementAndTimeOut("#edit-account-email-exists-error");
+                return;
+              }
+            }
+            showElementAndTimeOut("#edit-account-error");
+          }
         })
         .catch((err) => {
           buttonLoadingHide();
@@ -371,6 +382,13 @@ function editProfileInfo(e) {
     }
     // console.log({ date_class:  });
   }
+}
+function showElementAndTimeOut(elementName) {
+  document.querySelector(elementName).style.display = "block";
+  const timeOut = setTimeout(() => {
+    document.querySelector(elementName).style.display = "none";
+    timeOut && clearTimeout(timeOut);
+  }, 3000);
 }
 
 function newPasswordForm(e) {
@@ -406,6 +424,8 @@ function newPasswordForm(e) {
         buttonLoadingHide();
         if (d.message == "password_not_match_old") {
           showPointingShow("#password_not_match_old");
+        } else {
+          showElementAndTimeOut("#change-password-success");
         }
       })
       .catch((err) => {

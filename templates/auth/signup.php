@@ -378,7 +378,7 @@ $found_posts = checkUserIsAddedUserData();
 
 
 <?php  
-$redLatest = add_login_redirect();
+$redLatest = returnLatestUrl();
 get_template_part("components/form-success" , null ,  [
 		 "title" => "ลงทะเบียนสำเร็จ",
 		 "sub_title" => "การลงทะเบียนสมบูรณ์ คุณสามารถใช้งานได้ทันที",

@@ -3,6 +3,7 @@
 $user_login = $args['user_login'];
 $aria_describedby_error = $args['aria_describedby_error'];
 $errors =  $args["errors"];
+ 
 ?>
  
  <form 
@@ -16,17 +17,10 @@ $errors =  $args["errors"];
 		
 		
 	 
-			if($errors):
-				foreach($errors as $error):
-					foreach($error as $err):
-						foreach($err as $e):
-					?>
-					<h5 class="error-text"><?php echo $e ?></h5>
-					<?php 
-						endforeach;
-					endforeach;
-					
-				endforeach;
+			if(count($errors->errors) && !isset($_GET["logged"])):
+			 ?>
+					<h5 class="error-text">ไม่พบผู้ใช้งาน</h5>
+				<?php 
 
 			endif;
 		 

@@ -207,6 +207,17 @@ setTimeout(() => {
 					</div>
 
         </div>
+        <div id="edit-account-success" class="alert alert-success" role="alert">
+            เปลี่ยนข้อมูลผู้ใช้สำเร็จ
+         </div>
+         <div id="edit-account-error"  class="alert alert-danger" role="alert">
+         เปลี่ยนข้อมูลผู้ใช้ไม่สำเร็จ
+
+         </div>
+         <div id="edit-account-email-exists-error"  class="alert alert-danger" role="alert">
+            อีเมลที่ถูกเปลี่ยนมีอยู่ในระบบแล้ว
+
+         </div>
     </form>
 
 
@@ -305,6 +316,10 @@ setTimeout(() => {
 					</div>
 				
         </div>
+        <div id="change-password-success"  class="alert alert-success" role="alert">
+            เปลี่ยนรหัสผ่านสำเร็จ
+         </div>
+        
     </form>
     
  </div>

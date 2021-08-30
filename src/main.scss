@@ -10495,3 +10495,9 @@ input {
   margin: auto !important;
   padding: 2em 0px;
 }
+#edit-account-success,
+#change-password-success,
+#edit-account-error,
+#edit-account-email-exists-error {
+  display: none;
+}

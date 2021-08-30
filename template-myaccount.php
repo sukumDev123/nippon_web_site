@@ -4,10 +4,12 @@
 
 get_template_part("other/loading");
 if(isset($_GET['logout'])) {
+    unset($_COOKIE['check_info_user']); 
+    setcookie('check_info_user', null, -1, '/'); 
     wp_logout();
         
     }
-if ( ! is_user_logged_in() ) {
+if ( !is_user_logged_in() ) {
     wp_safe_redirect( wp_login_url() );
     exit;
 }
