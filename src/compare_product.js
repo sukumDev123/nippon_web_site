@@ -58,7 +58,7 @@ function mainCateChanged() {
       ["product_1", "product_2", "product_3"].forEach((element) => {
         const _cate = document.querySelector("#" + element);
         removeChildElementSelect(_cate, element);
-        createOption(_cate, "", "", "เลือกเกรด");
+        createOption(_cate, "", "", "เลือกผลิตภัณฑ์");
       });
       // console.log({ d: d.product_term.length });
       if (d.product_term.length) {
@@ -91,7 +91,7 @@ function mainCateChanged() {
           ["product_1", "product_2", "product_3"].forEach((ele, i) => {
             const product_1 = document.querySelector("#" + ele);
             removeChildElementSelect(product_1);
-            createOption(product_1, "", "", "เลือกเกรด");
+            createOption(product_1, "", "", "เลือกผลิตภัณฑ์");
             products.forEach((product, i) => {
               createOption(
                 product_1,

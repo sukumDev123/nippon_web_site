@@ -19,12 +19,14 @@ endif;
 
 $words = [
     "en" => [
+        "all" => "get-idea",
         "house-inspiration" => "house-inspiration",
         "designer-talk" => "designer-talk",
         "trend-beyond-colours" => "trend-beyond-colours",
         "greensoul-magazine" => "greensoul-magazine",
     ],
     "th" => [
+        "all" => "get-idea",
         "house-inspiration" => "house-inspiration",
         "designer-talk" => "designer-talk",
         "trend-beyond-colours" => "trend-beyond-colours",
@@ -61,6 +63,7 @@ $args = array(
             <div class="swiper-wrapper">
              
             <?php $query = new WP_Query($args);
+            $indexBanner = 1;
             while($query->have_posts()):
                 $query->the_post();
                 $featured_img_url = get_the_post_thumbnail_url(get_the_ID(),'full');    
@@ -75,6 +78,8 @@ $args = array(
                             "short_text" => get_field("short_text"),
                             "image" =>  $featured_img_url ,
                             "link" => get_permalink() ,
+                            "index" => $indexBanner,
+                            "link_view_more" => get_site_url()."/".$words[get_field("type_of_page")].'/?slide='.$indexBanner++."&scroll=true"
                         ]);
                         
                         ?>

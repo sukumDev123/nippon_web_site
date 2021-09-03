@@ -50,7 +50,7 @@ if(!$page_name) {
             if($query->have_posts()): while($query->have_posts()): $query->the_post(); ?>
             
             <a href="<?php echo get_permalink(get_the_ID() )?>" class="<?php if( $page_name  === get_field("page_name" , get_the_ID())): echo "active" ;endif; ?> item">
-                    <h2 class="ui header center aligned">
+                    <h2 class="ui header center aligned title-menu title-header-menus">
                     <?php echo get_the_Title() ?>
                     </h2>
             </a>

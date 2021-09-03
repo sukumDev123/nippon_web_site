@@ -32,16 +32,13 @@ $app_5 = get_field("app_5");
      </div>
      <div  class="col-12 col-md-6">
          <div class="content">
-            <h1 class="ui header primary-text">Colour Visualizer</h1>
-            <h4 class="ui header sub-title">เครื่องมือสำหรับนักออกแบบ</h4>
-            <h4 class="ui header">เห็นภาพสีบ้านก่อนทาจริงด้วยปลายนิ้วด้วย NIPPON PAINT Colour Visualizer แอปพลิเคชันจำลองสีผนังบ้านที่คุณต้องการโดยไม่ต้องทาสี ช่วยลดขั้นตอน ประหยัดเวลา หมดปัญหาค่าใช้จ่ายหาก
-    สีที่เลือกไม่ได้ดั่งใจ</h4>
+            <h1 class="ui header primary-text"><?php echo get_the_title() ?></h1>
+            <h4 class="ui header sub-title"><?php echo get_field("sub_title") ?></h4>
+            <h4 class="ui header"><?php echo get_field("text1") ?></h4>
 
             <div class="content-how-to">
                 <h4 class="ui header primary-text">การใช้งาน</h4>
-                <h4 class="ui header">
-                เพียงอัปโหลดหรือถ่ายภาพบ้านของคุณ เลือกเฉดสีที่ชอบจาก NIPPON PAINT ที่มีมากกว่า 1,000 สี และระบายสีลงไปบนผนังหรือบริเวณที่ต้องการ โดยสามารถบันทึกภาพเพื่อเป็นไอเดียในการเลือกสีทาบ้านได้ไม่จำกัด ดาวน์โหลดได้แล้ววันนี้ที่ App Store, Google Play, AppGallery
-                </h4>
+                <h4 class="ui header"><?php echo get_field("text2") ?></h4>
             </div>
             <div class="loop-qr-code">
  

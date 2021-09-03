@@ -12,7 +12,9 @@
     </div>
     <div class="color-your-style">
      <div class="rel">
-     <h3 class="view_more_info">ดูเนื้อหา</br>เพิ่มเติม</h3>
+         <a  href="<?php echo $args["link_view_more"] ?>" class="view_more_info">
+         ดูเนื้อหา</br>เพิ่มเติม
+         </a>
 
         <div class="text-cys">
             <h1>COLOUR</h1>

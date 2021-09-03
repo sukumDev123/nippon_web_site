@@ -32,7 +32,13 @@ if(get_current_user_id()):
                         
                 ]) ?>
 
-      <img class='thumbnail-image' src="<?php echo $featured_img_url ?>" alt="<?php echo get_the_title() ?>">
+</div>
+<div class="thumbnail-image">
+<img   src="<?php echo $featured_img_url ?>" alt="<?php echo get_the_title() ?>">
+
+</div>
+<div class="container single-page-content">
+
 
       <?php the_content() ?>
  

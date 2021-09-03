@@ -97,7 +97,7 @@ endif;
                     </div>
                     <div class="footer-content-arrow">
                             <div onclick="goToTop('.content-get-idea')" class="arrow-up-to-top">
-                                <img src="http://localhost/nippon/wp-content/themes/nippontheme/assets/images/arrow-g.svg" alt="">
+                                <img src="/wp-content/themes/nippontheme/assets/images/arrow-g.svg" alt="">
                             </div>
                     </div>
             </div>

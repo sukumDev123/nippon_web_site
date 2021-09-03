@@ -1,5 +1,5 @@
 <div class="mt-5">
-    <h2 class="ui header">
+    <h2 class="ui header title-header-menus">
         ป้อนข้อมูลพื้นที่ผนังภายนอก
     </h2>
 
@@ -14,8 +14,8 @@
                     
                     get_template_part("templates/calculate-color/calulate-step-2-field" , null , [
                         "title" => "ผนังด้านที่ 1",
-                        "choice_1" => "ความกว้างของรั้ว (เมตร)",
-                        "choice_2" => "ความสูงของรั้ว (เมตร)",
+                        "choice_1" => "ความกว้างของผนัง (เมตร)",
+                        "choice_2" => "ความสูงของผนัง (เมตร)",
                         "button_text" => "พื้นที่ทาผนังด้านที่ 1",
                         "input_1" => "external_input_1_1",
                         "input_2" => "external_input_2_1",

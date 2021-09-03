@@ -268,8 +268,7 @@ function saveCareer() {
   if (career_send)
     career_send.addEventListener("click", (e) => {
       e.preventDefault();
-      const checkRecapCha = grecaptcha.getResponse();
-      if (!checkRecapCha) return;
+
       const data = {
         first_name: firstName.value,
         last_name: lastName.value,
@@ -281,6 +280,20 @@ function saveCareer() {
         cover_letter: cover_letter_value.value,
         career_name: career_name.value,
       };
+      const checkRecapCha = grecaptcha.getResponse();
+      clearAlertErrorMessage([
+        "#message_error_rechapch",
+        "#message_error_accept",
+      ]);
+
+      if (!checkRecapCha) {
+        showAlertErrorMessage("#message_error_rechapch");
+        return;
+      }
+      if (!document.querySelector("#accept").checked) {
+        showAlertErrorMessage("#message_error_accept");
+        return;
+      }
       const valuesData = Object.keys(data);
 
       const required = {
@@ -324,17 +337,14 @@ function saveCareer() {
       const accept = document.querySelector("#accept").checked;
       if (!accept)
         document.querySelector("#accept_field").className = "field error";
-      console.log({
-        dd: validateEmail(email.value),
-        accept,
-        c: checkAllField(),
-        checkRecapCha,
-      });
+
       if (!validateEmail(email.value)) {
         _listInp[2].className = "field required error";
       } else {
         _listInp[2].className = "field required";
       }
+      // if (!checkRecapCha) return;/
+
       if (checkAllField() && accept) {
         fetch(domain + "wp-json/api/v1/career/save", {
           method: "POST",
@@ -589,7 +599,7 @@ function summaryExternalCal() {
       document.querySelector("#summary_number_1").innerHTML =
         allResult.toFixed(2);
       setTimeout(() => {
-        document.querySelector(".submit-calculate").scrollIntoView({
+        document.querySelector(".reset-button").scrollIntoView({
           behavior: "smooth",
           block: "start",
         });
@@ -670,16 +680,12 @@ function calculateInternalRoomSummary() {
 
         summary_number_1.innerHTML = (summary || 0).toFixed(2);
         summary_number_2.innerHTML = (summary || 0).toFixed(2);
-        // result_top_1.innerHTML = (summary / 30).toFixed(2);
-        // result_top_2.innerHTML = (summary / 15).toFixed(2);
-        // result_bottom_1.innerHTML = (summary / 30).toFixed(2);
-        // result_bottom_2.innerHTML = (summary / 15).toFixed(2);
         result_top_1.innerHTML = `${(+summary / 30).toFixed(2)} แกลลอน`;
         result_top_2.innerHTML = `${(+summary / 15).toFixed(2)} แกลลอน`;
         result_bottom_1.innerHTML = `${(+summary / 30).toFixed(2)} แกลลอน`;
         result_bottom_2.innerHTML = `${(+summary / 15).toFixed(2)} แกลลอน`;
         setTimeout(() => {
-          document.querySelector(".submit-calculate").scrollIntoView({
+          document.querySelector(".reset-button").scrollIntoView({
             behavior: "smooth",
             block: "start",
           });
@@ -982,7 +988,7 @@ function onSelected(eleId, url = null) {
 function onSelectedShowList(elementId, elementId2) {
   const _element = document.querySelector("." + elementId);
   const _element2 = document.querySelector("." + elementId2);
-  console.log({ d: _element.className });
+  // console.log({ d: _element.className });
   if (_element.className.match(/active/)) _element.className = elementId;
   else _element.className = elementId + " " + "active";
   if (_element2.className.match(/active/)) _element2.className = elementId2;
@@ -992,7 +998,7 @@ function onSelectedShowList(elementId, elementId2) {
 function checkFieldRequired(checkedField = undefined, bigDiv = "") {
   let checkErr = true;
   const _keysId = [];
-  console.log({ bigDiv });
+  // console.log({ bigDiv });
   const fieldRequired = bigDiv
     ? document.querySelectorAll(bigDiv + " .field.required")
     : document.querySelectorAll(".field.required");
@@ -1160,7 +1166,7 @@ function checkField(checkedField = undefined, bigDiv = "") {
           .filter((c) => c !== "error")
           .join(" ");
         _keysId.push("#" + textarea.id);
-        data[textarea.id] = textarea.innerHTML;
+        data[textarea.id] = textarea.value;
       }
     } else {
       if (!input) continue;
@@ -1221,14 +1227,31 @@ function checkField(checkedField = undefined, bigDiv = "") {
     clear: clearData,
   };
 }
-
+function clearAlertErrorMessage(elementNames) {
+  elementNames.forEach((ele) => {
+    const elementHash = document.querySelector(ele);
+    console.log({ elementHash });
+    if (elementHash) elementHash.style.display = "none";
+  });
+}
+function showAlertErrorMessage(elementName) {
+  const elementHash = document.querySelector(elementName);
+  console.log({ elementHash });
+  if (elementHash) elementHash.style.display = "block";
+}
 function saveFaqForm() {
-  // const recaptcha = document.querySelector(".g-recaptcha");
-  const checkRecapCha = grecaptcha.getResponse();
-  if (!checkRecapCha) return;
   const faqForm = checkFieldRequired();
 
-  console.log({ faqForm });
+  const checkRecapCha = grecaptcha.getResponse();
+  clearAlertErrorMessage(["#message_error_rechapch", "#message_error_accept"]);
+  if (!checkRecapCha) {
+    showAlertErrorMessage("#message_error_rechapch");
+    return;
+  }
+  if (!document.querySelector("#acceptValue").checked) {
+    showAlertErrorMessage("#message_error_accept");
+    return;
+  }
   popUpSuccessOff();
   if (faqForm.checkErr) {
     buttonLoadingShow();
@@ -1241,6 +1264,7 @@ function saveFaqForm() {
       body: JSON.stringify({
         ...faqForm.data,
         ip_user: document.querySelector("#ip_user").value,
+        detail: document.querySelector("#detail").value,
         g_recaptcha_response: checkRecapCha,
         acceptValue: document.querySelector("#acceptValue").checked,
       }),

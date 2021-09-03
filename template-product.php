@@ -28,9 +28,9 @@ $word_selected = "เลือกประเภทสินค้า";
     $termShow = [];
     $termId  = get_queried_object_id();
     $termShow = get_terms('product_cat', array('hide_empty' => false, 'parent' =>$termId));
-    if(isset($_GET['slug']) || isset($_GET['scroll'])  || isset($_GET['search'])):
+    if(isset($_GET['search'])):
         echo '<script> setTimeout(() => {
-            document.querySelector("#nav-products").scrollIntoView({behavior: "smooth" , block: "start"})
+            document.querySelector("#product-title").scrollIntoView({behavior: "smooth" , block: "start"})
         } , 100)</script>';
     endif;
     
@@ -191,7 +191,7 @@ $word_selected = "เลือกประเภทสินค้า";
         <?php if($query->have_posts()): while($query->have_posts()): $query->the_post(); ?>
             <h1><?php echo get_the_title() ?></h1>
             <p><?php echo get_field("short_text") ?></p>
-            <form   method="get" class="search-filter">
+            <form   onsubmit="onProductTemplateSearch(event , '<?php echo get_permalink() ?>', '#search')" class="search-filter">
             <?php 
             $slug = "";
             if(isset($_GET["slug"]) ) :  
@@ -202,13 +202,17 @@ $word_selected = "เลือกประเภทสินค้า";
             ?>
             <input type="hidden" value="<?php echo  $slug ?>" name="<?php  if( $slug) : echo  "slug"; else : echo "" ; endif; ?>" />
             <i class="fas fa-search"></i>
-                <input type="text" name="search" value="<?php if(isset($_GET["search"])): echo $_GET["search"]; endif; ?>" placeholder="Search..." />
+                <input type="text" id="search" name="search" value="<?php if(isset($_GET["search"])): echo $_GET["search"]; endif; ?>" placeholder="Search..." />
             </form>
         <?php endwhile;endif; wp_reset_query(); ?>
         </div>
 </div>
  
+<?php if(!isset($_GET['search'])): ?>
 <div  class="container" id="all-product-content" >
+
+
+
 <div class="row">
 <?php if(count($terms) > 0): ?>
             <?php foreach($terms as  $term): 
@@ -226,11 +230,101 @@ $image = wp_get_attachment_url( $thumbnail_id );
                    </a>
                 </div>
             <?php endif; endforeach; ?>
+            <div class="col-12 col-md-4 product-cat-card"></div>
         <?php endif; ?>
 </div>
+ 
+
+</div>
+<?php else: ?>
+
+
+
+
+
+    <div  class="container" id="product-container" >
+     
+
+ 
+    <ul class="products clear-padding">
+
+    <?php
+        $tax_query = [];
+        $search = "";
+        
+      
+       
+        $args = array(
+            'post_type' => 'product',
+            'posts_per_page' => 12,
+            'meta_key'	=> 'priority',
+            'orderby'   => 'meta_value_num',
+            'order'		=> 'ASC'
+           
+        );
+        if(isset($_GET['search']))  :
+            $args["s"] =  $_GET["search"];
+            $search = $_GET['search'];
+        endif;
+        $args['paged'] = 1;
+        if(isset($_GET["p-page"])) {
+            $args['paged']= $_GET["p-page"];
+        }
+        
+      
+        $data_favorites = getFavoritesData("product");
+        $index = 0;
+        $loop = new WP_Query( $args );
+        if ( $loop->have_posts() ) {
+            while ( $loop->have_posts() ) : $loop->the_post();
+                $featured_img_url = get_the_post_thumbnail_url( get_the_ID(),'full');
+                $link = get_permalink(get_the_ID());
+                $target = "_self";
+                if(get_field("external_link")) {
+                    $link =  get_field("external_link");
+                    $target = "_blank";
+                }
+                get_template_part("components/products-component" , null , [
+                    "target" =>  $target,
+                    "title" => get_the_title() ,
+                    "featured_img_url" => $featured_img_url,
+                    "detail" => get_the_excerpt(),
+                    "href" => $link,
+                    "user" => get_current_user_id(),
+                    "data_favorites" => $data_favorites['datas'],
+                    "prod_id" => get_the_ID(),
+                    "index" => ++$index 
+                ]);
+            endwhile;
+        } else {
+            echo __( 'No products found' );
+        }
+    ?>
+    </ul><!--/.products-->
     
 </div>
  
+<div class="pagination">
+    <?php 
+        echo paginate_links( array(
+ 
+            'format' => '/?p-page=%#%',
+            'current' => max( 1,  $args['paged']  ),
+            'total' => $loop->max_num_pages,
+           'prev_next'    => true,
+            'prev_text'    => sprintf( '<i></i> %1$s', __( '<', 'text-domain' ) ),
+            'next_text'    => sprintf( '%1$s <i></i>', __( '>', 'text-domain' ) ),
+        ) );
+
+        wp_reset_postdata();  
+
+    ?>
+</div>
+
+
+
+
+<?php endif; ?>
  
 <div class="mt-5rem"></div>
  

@@ -111,14 +111,14 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
 
 <div class="menus-solution">
     <div class="container">
-        <a class="active"  href="<?php echo get_site_url() ?>/tips-and-solutions/product-solutions/">  Product Solutions </a>
-        <a href="<?php echo get_site_url() ?>/tips-and-solutions/problems-and-solutions/"> Problems and Solutions</a>
-        <a  href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">  How to Paint</a>
+        <a class="active left"  href="<?php echo get_site_url() ?>/tips-and-solutions/product-solutions/">  Product Solutions </a>
+        <a  href="<?php echo get_site_url() ?>/tips-and-solutions/problems-and-solutions/"> Problems and Solutions</a>
+        <a   href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">  How to Paint</a>
         
        
     </div>
     
-        <button 
+        <!-- <button 
             id="solution-page-button" 
             type="button" 
             class="btn  dropdown-toggle" 
@@ -145,7 +145,7 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
             </li>
             
             
-        </ul>
+        </ul> -->
 
 </div>
 <div id="solution-pages" >
@@ -254,7 +254,7 @@ wp_reset_query();
                     $className ="";
                     $ids= [];
                     if( $detail["id"] == $solution->ID) {
-                        $className = "card-active";
+                        //$className = "card-active";
                     }
                     ?>
                     <!-- <a  > -->
@@ -291,7 +291,7 @@ wp_reset_query();
  
 <?php if(!empty($detail)) : ?>
 
-<div id='info-solution'>
+<div id='info-solution'  >
         <div class="container">
                <div class="content">
                 <h1 id="problem_title"><?php echo $detail['problem']['title'] ;  ?></h1>

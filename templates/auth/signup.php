@@ -9,21 +9,27 @@ $user = [
 	"first_name" => "",
 	"last_name" => "",
 	"ID" => "",
+	"user_email" => ""
 ];
+$found_posts = false;
 
 if(is_user_logged_in()):
+	
 	$userId = get_current_user_id();
 	$userObj = get_user_by("ID" , $userId); 
 	// var_dump($user);
 	$pieces = explode(" ", $userObj->data->display_name);
  
 	$user["first_name"] = $pieces[0];
+	if(isset($userObj->data->user_email)):
+	$user["user_email"] = $userObj->data->user_email;
+	endif;
 	if(count($pieces) > 1):
 	$user["last_name"] = $pieces[1];
 	endif;
 	$user["ID"] =  $userId;
+	$found_posts = checkUserIsAddedUserData();
 endif;
-$found_posts = checkUserIsAddedUserData();
 
  $query = new WP_Query([
 	 "post_type" => "post",
@@ -205,14 +211,16 @@ $found_posts = checkUserIsAddedUserData();
 	
 	<?php get_template_part("components/login-social-button") ?>
 
+	<?php 
+		get_template_part("components/error-message" , null , [
+			"id" => "message_error_exists_user",
+			"text" => "ผู้ใช้งานคนนี้มีอยู่ในระบบแล้ว"
+		]); 
+	?>
 
   
-	<div id="message_error_exists_user" class="mt-3 alert alert-danger d-flex align-items-center" role="alert">
-			<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-			<div>
-				ผู้ใช้งานคนนี้มีอยู่ในระบบแล้ว
-			</div>
-		</div>
+ 
+
  
 </form>		
   </div>
@@ -238,6 +246,15 @@ $found_posts = checkUserIsAddedUserData();
         </div>
 
 		<input type="hidden" id="userId" value="<?php echo $user["ID"] ?>">
+
+		<?php  get_template_part("components/input_exclamation" , null ,  [
+		"placeholder" => "อีเมล",
+		"name" => "log",
+		"label" => "อีเมล",
+		"id" => "emailValConfirm",
+		"value" =>  $user["user_email"],
+		"class"=>"input" 
+	]); ?>
 
 		
 	<?php  get_template_part("components/input_exclamation" , null ,  [
@@ -321,7 +338,7 @@ $found_posts = checkUserIsAddedUserData();
 			  
 				</div>
   
-				<div class="field required">
+				<div class="field">
 					<label for="">อื่น ๆ โปรดระบุ</label>
 					<input name="other" id="other"></input>
 			  
@@ -387,10 +404,4 @@ get_template_part("components/form-success" , null ,  [
 		 "link" => $redLatest 
 	]); ?>
  
- <script>
-
-setTimeout(() => {
-  onLoadDate( );
-    
-}, 100);
- </script>
+ 

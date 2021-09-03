@@ -17,7 +17,7 @@ $errors =  $args["errors"];
 		
 		
 	 
-			if(count($errors->errors) && !isset($_GET["logged"])):
+			if(count($errors->errors) && !isset($_GET["logged"]) && !isset($_GET["loggedout"])):
 			 ?>
 					<h5 class="error-text">ไม่พบผู้ใช้งาน</h5>
 				<?php 

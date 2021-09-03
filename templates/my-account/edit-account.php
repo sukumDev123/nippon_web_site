@@ -43,7 +43,7 @@ $query = new WP_Query([
 setTimeout(() => {
   onLoadDate('<?php echo $user['birthday'] ?>');
     
-}, 100);
+}, 1000);
  </script>
  <div class="edit-account-div">
      
@@ -156,7 +156,10 @@ setTimeout(() => {
             </div>
 
             <div class="field required">
-					<label for="">ประเภทผู้ใช้งาน</label>
+					<label for="">ประเภทผู้ใช้งาน <?php 
+                    
+                    
+                    ?></label>
 						<select  class="ui dropdown" name="type_user" id="type_user">
 							<option value="">ประเภทผู้ใช้งาน</option>
 						<?php  
@@ -167,10 +170,12 @@ setTimeout(() => {
                                                     'orderby' => 'ID'
                                                 ];
                                                 $queryTypeUser = new WP_Query($argc);
-                                                $selected  = "";
                                                 if($queryTypeUser->have_posts()):
                                                     while($queryTypeUser->have_posts()): $queryTypeUser->the_post();
-                                                    if(get_the_title() == $user['type_of_user'] ):
+                                                    
+                                                    $selected  = "";
+
+                                                    if(trim(get_the_title()) == trim($user['type_of_user']) ):
                                                         $selected = "selected";
                                                     endif;
                                             ?>

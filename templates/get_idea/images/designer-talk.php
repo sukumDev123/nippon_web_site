@@ -6,7 +6,7 @@
     <div class="fragment">
         <div class="image-and-bottom">
             <img class="image-center" src="<?php echo $args["image"] ?>" alt="<?php echo $args["title"] ?>">
-            <h3 class="view_more_info">ดูเนื้อหา</br>เพิ่มเติม</h3>
+            <a  href="<?php echo $args["link_view_more"] ?>" class="view_more_info">ดูเนื้อหา</br>เพิ่มเติม</a>
         </div>
         <div class="text-content">
             <h2 class="ui header">

@@ -42,7 +42,6 @@ $text_static = [
                     </div>   -->
                     <div class="image-div">
                         <img src="<?php echo get_field("image-shade", $shade->ID)['url'] ?>" alt="">
-                        <div class="swiper-pagination shade-pagination"></div>
                     </div>
 
                     <a  class="shades-color" href="<?php  echo $text_static['url'] . "?shade_id=".$shade->ID ?>">
@@ -57,6 +56,8 @@ $text_static = [
             <?php endforeach; ?>
         <?php endif; ?>
            </div>
+           <div class="swiper-pagination shade-pagination"></div>
+
        </div>
     </div>
     <div class="content">

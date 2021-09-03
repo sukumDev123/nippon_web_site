@@ -31,7 +31,7 @@ $download_file  = get_field("download_file");
                     <?php foreach($program_images as $program_image): 
                         $image= $program_image['full_image_url']; 
                     ?>
-                    <div class="col-12 col-md-4">
+                    <div class="col-4">
                         <img src="<?php echo $image ?>" alt="">
                     </div>
                     <?php endforeach; ?>
@@ -45,7 +45,7 @@ $download_file  = get_field("download_file");
                 <div class="button-download">
                     <h3 class="ui header text-center">(การบริการนี้ไม่เสียค่าใช้จ่ายใดๆ)</h3>
                     <?php if(is_user_logged_in()): ?>
-                        <a target="_blank" href="<?php echo $download_file['url'] ?>">
+                        <a target="_blank" href="<?php echo $download_file["url"] ?>">
                             <button class="download-button">ดาวน์โหลด</button>
 
                         </a>

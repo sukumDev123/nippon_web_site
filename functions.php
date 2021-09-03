@@ -861,6 +861,14 @@ add_action( 'rest_api_init', function () {
   } );
 
 
+  
+  function removeBrTag($title) {
+    return preg_replace('/(\s*<(\/?p|br)\s*\/?>\s*)+/u' , " " , $title);
+ 
+}
+
+
+
   function save_faq($request) {
     $data = $request->get_body();
     $toArray = json_decode($data);
@@ -1495,7 +1503,9 @@ function checkUserInfo($userId = "") {
     if(!$userId) $userId  = get_current_user_id();
     $checkUserAndCookies = false;
     if(isset($_COOKIE["check_info_user"])):
-        $checkUserAndCookies = true;      
+        if($_COOKIE["check_info_user"] == $userId):
+            $checkUserAndCookies = true;      
+        endif;
     endif;
     if($checkUserAndCookies) {
         return [

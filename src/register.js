@@ -41,7 +41,7 @@ function registerStep1(e) {
     return;
   }
   const passwordFormat = passwordREG.test(inputRegis.data["pwd"]);
-  console.log({ passwordFormat });
+  // console.log({ passwordFormat });
   if (!passwordFormat) {
     showPointingShow("#password_more_8_length");
     return;
@@ -67,6 +67,8 @@ function registerStep1(e) {
       } else {
         sign_in_step1.style.display = "none";
         sign_in_step2.style.display = "block";
+        document.querySelector("#emailValConfirm").value =
+          document.querySelector("#emailVal").value;
       }
     });
 }
@@ -101,15 +103,14 @@ function registerForm() {
   const sign_in_step3 = document.querySelector("#sign_in_step3");
   const userId = document.querySelector("#userId");
 
-  console.log({ inputReg: inputRegis.data });
   // console.log({ keys });
   let fieldsRequireRegis = [
-    "emailVal",
+    "emailValConfirm",
     "pwd",
     "confirm_password",
     "accept_email",
     "accept_pdpa",
-    "other",
+
     "type_user",
     "phone_number",
     "date",
@@ -123,7 +124,7 @@ function registerForm() {
     fieldsRequireRegis = [
       "accept_email",
       "accept_pdpa",
-      "other",
+      "emailValConfirm",
       "type_user",
       "phone_number",
       "date",
@@ -156,7 +157,7 @@ function registerForm() {
       return;
     } else {
       let createUser = {
-        emailVal: inputRegis.data["emailVal"],
+        emailVal: inputRegis.data["emailValConfirm"],
 
         accept_email: inputRegis.data["accept_email"],
         accept_pdpa: inputRegis.data["accept_pdpa"],
@@ -177,6 +178,11 @@ function registerForm() {
         };
       }
       buttonLoadingShow();
+
+      const domOther = document.querySelector("#other");
+      if (domOther.value) createUser.other = domOther.value;
+
+      console.log({ createUser });
       fetch(domain + "wp-json/api/v1/user/create", {
         method: "POST",
         headers: {
@@ -221,9 +227,9 @@ function onLoadDate(dateDefault = null) {
   const _date = document.querySelector("#date");
   const _month = document.querySelector("#month");
   const _year = document.querySelector("#year");
-  _date.appendChild(onDefault("เลือกวันเกิด"));
-  _month.appendChild(onDefault("เลือกเดือนเกิด"));
-  _year.appendChild(onDefault("เลือกปีเกิด"));
+  _date && _date.appendChild(onDefault("เลือกวันเกิด"));
+  _month && _month.appendChild(onDefault("เลือกเดือนเกิด"));
+  _year && _year.appendChild(onDefault("เลือกปีเกิด"));
   const format0 = (n) => (n > 9 ? n : "0" + n);
   for (let i = 1; i < 32; i++) {
     const optionCreate = document.createElement("option");
@@ -234,7 +240,7 @@ function onLoadDate(dateDefault = null) {
       const _dateF = format0(dateDefault_.getDate());
       if (_dateF == _valueDate) optionCreate.selected = true;
     }
-    _date.appendChild(optionCreate);
+    _date && _date.appendChild(optionCreate);
   }
 
   [
@@ -260,7 +266,7 @@ function onLoadDate(dateDefault = null) {
       const _monthF = format0(dateDefault_.getMonth() + 1);
       if (_monthF == _valueMonth) optionCreate.selected = true;
     }
-    _month.appendChild(optionCreate);
+    _month && _month.appendChild(optionCreate);
   });
   for (
     let i = new Date().getFullYear();
@@ -274,7 +280,7 @@ function onLoadDate(dateDefault = null) {
       const _yearF = format0(dateDefault_.getFullYear());
       if (_yearF == i) optionCreate.selected = true;
     }
-    _year.appendChild(optionCreate);
+    _year && _year.appendChild(optionCreate);
   }
 }
 

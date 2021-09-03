@@ -1,7 +1,7 @@
 <div class="mt-5">
-    <h2 class="ui header">
+    <h3 class="ui header title-header-menus">
         ป้อนข้อมูลพื้นที่ห้อง
-    </h2>
+    </h3>
 
     <div class="text-center">
         <img src="<?php  bloginfo("template_directory") ?>/assets/images/internal-room-top.jpg" alt="">
@@ -64,7 +64,7 @@
                         <div id="show-more-cal"  class="accordion-item">
                                 <h2 class="accordion-header" id="headingTwo_1">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo_1" aria-expanded="false" aria-controls="collapseTwo_1">
-                                <h2>ส่วนเพิ่มเติม	</h2>
+                                <h2 class="ui header title-header-menus">ส่วนเพิ่มเติม	</h2>
                                 </button>
                                 </h2>
                             <div id="collapseTwo_1" class="accordion-collapse collapse" aria-labelledby="headingTwo_1" data-bs-parent="#accordionExample">
@@ -102,9 +102,9 @@
 
 <div class="submit-calculate">
     <div class="show-result-m">
-        <h2>พื้นที่ทาสีทั้งหมด</h2>
+        <h2 class="ui header ">พื้นที่ทาสีทั้งหมด</h2>
         <h1 id="summary_number_1">0</h1>
-        <h2>ตารางเมตร</h2>
+        <h2 class="ui header ">ตารางเมตร</h2>
     </div>
 
    <div class="text-center">

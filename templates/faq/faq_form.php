@@ -44,15 +44,7 @@ $ip = getIPAddress();
                     ]); ?>
                     
                    
-
-                    <?php /* get_template_part("components/input_exclamation" , null ,  [
-                        "placeholder" => "เบอร์โทรศัพท์",
-                        "name" => "tel",
-                        "label" => "เบอร์โทรศัพท์",
-                        "id" => "tel",
-                        "value" => "",
-                        "class"=>"input isNumber" 
-                    ]); */?>
+ 
                     <div class="field required">
                     <label for="Test">เบอร์โทรศัพท์</label>
 
@@ -91,6 +83,30 @@ $ip = getIPAddress();
                 <div class="reChapcha">
                 <div class="g-recaptcha" data-sitekey="6LdjuzAcAAAAAEBGh0lefbwuyop5lH8LIUNuy8D-"></div>
                 </div>
+
+
+                <div class="width-error">
+                    <div id="message_error_rechapch">
+                    <?php 
+                        get_template_part("components/error-message" , null , [
+                            "id" => "message_error_rechapch_",
+                            "text" => "I'm not a robot is required"
+                        ]); 
+                    ?>
+                    </div>
+                    
+                    <div id="message_error_accept">
+                    <?php 
+                        get_template_part("components/error-message" , null , [
+                            "id" => "message_error_accept_",
+                            "text" => "กดยอมรับการเงื่อนไขก่อนส่งคำถาม"
+                        ]); 
+                    ?>
+                    </div>
+                    
+                   
+                </div>
+
                 <input type="hidden" id="ip_user" value="<?php  echo $ip ?>">
                 <div class="field mt-4">
                     <!-- <button></button> -->

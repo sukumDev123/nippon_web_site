@@ -26,9 +26,9 @@ $count = $query->found_posts;
 
 
 <div class="container">
-        <div class="margin-page"></div>
+ 
         <div class="container-career-header">
-            <h2 class="ui header primary-text center aligned mb-3">ตำแหน่งที่เปิดรับ</h2>
+            <h1 class="ui header primary-text center aligned mb-3">ตำแหน่งที่เปิดรับ</h1>
             <form action="<?php echo  get_site_url()."/career/" ?>" method="GET" class="ui grid aligned center">
                 <div class="twelve wide column">
                     <div class="ui  search">
@@ -46,7 +46,7 @@ $count = $query->found_posts;
                 </div>
             </form>
         </div>
-        <div class="margin-page"></div>
+         
     <div class="container-careers">
             <h3 class="ui header right aligned">
                 <div class="sub header"><?php echo $count ?> ตำแหน่งที่เปิดรับ</div>

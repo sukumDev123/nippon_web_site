@@ -39,12 +39,12 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
     <div class="container">
         <a href="<?php echo get_site_url() ?>/tips-and-solutions/product-solutions/">  Product Solutions </a>
         <a  href="<?php echo get_site_url() ?>/tips-and-solutions/problems-and-solutions/"> Problems and Solutions</a>
-        <a class="active" href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">  How to Paint</a>
+        <a class="active right" href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">  How to Paint</a>
         
        
     </div>
     
-        <button 
+        <!-- <button 
             id="solution-page-button" 
             type="button" 
             class="btn  dropdown-toggle" 
@@ -52,8 +52,8 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
             aria-expanded="false"
         >
         Product Solutions
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="solution-page-button">
+        </button> -->
+        <!-- <ul class="dropdown-menu" aria-labelledby="solution-page-button">
             <li  class="dropdown-item"  >
             <a href="<?php echo get_site_url() ?>/tips-and-solutions/product-solutions/">
                 Product Solutions
@@ -71,7 +71,7 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
             </li>
             
             
-        </ul>
+        </ul> -->
 
 </div>
 

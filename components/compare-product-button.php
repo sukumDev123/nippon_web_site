@@ -1,4 +1,4 @@
-<div class="compare-product-table-images">
+<div class="compare-product-table-images latest-button">
             <div class="image hh">
                 <h3></h3>
                

@@ -220,11 +220,7 @@ else:
 endif;
  
  ?>
-<?php // if($_GET[]) ?>
-
-
-
-
+ 
 
 
 <div class="container template-compare"  >
@@ -398,31 +394,35 @@ endif;
             
                     get_template_part('components/compare-product' , null , [
                         "title"  => "",
-                        "product1" => $product1["title"],
-                        "product2" => $product2["title"],
-                        "product3" => $product3["title"],
+                        "product1" => removeBrTag($product1["title"]),
+                        "product2" => removeBrTag($product2["title"]),
+                        "product3" => removeBrTag($product3["title"]),
                     ]);
             ?>
     
-            <div class="compare-product-table-images">
-                <div class="image hh">
-                    <h3></h3>
+            <div class="compare-product-table-images-header-fixed">
+                <div class="image box-null">
+                    <h5></h5>
                 </div>    
-                <div class="image two">
+                <div class="image   image-product">
+                    <h3 class="ui header"><?php echo removeBrTag($product1["title"]) ?></h3>
                             <img  
                             
                             src="<?php echo  $product1["image"] ?>" 
                             alt="<?php echo $product1["title"] ?>">
                     </div>
                     <?php if( isset($_GET['product_2'])): ?>
-                        <div class="image two">
+                        
+                        <div class="image  image-product">
+                            <h3 class="ui header"><?php echo removeBrTag($product2["title"]) ?></h3>
                                 <img  
                                 src="<?php  echo  $product2["image"] ?>" 
                                 alt="<?php echo $product2["title"] ?>">
                         </div>
                     <?php endif; ?>
                     <?php if(  isset($_GET['product_3'])): ?>
-                        <div class="image two">
+                        <div class="image image-product">
+                            <h3 class="ui header"><?php echo removeBrTag($product3["title"]) ?></h3>
                                 <img  
                                 src="<?php  echo  $product3["image"] ?>" 
                                 alt="<?php echo $product3["title"] ?>">
