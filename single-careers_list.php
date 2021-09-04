@@ -75,7 +75,7 @@ $ip = getIPAddress();
                 "label" => "เบอร์โทรศัพท์",
                 "id" => "tel",
                 "value" => "",
-                "class"=>"input isNumber" 
+                "class"=>"input isNumber isPhone" 
             ]); ?>
             <?php  get_template_part("components/input_exclamation" , null ,  [
                 "placeholder" => "Portfolio Link",
@@ -188,6 +188,23 @@ $ip = getIPAddress();
                 </div>
 
                 <input type="hidden" id="ip_user" value="<?php  echo $ip ?>">
+
+                <div class="width-error">
+                <?php 
+                    get_template_part("components/error-message" , null , [
+                        "id" => "required_resume_field",
+                        "text" => "โปรดระบุบ Resume"
+                    ]); 
+                ?>
+                            <?php 
+                    get_template_part("components/error-message" , null , [
+                        "id" => "required_transcript_field", 
+                        "text" => "โปรดระบุบ Transcript"
+                    ]); 
+                ?>
+
+                </div>
+                
 
 
             <div class="field">

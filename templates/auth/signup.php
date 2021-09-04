@@ -29,6 +29,10 @@ if(is_user_logged_in()):
 	endif;
 	$user["ID"] =  $userId;
 	$found_posts = checkUserIsAddedUserData();
+
+
+
+	
 endif;
 
  $query = new WP_Query([
@@ -78,7 +82,7 @@ endif;
 <?php endif; ?>
 </style>
 
-
+ 
  <?php if(!is_user_logged_in()): ?>
 <div class="ui stackable row grid segment " id="sign_in_step1">
 	<div class="ten wide column form-content">
@@ -188,7 +192,12 @@ endif;
 	
   </div>
  
- 
+  <?php 
+		get_template_part("components/error-message" , null , [
+			"id" => "message_error_exists_user",
+			"text" => "ผู้ใช้งานคนนี้มีอยู่ในระบบแล้ว"
+		]); 
+	?>
  
   <button 
   	class="ui button submit primary fluid button-normal" 
@@ -211,15 +220,7 @@ endif;
 	
 	<?php get_template_part("components/login-social-button") ?>
 
-	<?php 
-		get_template_part("components/error-message" , null , [
-			"id" => "message_error_exists_user",
-			"text" => "ผู้ใช้งานคนนี้มีอยู่ในระบบแล้ว"
-		]); 
-	?>
 
-  
- 
 
  
 </form>		
@@ -249,11 +250,12 @@ endif;
 
 		<?php  get_template_part("components/input_exclamation" , null ,  [
 		"placeholder" => "อีเมล",
-		"name" => "log",
+		"name" => "emailValConfirm",
 		"label" => "อีเมล",
 		"id" => "emailValConfirm",
 		"value" =>  $user["user_email"],
-		"class"=>"input" 
+		"class"=>"input" ,
+		"emailDisabled"=> true 
 	]); ?>
 
 		
@@ -355,6 +357,15 @@ endif;
 				<label>ยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน <a href="/">นโยบายคุ้มครองข้อมูลส่วนบุคคล</a> </label>
 			</div>
         
+			<?php 
+		get_template_part("components/error-message" , null , [
+			"id" => "message_error_exists_user_2",
+			"text" => "ผู้ใช้งานคนนี้มีอยู่ในระบบแล้ว"
+		]); 
+	?>
+ 
+
+
         <div class="field mt-3">
 			<button 
 					class="ui button submit primary fluid button-normal" 
@@ -391,7 +402,11 @@ endif;
 <?php endif; ?>
 </div>
  
-   
+   <div class="form-hide">
+	   <form id="form-submit" action="wp-login.php?action=register" method="POST">
+		   <input type="text" name="signInSuccess" value="true">
+	   </form>
+   </div>
 
 
 <?php  

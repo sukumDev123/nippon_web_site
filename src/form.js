@@ -284,6 +284,8 @@ function saveCareer() {
       clearAlertErrorMessage([
         "#message_error_rechapch",
         "#message_error_accept",
+        "#required_resume_field",
+        "#required_transcript_field",
       ]);
 
       if (!checkRecapCha) {
@@ -292,6 +294,17 @@ function saveCareer() {
       }
       if (!document.querySelector("#accept").checked) {
         showAlertErrorMessage("#message_error_accept");
+        return;
+      }
+      if (!resume_value.value) {
+        console.log("asdasd");
+
+        showAlertErrorMessage("#required_resume_field");
+        return;
+      }
+      if (!transcript_value.value) {
+        showAlertErrorMessage("#required_transcript_field");
+
         return;
       }
       const valuesData = Object.keys(data);
@@ -1230,13 +1243,13 @@ function checkField(checkedField = undefined, bigDiv = "") {
 function clearAlertErrorMessage(elementNames) {
   elementNames.forEach((ele) => {
     const elementHash = document.querySelector(ele);
-    console.log({ elementHash });
+    // console.log({ elementHash });
     if (elementHash) elementHash.style.display = "none";
   });
 }
 function showAlertErrorMessage(elementName) {
   const elementHash = document.querySelector(elementName);
-  console.log({ elementHash });
+  // console.log({ elementHash });
   if (elementHash) elementHash.style.display = "block";
 }
 function saveFaqForm() {

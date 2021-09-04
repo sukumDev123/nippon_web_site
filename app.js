@@ -1626,3 +1626,6 @@ function onTipAndSolutionPageHeaderSelected() {
       );
   }
 }
+function redirectToHomePage() {
+  window.location.href = "/";
+}

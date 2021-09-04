@@ -6017,7 +6017,8 @@ footer {
             img {
               max-height: auto;
               width: 100%;
-              object-fit: contain;
+              object-fit: cover;
+              height: 176px;
             }
           }
         }
@@ -10790,9 +10791,9 @@ input {
     border-radius: 3px;
   }
 }
-#message_error_exists_user {
-  // display: none;
-  opacity: 0;
+#message_error_exists_user,
+#message_error_exists_user_2 {
+  display: none;
 }
 
 .login-link {
@@ -10833,6 +10834,9 @@ input {
   display: none;
 }
 #message_error_rechapch,
-#message_error_accept {
+#message_error_accept,
+#required_resume_field,
+#required_transcript_field,
+.form-hide {
   display: none;
 }

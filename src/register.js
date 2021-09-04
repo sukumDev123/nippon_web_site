@@ -62,13 +62,14 @@ function registerStep1(e) {
       // console.log({ d });
       buttonLoadingHide();
       if (d.message == "user_exists") {
-        document.querySelector("#message_error_exists_user").style.opacity =
-          "1";
+        document.querySelector("#message_error_exists_user").style.display =
+          "block";
       } else {
         sign_in_step1.style.display = "none";
         sign_in_step2.style.display = "block";
         document.querySelector("#emailValConfirm").value =
           document.querySelector("#emailVal").value;
+        document.querySelector("#emailValConfirm").disabled = true;
       }
     });
 }
@@ -157,8 +158,7 @@ function registerForm() {
       return;
     } else {
       let createUser = {
-        emailVal: inputRegis.data["emailValConfirm"],
-
+        emailVal: document.querySelector("#emailValConfirm").value,
         accept_email: inputRegis.data["accept_email"],
         accept_pdpa: inputRegis.data["accept_pdpa"],
         other: inputRegis.data["other"],
@@ -192,16 +192,18 @@ function registerForm() {
       })
         .then((data) => data.json())
         .then((d) => {
-          // buttonLoadingHide();
-          // if (d.message?.errors) {
-          //   const { errors } = d.message;
-          //   if (errors.existing_user_login) {
-          //   }
-          // } else {
-          //   sign_in_step2.style.display = "none";
-          //   sign_in_step3.style.display = "block";
-          // }
-          window.location = domain + "/wp-login.php?action=register";
+          if (d.message === "OK") {
+            // window.location.href =
+            //   domain + "/wp-login.php?action=register&signInSuccess=true";
+            document.querySelector("#form-submit").submit();
+          } else {
+            if (d.message === "EMAIL_EXISTS") {
+              document.querySelector(
+                "#message_error_exists_user_2"
+              ).style.display = "block";
+            }
+            buttonLoadingHide();
+          }
         })
         .catch((err) => {
           buttonLoadingHide();

@@ -899,7 +899,16 @@ add_action( 'rest_api_init', function () {
                 "post_status" => "publish"
             ];
             wp_insert_post($postArr);
-
+            $phpmailer = send_email();
+            $displayName = $toArray->first_name. " " . $toArray->last_name;
+            $phpmailer->addAddress( "nutsuda.c@likemeasia.com", "Nutsuda Chomtee");
+            $phpmailer->Subject = "มีรายการคำถามใหม่จาก คุณ ". $displayName;
+            $logo = dirname(__FILE__) . '/assets/images/logo_png.png';
+            $phpmailer->AddEmbeddedImage($logo, 'logo' ,  "logo.png" ); 
+            $phpmailer->IsHTML(true); 
+            $phpmailer->Body = EmailFAQ($displayName ,   $toArray->emailVal ,  $toArray->tel ,  $toArray->detail);
+            $test = $phpmailer->Send();
+            
             return json_decode(json_encode(["message" => "success"]));
     else:
         header("HTTP/1.1 500 Internal Server Error");
@@ -1145,6 +1154,20 @@ if ( ! function_exists( 'woocommerce_content_custom' ) ) {
  
  
 function add_login_header() {
+    if(is_user_logged_in()):
+        $found_posts = checkUserIsAddedUserData();	
+        if($found_posts  > 0 && !isset($_POST['signInSuccess'])):
+            $link = get_site_url();
+        echo <<<script
+            <script>
+                
+                window.location.href = "$link";
+            </script>
+
+        script;
+        endif;
+    endif;
+    get_template_part("other/loading");
     get_header();
 }
 function add_login_footer() {
@@ -1238,17 +1261,41 @@ function register_user($request) {
     $data = $request->get_body();
     $toArray = json_decode($data);
     $user = false;
-    $email = "";
+    $email = $toArray->emailVal;
+    $checkEmailExists = false;
     if(isset($toArray->userId)):
-        $currentUser = get_user_by("ID",$toArray->userId);
-        $user = $currentUser->ID;
-        $email = $currentUser->data->user_email;
+        $currentUser = get_user_by("ID",$toArray->userId); 
+        $currentUserEmail = $currentUser->data->user_email;
+        
+        if($currentUserEmail)  {
+    
+            if($currentUserEmail != $toArray->emailVal) {
+                $getUserByEmail = get_user_by("email", $toArray->emailVal);
+                if($getUserByEmail) {
+                    return json_decode(json_encode(["message" => "EMAIL_EXISTS"]));
+                }   
+            }
+        }
+        else {
+            $getUserByEmail = get_user_by("email",$toArray->emailVal);
+            if($getUserByEmail) {
+                return json_decode(json_encode(["message" => "EMAIL_EXISTS"]));
+            }   
+        }
+        
+        $email =  $toArray->emailVal;
         $userdata = array(
+            'ID'         => $currentUser->ID,
             'first_name'    =>    $toArray->name,
             'last_name'     =>    $toArray->lastname,
+            "user_email" => $toArray->emailVal,
             );
-        $updateUser = wp_update_user( $userdata );
+        $user = wp_update_user( $userdata );
     else:
+        $getUserByEmail = get_user_by("email",$toArray->emailVal);
+        if($getUserByEmail) {
+            return json_decode(json_encode(["message" => "EMAIL_EXISTS"]));
+        }   
         $userdata = array(
             'user_login'    =>    $toArray->emailVal,
             'user_email'    =>    $toArray->emailVal,
@@ -1258,17 +1305,17 @@ function register_user($request) {
             );
         $user = wp_insert_user( $userdata );
         $email = $toArray->emailVal;
-        $creds['user_login'] = $toArray->emailVal;
+        $creds['user_login'] = $email;
+        $creds['user_email'] = $email;
         $creds['user_password'] = $toArray->pwd;
         $creds['remember'] = true;
         $autologin_user = wp_signon( $creds, false );
-
     endif;
+     
     if ( is_wp_error( $user ) ) {
         return json_decode(json_encode(["message" =>  $user ]));
     }   else {
         $phpmailer = send_email();
-        $displayName = $toArray->name . " ". $toArray->lastname;
         $info = [
             "first_name" =>  $toArray->name,
             "last_name" =>  $toArray->lastname,
@@ -1288,10 +1335,11 @@ function register_user($request) {
             "post_status" => "publish"
         ];
        $create =   wp_insert_post($postArr);
-       registerSuccess($phpmailer, $email, $displayName  );
-
+       
     }
-    return json_decode(json_encode(["message" => "success" , "user" => json_encode($user) ]));
+    $displayName = $toArray->name . " ". $toArray->lastname;
+    registerSuccess($phpmailer, $email, $displayName  );
+    return json_decode(json_encode(["message" => "OK" , "user" => json_encode($user) ]));
 }
 add_action( 'rest_api_init', function () {
     register_rest_route( 'api/v1', '/user/create', array(
@@ -2233,6 +2281,14 @@ function EmailBodyRegister($name) {
         <!DOCTYPE html><html lang="en"> <head> <meta charset="UTF-8" /> <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Document</title> <link rel="preconnect" href="https://fonts.googleapis.com" /> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;800&display=swap" rel="stylesheet" /> <style> .content-text ul { text-align: left; padding: 0px 0px 0px 20px; } .content-text ul li {list-style: decimal; } .primary { color: red } .image-content { overflow: hidden; border-radius: 20px; height: 200px; margin: 20px 0; } .image-content img { width: 100%; object-fit: cover; border-radius: 20px; } .btn { padding: 10px 30px; width: 100%; border-radius: 4px; max-width: 300px; margin-top: 30px; background-color:#03428E ; color:white;border:0px; font-weight: 300; font-family: 'Kanit', sans-serif; } .text-primary { color:#03428E ; font-weight: 500; } .text-center { align-items: center; } </style> </head> <body> <div style=" background-color: #f7f7f7; padding: 0px; margin: 0px; position: fixed; top: 0; bottom: 0; left: 0; width: 100%; font-family: 'Kanit', sans-serif; font-weight: 300; " > <div style=" background: white; border: 1px solid rgba(0, 0, 0, 0.1); width: 100%; height: fit-content; max-width: 600px; margin: 20px auto; border-radius: 5px; padding-bottom: 30px; " > <div style="background-color: #03428e; width: 100%; height: 20px"></div> <div style="padding: 20px 50px 0px; color: #03428e; margin-bottom: 0"> <div style=" border-bottom: 1px solid rgba(0, 0, 0, 0.1); width: 100%; padding-bottom: 20px; " > <div style="width: 128px"> <img src="cid:logo" alt="Nippon Image" style="width: 100%" /> </div> </div> </div> <div style="padding: 20px 50px; text-align: center"> <!-- CONTENT --> <div class="image-content"><img src="cid:image" alt="image"> </div> <div class="content-text"> <h1 class="text-primary text-center">ยินดีต้อนรับ คุณ $name </h1> <ul> ตอนนี้คุณเป็นส่วนหนึ่งของ นิปปอนเพนต์ และคุณยังได้รับสิทธิพิเศษอีกมากมายดังนี้ <li> ได้รับสิทธิ์ในการดาวน์โหลดโปรแกรมจากเมนู Colour Library </li> <li> สามารถเลือกเก็บผลิตภัณฑ์ และเนื้อหาที่น่าสนใจไว้ดูภายหลังได้ </li> <li> รับคูปองส่วนลดพิเศษในการเลือกซื้อผลิตภัณฑ์จากนิปปอนเพนต์</li> </ul> </div> <a href="https://staging.tanpong.me"> <button class="btn btn-primary">เข้าสู่เว็บไซต์</button> </a> </div> </div> </div> </div> </body></html>
     text; 
     return $body;
+}
+
+function EmailFAQ($name , $email , $phone , $question) {
+    $body = <<<text
+        <!DOCTYPE html><html lang="en"> <head> <meta charset="UTF-8" /> <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Document</title> <link rel="preconnect" href="https://fonts.googleapis.com" /> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;800&display=swap" rel="stylesheet" /> <style> .content-text ul { text-align: left; padding: 0px 0px 0px 20px; } .content-text ul li {list-style: decimal; } .primary { color: red } .image-content { overflow: hidden; border-radius: 20px; height: 200px; margin: 20px 0; } .image-content img { width: 100%; object-fit: cover; border-radius: 20px; } .text-normal { text-align: left; font-weight: 400; /* width: 200px; */ font-size: 1em; font-weight: 300; margin-top: 0px; } .text-normal label { font-weight: 500; } </style> </head> <body> <div style=" background-color: #f7f7f7; padding: 0px; margin: 0px; position: fixed; top: 0; bottom: 0; left: 0; width: 100%; font-family: 'Kanit', sans-serif; font-weight: 300; " > <div style=" background: white; border: 1px solid rgba(0, 0, 0, 0.1); width: 100%; height: fit-content; max-width: 600px; margin: 20px auto; border-radius: 5px; padding-bottom: 30px; " > <div style="background-color: #03428e; width: 100%; height: 20px"></div> <div style="padding: 20px 50px 0px; color: #03428e; margin-bottom: 0"> <div style=" border-bottom: 1px solid rgba(0, 0, 0, 0.1); width: 100%; padding-bottom: 20px; " > <div style="width: 128px"> <img src="cid:logo" alt="Nippon Image" style="width: 100%" /> </div> </div> </div> <div style="padding: 20px 50px; text-align: center"> <!-- CONTENT --> <div class="content-text"> <h3 class="text-normal" > เรียนทีม Customer Support </h3> <h3 class="text-normal" ><label>คุณ:</label> $name</h3> <h3 class="text-normal" ><label>อีเมล:</label> $email</h3> <h3 class="text-normal" ><label>เบอร์โทร:</label> $phone</h3> <h3 class="text-normal" ><label>คำถาม:</label> $question </h3> </div> </div> </div> </div> </div> </body></html>
+
+    text;
+return $body;
 }
 
 

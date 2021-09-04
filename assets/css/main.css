@@ -5311,8 +5311,9 @@ footer .copywrite {
   #footer_banner .swiper-container .swiper-wrapper .swiper-slide img {
     max-height: auto;
     width: 100%;
-    -o-object-fit: contain;
-       object-fit: contain;
+    -o-object-fit: cover;
+       object-fit: cover;
+    height: 176px;
   }
   #footer_banner .swiper-container .swiper-pagination-bullet-active {
     display: none;
@@ -9771,8 +9772,9 @@ input:focus {
   border-radius: 3px;
 }
 
-#message_error_exists_user {
-  opacity: 0;
+#message_error_exists_user,
+#message_error_exists_user_2 {
+  display: none;
 }
 
 .login-link i {
@@ -9813,6 +9815,9 @@ input:focus {
 }
 
 #message_error_rechapch,
-#message_error_accept {
+#message_error_accept,
+#required_resume_field,
+#required_transcript_field,
+.form-hide {
   display: none;
 }

@@ -14,8 +14,13 @@ if(isset($args['required'])) {
 $classFront = "field required";
 if($red == false) {
 	$classFront = "field";
-
-} 
+}
+$emailDisabled = "";
+if(isset($args['emailDisabled'])): 
+	if($args['value']):
+		$emailDisabled = "disabled";
+	endif;
+endif;
 ?>
 
  <div class="<?php echo $classFront ?>">
@@ -28,7 +33,7 @@ if($red == false) {
 				value="<?php echo $value  ?>"
 				id="<?php echo $id ?>"
 				class="<?php echo $class ?>" 
-				 
+				 <?php echo $emailDisabled ?>
 		/>
 				<i  class="exclamation circle icon"></i>
 
