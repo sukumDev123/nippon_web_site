@@ -1,31 +1,6 @@
- 
- <?php 
-
-get_header();
-global $post;
-
-$slug = get_post_field( 'post_name');
-$post_type = get_post_field( 'post_type');
-
-?>
-<!-- <div id="banner-page"> -->
-
-<?php 
-get_template_part("other/page-bk");
-
-?>
-
- 
-      <?php the_content() ?>
- 
-
-  
-<!-- <h1>Tet </h1> -->
-
-<?php 
-
-
-
-get_footer();
-
-?>
+<?php get_header() ?>
+<div class="container page-content">
+      
+    <?php the_content() ?>
+</div>
+<?php get_footer() ?>

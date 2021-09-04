@@ -2593,3 +2593,34 @@ function check_user_exists($request) {
       'permission_callback' => '__return_true'
     ) );
   } );
+
+
+
+
+  function getPrivacyPolicyPage() {
+    $lang=get_bloginfo("language");  
+    $argc = [
+        "lang" => $lang,
+        "post_type" => "post",
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'category',
+                'field'    => 'slug',
+                'terms'    => 'privacy-policy-'. strtolower($lang),
+            ),
+        ),
+        'posts_per_page' => -1,
+        "post_status" => "published"
+    ];
+    $query_post_href = new WP_Query($argc);
+
+    $href = "";
+    if($query_post_href->have_posts()){
+        while($query_post_href->have_posts()) {
+            $query_post_href->the_post();
+            $href = get_permalink();
+        }
+    }
+    wp_reset_query();
+    return $href;
+  }

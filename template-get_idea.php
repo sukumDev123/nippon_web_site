@@ -24,6 +24,7 @@ $words = [
         "designer-talk" => "designer-talk",
         "trend-beyond-colours" => "trend-beyond-colours",
         "greensoul-magazine" => "greensoul-magazine",
+        "all_text" => "All"
     ],
     "th" => [
         "all" => "get-idea",
@@ -31,6 +32,7 @@ $words = [
         "designer-talk" => "designer-talk",
         "trend-beyond-colours" => "trend-beyond-colours",
         "greensoul-magazine" => "greensoul-magazine",
+        "all_text" => "ทั้งหมด"
     ],
 ][$lang];
 
@@ -100,7 +102,7 @@ $args = array(
 
         <div class="menus-tax-ideas container">
             <a href="<?php echo  get_site_url() ?>/get-idea/?scroll=true">
-                <h5  class="ui header <?php if($type_page == "all"): echo "active" ;endif;  ?>">All</h5>
+                <h5  class="ui header <?php if($type_page == "all"): echo "active" ;endif;  ?>"><?php echo $words['all_text'] ?></h5>
             </a>
             <?php $index = 1; foreach($terms as $term):
                 ?>

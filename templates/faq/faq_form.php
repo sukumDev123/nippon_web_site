@@ -1,6 +1,10 @@
 <?php 
 
 $ip = getIPAddress();
+
+ $privacy_policy = getPrivacyPolicyPage();
+
+
 ?>
 
 <div class="ui stackable grid  faq-form">
@@ -77,7 +81,7 @@ $ip = getIPAddress();
                 <div id="accept_field" class="field required">
                     <div class="ui checkbox">
                     <input type="checkbox" name="acceptValue" id="acceptValue" tabindex="0" >
-                    <label>ยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน <a href="/">นโยบายคุ้มครองข้อมูลส่วนบุคคล</a> </label>
+                    <label>ยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน <a href="<?php echo  $privacy_policy  ?>" target="_blank" >นโยบายคุ้มครองข้อมูลส่วนบุคคล</a> </label>
                 </div>
 
                 <div class="reChapcha">

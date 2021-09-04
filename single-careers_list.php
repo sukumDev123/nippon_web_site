@@ -6,29 +6,36 @@ get_template_part("other/loading");
  
 $ip = getIPAddress();
  
+$privacy_policy = getPrivacyPolicyPage();
 
 
 ?>
 
 <div class="container page-mt">
 
+   <div class="title-career-form">
     <h1 class="ui head center aligned container  primary-text">
-        <?php echo get_the_title() ?>
-    
-    </h1>
+            <?php echo get_the_title() ?>
+        
+        </h1>
 
-    <div class="type-of-career">
-        <h4>
-        <?php get_template_part("components/icon" , null ,  ['icon' => "location-career"]) ?>  <?php echo get_field("location_career") ?>
-        </h4>
-        <h4>
-        <?php get_template_part("components/icon" , null ,  ['icon' => "icon2"]) ?> <?php echo get_field("type_career") ?>
-        </h4>
-        <h4>
-        <?php get_template_part("components/icon" , null ,  ['icon' => "icon-money-card"]) ?>  <?php echo get_field("role_career") ?>
+        <div class="type-of-career">
+            <h4>
+            <?php get_template_part("components/icon" , null ,  ['icon' => "location-career"]) ?>  <?php echo get_field("location_career") ?>
+            </h4>
+            <h4>
+            <?php get_template_part("components/icon" , null ,  ['icon' => "icon2"]) ?> <?php echo get_field("type_career") ?>
+            </h4>
+            <h4>
+            <?php get_template_part("components/icon" , null ,  ['icon' => "icon-money-card"]) ?>  <?php echo get_field("role_career") ?>
 
-        </h4>
-    </div>
+            </h4>
+        </div>
+        <button onclick="goToForm()" id="btn-do-form">
+            <i class="bi bi-file-earmark-text"></i>
+            กรอกแบบฟอร์มสมัครงาน
+        </button>
+   </div>
 
 <div class="margin-page"></div>
  
@@ -153,7 +160,7 @@ $ip = getIPAddress();
             <div id="accept_field" class="field">
                 <div class="ui checkbox">
                 <input type="checkbox" name="accept" id="accept" tabindex="0" >
-                <label>ยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน <a href="/">นโยบายคุ้มครองข้อมูลส่วนบุคคล</a> </label>
+                <label>ยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน <a href="<?php echo  $privacy_policy  ?>" target="_blank" >นโยบายคุ้มครองข้อมูลส่วนบุคคล</a> </label>
                 </div>
             </div>
         

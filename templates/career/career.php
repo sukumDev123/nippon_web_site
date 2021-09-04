@@ -7,6 +7,28 @@ if(isset($_GET['paged_show'])):
 
 endif;
 
+ 
+$lang=get_bloginfo("language");  
+$words = [
+      "th" => [
+            "title" => "ตำแหน่งที่เปิดรับ",
+            "search" => "ค้นหาตำแหน่งที่เปิดรับ",
+            "btn_search" => "ค้นหา",
+            "btn_card_text" => "ดูรายละเอียดเพิ่มเติม",
+            "see_more" => "ดูเพิ่มเติม"
+
+      ],
+      "en" => [
+            "title" => "",
+            "search" => "",
+            "btn_search" => "ค้นหาตำแหน่งที่เปิดรับ",
+            "btn_card_text" => "ดูรายละเอียดเพิ่มเติม",
+            "see_more" => "ดูเพิ่มเติม"
+
+
+
+      ]
+][$lang];
 $argc = [
     "post_type" => 'careers_list',
     'post_status' => 'publish',
@@ -25,15 +47,15 @@ $count = $query->found_posts;
 ?>
 
 
-<div class="container">
+<div class="container container-career">
  
         <div class="container-career-header">
-            <h1 class="ui header primary-text center aligned mb-3">ตำแหน่งที่เปิดรับ</h1>
-            <form action="<?php echo  get_site_url()."/career/" ?>" method="GET" class="ui grid aligned center">
+            <h1 class="ui header primary-text  center aligned mb-3"><?php echo $words['title'] ?></h1>
+            <form action="<?php echo  get_site_url()."/career/" ?>" method="GET" class="ui stackable grid aligned center">
                 <div class="twelve wide column">
                     <div class="ui  search">
                         <div class="ui fluid left icon input">
-                            <input name="search" class="prompt" value="<?php echo $search ?>" type="text" placeholder="Search...">
+                            <input name="search" class="prompt" value="<?php echo $search ?>" type="text" placeholder="<?php echo $words['search'] ?>">
                             <i class="search icon"></i>
                         </div>
                        
@@ -42,14 +64,14 @@ $count = $query->found_posts;
 
               
                 <div class="four wide column">
-                    <button type="submit" class="search-button-career">ค้นหา</button>
+                    <button type="submit" class="search-button-career"><?php echo $words['btn_search'] ?></button>
                 </div>
             </form>
         </div>
          
     <div class="container-careers">
             <h3 class="ui header right aligned">
-                <div class="sub header"><?php echo $count ?> ตำแหน่งที่เปิดรับ</div>
+                <div class="sub header"><?php echo $count ?> <?php echo $words['title'] ?></div>
             </h3>
 
         <?php 
@@ -59,7 +81,7 @@ $count = $query->found_posts;
                 $query->the_post(); 
                 
                 ?>
-                    <div class="ui grid segment aligned center">      
+                    <div class="ui grid stackable segment aligned center career-card">      
                         <div class="ten wide column">
                         
                             <h2 class="primary-text ui header">
@@ -83,7 +105,7 @@ $count = $query->found_posts;
                         <div class="six wide column center aligned">
                         <button class="btn-primary btn btn-block">
                         <a href="<?php echo get_permalink(get_the_ID()); ?>">
-                        ดูรายละเอียดเพิ่มเติม
+                        <?php echo $words["btn_card_text"] ?>
                     </a>   
                         </button>
                         </div>
@@ -101,7 +123,7 @@ $count = $query->found_posts;
         <?php if($count > $page): $page = $page +  3;  ?>
         <h3 class="ui header right aligned">
             <a href="<?php echo  get_site_url()."/career". $seeMore .= "?paged_show=".$page ?>">
-                <div class="sub header"> See More</div>
+                <div class="sub header"><?php echo $words["see_more"] ?></div>
             </a>
         </h3>
         <?php endif; ?>

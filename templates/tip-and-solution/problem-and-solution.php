@@ -22,7 +22,20 @@ $parent_title = get_the_title($post->post_parent);
 $postId =   get_top_ancestor_id();
 $thisPostId = $post->ID;
 $lang=get_bloginfo("language");  
- 
+  
+$text_static_solution = [
+    "en" => [
+         "product" => "",
+         "problem" => "",
+         "htp" => ""
+
+    ],
+    "th" => [
+        "product" => "ตอบโจทย์ทุกงานสี",
+        "problem" => "การแก้ไขปัญหาสี",
+        "htp" => "เคล็ดลับการทำงานสี"
+    ]
+][$lang];
  ?>
 <?php 
 $page = 9;
@@ -51,9 +64,9 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
 
 <div class="menus-solution">
     <div class="container">
-        <a href="<?php echo get_site_url() ?>/tips-and-solutions/product-solutions/">  Product Solutions </a>
-        <a  class="active center" href="<?php echo get_site_url() ?>/tips-and-solutions/problems-and-solutions/"> Problems and Solutions</a>
-        <a  href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">  How to Paint</a>
+        <a href="<?php echo get_site_url() ?>/tips-and-solutions/product-solutions/"> <?php echo $text_static_solution["product"] ?> </a>
+        <a  class="active center" href="<?php echo get_site_url() ?>/tips-and-solutions/problems-and-solutions/"> <?php echo $text_static_solution['problem'] ?></a>
+        <a  href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">  <?php echo $text_static_solution["htp"] ?></a>
         
        
     </div>

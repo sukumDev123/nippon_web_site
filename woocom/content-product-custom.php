@@ -11,6 +11,17 @@ $query =  new WP_Query($argc) ?>
 <?php endwhile;endif; wp_reset_query(); ?>
 <?php 
 $word_selected = "เลือกประเภทสินค้า";
+$lang=get_bloginfo("language");  
+
+$words = [
+    "th" => [
+        "search" => "ค้นหาผลิตภัณฑ์"
+
+    ] ,
+    "en" => [
+        "search" => "Search"
+    ]
+][$lang];
 
 
 
@@ -206,7 +217,7 @@ $word_selected = "เลือกประเภทสินค้า";
             ?>
             <input type="hidden" value="<?php echo  $slug ?>" name="<?php  if( $slug) : echo  "slug"; else : echo "" ; endif; ?>" />
             <i class="fas fa-search"></i>
-                <input type="text" name="search" value="<?php if(isset($_GET["search"])): echo $_GET["search"]; endif; ?>" placeholder="Search..." />
+                <input type="text" name="search" value="<?php if(isset($_GET["search"])): echo $_GET["search"]; endif; ?>" placeholder="<?php echo $words["search"] ?>" />
             </form>
         <?php endwhile;endif; wp_reset_query(); ?>
         </div>

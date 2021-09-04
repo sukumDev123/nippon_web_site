@@ -120,7 +120,9 @@ $search  =  get_site_url() . "/search/";
     </div>
 
     <div class="show-menus-mobile">
-        <i class="fas fa-bars"></i>
+        <!-- <i class="fas fa-bars"></i> -->
+        <!-- <i class="bi bi-filter-left"></i> -->
+        <i class="bi bi-justify-right"></i>
     </div>
  
 </header>

@@ -1629,3 +1629,10 @@ function onTipAndSolutionPageHeaderSelected() {
 function redirectToHomePage() {
   window.location.href = "/";
 }
+
+function goToForm() {
+  document.querySelector(".form-career").scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+}

@@ -15,19 +15,15 @@ $lang=get_bloginfo("language");
  
 $text_static_solution = [
     "en" => [
-        "title" => "เคล็ดลับซ่อมแซมปัญหาสีบ้าน จากนิปปอนเพนต์",
-        "detail" => "“ทุกปัญหาสีบ้าน นิปปอนเพนต์ช่วยได้” <br/>
-        เมื่อรู้สาเหตุของปัญหาสีที่เกิดขึ้น มีแนวทางการแก้ไขที่ถูกขั้นตอน และเลือกใช้ผลิตภัณฑ์ที่ตอบโจทย์ บ้านของคุณก็จะสวยใหม่อยู่เสมอ"
-
+         "product" => "",
+         "problem" => "",
+         "htp" => ""
 
     ],
     "th" => [
-        "title" => "เคล็ดลับซ่อมแซมปัญหาสีบ้าน จากนิปปอนเพนต์",
-        "detail" => "“ทุกปัญหาสีบ้าน นิปปอนเพนต์ช่วยได้” <br/>
-        เมื่อรู้สาเหตุของปัญหาสีที่เกิดขึ้น มีแนวทางการแก้ไขที่ถูกขั้นตอน และเลือกใช้ผลิตภัณฑ์ที่ตอบโจทย์ บ้านของคุณก็จะสวยใหม่อยู่เสมอ"
-       
-        
-
+        "product" => "ตอบโจทย์ทุกงานสี",
+        "problem" => "การแก้ไขปัญหาสี",
+        "htp" => "เคล็ดลับการทำงานสี"
     ]
 ][$lang];
 
@@ -111,9 +107,9 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
 
 <div class="menus-solution">
     <div class="container">
-        <a class="active left"  href="<?php echo get_site_url() ?>/tips-and-solutions/product-solutions/">  Product Solutions </a>
-        <a  href="<?php echo get_site_url() ?>/tips-and-solutions/problems-and-solutions/"> Problems and Solutions</a>
-        <a   href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">  How to Paint</a>
+        <a class="active left"  href="<?php echo get_site_url() ?>/tips-and-solutions/product-solutions/">  <?php echo $text_static_solution['product'] ?> </a>
+        <a  href="<?php echo get_site_url() ?>/tips-and-solutions/problems-and-solutions/"> <?php echo $text_static_solution['problem'] ?></a>
+        <a   href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/"> <?php echo $text_static_solution['htp'] ?></a>
         
        
     </div>

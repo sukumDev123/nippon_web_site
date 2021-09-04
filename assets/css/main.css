@@ -580,7 +580,7 @@ div.loginform .error-text {
 }
 @media screen and (max-width: 1026px) {
   #services {
-    padding: 0em;
+    padding: 0em 2em;
   }
   #services > h2 {
     font-size: 1.5em;
@@ -1240,8 +1240,6 @@ footer .copywrite {
   font-size: 16px;
 }
 footer > div:first-child {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
   max-width: 1170px;
   margin: auto;
 }
@@ -1314,7 +1312,7 @@ footer > div:first-child h5 {
 }
 @media screen and (max-width: 1026px) {
   footer > div:first-child .footer-header {
-    padding: 1em 2em;
+    padding: 3em 0px !important;
   }
   footer > div:first-child .footer-header h1 {
     font-size: 1.6em;
@@ -1635,17 +1633,23 @@ footer .copywrite {
      object-fit: cover;
 }
 @media screen and (max-width: 1026px) {
+  .page-bk,
+.page-bk-shade,
+.page-bk-search,
+.page-bk-2 {
+    height: 232px !important;
+  }
   .page-bk .page-detail h1,
 .page-bk-shade .page-detail h1,
 .page-bk-search .page-detail h1,
 .page-bk-2 .page-detail h1 {
-    font-size: 26px;
+    font-size: 26px !important;
   }
   .page-bk .page-detail p,
 .page-bk-shade .page-detail p,
 .page-bk-search .page-detail p,
 .page-bk-2 .page-detail p {
-    font-size: 14px;
+    font-size: 14px !important;
   }
 }
 
@@ -1657,7 +1661,6 @@ footer .copywrite {
   justify-content: center;
 }
 .page-bk .page-detail {
-  padding-top: 3em;
   padding-left: 1em;
   padding-right: 1em;
 }
@@ -1725,6 +1728,9 @@ footer .copywrite {
   padding-right: 1em;
 }
 @media screen and (max-width: 1366px) {
+  .page-bk-2 {
+    margin-top: 79px !important;
+  }
   .page-bk-2 .page-detail h1 {
     font-size: 32px;
   }
@@ -2722,6 +2728,11 @@ footer .copywrite {
 #product-title > div h1 {
   color: #1e4f92;
 }
+@media screen and (max-width: 1024px) {
+  #product-title {
+    padding: 4em 2em;
+  }
+}
 
 #all-product-content {
   max-width: 1170px;
@@ -2764,6 +2775,14 @@ footer .copywrite {
 #all-product-content .product-cat-card p {
   font-size: 1.2em;
   color: #000;
+}
+@media screen and (max-width: 1024px) {
+  #all-product-content {
+    padding: 2em 2em 4em 2em;
+  }
+  #all-product-content .product-cat-card {
+    width: 100% !important;
+  }
 }
 
 #product-container {
@@ -5871,6 +5890,7 @@ footer .copywrite {
 }
 .show-menus-mobile i {
   color: #1e4f92;
+  font-size: 2em;
 }
 @media screen and (max-width: 1176px) {
   .show-menus-mobile {
@@ -6712,15 +6732,74 @@ body.login input[type=text] {
 .page-mt h2 {
   margin-bottom: 52px !important;
 }
+.page-mt #btn-do-form {
+  margin-top: 2em;
+  display: none;
+  font-size: 14px;
+  width: 100%;
+  border-radius: 6px;
+  background-color: #1e4f92;
+  color: white;
+  border: 0px;
+  padding: 15px 0px;
+}
+.page-mt #btn-do-form i {
+  margin-right: 5px;
+}
+@media screen and (max-width: 1024px) {
+  .page-mt {
+    margin-top: 79px;
+    padding: 4em 2em !important;
+  }
+  .page-mt #btn-do-form {
+    display: block;
+  }
+  .page-mt .margin-page {
+    height: 1em;
+  }
+  .page-mt .ui.grid > .stackable.stackable.row > .column,
+.page-mt .ui.stackable.grid > .column.grid > .column,
+.page-mt .ui.stackable.grid > .column.row > .column,
+.page-mt .ui.stackable.grid > .column:not(.row),
+.page-mt .ui.stackable.grid > .row > .column,
+.page-mt .ui.stackable.grid > .row > .wide.column,
+.page-mt .ui.stackable.grid > .wide.column {
+    padding: 2em 0px !important;
+  }
+  .page-mt .title-career-form {
+    padding: 2em;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  .page-mt .title-career-form h1 {
+    padding: 0px;
+    margin: 0px !important;
+  }
+}
 
 #career_send {
   max-width: 300px;
   margin: auto;
 }
 
+.container-career {
+  max-width: 1170px !important;
+}
+@media screen and (max-width: 1024px) {
+  .container-career {
+    padding: 0px 2em !important;
+  }
+}
+
 .form-career {
   padding-left: 10em !important;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+@media screen and (max-width: 1024px) {
+  .form-career {
+    padding-left: 0px !important;
+    border-left: 0px;
+  }
 }
 
 .content-career {
@@ -6729,18 +6808,36 @@ body.login input[type=text] {
 
 .container-careers {
   max-width: 900px;
-  margin: 2em auto;
+  margin: 2em auto 4em;
 }
 .container-careers .ui.grid {
   padding: 20px 40px;
   align-items: center;
 }
-.container-careers .segment {
+.container-careers .career-card {
   border-radius: 20px !important;
   margin: 2rem 0 0px !important;
 }
 .container-careers > div {
   margin-bottom: 2em;
+}
+.container-careers .btn {
+  padding: 10px 2em !important;
+}
+@media screen and (max-width: 1024px) {
+  .container-careers .ui.grid {
+    padding: 1em 0.5em;
+    align-items: center;
+  }
+  .container-careers .career-card {
+    padding: 1em;
+  }
+  .container-careers .primary-text {
+    text-align: center;
+  }
+  .container-careers h3 div {
+    text-align: center;
+  }
 }
 
 .container-career-header {
@@ -6757,6 +6854,21 @@ body.login input[type=text] {
   color: white;
   background-color: #1e4f92;
   border: 0px;
+}
+@media screen and (max-width: 1024px) {
+  .container-career-header h1 {
+    font-size: 22px !important;
+    margin-bottom: 1em !important;
+  }
+  .container-career-header div {
+    text-align: center;
+  }
+  .container-career-header div .search-button-career {
+    max-width: 120px;
+    padding: 10px 2em;
+    margin: auto;
+    font-weight: bold;
+  }
 }
 
 .border-r-20 {
@@ -6964,6 +7076,23 @@ body.login input[type=text] {
   padding-right: 1em;
   border-left: 1px solid #637381;
   border-right: 1px solid #637381;
+}
+@media screen and (max-width: 1024px) {
+  .type-of-career,
+.type-of-career-list {
+    display: block;
+  }
+  .type-of-career h4,
+.type-of-career-list h4 {
+    max-width: 133px;
+    margin: auto;
+  }
+  .type-of-career h4:nth-child(2),
+.type-of-career-list h4:nth-child(2) {
+    border: 0px;
+    margin: 1em auto;
+    padding: 0px;
+  }
 }
 
 .type-of-career {
@@ -10009,4 +10138,17 @@ input:focus {
 #email_format_confirm_error,
 .form-hide {
   display: none;
+}
+
+.container.page-content {
+  max-width: 1170px;
+  margin: auto;
+  margin-top: 123px;
+  padding: 3em 0px 4em;
+}
+@media screen and (max-width: 1024px) {
+  .container.page-content {
+    padding: 2em 2em 3em;
+    margin-top: 79px;
+  }
 }

@@ -12,6 +12,7 @@ $user = [
 	"user_email" => ""
 ];
 $found_posts = false;
+$privacy_policy = getPrivacyPolicyPage();
 
 if(is_user_logged_in()):
 	
@@ -363,7 +364,7 @@ endif;
 			<div id="accept_field" class="field required">
 				<div class="ui checkbox mt-2">
 				<input type="checkbox" name="accept_pdpa" id="accept_pdpa" tabindex="0" >
-				<label>ยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน <a href="/">นโยบายคุ้มครองข้อมูลส่วนบุคคล</a> </label>
+				<label>ยอมรับข้อกำหนดและเงื่อนไขที่ระบุไว้ใน <a href="<?php echo  $privacy_policy  ?>" target="_blank" >นโยบายคุ้มครองข้อมูลส่วนบุคคล</a> </label>
 			</div>
         
 			<?php 

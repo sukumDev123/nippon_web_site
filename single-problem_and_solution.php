@@ -5,14 +5,26 @@ get_header();
 $featured_img_url = get_the_post_thumbnail_url( get_the_ID(),'full'); 
 $getFavs = getFavoritesData("problem-and-solution" );
 $data_favorites =  $getFavs["datas"];
+$lang=get_bloginfo("language");  
+$words = [
+      "th" => [
+            "title" => "เคล็ดลับและการแก้ไขปัญหาสี",
+            "title_2" => "การแก้ไขปัญหาสี"
+
+      ],
+      "en" => [
+            "title" => "",
+            "title_2" => ""
+      ]
+][$lang];
 ?>
 
 <div class="container single-page"  >
       
       <div class="ui large breadcrumb">
-      <a class="section">เคล็ดลับและการแก้ไขปัญหาสี</a>
+      <a class="section"><?php echo $words['title'] ?></a>
       <i class="right chevron icon divider"></i>
-      <a href="<?php echo get_site_url() ?>/tips-and-solutions/problems-and-solutions/"  class="section">Problems and Solutions</a>
+      <a href="<?php echo get_site_url() ?>/tips-and-solutions/problems-and-solutions/"  class="section"><?php echo $words['title_2'] ?></a>
       <i class="right chevron icon divider"></i>
       <div class="active section"><?php echo get_the_title() ?></div>
       </div>
