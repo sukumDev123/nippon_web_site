@@ -131,7 +131,10 @@ endif;
     <div id="email_format_error" class="ui pointing red basic label pointing-alert">
                         รูปแบบอีเมลผิดพลาด
                     </div>
+
   
+
+					
   
   <div class="required field">
 		<label for="user_pass">รหัสผ่าน</label>
@@ -258,6 +261,12 @@ endif;
 		"emailDisabled"=> true 
 	]); ?>
 
+	<!-- <div 
+		id="email_format_confirm_error" 
+		class="ui pointing red basic label pointing-alert"></div> -->
+
+
+
 		
 	<?php  get_template_part("components/input_exclamation" , null ,  [
 		"placeholder" => "ชื่อ",
@@ -361,6 +370,12 @@ endif;
 		get_template_part("components/error-message" , null , [
 			"id" => "message_error_exists_user_2",
 			"text" => "ผู้ใช้งานคนนี้มีอยู่ในระบบแล้ว"
+		]); 
+	?>
+			<?php 
+		get_template_part("components/error-message" , null , [
+			"id" => "email_format_confirm_error",
+			"text" => "รูปแบบอีเมลผิดพลาด"
 		]); 
 	?>
  

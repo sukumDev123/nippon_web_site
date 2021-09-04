@@ -146,7 +146,21 @@ function registerForm() {
     (c) => inputRegis.data[c]
   ).length;
   clearPointingShow();
+  const email_format_confirm_error = document.querySelector(
+    "#email_format_confirm_error"
+  );
+  const message_error_exists_user_2 = document.querySelector(
+    "#message_error_exists_user_2"
+  );
+  email_format_confirm_error &&
+    (email_format_confirm_error.style.display = "none");
+  message_error_exists_user_2 &&
+    (message_error_exists_user_2.style.display = "none");
   if (checkToRegister === fieldsRequireRegis.length) {
+    if (!emailReg.test(document.querySelector("#emailValConfirm").value)) {
+      email_format_confirm_error.style.display = "block";
+      return;
+    }
     const date = inputRegis.data["date"];
     const month = inputRegis.data["month"];
     const year = inputRegis.data["year"];

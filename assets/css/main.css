@@ -6614,6 +6614,9 @@ body.login input[type=text] {
   body.login {
     margin-top: 79px;
   }
+  body.login .ui.form {
+    padding: 2em 0px;
+  }
 }
 
 .template-myaccount {
@@ -10003,6 +10006,7 @@ input:focus {
 #message_error_accept,
 #required_resume_field,
 #required_transcript_field,
+#email_format_confirm_error,
 .form-hide {
   display: none;
 }

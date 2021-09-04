@@ -7418,6 +7418,9 @@ body.login {
   @media screen and (max-width: 1025px) {
     & {
       margin-top: 79px;
+      .ui.form {
+        padding: 2em 0px;
+      }
     }
   }
 }
@@ -11037,6 +11040,7 @@ input {
 #message_error_accept,
 #required_resume_field,
 #required_transcript_field,
+#email_format_confirm_error,
 .form-hide {
   display: none;
 }
