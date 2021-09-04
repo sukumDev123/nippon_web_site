@@ -12,7 +12,7 @@
             <?php echo $args["title"] ?>
         </h3>
          
-        <div  class="ui three columns grid choice-div">
+        <div  class="ui stackable  three columns grid choice-div">
             <div class="column cal-div">
                     <h4 for="A1"><?php echo $args["choice_1"] ?></h4>
                     <input class="isNumber" type="text" id="<?php echo $args["input_1"] ?>">

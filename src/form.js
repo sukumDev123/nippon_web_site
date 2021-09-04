@@ -488,7 +488,7 @@ function addPlusButton() {
       element.addEventListener("keyup", (e) => {
         const _input1Val = parseInt(_inputDefault1.value) || 0;
         const _input2Val = parseInt(_inputDefault2.value) || 0;
-        _resultDefault.innerHTML = _input1Val * _input2Val;
+        _resultDefault.innerHTML = (_input1Val * _input2Val).toFixed(2);
       });
   });
   const _external_other_value_a = document.querySelector(
@@ -505,7 +505,7 @@ function addPlusButton() {
       element.addEventListener("keyup", (e) => {
         const _input1Val = parseInt(_external_other_value_a.value) || 0;
         const _input2Val = parseInt(_external_other_value_b.value) || 0;
-        _external_other_result.innerHTML = _input1Val * _input2Val;
+        _external_other_result.innerHTML = (_input1Val * _input2Val).toFixed(2);
       });
   });
   if (plus_button) {
@@ -522,7 +522,7 @@ function addPlusButton() {
             <h2   class="ui header primary-text">
             ผนังด้านที่ ${_countE}
             </h2>
-            <div class="ui three columns grid">
+            <div class="ui stackable three columns grid">
                 <div class="column cal-div">
                         <h4 for="A1"> ความกว้างของผนัง (เมตร)</h4>
                         <input class="isNumber" type="text" id="${inputId}">
@@ -572,6 +572,10 @@ function summaryExternalCal() {
   const external_big_div = document.querySelector(".external-big-div");
   const result_top_1 = document.querySelector("#result-top-1");
   const result_top_2 = document.querySelector("#result-top-2");
+  const result_top_b_1 = document.querySelector("#result-top-b-1");
+  const result_top_b_2 = document.querySelector("#result-top-b-2");
+  const result_bottom_b_1 = document.querySelector("#result-bottom-b-1");
+  const result_bottom_b_2 = document.querySelector("#result-bottom-b-2");
   const summary_calculate = document.querySelector(".summary-calculate");
   const result_bottom_1 = document.querySelector("#result-bottom-1");
   const result_bottom_2 = document.querySelector("#result-bottom-2");
@@ -605,8 +609,12 @@ function summaryExternalCal() {
 
       result_top_1.innerHTML = `${(+allResult / 30).toFixed(2)} แกลลอน`;
       result_top_2.innerHTML = `${(+allResult / 15).toFixed(2)} แกลลอน`;
+      result_top_b_1.innerHTML = `${(+allResult / 30).toFixed(2)} แกลลอน`;
+      result_top_b_2.innerHTML = `${(+allResult / 15).toFixed(2)} แกลลอน`;
       result_bottom_1.innerHTML = `${(+allResult / 30).toFixed(2)} แกลลอน`;
       result_bottom_2.innerHTML = `${(+allResult / 15).toFixed(2)} แกลลอน`;
+      result_bottom_b_1.innerHTML = `${(+allResult / 30).toFixed(2)} แกลลอน`;
+      result_bottom_b_2.innerHTML = `${(+allResult / 15).toFixed(2)} แกลลอน`;
       document.querySelector("#summary_number_2").innerHTML =
         allResult.toFixed(2);
       document.querySelector("#summary_number_1").innerHTML =
@@ -672,10 +680,14 @@ function calculateInternalRoomSummary() {
 
   const result_top_1 = document.querySelector("#result-top-1");
   const result_top_2 = document.querySelector("#result-top-2");
+  const result_top_b_1 = document.querySelector("#result-top-b-1");
+  const result_top_b_2 = document.querySelector("#result-top-b-2");
   const summary_calculate = document.querySelector(".summary-calculate");
 
   const result_bottom_1 = document.querySelector("#result-bottom-1");
   const result_bottom_2 = document.querySelector("#result-bottom-2");
+  const result_bottom_b_1 = document.querySelector("#result-bottom-b-1");
+  const result_bottom_b_2 = document.querySelector("#result-bottom-b-2");
 
   [submit_all_calculate, reset_calculate].forEach((element) => {
     if (element) {
@@ -695,8 +707,12 @@ function calculateInternalRoomSummary() {
         summary_number_2.innerHTML = (summary || 0).toFixed(2);
         result_top_1.innerHTML = `${(+summary / 30).toFixed(2)} แกลลอน`;
         result_top_2.innerHTML = `${(+summary / 15).toFixed(2)} แกลลอน`;
+        result_top_b_1.innerHTML = `${(+summary / 30).toFixed(2)} แกลลอน`;
+        result_top_b_2.innerHTML = `${(+summary / 15).toFixed(2)} แกลลอน`;
         result_bottom_1.innerHTML = `${(+summary / 30).toFixed(2)} แกลลอน`;
         result_bottom_2.innerHTML = `${(+summary / 15).toFixed(2)} แกลลอน`;
+        result_bottom_b_1.innerHTML = `${(+summary / 30).toFixed(2)} แกลลอน`;
+        result_bottom_b_2.innerHTML = `${(+summary / 15).toFixed(2)} แกลลอน`;
         setTimeout(() => {
           document.querySelector(".reset-button").scrollIntoView({
             behavior: "smooth",

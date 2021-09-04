@@ -123,6 +123,8 @@
     <strong id="summary_number_2">400</strong>
     ตารางเมตร
     </h3>
+    <div class="summary-window">
+
     <div class="header-summary">
         <div class="text-center">
             <h2 class="primary-text">พื้นที่ทาสี</h2>
@@ -174,6 +176,128 @@
         </div>
     </div>
 
+
+    </div>
+
+    
+    <div class="summary-mobile">
+   <div class="sum1">
+    <h4 class="ui header title-sum">พื้นที่สีทาภายใน</h4>
+    <div class="sum-box">
+        <div class="sum-value">
+                <h4 class="ui header title-sum">พื้นที่ทาสี</h4>
+                <div class="row space-between">
+                    <div class="col-6">
+                        <h5>ผนังห้อง</h5>
+                    </div>
+                    <div class="col-6">
+                    <h5>(สีน้ำทาภายใน)</h5>
+                    </div>
+                </div>
+        </div>
+        <div class="sum-value">
+        <h4 class="ui header title-sum">ประเภทสี</h4>
+                <div class="row space-between">
+                    <div class="col-6">
+                        <h5>1. สีรองพื้นปูน</h5>
+                    </div>
+                    <div class="col-6">
+                        <h5>(ทา 1 รอบ)</h5>
+                    </div>
+                </div>
+                <div class="row space-between">
+                    <div class="col-6">
+                        <h5>2. สีทับหน้า</h5>
+                    </div>
+                    <div class="col-6">
+                        <h5>(ทา 2 รอบ)</h5>
+                    </div>
+                </div>
+        </div>
+        <div class="sum-value">
+        <h4 class="ui header title-sum">ปริมาณสีที่ต้องใช้</h4>
+        <div class="row space-between">
+                    <div class="col-6">
+                        <h5>1. สีรองพื้นปูน</h5>
+                    </div>
+                    <div class="col-6">
+                        <h5 id="result-top-b-1" >(ทา 1 รอบ)</h5>
+                    </div>
+                </div>
+                <div class="row space-between">
+                    <div class="col-6">
+                        <h5>2. สีทับหน้า</h5>
+                    </div>
+                    <div class="col-6">
+                        <h5 id="result-top-b-2" > (ทา 2 รอบ)</h5>
+                    </div>
+                </div>
+        </div>
+    </div>
+   </div>
+   <div class="sum2">
+    <h4>ส่วนเพิ่มเติม</h4>
+
+
+        <div class="sum-box">
+            <div class="sum-value">
+                    <h4 class="ui header title-sum">พื้นที่ทาสี</h4>
+                    <div class="row space-between">
+                        <div class="col-6">
+                            <h5>ฝ้า</h5>
+                        </div>
+                        <div class="col-6">
+                        <h5>(สีน้ำทาภายใน)</h5>
+                        </div>
+                    </div>
+            </div>
+            <div class="sum-value">
+            <h4 class="ui header title-sum">ประเภทสี</h4>
+                    <div class="row space-between">
+                        <div class="col-6">
+                            <h5>1. สีรองพื้นปูน</h5>
+                        </div>
+                        <div class="col-6">
+                            <h5>(ทา 1 รอบ)</h5>
+                        </div>
+                    </div>
+                    <div class="row space-between">
+                        <div class="col-6">
+                            <h5>2. สีทับหน้า</h5>
+                        </div>
+                        <div class="col-6">
+                            <h5>(ทา 2 รอบ)</h5>
+                        </div>
+                    </div>
+            </div>
+            <div class="sum-value">
+            <h4 class="ui header title-sum">ปริมาณสีที่ต้องใช้</h4>
+            <div class="row space-between">
+                        <div class="col-6">
+                            <h5>1. สีรองพื้นปูน</h5>
+                        </div>
+                        <div class="col-6">
+                            <h5 id="result-bottom-b-1" >(ทา 1 รอบ)</h5>
+                        </div>
+                    </div>
+                    <div class="row space-between">
+                        <div class="col-6">
+                            <h5>2. สีทับหน้า</h5>
+                        </div>
+                        <div class="col-6">
+                            <h5 id="result-bottom-b-2" > (ทา 2 รอบ)</h5>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+   </div>
+</div>
+
+
+
+
     <div class="notes_need_to_know">
         <h3 class="ui red header">
         หมายเหตุ
@@ -182,6 +306,15 @@
     ที่อาจเกี่ยวข้อง</p>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
 
 <div class="mt-5rem"></div>
 

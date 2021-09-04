@@ -465,7 +465,11 @@ body::-webkit-scrollbar-thumb {
 
 @media screen and (max-width: 1024px) {
   .login_form {
-    padding: 0 2rem !important;
+    padding: 4em 10px !important;
+    display: block;
+  }
+  .login_form .loginform {
+    padding: 1.4em !important;
   }
 }
 form.loginform,
@@ -576,19 +580,27 @@ div.loginform .error-text {
 }
 @media screen and (max-width: 1026px) {
   #services {
-    padding: 0em 2em;
+    padding: 0em;
   }
   #services > h2 {
     font-size: 1.5em;
   }
   #services .services-card {
-    display: block;
+    overflow: auto;
+    justify-content: flex-start;
   }
   #services .services-card .service-card {
+    flex-shrink: 0;
+    overflow: hidden;
+    width: 100%;
     margin-bottom: 2em;
   }
   #services .services-card .service-card div {
     width: 100%;
+    max-width: 100%;
+  }
+  #services .services-card .service-card div .bk {
+    border-radius: 6px;
   }
 }
 
@@ -6598,6 +6610,11 @@ body.login input[type=text] {
   font-size: 1em;
   padding: 0px;
 }
+@media screen and (max-width: 1025px) {
+  body.login {
+    margin-top: 79px;
+  }
+}
 
 .template-myaccount {
   margin-top: 123px;
@@ -6824,6 +6841,13 @@ body.login input[type=text] {
      object-fit: cover !important;
   border-radius: 10px !important;
 }
+@media screen and (max-width: 1024px) {
+  .image-register {
+    -o-object-fit: contain !important;
+       object-fit: contain !important;
+    height: auto;
+  }
+}
 
 .form-content {
   padding: 3em !important;
@@ -6964,6 +6988,13 @@ body.login input[type=text] {
 .page-calculate .accordion-button:not(.collapsed)::after {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2300'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 }
+.page-calculate img {
+  width: 100%;
+  height: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+  max-width: 700px;
+}
 .page-calculate .accordion-button::after {
   background-size: 2rem !important;
   height: 2rem !important;
@@ -6993,11 +7024,47 @@ body.login input[type=text] {
 .page-calculate .active.item .title-menu {
   color: #1e4f92 !important;
 }
+@media screen and (max-width: 1024px) {
+  .page-calculate {
+    padding: 0 2em !important;
+    margin-top: 79px;
+  }
+  .page-calculate .title-header-menus {
+    font-size: 14px !important;
+  }
+  .page-calculate .text-center img {
+    margin: 2em 0;
+  }
+  .page-calculate .header-title-page {
+    padding-bottom: 1em;
+  }
+  .page-calculate h4 {
+    font-size: 18px !important;
+  }
+  .page-calculate .accordion-button {
+    padding: 0px !important;
+  }
+  .page-calculate .ui.grid > .stackable.stackable.row > .column,
+.page-calculate .ui.stackable.grid > .column.grid > .column,
+.page-calculate .ui.stackable.grid > .column.row > .column,
+.page-calculate .ui.stackable.grid > .column:not(.row),
+.page-calculate .ui.stackable.grid > .row > .column,
+.page-calculate .ui.stackable.grid > .row > .wide.column,
+.page-calculate .ui.stackable.grid > .wide.column {
+    padding: 1rem 0px !important;
+  }
+}
 
 .set_a {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding-bottom: 4em;
   margin-bottom: 4em;
+}
+@media screen and (max-width: 1024px) {
+  .set_a {
+    padding-bottom: 2em;
+    margin-bottom: 2em;
+  }
 }
 
 .cal-div {
@@ -7011,11 +7078,12 @@ body.login input[type=text] {
 .cal-div input {
   max-width: 104px;
   width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.5);
   padding: 10px;
 }
 .cal-div input:focus {
   outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 .cal-div h4 {
   margin: 0px;
@@ -7026,6 +7094,14 @@ body.login input[type=text] {
 .cal-div h4 strong {
   font-weight: 800;
   margin-right: 0.61em;
+}
+@media screen and (max-width: 1024px) {
+  .cal-div input {
+    padding: 5px 10px;
+  }
+  .cal-div h4 {
+    font-size: 14px !important;
+  }
 }
 
 .cal-result {
@@ -7050,6 +7126,11 @@ body.login input[type=text] {
 .cal-result h1 {
   font-size: 1.7em;
 }
+@media screen and (max-width: 1024px) {
+  .cal-result {
+    margin-top: 1.8em;
+  }
+}
 
 .cal-result-step4 {
   align-items: center;
@@ -7073,6 +7154,17 @@ body.login input[type=text] {
 .cal-result-step4 h1 {
   font-size: 1.7em;
 }
+@media screen and (max-width: 1024px) {
+  .cal-result-step4 {
+    padding: 1em 0 !important;
+  }
+  .cal-result-step4 h1 {
+    font-size: 22px;
+  }
+  .cal-result-step4 h4 {
+    font-size: 14px !important;
+  }
+}
 
 .cal-internal-other {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -7093,6 +7185,17 @@ body.login input[type=text] {
 }
 .cal-internal-other .ui.accordion .title.active img {
   transform: rotate(0deg);
+}
+@media screen and (max-width: 1024px) {
+  .cal-internal-other h2 {
+    font-size: 18px;
+  }
+  .cal-internal-other .accordion-body h2 {
+    font-size: 18px !important;
+  }
+  .cal-internal-other .accordion-body h4 {
+    font-size: 14px !important;
+  }
 }
 
 .submit-calculate {
@@ -7129,6 +7232,19 @@ body.login input[type=text] {
 .submit-calculate .show-result-m h1 {
   font-size: 2.3em !important;
 }
+@media screen and (max-width: 1024px) {
+  .submit-calculate .show-result-m {
+    padding: 1em 20px;
+    border-radius: 3px;
+  }
+  .submit-calculate .show-result-m h2 {
+    font-size: 14px !important;
+  }
+  .submit-calculate .show-result-m h1 {
+    font-size: 22px !important;
+    padding: 0 10px;
+  }
+}
 .submit-calculate .submit-button {
   font-size: 1em;
   color: #1e4f92;
@@ -7152,6 +7268,15 @@ body.login input[type=text] {
   color: #ed1c24;
   border-bottom: 1px solid #ed1c24;
   font-size: 1em;
+}
+@media screen and (max-width: 1024px) {
+  .submit-calculate {
+    padding-top: 2em;
+  }
+  .submit-calculate .notes-1 p {
+    text-align: left;
+    font-size: 1em;
+  }
 }
 
 .summary-calculate {
@@ -7260,6 +7385,53 @@ body.login input[type=text] {
 .summary-calculate .notes_need_to_know p {
   font-size: 14px;
 }
+.summary-calculate .summary-mobile {
+  display: none;
+}
+.summary-calculate .summary-mobile .row.space-between {
+  justify-content: space-between !important;
+  padding-bottom: 5px;
+  margin-top: 5px;
+}
+.summary-calculate .summary-mobile .row.space-between .col-6:last-child {
+  text-align: right;
+}
+.summary-calculate .summary-mobile .sum-box {
+  background-color: #1e4f92;
+  padding: 3em 3em;
+  color: white;
+  border-radius: 6px;
+  margin-bottom: 2em;
+}
+.summary-calculate .summary-mobile .sum-box h4 {
+  color: white;
+  text-align: center;
+  font-weight: 800;
+  margin-bottom: 1em;
+}
+.summary-calculate .summary-mobile .sum-box h5 {
+  font-weight: 500;
+}
+.summary-calculate .summary-mobile .sum-value {
+  margin-bottom: 2em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  padding-bottom: 2em;
+}
+.summary-calculate .summary-mobile .sum-value:last-child {
+  margin-bottom: 0px;
+}
+@media screen and (max-width: 1024px) {
+  .summary-calculate {
+    margin-top: 3em;
+  }
+  .summary-calculate .summary-mobile {
+    display: block;
+    margin-top: 3em;
+  }
+  .summary-calculate .summary-window {
+    display: none;
+  }
+}
 
 #plus-buttom {
   width: 1em;
@@ -7278,6 +7450,11 @@ body.login input[type=text] {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding-bottom: 30px;
   padding-top: 30px;
+}
+@media screen and (max-width: 1024px) {
+  .external-div h2 {
+    font-size: 18px !important;
+  }
 }
 
 .external-add-new {
@@ -9731,6 +9908,14 @@ div.nsl-container.nsl-container-block .nsl-container-buttons {
 
 .title-header {
   font-size: 28px !important;
+}
+@media screen and (max-width: 1024px) {
+  .title-header {
+    font-size: 22px !important;
+  }
+  .title-header div {
+    font-size: 14px !important;
+  }
 }
 
 .header-title-page {

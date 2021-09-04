@@ -4,7 +4,7 @@
                 <h2   class="ui header primary-text">
                     <?php echo $args["title"] ?>
                 </h2>
-                <div class="ui three columns grid">
+                <div class="ui stackable three columns grid">
                     <div class="column cal-div">
                             <h4 for="A1"> <?php echo $args["choice_1"] ?></h5>
                             <input class="isNumber" type="text" id="<?php echo $args["input_1"] ?>">

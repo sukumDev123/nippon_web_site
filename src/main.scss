@@ -583,7 +583,11 @@ body {
 // }
 @media screen and (max-width: 1024px) {
   .login_form {
-    padding: 0 2rem !important;
+    padding: 4em 10px !important;
+    display: block;
+    .loginform {
+      padding: 1.4em !important;
+    }
   }
 }
 // }
@@ -707,17 +711,27 @@ div.loginform {
 
   @media screen and (max-width: 1026px) {
     & {
-      padding: 0em 2em;
+      padding: 0em;
 
       > h2 {
         font-size: 1.5em;
       }
       .services-card {
-        display: block;
+        // display: block;
+        overflow: auto;
+        justify-content: flex-start;
         .service-card {
+          flex-shrink: 0;
+          overflow: hidden;
+          width: 100%;
+          // min-width: 100%;
           margin-bottom: 2em;
           div {
             width: 100%;
+            max-width: 100%;
+            .bk {
+              border-radius: 6px;
+            }
           }
         }
       }
@@ -7401,6 +7415,11 @@ body.login {
     font-size: 1em;
     padding: 0px;
   }
+  @media screen and (max-width: 1025px) {
+    & {
+      margin-top: 79px;
+    }
+  }
 }
 .template-myaccount {
   // margin-top: 160px;
@@ -7623,6 +7642,12 @@ body.login {
 .image-register {
   object-fit: cover !important;
   border-radius: 10px !important;
+  @media screen and (max-width: 1024px) {
+    & {
+      object-fit: contain !important;
+      height: auto;
+    }
+  }
 }
 .form-content {
   padding: 3em !important;
@@ -7776,6 +7801,12 @@ body.login {
 
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2300'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
   }
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-width: 700px;
+  }
   .accordion-button::after {
     background-size: 2rem !important;
     height: 2rem !important;
@@ -7810,11 +7841,49 @@ body.login {
       color: $primary-color !important;
     }
   }
+  @media screen and (max-width: 1024px) {
+    & {
+      padding: 0 2em !important;
+      margin-top: 79px;
+      .title-header-menus {
+        font-size: 14px !important;
+      }
+      .text-center {
+        img {
+          margin: 2em 0;
+        }
+      }
+      .header-title-page {
+        padding-bottom: 1em;
+      }
+      h4 {
+        font-size: 18px !important;
+      }
+      .accordion-button {
+        padding: 0px !important;
+      }
+      .ui.grid > .stackable.stackable.row > .column,
+      .ui.stackable.grid > .column.grid > .column,
+      .ui.stackable.grid > .column.row > .column,
+      .ui.stackable.grid > .column:not(.row),
+      .ui.stackable.grid > .row > .column,
+      .ui.stackable.grid > .row > .wide.column,
+      .ui.stackable.grid > .wide.column {
+        padding: 1rem 0px !important;
+      }
+    }
+  }
 }
 .set_a {
   border-bottom: 1px solid rgba($color: #000, $alpha: 0.1);
   padding-bottom: 4em;
   margin-bottom: 4em;
+  @media screen and (max-width: 1024px) {
+    & {
+      padding-bottom: 2em;
+      margin-bottom: 2em;
+    }
+  }
 }
 .cal-div {
   display: flex !important;
@@ -7827,12 +7896,14 @@ body.login {
     // margin-left: 20px;
     max-width: 104px;
     width: 100%;
-    border: 1px solid rgba($color: #000000, $alpha: 0.1);
+    border: 1px solid rgba($color: #000000, $alpha: 0.5);
     padding: 10px;
     &:focus {
       outline: none;
+      border: 1px solid rgba($color: #000000, $alpha: 0.5);
     }
   }
+
   h4 {
     margin: 0px;
     padding: 0px;
@@ -7841,6 +7912,16 @@ body.login {
     strong {
       font-weight: 800;
       margin-right: 0.61em;
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    & {
+      input {
+        padding: 5px 10px;
+      }
+      h4 {
+        font-size: 14px !important;
+      }
     }
   }
 }
@@ -7866,6 +7947,11 @@ body.login {
   h1 {
     font-size: 1.7em;
   }
+  @media screen and (max-width: 1024px) {
+    & {
+      margin-top: 1.8em;
+    }
+  }
 }
 .cal-result-step4 {
   align-items: center;
@@ -7887,6 +7973,17 @@ body.login {
   }
   h1 {
     font-size: 1.7em;
+  }
+  @media screen and (max-width: 1024px) {
+    & {
+      h1 {
+        font-size: 22px;
+      }
+      h4 {
+        font-size: 14px !important;
+      }
+      padding: 1em 0 !important;
+    }
   }
 }
 .cal-internal-other {
@@ -7910,6 +8007,21 @@ body.login {
       &.active {
         img {
           transform: rotate(0deg);
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    & {
+      h2 {
+        font-size: 18px;
+      }
+      .accordion-body {
+        h2 {
+          font-size: 18px !important;
+        }
+        h4 {
+          font-size: 14px !important;
         }
       }
     }
@@ -7948,6 +8060,21 @@ body.login {
     h1 {
       font-size: 2.3em !important;
     }
+    @media screen and (max-width: 1024px) {
+      & {
+        h2 {
+          font-size: 14px !important;
+        }
+        h1 {
+          font-size: 22px !important;
+          padding: 0 10px;
+        }
+        padding: 1em 20px;
+        border-radius: 3px;
+
+        // margin-bottom: 1em;
+      }
+    }
   }
   .submit-button {
     font-size: 1em;
@@ -7972,6 +8099,17 @@ body.login {
     color: #ed1c24;
     border-bottom: 1px solid #ed1c24;
     font-size: 1em;
+  }
+  @media screen and (max-width: 1024px) {
+    & {
+      padding-top: 2em;
+      .notes-1 {
+        p {
+          text-align: left;
+          font-size: 1em;
+        }
+      }
+    }
   }
 }
 
@@ -8082,6 +8220,53 @@ body.login {
       font-size: 14px;
     }
   }
+  .summary-mobile {
+    display: none;
+    .row.space-between {
+      justify-content: space-between !important;
+      padding-bottom: 5px;
+      margin-top: 5px;
+      .col-6:last-child {
+        text-align: right;
+      }
+    }
+    .sum-box {
+      background-color: $primary-color;
+      padding: 3em 3em;
+      color: white;
+      border-radius: 6px;
+      margin-bottom: 2em;
+      h4 {
+        color: white;
+        text-align: center;
+        font-weight: 800;
+        margin-bottom: 1em;
+      }
+      h5 {
+        font-weight: 500;
+      }
+    }
+    .sum-value {
+      margin-bottom: 2em;
+      border-bottom: 1px solid rgba($color: #fff, $alpha: 0.5);
+      padding-bottom: 2em;
+      &:last-child {
+        margin-bottom: 0px;
+      }
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    & {
+      margin-top: 3em;
+      .summary-mobile {
+        display: block;
+        margin-top: 3em;
+      }
+      .summary-window {
+        display: none;
+      }
+    }
+  }
 }
 #plus-buttom {
   width: 1em;
@@ -8100,6 +8285,13 @@ body.login {
   border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
   padding-bottom: 30px;
   padding-top: 30px;
+  @media screen and (max-width: 1024px) {
+    & {
+      h2 {
+        font-size: 18px !important;
+      }
+    }
+  }
 }
 
 .external-add-new {
@@ -10753,6 +10945,14 @@ div.nsl-container.nsl-container-block .nsl-container-buttons {
 }
 .title-header {
   font-size: $font-size-title !important;
+  @media screen and (max-width: 1024px) {
+    & {
+      font-size: 22px !important;
+      div {
+        font-size: 14px !important;
+      }
+    }
+  }
 }
 .header-title-page {
   padding: $page-top-xl 0;
