@@ -2430,11 +2430,23 @@ add_action( 'rest_api_init', function () {
     $current_url = home_url(add_query_arg(array(), $wp->request));
     $match = "";
     $checkWpLoginPageg = in_array($GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php'));
+    $terms =  get_the_terms( get_the_ID(), "category" );
+    $checkPrivacyPolicy = false;
 
-    if(!$checkWpLoginPageg):
+    if(get_post_type() == "post"):
+        foreach($terms as $term):
+            if(preg_match("/privacy-policy/", $term->slug)):                
+                $checkPrivacyPolicy  = true;
+            endif;
+        endforeach;
+    endif;
+    if(!$checkWpLoginPageg && !$checkPrivacyPolicy):
         setcookie('url_latest',$current_url , time()+3600 , "/");
 
     endif;
+
+    // echo "saveCurrent : checkPrivacyPolicy " . $checkPrivacyPolicy;
+
   }
 
 

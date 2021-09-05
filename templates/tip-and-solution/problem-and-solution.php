@@ -168,9 +168,9 @@ endif;
                 "post_type" => 'problem_and_solution',
                 'post_status' => 'publish',
                 "posts_per_page" =>  $page,
-                "orderby" => "order",
-                'order' => 'ASC' 
-                
+                'orderby' => 'date',
+                'order'   => 'DESC',
+                'suppress_filters' => true
             ];
             if($cate != ""):
                 $cate  = $cate;

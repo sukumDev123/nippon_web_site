@@ -26,7 +26,7 @@ $app_5 = get_field("app_5");
 <div id="colours-vis" class="container">
    <div class="row">
    <div class="col-12 col-md-6">
-        <div class="image-app">
+        <div class="image-app window">
             <img src="<?php echo $featured_img_url ?>" alt="">
         </div>
      </div>
@@ -34,8 +34,10 @@ $app_5 = get_field("app_5");
          <div class="content">
             <h1 class="ui header primary-text"><?php echo get_the_title() ?></h1>
             <h4 class="ui header sub-title"><?php echo get_field("sub_title") ?></h4>
+            <div class="image-app mobile">
+                <img src="<?php echo $featured_img_url ?>" alt="">
+            </div>
             <h4 class="ui header"><?php echo get_field("text1") ?></h4>
-
             <div class="content-how-to">
                 <h4 class="ui header primary-text">การใช้งาน</h4>
                 <h4 class="ui header"><?php echo get_field("text2") ?></h4>

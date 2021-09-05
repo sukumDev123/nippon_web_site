@@ -145,8 +145,9 @@ endif;
                 "post_type" => 'how_to_paint',
                 'post_status' => 'publish',
                 "posts_per_page" =>  $page,
-                "orderby" => "order",
-                'order' => 'ASC' 
+                'orderby' => 'date',
+                'order'   => 'DESC',
+                'suppress_filters' => true
             ];
             if($cate != ""):
                 $cate  = $cate;

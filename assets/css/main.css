@@ -7719,6 +7719,11 @@ body.login input[type=text] {
 .list-faq .four.wide.column {
   padding: 0px !important;
 }
+@media screen and (max-width: 1024px) {
+  .list-faq {
+    margin: 0px !important;
+  }
+}
 
 .faq-form {
   margin: 50px 0px !important;
@@ -8896,6 +8901,23 @@ body.login input[type=text] {
 .fav_big .accordion-item {
   border-radius: 20px !important;
 }
+.fav_big .list-faq-show-on-mobile {
+  display: none !important;
+}
+@media screen and (max-width: 1024px) {
+  .fav_big .list-faq-show-on-mobile {
+    display: block !important;
+  }
+  .fav_big .sub-type-headers {
+    display: none !important;
+  }
+  .fav_big .accordion-button {
+    padding: 15px 20px !important;
+  }
+  .fav_big .accordion-body {
+    padding: 10px 20px !important;
+  }
+}
 
 .ui.label {
   background-color: rgba(0, 0, 0, 0) !important;
@@ -9737,9 +9759,6 @@ div.nsl-container.nsl-container-block .nsl-container-buttons {
   max-width: 1170px;
   margin: auto;
 }
-#colours-vis.container .col-12 {
-  padding: 0px;
-}
 #colours-vis.container .image-app img {
   width: 100%;
   -o-object-fit: contain;
@@ -9786,9 +9805,47 @@ div.nsl-container.nsl-container-block .nsl-container-buttons {
 #colours-vis.container .content .content-how-to h4:last-child {
   margin-top: 10px;
 }
+#colours-vis .image-app.mobile {
+  display: none;
+}
 @media screen and (max-width: 1400px) {
+  #colours-vis.container {
+    margin-top: 79px !important;
+    padding: 3em 2em !important;
+  }
+  #colours-vis.container .image-app.window {
+    display: none;
+  }
+  #colours-vis.container .image-app.mobile {
+    display: block;
+  }
+  #colours-vis.container .image-app.mobile img {
+    height: auto;
+    max-height: 250px;
+    margin: 2em 0;
+  }
+  #colours-vis.container .content {
+    text-align: center;
+  }
+  #colours-vis.container .content h1 {
+    font-size: 24px;
+  }
+  #colours-vis.container .content h4 {
+    font-size: 14px;
+  }
+  #colours-vis.container .content .sub-title {
+    font-size: 16px;
+  }
   #colours-vis.container .content .loop-qr-code .card-qr-code {
     max-width: 120px;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+  #colours-vis.container .loop-qr-code {
+    justify-content: center;
+  }
+  #colours-vis.container .loop-qr-code .card-qr-code {
+    max-width: 100%;
   }
   #colours-vis.container .image-app {
     display: flex;
@@ -10016,7 +10073,7 @@ div.nsl-container.nsl-container-block .nsl-container-buttons {
 .content-app-body .app-show-list .app-card {
   width: calc(100% / 5 - 25px) !important;
   margin-right: 30px;
-  flex-shrink: 0;
+  flex-shrink: 0 !important;
 }
 .content-app-body .app-show-list .app-card .icon-app {
   width: 42px;
@@ -10052,6 +10109,28 @@ div.nsl-container.nsl-container-block .nsl-container-buttons {
 }
 .content-app-body .app-show-list .app-card:last-child {
   margin-right: 0px;
+}
+@media screen and (max-width: 1024px) {
+  .content-app-body {
+    padding: 3em 2em !important;
+  }
+  .content-app-body .app-show-list {
+    padding-bottom: 29px;
+  }
+  .content-app-body .app-show-list .app-card {
+    width: -webkit-fit-content !important;
+    width: -moz-fit-content !important;
+    width: fit-content !important;
+  }
+  .content-app-body .app-show-list .app-card .sub_title {
+    max-width: 204px !important;
+    margin: auto;
+  }
+  .content-app-body .app-show-list .app-card img {
+    max-height: 364px !important;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
 }
 
 .header-login-register {
@@ -10120,8 +10199,38 @@ div.nsl-container.nsl-container-block .nsl-container-buttons {
   padding: 3em 0;
 }
 
+.faq.navbar-mobile {
+  padding-top: 3em !important;
+}
+
 .container.fav_big_container {
   padding: 0px !important;
+}
+.container.fav_big_container .sub-title-primary {
+  color: #1e4f92 !important;
+}
+@media screen and (max-width: 1024px) {
+  .container.fav_big_container {
+    padding: 0px 2em !important;
+  }
+  .container.fav_big_container .navbar-window,
+.container.fav_big_container .accord-window {
+    display: none;
+  }
+  .container.fav_big_container .title-faq {
+    text-align: center !important;
+    margin-bottom: 2em;
+    margin-top: 0px;
+  }
+  .container.fav_big_container .ui.grid > .stackable.stackable.row > .column,
+.container.fav_big_container .ui.stackable.grid > .column.grid > .column,
+.container.fav_big_container .ui.stackable.grid > .column.row > .column,
+.container.fav_big_container .ui.stackable.grid > .column:not(.row),
+.container.fav_big_container .ui.stackable.grid > .row > .column,
+.container.fav_big_container .ui.stackable.grid > .row > .wide.column,
+.container.fav_big_container .ui.stackable.grid > .wide.column {
+    padding: 0px !important;
+  }
 }
 
 .remember-link {
