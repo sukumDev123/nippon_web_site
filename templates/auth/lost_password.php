@@ -36,6 +36,14 @@
                     <i class="bi bi-chevron-double-right"></i>
                 </div>
             </div>
+            
+  <?php 
+		get_template_part("components/error-message" , null , [
+			"id" => "message_email_not_found",
+			"text" => "ไม่เจอ อีเมลในระบบ"
+		]); 
+	?>
+ 
             <div class="button-loading">
 						<div class="d-grid gap-2  ">
 							<button

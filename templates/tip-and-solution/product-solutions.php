@@ -205,7 +205,7 @@ $product_s = $query->found_posts;
 while ($query->have_posts()) {
     $query->the_post();
     $id = get_the_ID();
-    $featured_img_url = get_the_post_thumbnail_url( $id,'full');
+    $featured_img_url = get_the_post_thumbnail_url( $id, array( 120 , 120));
     $className = "";
   
     if($thisPostId == $id) {
@@ -246,7 +246,7 @@ wp_reset_query();
         if(count( $solutions) > 0)  {
             foreach( $solutions as  $solution) {
                     
-                    $featured_img_url = get_the_post_thumbnail_url($solution->ID,'full'); 
+                    $featured_img_url = get_the_post_thumbnail_url($solution->ID,  array(140  ,140)); 
                     $className ="";
                     $ids= [];
                     if( $detail["id"] == $solution->ID) {

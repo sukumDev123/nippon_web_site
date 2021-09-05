@@ -39,19 +39,19 @@ $words = [
 $args = array(
     'post_type'  => 'page', 
     'meta_query' => array( 
-        array(
-            'key'   => '_wp_page_template', 
-            'value' => 'template-get_idea.php'
-        )
+            array(
+                'key'   => '_wp_page_template', 
+                'value' => 'template-get_idea.php'
+            )
         ),
-        'meta_key'	=> 'order_page',
-        'orderby'   => 'meta_value_num',
-        'order'		=> 'ASC'
+    'meta_key'	=> 'order_page',
+    'orderby'   => 'meta_value_num',
+    'order'		=> 'ASC'
 );
 
 ?>
 
-<?php if(isset($_GET["scroll"])):
+<?php if(isset($_GET["scroll"]) || isset($_GET["user_type"])  || isset($_GET["order_by"])):
  echo '<script> setTimeout(() => {
     document.querySelector(".header_get_idea_menus").scrollIntoView({behavior: "smooth" , block: "start"})
 } , 1000)</script>';

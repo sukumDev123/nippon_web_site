@@ -6239,6 +6239,12 @@ section#location_page_div .header_list .locations-card .location-card.canLink p 
   section#location_page_div .header_location {
     padding: 2em 2em;
   }
+  section#location_page_div .header_list {
+    padding: 2em 2em 4em;
+  }
+  section#location_page_div .header_list h2 {
+    margin-bottom: 1.5em;
+  }
   section#location_page_div .header_list .locations-card {
     display: block;
   }
@@ -6615,7 +6621,7 @@ section#location_page_div .header_list .locations-card .location-card.canLink p 
 }
 
 body.login {
-  margin-top: 123px;
+  margin-top: 114px;
   height: auto;
 }
 body.login .ui.form {
@@ -6640,8 +6646,6 @@ body.login input[type=text] {
 }
 
 .template-myaccount {
-  margin-top: 123px;
-  padding-top: 3em;
   padding-bottom: 3em;
 }
 .template-myaccount .woocommerce {
@@ -6657,6 +6661,44 @@ body.login input[type=text] {
 }
 .template-myaccount .four.wide.column > .account-navbar {
   max-width: 200px !important;
+}
+.template-myaccount .nav-list-blog-mobile {
+  display: none !important;
+}
+.template-myaccount .nav-list-blog-mobile select.form-select {
+  border: 0px !important;
+  border-radius: 0px !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3) !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%231e4f92' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") !important;
+}
+.template-myaccount .nav-list-blog-mobile select.form-select:focus {
+  border-radius: 0px !important;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.8) !important;
+  box-shadow: 0px 0 0 0 rgba(0, 0, 0, 0) !important;
+}
+@media screen and (max-width: 1024px) {
+  .template-myaccount .nav-list-blog-window {
+    display: none !important;
+  }
+  .template-myaccount .nav-list-blog-mobile {
+    display: block !important;
+  }
+  .template-myaccount .header-account {
+    padding: 0 2em;
+  }
+}
+
+.template-myaccount-container {
+  margin-top: 114px;
+  padding-top: 3em;
+  padding-bottom: 3em;
+}
+@media screen and (max-width: 1024px) {
+  .template-myaccount-container {
+    margin-top: 79px;
+    padding-left: 2em;
+    padding-right: 2em;
+  }
 }
 
 .edit-account-div {
@@ -6674,6 +6716,14 @@ body.login input[type=text] {
 }
 .edit-account-div button {
   margin-top: 1.5em !important;
+}
+@media screen and (max-width: 1024px) {
+  .edit-account-div {
+    padding: 2em 1em;
+  }
+  .edit-account-div .border.border-my-account {
+    margin: 3em 0;
+  }
 }
 
 .account-navbar {
@@ -6721,7 +6771,7 @@ body.login input[type=text] {
 
 .page-mt {
   width: 100px;
-  margin-top: 123px;
+  margin-top: 114px;
   margin-bottom: 100px;
   padding: 3em 0;
 }
@@ -7100,7 +7150,7 @@ body.login input[type=text] {
 }
 
 .page-calculate {
-  margin-top: 123px;
+  margin-top: 114px;
   margin-bottom: 130px;
   padding: 0px !important;
 }
@@ -7806,13 +7856,22 @@ body.login input[type=text] {
 }
 .column-problem-card .column-problem-card-image img {
   width: 100%;
-  min-height: 300px;
   height: 300px;
   -o-object-fit: cover;
      object-fit: cover;
 }
+@media screen and (max-width: 1440px) {
+  .column-problem-card .column-problem-card-image {
+    height: 200px;
+  }
+  .column-problem-card .column-problem-card-image img {
+    height: 200px;
+  }
+}
 .column-problem-card .fav-problem-card-content {
   padding: 20px;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 .border-page {
@@ -7960,7 +8019,7 @@ body.login input[type=text] {
 
 .single-page.single-page,
 .single-page-content.single-page {
-  margin-top: 123px;
+  margin-top: 114px;
   padding: 3em 0px 1em;
 }
 .single-page.single-page-content,
@@ -7986,6 +8045,8 @@ body.login input[type=text] {
 .single-page p,
 .single-page-content p {
   min-height: 20px;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 .single-page .aligncenter,
 .single-page-content .aligncenter {
@@ -8150,7 +8211,7 @@ body.login input[type=text] {
 }
 
 .template-compare {
-  margin-top: 123px;
+  margin-top: 114px;
   margin-bottom: 81px;
 }
 .template-compare .header-product-categories {
@@ -9361,7 +9422,7 @@ body.login input[type=text] {
 }
 
 .get-idea-content {
-  margin-top: 123px;
+  margin-top: 114px;
   padding: 3em 0px;
 }
 .get-idea-content .header-get-content .wp-block-image img {
@@ -9488,6 +9549,11 @@ div.nsl-container.nsl-container-block .nsl-container-buttons {
 
 .old-password-div {
   max-width: 50%;
+}
+@media screen and (max-width: 1024px) {
+  .old-password-div {
+    max-width: 100%;
+  }
 }
 
 .range-button {
@@ -9663,7 +9729,7 @@ div.nsl-container.nsl-container-block .nsl-container-buttons {
 }
 
 #colours-vis {
-  margin-top: 123px !important;
+  margin-top: 114px !important;
   padding-top: 3em !important;
   padding-bottom: 3em !important;
 }
@@ -9735,7 +9801,7 @@ div.nsl-container.nsl-container-block .nsl-container-buttons {
 }
 
 #colours-lib {
-  margin-top: 123px !important;
+  margin-top: 114px !important;
   padding-top: 3em !important;
   padding-bottom: 3em !important;
 }
@@ -10136,19 +10202,63 @@ input:focus {
 #required_resume_field,
 #required_transcript_field,
 #email_format_confirm_error,
-.form-hide {
+.form-hide,
+#message_email_not_found {
   display: none;
 }
 
 .container.page-content {
   max-width: 1170px;
   margin: auto;
-  margin-top: 123px;
+  margin-top: 114px;
   padding: 3em 0px 4em;
 }
 @media screen and (max-width: 1024px) {
   .container.page-content {
     padding: 2em 2em 3em;
     margin-top: 79px;
+  }
+}
+
+.navbar-mobile {
+  align-items: flex-start;
+  margin-top: 0em;
+  margin-bottom: 3em;
+  overflow: auto;
+  padding: 0px 15% 0 34%;
+  display: none;
+}
+.navbar-mobile::-webkit-scrollbar {
+  opacity: 0 !important;
+  height: 0;
+}
+.navbar-mobile li {
+  flex-shrink: 0;
+  margin-right: 2em;
+  list-style: none;
+}
+.navbar-mobile li a {
+  padding: 10px 2em;
+  border-radius: 20px;
+  color: #1e4f92;
+  border: 1px solid;
+  display: block;
+}
+.navbar-mobile li a.active {
+  background-color: #1e4f92;
+  color: white;
+}
+
+@media screen and (max-width: 1024px) {
+  .navbar-window {
+    display: none !important;
+  }
+
+  .navbar-mobile {
+    display: flex;
+  }
+
+  .field.null-field-password {
+    display: none;
   }
 }

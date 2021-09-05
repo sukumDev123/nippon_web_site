@@ -28,16 +28,35 @@ if ( !is_user_logged_in() ) {
   
     
 ?>
-<div class="template-myaccount">
-    <div class="header-account">
+<div class="template-myaccount-container">
+<div class="header-account">
         <h1 class="primary-text ui header centered title-header "> 
             บัญชีของฉัน  
             <div class="sub header"> คุณสามารถดูภาพรวมบัญชีล่าสุดของคุณ และอัปเดตข้อมูลเกี่ยวกับบัญชี </div>
         </h1>
     </div>
+
+
+
+</div>
+<ul class="navbar-mobile">
+            <li>
+                <a class="list-menus left <?php echo  $checkedActive1  ?>" href="<?php echo  get_site_url() ."/edit-account" ?>">ข้อมูลผู้ใช้งาน</a>
+                </li>
+                <li>
+                <a class="list-menus  <?php echo  $checkedActive2  ?>" href="<?php echo  get_site_url() ."/favorites-products" ?>">เนื้อหาที่น่าสนใจ</a>
+                </li>
+                <li>
+                <!-- <a class=""></a> -->
+                </li>
+            </ul>
+
+
+<div class="template-myaccount">
+  
     <div class="container">
     <div class="ui stackable grid">
-        <div class="four wide column">
+        <div class="four wide column  navbar-window">
             <ul class="account-navbar">
                 <li>
                 <a class="account-a <?php echo  $checkedActive1  ?>" href="<?php echo  get_site_url() ."/edit-account" ?>">ข้อมูลผู้ใช้งาน</a>

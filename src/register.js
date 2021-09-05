@@ -84,7 +84,7 @@ function buttonLoadingShow() {
   });
   // bl.style.display = "block";
 }
-function buttonLoadingHide() {
+function buttonLoadingHide(displayType = "block") {
   // const bn = document.querySelector(".button-normal");
   // const bl = document.querySelector(".button-loading");
   // bn.style.display = "block";
@@ -92,7 +92,7 @@ function buttonLoadingHide() {
   const bn = document.querySelectorAll(".button-normal");
   const bl = document.querySelectorAll(".button-loading");
   bn.forEach((b) => {
-    b && (b.style.display = "block");
+    b && (b.style.display = displayType);
   });
   bl.forEach((b) => {
     b && (b.style.display = "none");
@@ -466,6 +466,9 @@ function onResetPasswordSubmit() {
   const btn_slide_reset_password = document.querySelector(
     "#btn-slide-reset-password"
   );
+  const message_email_not_found = document.querySelector(
+    "#message_email_not_found"
+  );
   const _rage_button_box = document.querySelector(".rage-button_box");
 
   const clearBtn = () => {
@@ -479,7 +482,7 @@ function onResetPasswordSubmit() {
     if (+btn_slide_reset_password.value !== 100) {
       clearBtn();
     }
-    // console.log({ email: inputRegis.data });
+    message_email_not_found.style.display = "none";
     if (inputRegis.data?.emailVal) {
       const syntaxEmail = emailReg.test(inputRegis.data["emailVal"]);
       if (!syntaxEmail) {
@@ -498,21 +501,24 @@ function onResetPasswordSubmit() {
           },
           body: JSON.stringify(data),
         })
-          .then((data) => data.json())
+          .then((data) => {
+            if (data.status == 200) return data.json();
+            else {
+              console.log({ data: data });
+              message_email_not_found.style.display = "block";
+              buttonLoadingHide("flex");
+              clearBtn();
+            }
+          })
           .then((d) => {
-            buttonLoadingHide();
+            buttonLoadingHide("flex");
             if (d.message == "OK") {
               // showPointingShow("#password_not_match_old");
               document.querySelector("#lost_password_success").style.display =
-                "block";
+                "flex";
               document.querySelector("#lost_password_form").style.display =
                 "none";
             }
-          })
-          .catch((err) => {
-            buttonLoadingHide();
-
-            console.log({ err });
           });
       }
     } else {

@@ -1,4 +1,4 @@
-<div class="ui fluid three item  secondary pointing menu">
+<div class="nav-list-blog-window ui fluid three item  secondary pointing menu">
   <a   href="<?php echo  get_site_url() ."/favorites-products" ?>" class="item">
     ผลิตภัณฑ์
   </a>
@@ -10,6 +10,20 @@
   </a>
    
 </div>
+
+
+
+
+<div class="nav-list-blog-mobile">
+  <select class="form-select" id="select-myaccount" onchange="onMyAccountChangedSelect('#select-myaccount')">
+    <option  value="<?php echo  get_site_url() ."/favorites-products" ?>">ผลิตภัณฑ์</option>
+    <option value="<?php echo  get_site_url() ."/favorites-solution-color" ?>">บทความการแก้ไขปัญหาสี</option>
+    <option selected value="<?php echo  get_site_url() ."/favorites-blog-idea" ?>">บทความไอเดียการตกแต่ง</option>
+  </select>
+</div>
+
+
+
 <div class="mt-3rem"></div>
 
 

@@ -413,35 +413,6 @@ function homePageInitSwiper() {
     },
   });
 
-  const project_home_suggestion = new Swiper(".project_home_suggestion", {
-    loop: true,
-    speed: 1000,
-    // autoplay: {
-    //     delay: 3000,
-    // },
-    effect: "coverflow",
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: "auto",
-
-    coverflowEffect: {
-      rotate: 0,
-      stretch: -100,
-      depth: 0,
-      modifier: 1,
-      slideShadows: true,
-    },
-
-    pagination: {
-      el: ".pagination-inspire",
-      clickable: true,
-    },
-    navigation: {
-      nextEl: ".inspire-next",
-      prevEl: ".inspire-prev",
-    },
-  });
-
   const footer_banner = new Swiper(".footer_banner", {
     // loop: true,
     pagination: {
@@ -606,6 +577,35 @@ function homePageInitSwiper() {
     },
     thumbs: {
       swiper: projectG2,
+    },
+  });
+
+  const project_home_suggestion = new Swiper(".project_home_suggestion", {
+    loop: true,
+    speed: 1000,
+    // autoplay: {
+    //     delay: 3000,
+    // },
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
+
+    coverflowEffect: {
+      rotate: 0,
+      stretch: -100,
+      depth: 0,
+      modifier: 1,
+      slideShadows: true,
+    },
+
+    pagination: {
+      el: ".pagination-inspire",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".inspire-next",
+      prevEl: ".inspire-prev",
     },
   });
   if (loading) loading.className = "hide";
@@ -1531,6 +1531,7 @@ window.onload = () => {
   onResetButtonInit();
   onHeaderCompareProduct();
   onTipAndSolutionPageHeaderSelected();
+  onTemplateMyAccountHandle();
   const message_right = document.querySelector(".message-right");
   const contact_message_box = document.querySelector(".contact-message-box");
   const arrow_up_to_top = document.querySelector(".arrow-up-to-top");
@@ -1635,4 +1636,36 @@ function goToForm() {
     behavior: "smooth",
     block: "start",
   });
+}
+
+function onTemplateMyAccountHandle() {
+  const menuSolution = document.querySelector(".navbar-mobile");
+  console.log({ menuSolution });
+  if (menuSolution) {
+    const aActiveCenter = document.querySelector("li a.active");
+
+    const aActiveLeft = document.querySelector("li a.active.left");
+
+    // const  aActiveRight = document.querySelector("a.active");
+    console.log({ aActiveCenter: aActiveCenter.getBoundingClientRect() });
+    aActiveCenter &&
+      menuSolution.scrollTo(
+        aActiveCenter.getBoundingClientRect().x,
+        aActiveCenter.getBoundingClientRect().y
+      );
+    aActiveLeft &&
+      menuSolution.scrollTo(0, aActiveLeft.getBoundingClientRect().y);
+    // aActiveRight &&
+    //   menuSolution.scrollTo(
+    //     aActiveRight.getBoundingClientRect().x,
+    //     aActiveRight.getBoundingClientRect().y
+    //   );
+  }
+}
+
+function onMyAccountChangedSelect(element) {
+  const ele = document.querySelector(element);
+  if (ele) {
+    window.location.href = ele.value;
+  }
 }

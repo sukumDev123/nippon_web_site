@@ -260,7 +260,7 @@ setTimeout(() => {
                     รหัสผ่านไม่ตรงกับรหัสผ่านเก่า
                 </div>
             </div>
-            <div class="field"></div>
+            <div class="field null-field-password"></div>
        </div>
       <div class="fields">
         <div class="field required">

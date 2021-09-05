@@ -1,9 +1,9 @@
 <div class="column">
-    
+  
 <div class="card-blog ">
     <div class="card-blog-header">
-        <?php if(isset($args['new'])) :  
-            if($args["new"] == TRUE):
+        <?php if(check_new_vs_update($args['id'])) :  
+            if(check_new_vs_update($args['id']) == 1):
             ?>
                 <h5 class="card-blog-new">ล่าสุด</h5>
             <?php 
@@ -34,6 +34,8 @@
     <div class="card-blog-content">
         <h5 class="ui header pointer">
         <?php echo $args["title"] ?>
+        
+        
         </h5>
         <?php echo $args["detail"] ?>
     </div>

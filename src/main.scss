@@ -9,7 +9,7 @@ $font-size-title: 28px;
 $margin-top-desktop: 113px;
 $fields-space: 1.5em;
 $page-top-xl: 3em;
-$margin-default: 123px;
+$margin-default: 114px;
 $btn-max-width: 300px;
 $imageBK: url("/wp-content/themes/nippontheme/assets/images/background_signin.jpg");
 @font-face {
@@ -6998,6 +6998,10 @@ section#location_page_div {
         padding: 2em 2em;
       }
       .header_list {
+        padding: 2em 2em 4em;
+        h2 {
+          margin-bottom: 1.5em;
+        }
         .locations-card {
           display: block;
 
@@ -7442,10 +7446,6 @@ body.login {
   }
 }
 .template-myaccount {
-  // margin-top: 160px;
-  margin-top: $margin-default;
-  // margin-bottom: 150px;
-  padding-top: $page-top-xl;
   padding-bottom: $page-top-xl;
   .woocommerce {
     display: flex;
@@ -7461,8 +7461,46 @@ body.login {
   .four.wide.column > .account-navbar {
     max-width: 200px !important;
   }
+  .nav-list-blog-mobile {
+    display: none !important;
+    select.form-select {
+      border: 0px !important;
+      border-radius: 0px !important;
+      border-bottom: 1px solid rgba($color: #000000, $alpha: 0.3) !important;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%231e4f92' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") !important;
+      &:focus {
+        border-radius: 0px !important;
+        border-bottom: 2px solid rgba($color: #000000, $alpha: 0.8) !important;
+        box-shadow: 0px 0 0 0 rgb(0, 0, 0, 0) !important;
+      }
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    & {
+      .nav-list-blog-window {
+        display: none !important;
+      }
+      .nav-list-blog-mobile {
+        display: block !important;
+      }
+      .header-account {
+        padding: 0 2em;
+      }
+    }
+  }
 }
-
+.template-myaccount-container {
+  margin-top: $margin-default;
+  padding-top: $page-top-xl;
+  padding-bottom: $page-top-xl;
+  @media screen and (max-width: 1024px) {
+    & {
+      margin-top: 79px;
+      padding-left: 2em;
+      padding-right: 2em;
+    }
+  }
+}
 .edit-account-div {
   border-radius: 6px;
   border: 1px solid rgba($color: #000000, $alpha: 0.1);
@@ -7477,6 +7515,14 @@ body.login {
   }
   button {
     margin-top: 1.5em !important;
+  }
+  @media screen and (max-width: 1024px) {
+    & {
+      padding: 2em 1em;
+      .border.border-my-account {
+        margin: 3em 0;
+      }
+    }
   }
 }
 
@@ -8671,13 +8717,23 @@ body.login {
     height: 300px;
     img {
       width: 100%;
-      min-height: 300px;
+      // min-height: 300px;
       height: 300px;
       object-fit: cover;
+    }
+    @media screen and (max-width: 1440px) {
+      & {
+        height: 200px;
+        img {
+          height: 200px;
+        }
+      }
     }
   }
   .fav-problem-card-content {
     padding: 20px;
+    overflow-x: hidden;
+    max-width: 100%;
   }
 }
 .border-page {
@@ -8855,6 +8911,8 @@ body.login {
   }
   p {
     min-height: 20px;
+    overflow-x: hidden;
+    max-width: 100%;
   }
   .aligncenter {
     margin: auto !important;
@@ -10506,6 +10564,11 @@ div.nsl-container.nsl-container-block .nsl-container-buttons {
 }
 .old-password-div {
   max-width: 50%;
+  @media screen and (max-width: 1024px) {
+    & {
+      max-width: 100%;
+    }
+  }
 }
 .range-button {
   position: relative;
@@ -11175,7 +11238,8 @@ input {
 #required_resume_field,
 #required_transcript_field,
 #email_format_confirm_error,
-.form-hide {
+.form-hide,
+#message_email_not_found {
   display: none;
 }
 .container.page-content {
@@ -11188,5 +11252,47 @@ input {
       padding: 2em 2em 3em;
       margin-top: 79px;
     }
+  }
+}
+
+.navbar-mobile {
+  align-items: flex-start;
+  margin-top: 0em;
+  margin-bottom: 3em;
+  overflow: auto;
+  padding: 0px 15% 0 34%;
+  display: none;
+  &::-webkit-scrollbar {
+    opacity: 0 !important;
+    height: 0;
+  }
+
+  li {
+    a {
+      &.active {
+        background-color: $primary-color;
+        color: white;
+      }
+      padding: 10px 2em;
+      border-radius: 20px;
+      color: $primary-color;
+      border: 1px solid;
+      display: block;
+    }
+    flex-shrink: 0;
+    margin-right: 2em;
+    list-style: none;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .navbar-window {
+    display: none !important;
+  }
+  .navbar-mobile {
+    display: flex;
+  }
+  .field.null-field-password {
+    display: none;
   }
 }

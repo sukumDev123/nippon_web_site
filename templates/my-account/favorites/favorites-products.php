@@ -1,7 +1,7 @@
 
 
 
-<div class="ui fluid three item  secondary pointing menu">
+<div class="nav-list-blog-window ui fluid three item  secondary pointing menu">
   <a href="<?php echo  get_site_url() ."/favorites-products" ?>" class="active item">
     ผลิตภัณฑ์
   </a>
@@ -13,16 +13,16 @@
   </a>
    
 </div>
-<!-- <div class="ui"> -->
-  <?php // var_dump($wishlists); ?>
- 
-  <?php   
-  
-  // echo do_shortcode('[yith_wcwl_wishlist]'); 
-  
 
- 
-  ?>
+
+<div class="nav-list-blog-mobile">
+  <select class="form-select" id="select-myaccount" onchange="onMyAccountChangedSelect('#select-myaccount')">
+    <option selected value="<?php echo  get_site_url() ."/favorites-products" ?>">ผลิตภัณฑ์</option>
+    <option value="<?php echo  get_site_url() ."/favorites-solution-color" ?>">บทความการแก้ไขปัญหาสี</option>
+    <option value="<?php echo  get_site_url() ."/favorites-blog-idea" ?>">บทความไอเดียการตกแต่ง</option>
+  </select>
+</div>
+
 <div class="mt-3rem"></div>
 <div class="ui stackable three column grid">
 
