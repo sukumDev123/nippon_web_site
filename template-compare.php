@@ -265,7 +265,7 @@ endif;
             <!-- <form action=""> -->
                <div id="show_product_filter_from_cate">
                <div <?php if(!$select_cate): echo "style='display:none'"; endif; ?> id="compare_cate_2" class="row mt-3">
-                <div class="col-12 col-md-4">
+                <div class="col-6 col-xl-4">
                     <select onchange="onProductCate1Changed()"   id="cate1" class="select-product-custom form-select" aria-label="Default select example">
                         <option value=""  >เลือกเกรด</option>
                         <?php
@@ -280,7 +280,7 @@ endif;
                         ?>
                     </select>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-6 col-xl-4">
                     <select value="<?php echo $cate2; ?>"  onchange="onProductCate2Changed()"  <?php if(!$product1_id): echo "disabled"; endif; ?>  id="cate2" class="select-product-custom form-select" aria-label="Default select example">
                         <option  value="" >เลือกเกรด</option>
                         <?php
@@ -295,7 +295,7 @@ endif;
                         ?>
                     </select>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-6 col-xl-4  hide-when-mobile">
                     <select  onchange="onProductCate3Changed()"  <?php if(!$product1_id): echo "disabled"; endif; ?> id="cate3" class="select-product-custom form-select" aria-label="Default select example">
                         <option   value="" >เลือกเกรด</option>
                         <?php
@@ -313,7 +313,7 @@ endif;
             </div>
       
                 <div class="row mt-3">
-                        <div class="col-12 col-md-4">
+                        <div class="col-6 col-xl-4">
                         <select onchange="onProduct1Selected()"  id="product_1" class="select-product-custom form-select" aria-label="Default select example">
                             <option  value="" selected>เลือกผลิตภัณฑ์</option>
                             <?php
@@ -331,7 +331,7 @@ endif;
                             ?>
                         </select>
                         </div>
-                        <div class="col-12 col-md-4">
+                        <div class="col-6 col-xl-4">
                             <select <?php if(!$product1_id): echo "disabled"; endif; ?>  id="product_2" class="select-product-custom form-select" aria-label="Default select example">
                                 <option value=""  selected>เลือกผลิตภัณฑ์</option>
                                 <?php
@@ -350,7 +350,7 @@ endif;
                             ?>
                             </select>
                         </div>
-                        <div class="col-12 col-md-4">
+                        <div class="col-6 col-xl-4 hide-when-mobile">
                             <select   <?php if(!$product1_id): echo "disabled"; endif; ?>  id="product_3" class="select-product-custom form-select" aria-label="Default select example">
                                 <option value=""   selected>เลือกผลิตภัณฑ์</option>
                                 <?php 
@@ -392,11 +392,12 @@ endif;
     <div class="compare-product-content">       
             <?php 
             
-                    get_template_part('components/compare-product' , null , [
+                    get_template_part('components/compare-product-header' , null , [
                         "title"  => "",
                         "product1" => removeBrTag($product1["title"]),
                         "product2" => removeBrTag($product2["title"]),
                         "product3" => removeBrTag($product3["title"]),
+                         
                     ]);
             ?>
     
@@ -405,8 +406,16 @@ endif;
                     <h5></h5>
                 </div>    
                 <div class="image   image-product">
-                    <h3 class="ui header"><?php echo removeBrTag($product1["title"]) ?></h3>
-                            <img  
+                    <!-- <h3 class="ui header"></h3>      -->
+                    <h3  
+                    class="text-ellipsis"
+
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="left" 
+                        title="<?php echo removeBrTag($product1["title"]) ?>">
+                        <?php echo removeBrTag($product1["title"]) ?>
+                    </h3>
+                    <img  
                             
                             src="<?php echo  $product1["image"] ?>" 
                             alt="<?php echo $product1["title"] ?>">
@@ -414,16 +423,29 @@ endif;
                     <?php if( isset($_GET['product_2'])): ?>
                         
                         <div class="image  image-product">
-                            <h3 class="ui header"><?php echo removeBrTag($product2["title"]) ?></h3>
-                                <img  
+                            <!-- <h3 class="ui header"><?php echo removeBrTag($product2["title"]) ?></h3> -->
+                            <h3  
+                            class="text-ellipsis"
+                                data-bs-toggle="tooltip" 
+                                data-bs-placement="left" 
+                                title="<?php echo removeBrTag($product2["title"]) ?>">
+                                <?php echo removeBrTag($product2["title"]) ?>
+                            </h3>    
+                            <img  
                                 src="<?php  echo  $product2["image"] ?>" 
                                 alt="<?php echo $product2["title"] ?>">
                         </div>
                     <?php endif; ?>
                     <?php if(  isset($_GET['product_3'])): ?>
                         <div class="image image-product">
-                            <h3 class="ui header"><?php echo removeBrTag($product3["title"]) ?></h3>
-                                <img  
+                            <!-- <h3 class="ui header"><?php echo removeBrTag($product3["title"]) ?></h3> -->
+                            <h3  
+                                data-bs-toggle="tooltip" 
+                                data-bs-placement="left" 
+                                title="<?php echo removeBrTag($product3["title"]) ?>">
+                                <?php echo removeBrTag($product3["title"]) ?>
+                            </h3>        
+                            <img  
                                 src="<?php  echo  $product3["image"] ?>" 
                                 alt="<?php echo $product3["title"] ?>">
                         </div>

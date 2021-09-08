@@ -624,7 +624,7 @@ const onSelectedFilterOnClick = () => {
       if (categories_project_filter.className.match("active")) {
         categories_project_filter.className = "";
         bk_filter_select.className = "bk-filter-select";
-        document.querySelector(".cgi").className = "fas fa-chevron-down cgi";
+        document.querySelector(".cgi").className = "bi bi-chevron-down cgi";
       } else {
         categories_project_filter.className = "active";
         bk_filter_select.className = "bk-filter-select active";
@@ -637,7 +637,7 @@ const onSelectedFilterOnClick = () => {
       if (product_filter.className.match("active")) {
         product_filter.className = "";
         bk_filter_select.className = "bk-filter-select";
-        document.querySelector(".pfi").className = "fas fa-chevron-down pfi";
+        document.querySelector(".pfi").className = "bi bi-chevron-down pfi";
       } else {
         document.querySelector(".pfi").className += " active";
         product_filter.className = "active";
@@ -651,8 +651,8 @@ const onSelectedFilterOnClick = () => {
       bk_filter_select.className = "bk-filter-select";
       categories_project_filter.className = "";
       product_filter.className = "";
-      document.querySelector(".pfi").className = "fas fa-chevron-down pfi";
-      document.querySelector(".cgi").className = "fas fa-chevron-down cgi";
+      document.querySelector(".pfi").className = "bi bi-chevron-down pfi";
+      document.querySelector(".cgi").className = "bi bi-chevron-down cgi";
     });
   }
 };
@@ -664,7 +664,7 @@ const select_product_id = (name, id) => {
   _product_value.value = name;
   _product_value_.value = id;
   product_filter.className = "";
-  document.querySelector(".pfi").className = "fas fa-chevron-down pfi";
+  document.querySelector(".pfi").className = "bi bi-chevron-down pfi";
 
   // window.location.href = "?filter_product=" + id;
 };
@@ -677,7 +677,7 @@ const select_project_name = (name, id) => {
   _product_value.value = name;
   _product_value_.value = id;
   categories_project_filter.className = "";
-  document.querySelector(".cgi").className = "fas fa-chevron-down cgi";
+  document.querySelector(".cgi").className = "bi bi-chevron-down cgi";
 
   // window.location.href = "?filter_product=" + id;
 };

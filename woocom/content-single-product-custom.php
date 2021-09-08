@@ -154,7 +154,7 @@ $word_selected = "";
                 // endforeach;
                 ?>
                 <a href="<?php echo  get_site_url() ?>/compare-product/?product_1=<?php echo get_the_ID() ?>&mainCate=<?php echo  $termId ?><?php if($grade): echo  "&cate1=".$grade ; endif; ?>">
-                    <button  class="btn btn-block primary" style="color:white"  >เปรียบเทียบ</button>
+                    <button  class="btn btn-block primary compare-product" style="color:white"  >เปรียบเทียบสินค้า</button>
                 </a>
                 <?php if( $userId !=  FALSE): ?>
                     
@@ -197,57 +197,82 @@ $word_selected = "";
                </div>
                <?php endif; ?>
        </div>
-       <div class="logo-images">
-
-           <?php $logos = acf_photo_gallery("logos" , get_the_ID());
-           
-           foreach($logos as $logo):?>
+       
+       <?php $logos = acf_photo_gallery("logos" , get_the_ID()); if(count($logos) > 0): ?>
+            <div class="logo-images">  
+           <?php foreach($logos as $logo):?>
                <img class="logo-image" src="<?php echo $logo['full_image_url'] ?>" alt="">
            <?php 
            endforeach;?>
-       
        </div>
+       <?php endif; ?>
       
        <?php if(!empty(get_field("custom"))): ?>
            <?php if(get_field("custom")['video_image'] ): ?>
            <div class="video-image">
-               <!-- <a href="<?php echo get_field("custom")[''] ?>"></a> -->
                <img src="<?php echo get_field("custom")['video_image']['url'] ?>" alt="">
            </div>
                <?php endif; ?>
-           <div class="file-left-right">
-               <?php if(get_field("custom")['catalog']['image']): ?>
+            <div class="file-left-right">
+               <?php if(get_field("custom")['catalog']['file_link']): ?>
                <div class="left">
-                   <h5><?php echo $text_static['catalog'] ?></h5>
-                   <a target="_blank" href="<?php if(get_field("custom")['catalog']['file_link']) : echo get_field("custom")['catalog']['file_link']["url"]; endif; ?>">
-                   <img src="<?php echo get_field("custom")['catalog']['image']['url'] ?>" alt="">
-                   </a>
+                    <?php 
+                        $imageUrl = get_bloginfo("template_directory") ."/assets/images/product-cat.jpg";
+                        $linkCatalog =  get_field("custom")['catalog']['file_link']["url"];
+                        if(!empty(get_field("custom")['catalog']['image']['url'])) : 
+                            $imageUrl= get_field("custom")['catalog']['image']['url'] ; 
+                        endif; 
+                    ?>
+                        <h5><?php echo $text_static['catalog']   ?></h5>
+                        <a 
+                            target="_blank" 
+                            href="<?php echo $linkCatalog ?>"
+                        >
+                            <img 
+                                src="<?php echo $imageUrl ?>" 
+                                alt="Catalog Image" />
+                        </a>
                </div>
                <?php endif; ?>
 
                <div class="right">
+                   <?php if(!empty(get_field("custom")['files']["file1"]["file_link"])  || !empty(get_field("custom")['files']["file2"]["file_link"])): ?>
                    <h5><?php echo $text_static['file_manager'] ?></h5>
-                    
-                   <?php if(!empty(get_field("custom")['files'])): ?>
-                       <button 
-                       class="file1 d-flex align-items-center justify-content-center mt-4">
-                       <img  
-                           src="<?php bloginfo("template_directory");  ?>/assets/images/logo.png"  
-                           class="image-logo me-5" />
-
-                           <a  
-                               target="_blank" style="text-decoration: none;color:#1E4F92;font-size:1.5em;font-weight:600;text-align:left" 
-                               href="<?php  echo  get_field("custom")['files']["file1"]["file_link"]["url"]; ?>">
-                               <?php if(get_field("custom")['files']["file1"]["title"]): echo get_field("custom")['files']["file1"]["title"]; else: echo "<strong>TECHNICAL</strong><br />DATA SHEET" ; endif; ?></a>
-                       </button>
-                       <button class="file2  d-flex align-items-center justify-content-center mt-4">
-                       <img  src="<?php bloginfo("template_directory");  ?>/assets/images/logo.png"  class="image-logo me-5" />
-
-                       <a   target="_blank" style="text-decoration: none;color:#1E4F92;font-size:1.5em;font-weight:600;text-align:left" href="<?php echo get_field("custom")['files']["file2"]["file_link"]["url"] ?>"><?php if(get_field("custom")['files']["file2"]["title"]): echo get_field("custom")['files']["file2"]["title"]; else: echo "<strong>SAFTY</strong><br />DATA SHEET" ; endif; ?></a>
-
-                       </button>
-                   <?php  endif;?>
+                    <?php if(!empty(get_field("custom")['files']["file1"]["file_link"])): ?>
+                       <a 
+                       href="<?php echo get_field("custom")['files']["file1"]["file_link"]['url'] ?>"
+                       target="_blank"
+                       class="button-download-file-management first">
+                            <button class="file2  d-flex align-items-center justify-content-center mt-4">
+                                <img  
+                                src="<?php bloginfo("template_directory");  ?>/assets/images/logo.png"  
+                                class="image-logo me-5" />
+                                <h5>
+                                <?php
+                                        if(get_field("custom")['files']["file1"]["title"]): echo get_field("custom")['files']["file1"]["title"]; else: echo "<strong>TECHNICAL</strong><br />DATA SHEET" ; endif; ?>
+                                </h5>
+                            </button>
+                       </a>
+                    <?php endif; ?>
+                    <?php if(!empty(get_field("custom")['files']["file2"]["file_link"])): ?>
+                       <a 
+                       href="<?php echo get_field("custom")['files']["file2"]["file_link"]['url'] ?>"
+                       target="_blank"
+                       class="button-download-file-management">
+                        <button class="file2  d-flex align-items-center justify-content-center mt-4">
+                            <img  
+                            src="<?php bloginfo("template_directory");  ?>/assets/images/logo.png"  
+                            class="image-logo me-5" />
+                            <h5>
+                            <?php if(get_field("custom")['files']["file2"]["title"]): echo get_field("custom")['files']["file2"]["title"]; else: echo "<strong>SAFTY</strong><br />DATA SHEET" ; endif; ?>
+                            </h5>
+                        </button>
+                       </a>
+                    <?php endif; ?>
+                      
+        
                </div>
+               <?php  endif; ?>
                </div>
            </div>
        <?php  endif; ?>
