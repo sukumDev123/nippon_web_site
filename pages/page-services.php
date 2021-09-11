@@ -4,9 +4,13 @@
     <?php 
     $argc = ["post_type" => "page" , "post_parent" => 143];
     $loop = new WP_Query( $argc );
- 
+ $count = $loop->found_posts;
+ $classFlex = "center";
+ if( $count > 2) {
+     $classFlex = "left";
+ }
     ?>
-    <div class="services-card">
+    <div class="services-card <?php echo $classFlex ?>">
 
     <?php 
     if ( $loop->have_posts() ) {
@@ -21,8 +25,9 @@
                     $link = "https://staging.tanpong.me/services/nippon-paint-rewards/";
 
                 endif;
+               
             ?>
-                    <div class="service-card">
+                    <div class="service-card ">
                       <div >
                       <!-- <a> -->
                             <div class="bk"></div>

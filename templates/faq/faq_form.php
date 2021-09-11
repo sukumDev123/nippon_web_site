@@ -58,7 +58,11 @@ $ip = getIPAddress();
                     </div>
                     <input type="text" id="tel" class="isPhone" placeholder="0999999999">
                     </div>
+                    <div id="phone_number_10_alert" class="ui pointing red basic label pointing-alert">
+                        เบอร์โทรศัพท์ต้องมี 10 ตัวอักษร
                     </div>
+                    </div>
+                   
                 </div>
                 <?php  /* get_template_part("components/input_exclamation" , null ,  [
                         "placeholder" => "",

@@ -18,7 +18,8 @@
             "input_1" => "step_1_value_a",
             "input_2" => "step_1_value_b",
             "input_3" => "step_1_value_c",
-            "result-id" => "step_1_result"
+            "result-id" => "step_1_result",
+            "summary_title" => "พื้นที่ผนัง"
         ]);
     
     ?>
@@ -28,11 +29,13 @@
             "title" => "ประตู",
             "choice_1" => "<strong>D</strong>  ความกว้างของประตู (เมตร)",
             "choice_2" => "<strong>E</strong>  ความสูงของประตู (เมตร)",
-            "choice_3" => "จำนวนประตู",
+            "choice_3" => "<strong class='null-text'></strong> จำนวนประตู",
             "input_1" => "step_2_value_a",
             "input_2" => "step_2_value_b",
             "input_3" => "step_2_value_c",
-            "result-id" => "step_2_result"
+            "result-id" => "step_2_result",
+            "summary_title" => "พื้นที่ประตู"
+
         ]);
     
     ?>
@@ -42,11 +45,13 @@
             "title" => "หน้าต่าง",
             "choice_1" => "<strong>F</strong>  ความกว้างของหน้าต่าง(เมตร)",
             "choice_2" => "<strong>G</strong>  ความสูงของหน้าต่าง (เมตร)",
-            "choice_3" => "จำนวนหน้าต่าง",
+            "choice_3" => "<strong class='null-text'></strong> จำนวนหน้าต่าง",
             "input_1" => "step_3_value_a",
             "input_2" => "step_3_value_b",
             "input_3" => "step_3_value_c",
-            "result-id" => "step_3_result"
+            "result-id" => "step_3_result",
+            "summary_title" => "พื้นที่หน้าต่าง"
+
         ]);
     
     ?>
@@ -81,7 +86,7 @@
                                                 "title" => "ฝ้า",
                                                 "choice_1" => "<strong>H</strong>  ความกว้างของห้อง (เมตร)",
                                                 "choice_2" => "<strong>I</strong>  ความยาวของห้อง (เมตร)",
-                                                "button_text" => "พื้นที่ทารั้ว",
+                                                "button_text" => "พื้นที่ฝ้า",
                                                 "input_1" => "step_4_value_a",
                                                 "input_2" => "step_4_value_b",
                                                 "result_id" => "step_4_result"

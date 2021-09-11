@@ -6,6 +6,19 @@ $red = "";
 if(isset($_GET['red'])):
 $red = $_GET['red'];
 endif;
+$search = "";
+if(isset($_GET['search'])):
+$search = $_GET['search'];
+endif;
+$lang=get_bloginfo("language");  
+$text_words = [
+    "th" => [
+        "search" => "ค้นหา"
+    ],
+    "en" => [
+        "search" => "Search"
+    ]
+][$lang];
 ?>
  <style>
      body {
@@ -27,10 +40,10 @@ endif;
     <i id="cancelled"  class="fa fa-times"></i>
     <div class="search-div-product">
         <div id="search_product_">
-            <form action="/search-result" method="get">
+            <form action="/nippon/search-result" method="get">
                 <div class="search-div-input">
-                    <i class="fas fa-search"></i>
-                    <input type="text" name="product_search" id="product_search" placeholder="Search" />
+                    <i class="bi bi-search"></i>
+                    <input type="text" name="product_search" id="product_search" placeholder="Search" value="<?php echo $search ?>" />
                 </div>
                 <div class="categories-div">
                     <?php if($terms): ?>
@@ -41,7 +54,7 @@ endif;
 
                 </div>
                 <button  type="submit" class="primary-button">
-                    ค้นหา
+                    <?php echo $text_words['search'] ?>
                 </button>
             </form>
         </div>

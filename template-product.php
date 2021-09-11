@@ -66,7 +66,7 @@ $words = [
               $termShowData = get_terms('product_cat', array('hide_empty' => false, 'parent' => $t->term_id));
               if($t->description != "0"):
               
-                  echo '<div class="product-cate-card"> <div class="d-flex align-items-center justify-content-between product-cate-card-clicked"><h2>'.$t->name.'</h2><i class="fas fa-chevron-down"></i> </div> ';
+                  echo '<div class="product-cate-card"> <div class="d-flex align-items-center justify-content-between product-cate-card-clicked"><h2>'.$t->name.'</h2><i class="bi bi-chevron-down"></i> </div> ';
                 echo '<div class="cate-div">';
                   $_slugs = "";
                   foreach ($termShowData as  $category) {
@@ -340,8 +340,15 @@ $image = wp_get_attachment_url( $thumbnail_id );
 
 
 <?php endif; ?>
- 
+
+
 <div class="mt-5rem"></div>
+
+<?php  get_template_part("other/solution-home-page"); ?>
+<div class="mt-5rem" style="height: 30px"></div>
+ 
+
+ 
  
 
 <?php 

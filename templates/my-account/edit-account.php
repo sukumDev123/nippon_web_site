@@ -123,7 +123,7 @@ setTimeout(() => {
                         <input type="text" id="phone_number" class="isPhone" value='<?php echo  $user['phone_number'] ?>' placeholder="0999999999">
                     </div>
                     <div id="phone_number_10_alert" class="ui pointing red basic label pointing-alert">
-                        เบอร์โทรศัพท์ต้องมี 10 ตัวอักษรขึ้นไป
+                        เบอร์โทรศัพท์ต้องมี 10 ตัวอักษร
                     </div>
             </div>
         </div>

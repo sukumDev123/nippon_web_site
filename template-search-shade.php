@@ -85,7 +85,7 @@ $num = $query->post_count;
 
         <div class="select-input">
             <input type="text" id="search_type"  placeholder="" value="RGB" />
-            <i id="search-select" class="fas fa-chevron-down"></i>
+            <i id="search-select" class="bi bi-chevron-down"></i>
         </div>
         <ul class="search_list_color">
             <li onclick="onChangeColorFilter('rgb-div'  , 'RGB')">RGB</li>

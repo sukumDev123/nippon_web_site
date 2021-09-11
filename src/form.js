@@ -221,11 +221,34 @@ function faqOnHeaderClicked() {
   });
 }
 
+// function checkKeyboard(ob, e) {
+//   re = /\d|\w|[\.\$@\*\\\/\+\-\^\!\(\)\[\]\~\%\&\=\?\>\<\{\}\"\'\,\:\;\_]/g;
+//   a = e.key.match(re);
+//   if (a == null) {
+//     console.log("llll");
+//     return false;
+//   }
+//   return true;
+// }
+
+// function isEnglish(charCode) {
+//   return (
+//     (charCode >= 97 && charCode <= 122) || (charCode >= 65 && charCode <= 90)
+//   );
+// }
+// function isNumberKey(keyCode) {
+//   return (
+//     (keyCode >= 48 && keyCode <= 57) ||
+//     (keyCode >= 96 && keyCode <= 105) ||
+//     keyCode === 8 ||
+//     keyCode === 190
+//   );
+// }
 function IsNumber() {
   const isNumber = document.querySelectorAll(".isNumber");
   Array.from(isNumber).forEach((isN) => {
     isN &&
-      isN.addEventListener("keypress", (event) => {
+      isN.addEventListener("keypress", function (event) {
         // if (+event.key < 0) event.preventDefault();
         if (!/[0-9.]/.test(event.key)) {
           event.preventDefault();
@@ -233,19 +256,36 @@ function IsNumber() {
       });
   });
 }
+function checkKey(e) {
+  e = e || window.event;
+  let j = false;
+  if (e.keyCode == "38") {
+    // up arrow
+    j = true;
+  } else if (e.keyCode == "40") {
+    // down arrow
+    j = true;
+  } else if (e.keyCode == "37") {
+    j = true;
+    // left arrow
+  } else if (e.keyCode == "39") {
+    // right arrow
+    j = true;
+  }
+  return j;
+}
 function isPhone() {
   const isNumber = document.querySelectorAll(".isPhone");
   Array.from(isNumber).forEach((isN) => {
-    isN &&
-      isN.addEventListener("keypress", (event) => {
-        if (!/[0-9]/.test(event.key)) {
-          event.preventDefault();
-        }
-        // console.log({ d: isN.value });
-        if (isN.value.length >= 10) {
-          event.preventDefault();
-        }
-      });
+    // isN &&
+    isN.addEventListener("keypress", (event) => {
+      if (!/[0-9]/.test(event.key)) {
+        event.preventDefault();
+      }
+      if (isN.value.length >= 10) {
+        event.preventDefault();
+      }
+    });
   });
 }
 function validateEmail(email) {
@@ -287,7 +327,11 @@ function saveCareer() {
         "#required_resume_field",
         "#required_transcript_field",
       ]);
-
+      clearPointingShow();
+      if (data.tel.length > 10) {
+        showPointingShow("#phone_number_10_alert");
+        return;
+      }
       if (!checkRecapCha) {
         showAlertErrorMessage("#message_error_rechapch");
         return;
@@ -524,11 +568,11 @@ function addPlusButton() {
             </h2>
             <div class="ui stackable three columns grid">
                 <div class="column cal-div">
-                        <h4 for="A1"> ความกว้างของผนัง (เมตร)</h4>
+                        <h4 for="A1"> ความกว้างของผนังบ้าน (เมตร)</h4>
                         <input class="isNumber" type="text" id="${inputId}">
                 </div>
                 <div class="column  cal-div">
-                        <h4 for="A1">ความสูงของผนัง (เมตร)</h4>
+                        <h4 for="A1">ความสูงของผนังบ้าน (เมตร)</h4>
                         <input class="isNumber" type="text" id="${input2Id}">
                 </div>
                 <div class="column ">
@@ -605,16 +649,24 @@ function summaryExternalCal() {
         "#external_other_result"
       );
 
-      allResult += +external_other_result.innerHTML;
+      const external_other_result_number = +external_other_result.innerHTML;
 
       result_top_1.innerHTML = `${(+allResult / 30).toFixed(2)} แกลลอน`;
       result_top_2.innerHTML = `${(+allResult / 15).toFixed(2)} แกลลอน`;
       result_top_b_1.innerHTML = `${(+allResult / 30).toFixed(2)} แกลลอน`;
       result_top_b_2.innerHTML = `${(+allResult / 15).toFixed(2)} แกลลอน`;
-      result_bottom_1.innerHTML = `${(+allResult / 30).toFixed(2)} แกลลอน`;
-      result_bottom_2.innerHTML = `${(+allResult / 15).toFixed(2)} แกลลอน`;
-      result_bottom_b_1.innerHTML = `${(+allResult / 30).toFixed(2)} แกลลอน`;
-      result_bottom_b_2.innerHTML = `${(+allResult / 15).toFixed(2)} แกลลอน`;
+      result_bottom_1.innerHTML = `${(
+        +external_other_result_number / 30
+      ).toFixed(2)} แกลลอน`;
+      result_bottom_2.innerHTML = `${(
+        +external_other_result_number / 15
+      ).toFixed(2)} แกลลอน`;
+      result_bottom_b_1.innerHTML = `${(
+        +external_other_result_number / 30
+      ).toFixed(2)} แกลลอน`;
+      result_bottom_b_2.innerHTML = `${(
+        +external_other_result_number / 15
+      ).toFixed(2)} แกลลอน`;
       document.querySelector("#summary_number_2").innerHTML =
         allResult.toFixed(2);
       document.querySelector("#summary_number_1").innerHTML =
@@ -698,10 +750,8 @@ function calculateInternalRoomSummary() {
         const step_3_result_value = +step_3_result.innerHTML;
         const step_4_result_value = +step_4_result.innerHTML;
         const summary =
-          step_1_result_value -
-          step_2_result_value -
-          step_3_result_value -
-          step_4_result_value;
+          step_1_result_value - step_2_result_value - step_3_result_value;
+        // step_4_result_value;
 
         summary_number_1.innerHTML = (summary || 0).toFixed(2);
         summary_number_2.innerHTML = (summary || 0).toFixed(2);
@@ -709,10 +759,18 @@ function calculateInternalRoomSummary() {
         result_top_2.innerHTML = `${(+summary / 15).toFixed(2)} แกลลอน`;
         result_top_b_1.innerHTML = `${(+summary / 30).toFixed(2)} แกลลอน`;
         result_top_b_2.innerHTML = `${(+summary / 15).toFixed(2)} แกลลอน`;
-        result_bottom_1.innerHTML = `${(+summary / 30).toFixed(2)} แกลลอน`;
-        result_bottom_2.innerHTML = `${(+summary / 15).toFixed(2)} แกลลอน`;
-        result_bottom_b_1.innerHTML = `${(+summary / 30).toFixed(2)} แกลลอน`;
-        result_bottom_b_2.innerHTML = `${(+summary / 15).toFixed(2)} แกลลอน`;
+        result_bottom_1.innerHTML = `${(+step_4_result_value / 30).toFixed(
+          2
+        )} แกลลอน`;
+        result_bottom_2.innerHTML = `${(+step_4_result_value / 15).toFixed(
+          2
+        )} แกลลอน`;
+        result_bottom_b_1.innerHTML = `${(+step_4_result_value / 30).toFixed(
+          2
+        )} แกลลอน`;
+        result_bottom_b_2.innerHTML = `${(+step_4_result_value / 15).toFixed(
+          2
+        )} แกลลอน`;
         setTimeout(() => {
           document.querySelector(".reset-button").scrollIntoView({
             behavior: "smooth",
@@ -1279,6 +1337,12 @@ function saveFaqForm() {
   }
   if (!document.querySelector("#acceptValue").checked) {
     showAlertErrorMessage("#message_error_accept");
+    return;
+  }
+  console.log({ tel: faqForm.data["tel"], l: faqForm.data["tel"]?.length });
+  clearPointingShow();
+  if (!faqForm.data["tel"] || faqForm.data["tel"]?.length > 10) {
+    showPointingShow("#phone_number_10_alert");
     return;
   }
   popUpSuccessOff();

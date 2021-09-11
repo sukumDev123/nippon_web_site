@@ -38,4 +38,12 @@ endif;
 				<i  class="exclamation circle icon"></i>
 
    </div>
+
+   <?php if(isset($args["errorId"])): ?>
+   <div id="<?php echo $args["errorId"] ?>" class="ui pointing red basic label pointing-alert">
+                        
+						<?php echo $args["errorText"] ?>
+                    </div>
+   <?php endif; ?>
+
   </div>

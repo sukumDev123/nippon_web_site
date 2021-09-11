@@ -82,7 +82,9 @@ $privacy_policy = getPrivacyPolicyPage();
                 "label" => "เบอร์โทรศัพท์",
                 "id" => "tel",
                 "value" => "",
-                "class"=>"input isNumber isPhone" 
+                "class"=>"input isNumber isPhone" ,
+                "errorId" => "phone_number_10_alert" ,
+                "errorText" => "เบอร์โทรศัพท์ต้องมี 10 ตัวอักษร"
             ]); ?>
             <?php  get_template_part("components/input_exclamation" , null ,  [
                 "placeholder" => "Portfolio Link",

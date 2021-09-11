@@ -10,11 +10,15 @@ $lang=get_bloginfo("language");
 $text_static = [
     "en" => [
         "filter" => "",
-        "search" => "Search"
+        "search" => "Search",
+        "filter_1" => "โครงการ",
+        "filter_2" => "สินค้า",
     ],
     "th" => [
         "filter" => "",
-        "search" => "ค้นหา"
+        "search" => "ค้นหา",
+        "filter_1" => "โครงการ",
+        "filter_2" => "สินค้า",
     ]
 ][$lang];
 if(isset($_GET["paged_show"])) {
@@ -49,7 +53,7 @@ if(isset($_GET['type'])):
     endif;
 endif;
 
-$getFavs = getFavoritesData("problem-and-solution");  
+$getFavs = getFavoritesData("get_idea");  
 $data_favorites = $getFavs["datas"];  
 ?>
 <?php get_template_part("pages/page-bk");  ?>
@@ -67,14 +71,14 @@ $data_favorites = $getFavs["datas"];
                         <input 
                             type="text" 
                             id="show_cate" 
-                            value="<?php if($project_value): echo $project_value->name; else: echo 'Select Categories'; endif; ?>" 
+                            value="<?php if($project_value): echo $project_value->name; else: echo $text_static["filter_1"]; endif; ?>" 
                             readonly 
                         />
                         <input 
                             type="hidden" 
                             name="type" 
                         />
-                        <i class="fas fa-chevron-down cgi"></i>
+                        <i class="bi bi-chevron-down cgi"></i>
                     </div>
                     <ul>
                     <?php foreach ($primary_categories as $primary_category) :$post_cats = get_the_category();     
@@ -96,9 +100,9 @@ $data_favorites = $getFavs["datas"];
                 <div class="filter_div">
                    
                     <div class="select-input">
-                     <input type="text" id="show_product" placeholder="Select product" value="<?php if( $product_value): echo  $product_value; else: echo "Select Product"; endif; ?>"  readonly>
+                     <input type="text" id="show_product" placeholder="Select product" value="<?php if( $product_value): echo  $product_value; else: echo $text_static["filter_2"]; endif; ?>"  readonly>
                         <input type="hidden" name="filter_product"  >
-                        <i class="fas fa-chevron-down pfi"></i>
+                        <i class="bi bi-chevron-down pfi"></i>
                    </div>
                     <ul>
                         <?php 
@@ -222,7 +226,7 @@ $data_favorites = $getFavs["datas"];
                 "id" => get_the_ID(),
                 "favorite" =>  $checkFav,
                 "index" => $index,
-                "type_blog" => "problem-and-solution",
+                "type_blog" => "get_idea",
                 "new" => FALSE,
             ]);
             $index += 1;

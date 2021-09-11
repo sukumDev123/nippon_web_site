@@ -321,7 +321,11 @@ endif;
                     <div class="ui label">
                     +66
                     </div>
-                    <input type="text" id="phone_number" class="isPhone" placeholder="0999999999">
+                    <input type="text" id="phone_number" class="" placeholder="0999999999">
+                    </div>
+
+					<div id="phone_number_10_alert" class="ui pointing red basic label pointing-alert">
+                        เบอร์โทรศัพท์ต้องมี 10 ตัวอักษร
                     </div>
         </div>
 		<div class="field required">

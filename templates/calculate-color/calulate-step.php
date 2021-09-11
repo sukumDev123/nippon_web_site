@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class=" cal-result">
-            <h4>พื้นที่ทาผนัง</h4> 
+            <h4><?php echo $args["summary_title"] ?></h4> 
             <h1 id="<?php echo $args["result-id"] ?>">0</h1>   
             <h4>ตารางเมตร</h4>   
         </div>

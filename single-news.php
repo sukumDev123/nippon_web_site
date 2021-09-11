@@ -20,6 +20,8 @@ $data_favorites =  $getFavs["datas"];
            "title" => get_the_title(),
            "postId" => get_the_ID(),
            "typeFav" => "problem-and-solution",
+           "fav_false" => TRUE
+
             
      ]) ?>
 

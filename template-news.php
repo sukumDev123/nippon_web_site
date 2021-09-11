@@ -49,6 +49,8 @@ $data_favorites = $getFavs["datas"];
                 "index" => $indexSuggesion,
                 "type_blog" => "problem-and-solution",
                 "new" => FALSE,
+                "fav_false" => TRUE
+
             ]);
             $indexSuggesion++;
              endforeach;  
@@ -145,6 +147,7 @@ $data_favorites = $getFavs["datas"];
                 "index" => $index,
                 "type_blog" => "problem-and-solution",
                 "new" => FALSE,
+                "fav_false" => TRUE
             ]);
             $index += 1;
             }

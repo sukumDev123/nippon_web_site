@@ -86,6 +86,7 @@ $text_static_solution = [
                 wp_reset_postdata();
             ?>
     </div>
+    
     <div class="border-solution"></div>
  
     <div class="solution-div" ></div>

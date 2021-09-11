@@ -11,7 +11,7 @@
         
         endif; ?>
        
-        <?php if(isset($args['user_id'])) :  
+        <?php if(isset($args['user_id']) && !isset($args['fav_false'])) :  
              do_action("make_favorites_blogs" , [
                 "user_id" =>  $args['user_id'],
                 "id" =>  $args["id"],

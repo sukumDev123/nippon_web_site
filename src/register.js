@@ -161,6 +161,10 @@ function registerForm() {
       email_format_confirm_error.style.display = "block";
       return;
     }
+    if (inputRegis.data["phone_number"]?.length > 10) {
+      showPointingShow("#phone_number_10_alert");
+      return;
+    }
     const date = inputRegis.data["date"];
     const month = inputRegis.data["month"];
     const year = inputRegis.data["year"];

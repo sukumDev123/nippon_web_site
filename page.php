@@ -1,6 +1,6 @@
  
  <?php 
-
+get_template_part("other/loading");
 get_header();
 
 

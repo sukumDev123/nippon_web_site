@@ -6,13 +6,17 @@ $text_static = [
     "en" => [
         "location" => "Location",
         "contact" => "Contact",
-        "signin" => "Sign in"
+        "signin" => "Sign in",
+        "link" => get_site_url() . "/edit-account"
+
       
     ],
     "th" => [
         "location" => "ค้นหาร้านค้า",
         "contact" => "ติดต่อเรา",
-        "signin" => "เข้าสู่ระบบ"
+        "signin" => "เข้าสู่ระบบ",
+        "link" => get_site_url() . "/edit-account"
+
 
     ]
 ][$lang];
@@ -33,13 +37,9 @@ $text_static = [
             </div>
             </div>
         </div>
-        <div class="search-header-mobile">
-        <form   method="get" class="search-filter-menu">
-            <i class="fas fa-search"></i>
-            <input type="text" name="search"   placeholder="Search..." />
-        </form>
- 
-        </div>
+        <?php do_action("header-user-nav-mobile"  , [
+                                   "link" => $text_static['link']
+                               ]) ?>
         <?php 
                 
                 wp_nav_menu([
@@ -48,7 +48,7 @@ $text_static = [
 
             ?>
 
-        <a href="<?php echo get_site_url().'/ค้นหาร้านค้า/'  ?>" class="btn   d-flex align-items-center justify-content-center" >
+        <a href="<?php echo get_site_url().'/search-shop/'  ?>" class="btn   d-flex align-items-center justify-content-center" >
             
             <i class="fas me-2 fa-map-marker-alt"></i>
             <?php echo $text_static['location'] ?>
@@ -61,13 +61,14 @@ $text_static = [
 
         <div  class="login_menu ">
             <div class="container d-flex align-items-center justify-content-between">
-                <!-- <h5>
-                    <i class="fas fa-user"></i>
-                    <?php echo $text_static['signin'] ?>
-                </h5>   -->
-                    <div></div>
-               
-            </div>
                 
+            </div>
+        </div>
+        <div class="search-header-mobile">
+        <form   method="get" action="search" class="search-filter-menu">
+            <i class="fas fa-search"></i>
+            <input type="text" name="search"   placeholder="Search..." />
+        </form>
+ 
         </div>
 </header>

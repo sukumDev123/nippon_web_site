@@ -358,6 +358,58 @@ function homePageInitSwiper() {
     slidesPerView: 4,
     spaceBetween: 50,
   });
+  const card_csr1 = new Swiper(".card-images-list-1", {
+    slidesPerView: 1,
+    spaceBetween: 14,
+    speed: 1000,
+    slidesPerGroup: 1,
+    breakpoints: {
+      1024: {
+        slidesPerView: 4,
+        spaceBetween: 14,
+        slidesPerGroup: 4,
+      },
+      // : {
+      //   slidesPerView: 3,
+      //   spaceBetween: 40,
+      // },
+    },
+    pagination: {
+      el: ".csr-pagination-1 ",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".card-images-list-1-next",
+      prevEl: ".card-images-list-1-prev",
+    },
+  });
+  const card_csr2 = new Swiper(".card-images-list-2", {
+    slidesPerView: 1,
+    spaceBetween: 14,
+    speed: 1000,
+    slidesPerGroup: 1,
+    breakpoints: {
+      1024: {
+        slidesPerView: 4,
+        spaceBetween: 14,
+        slidesPerGroup: 4,
+      },
+      // : {
+      //   slidesPerView: 3,
+      //   spaceBetween: 40,
+      // },
+    },
+    pagination: {
+      el: ".csr-pagination-2",
+
+      clickable: true,
+    },
+
+    navigation: {
+      nextEl: ".card-images-list-2-next",
+      prevEl: ".card-images-list-2-prev",
+    },
+  });
   const shade_swiper_family = new Swiper(".family-image", {
     slidesPerView: 1,
     // spaceBetween: 50,
@@ -459,10 +511,6 @@ function homePageInitSwiper() {
     },
 
     // Navigation arrows
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
   });
   [1, 2, 3, 4].forEach((runNumber) => {
     const get_idea_swiper = new Swiper(".get_idea_swiper_" + runNumber, {
@@ -837,7 +885,7 @@ const onSelectedFilterOnClick = () => {
       if (categories_project_filter.className.match("active")) {
         categories_project_filter.className = "";
         bk_filter_select.className = "bk-filter-select";
-        document.querySelector(".cgi").className = "fas fa-chevron-down cgi";
+        document.querySelector(".cgi").className = "bi bi-chevron-down cgi";
       } else {
         categories_project_filter.className = "active";
         bk_filter_select.className = "bk-filter-select active";
@@ -850,7 +898,7 @@ const onSelectedFilterOnClick = () => {
       if (product_filter.className.match("active")) {
         product_filter.className = "";
         bk_filter_select.className = "bk-filter-select";
-        document.querySelector(".pfi").className = "fas fa-chevron-down pfi";
+        document.querySelector(".pfi").className = "bi bi-chevron-down pfi";
       } else {
         document.querySelector(".pfi").className += " active";
         product_filter.className = "active";
@@ -864,8 +912,8 @@ const onSelectedFilterOnClick = () => {
       bk_filter_select.className = "bk-filter-select";
       categories_project_filter.className = "";
       product_filter.className = "";
-      document.querySelector(".pfi").className = "fas fa-chevron-down pfi";
-      document.querySelector(".cgi").className = "fas fa-chevron-down cgi";
+      document.querySelector(".pfi").className = "bi bi-chevron-down pfi";
+      document.querySelector(".cgi").className = "bi bi-chevron-down cgi";
     });
   }
 };
@@ -877,7 +925,7 @@ const select_product_id = (name, id) => {
   _product_value.value = name;
   _product_value_.value = id;
   product_filter.className = "";
-  document.querySelector(".pfi").className = "fas fa-chevron-down pfi";
+  document.querySelector(".pfi").className = "bi bi-chevron-down pfi";
 
   // window.location.href = "?filter_product=" + id;
 };
@@ -890,7 +938,7 @@ const select_project_name = (name, id) => {
   _product_value.value = name;
   _product_value_.value = id;
   categories_project_filter.className = "";
-  document.querySelector(".cgi").className = "fas fa-chevron-down cgi";
+  document.querySelector(".cgi").className = "bi bi-chevron-down cgi";
 
   // window.location.href = "?filter_product=" + id;
 };
@@ -929,12 +977,17 @@ const handleMenuClickedShowSubMenu = () => {
         if (menu.children[1]) {
           console.log({ g: menu.children[1].className.match(/active/) });
           if (menu.children[1].className.match(/active/)) {
-            menu.children[1].className = menu.children[1].className
-              .split(" ")
-              .filter((m) => m !== "active")
-              .join(" ");
+            // menu.children[1].className = menu.children[1].className
+            //   .split(" ")
+            //   .filter((m) => m !== "active")
+            //   .join(" ");
+            menu.classList.remove("active-ul");
+            menu.children[1].classList.remove("active");
           } else {
-            menu.children[1].className = " active";
+            menu.classList.add("active-ul");
+
+            // menu.children[1].className = " active";
+            menu.children[1].classList.add("active");
           }
         }
       });
@@ -990,12 +1043,18 @@ function handleFooterMenuClicked() {
       if (ele.children[0]) {
         ele.children[0].addEventListener("click", (event) => {
           event.preventDefault();
-          if (ele.className.match("active"))
-            ele.className = ele.className
-              .split(" ")
-              .filter((c) => c != "active")
-              .join(" ");
-          else ele.className += " active";
+          if (ele.className.match("active")) {
+            // ele.className = ele.className
+            // .split(" ")
+            // .filter((c) => c != "active")
+            // .join(" ");
+            ele.classList.remove("active");
+            ele.classList.remove("active-footer-ul");
+          } else {
+            // ele.className += " active";
+            ele.classList.add("active");
+            ele.classList.add("active-footer-ul");
+          }
         });
       }
     });
@@ -1532,6 +1591,7 @@ window.onload = () => {
   onHeaderCompareProduct();
   onTipAndSolutionPageHeaderSelected();
   onTemplateMyAccountHandle();
+  onTemplateMyAccount2Handle();
   const message_right = document.querySelector(".message-right");
   const contact_message_box = document.querySelector(".contact-message-box");
   const arrow_up_to_top = document.querySelector(".arrow-up-to-top");
@@ -1644,22 +1704,43 @@ function onTemplateMyAccountHandle() {
   if (menuSolution) {
     const aActiveCenter = document.querySelector("li a.active");
 
-    const aActiveLeft = document.querySelector("li a.active.left");
-
-    // const  aActiveRight = document.querySelector("a.active");
-    console.log({ aActiveCenter: aActiveCenter.getBoundingClientRect() });
     aActiveCenter &&
       menuSolution.scrollTo(
-        aActiveCenter.getBoundingClientRect().x,
+        aActiveCenter.getBoundingClientRect().x - 120,
         aActiveCenter.getBoundingClientRect().y
       );
-    aActiveLeft &&
-      menuSolution.scrollTo(0, aActiveLeft.getBoundingClientRect().y);
-    // aActiveRight &&
-    //   menuSolution.scrollTo(
-    //     aActiveRight.getBoundingClientRect().x,
-    //     aActiveRight.getBoundingClientRect().y
-    //   );
+  }
+}
+function onTemplateMyAccount2Handle() {
+  const menuSolution = document.querySelector(".navbar-mobile.account");
+  console.log({ menuSolution });
+  if (menuSolution) {
+    const aActiveCenter = document.querySelector("li a.active");
+
+    aActiveCenter &&
+      menuSolution.scrollTo(
+        aActiveCenter.getBoundingClientRect().x - 120,
+        aActiveCenter.getBoundingClientRect().y
+      );
+  }
+}
+function onTemplateMyAccountHandle() {
+  const menuSolution = document.querySelector(".menus-tax-ideas.container");
+  console.log({ menuSolution });
+  if (menuSolution) {
+    const aActiveCenter = document.querySelector("h5.active");
+    console.log({
+      aActiveCenter: aActiveCenter.offsetWidth,
+      x: aActiveCenter.getBoundingClientRect().x,
+    });
+    let v = 100;
+    if (aActiveCenter.offsetWidth > 200) v = 50;
+
+    aActiveCenter &&
+      menuSolution.scrollTo(
+        aActiveCenter.getBoundingClientRect().x - v,
+        aActiveCenter.getBoundingClientRect().y
+      );
   }
 }
 

@@ -1,5 +1,5 @@
 <div class="get_idea_main_page">
-    <img src="<?php echo $args["image"] ?>" alt="">
+    <img class="get_idea_main_page_image_class" src="<?php echo $args["image"] ?>" alt="">
     <div class="content-page">
        <div class="container">
         <h1 class="ui header">

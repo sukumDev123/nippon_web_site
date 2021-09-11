@@ -39,15 +39,16 @@ if ( !is_user_logged_in() ) {
 
 
 </div>
-<ul class="navbar-mobile">
+<ul class="navbar-mobile account">
             <li>
                 <a class="list-menus left <?php echo  $checkedActive1  ?>" href="<?php echo  get_site_url() ."/edit-account" ?>">ข้อมูลผู้ใช้งาน</a>
                 </li>
                 <li>
                 <a class="list-menus  <?php echo  $checkedActive2  ?>" href="<?php echo  get_site_url() ."/favorites-products" ?>">เนื้อหาที่น่าสนใจ</a>
                 </li>
+                
                 <li>
-                <!-- <a class=""></a> -->
+                <a class=" text-danger  <?php echo  $checkedActive2  ?>" href="<?php echo  get_permalink() ."?logout=true" ?>">ออกจากระบบ</a>
                 </li>
             </ul>
 

@@ -87,9 +87,9 @@ $table_prefix = 'dx36fd_';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define('WP_DEBUG', true);
+define('WP_DEBUG', false);
 // Enable Debug logging to the /wp-content/debug.log file
-define('WP_DEBUG_LOG', true);
+define('WP_DEBUG_LOG', false);
 // Disable display of errors and warnings which is recommended on a live site.
 define('WP_DEBUG_DISPLAY', false);
 @ini_set('display_errors',0);

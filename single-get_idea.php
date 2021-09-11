@@ -22,7 +22,20 @@ endif;
 
 <div class="get-idea-content">
    <div class="container">
-  
+   <div class="header-get-content mobile">
+                    <div class="ui small breadcrumb">
+                        <a href="<?php echo get_site_url() ?>/get-idea" class="section">หน้าแรก</a>
+                        <i class="right chevron icon divider"></i>
+                    
+                        <div class="active section"><?php  echo get_the_title() ?></div>
+                </div>
+                <?php do_action("favorites_blog_h2" , [
+                        "title" => get_the_title(),
+                        "postId" => get_the_ID(),
+                        "typeFav" => "get_idea",
+                            
+                    ]) ?>
+            </div>
 
 
    <div class="row">
@@ -49,7 +62,7 @@ endif;
         </div>
         <div class="col-12 col-md-4 content-get-idea" >
 
-            <div class="header-get-content">
+            <div class="header-get-content window">
                     <div class="ui small breadcrumb">
                         <a href="<?php echo get_site_url() ?>/get-idea" class="section">หน้าแรก</a>
                         <i class="right chevron icon divider"></i>

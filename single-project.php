@@ -4,7 +4,7 @@ get_template_part("other/loading");
 get_header();
 $featured_img_url = get_the_post_thumbnail_url( get_the_ID(),'full'); 
 
-$getFavs = getFavoritesData("problem-and-solution" );
+$getFavs = getFavoritesData("get_idea" );
 $data_favorites =  $getFavs["datas"];
 
 ?>
@@ -12,14 +12,14 @@ $data_favorites =  $getFavs["datas"];
 <div class="container single-page"  >
       
       <div class="ui large breadcrumb">
-      <a href="<?php echo get_site_url() ?>/tips-and-solutions/project-reference/"  class="section">โครงการที่ใช้สีนิปปอนเพนต์</a>
+      <a href="<?php echo get_site_url() ?>/project-reference/"  class="section">โครงการที่ใช้สีนิปปอนเพนต์</a>
       <i class="right chevron icon divider"></i>
       <div class="active section"><?php echo get_the_title() ?></div>
       </div>
       <?php do_action("favorites_blog" , [
            "title" => get_the_title(),
            "postId" => get_the_ID(),
-           "typeFav" => "problem-and-solution",
+           "typeFav" => "get_idea",
             
      ]) ?>
 </div>
