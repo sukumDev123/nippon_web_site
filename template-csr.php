@@ -7,18 +7,18 @@
  $topTitle1 = get_field("learning")['title'];
  $title1 = get_field("learning")['sub_title'];
  $detail1 = get_field("learning")['detail'];
-$link1 = get_field("learning")['btn_text'];
+$link1 = get_field("learning")['btn_title'];
 $link1_link = get_field("learning")['btn_link'];
 // $images_1 = get_field("learning")['images'];
-$images_1  = get_field("learning_images");
+$images_1  = acf_photo_gallery("learning_images" , get_the_ID());
 $image_1 = get_field("learning")['image']['url'];
 
  $topTitle2 = get_field("help_society")['title'];
  $title2 = get_field("help_society")['sub_title'];
  $detail2 = get_field("help_society")['detail'];
-$link2 = get_field("help_society")['btn_text'];
+$link2 = get_field("help_society")['btn_title'];
 $link2_link = get_field("help_society")['btn_link'];
-$images_2 = get_field("help_society")['images'];
+$images_2 = acf_photo_gallery("help_society_images" , get_the_ID());
 $image_2 = get_field("help_society")['image'];
  
 $imageBanner = get_field("banner_image")['url'];
@@ -35,8 +35,27 @@ $imageBanner = get_field("banner_image")['url'];
 
 
 ?>
+<?php 
 
+get_template_part("templates/csr/modal-swiper" , null , [
+   "swiper-class" => "swiper-modal-1",
+   "big-class-div" => "big-class-div-1",
+   "images" => $images_1 
+]);
+ 
+
+get_template_part("templates/csr/modal-swiper" , null , [
+   "swiper-class" => "swiper-modal-2",
+   "big-class-div" => "big-class-div-2",
+   "images" => $images_2 
+]);
+ 
+
+
+?>
 <div class="template-csr">
+
+
     <div class="banner">
     <?php 
         get_template_part(
@@ -67,28 +86,35 @@ $imageBanner = get_field("banner_image")['url'];
                 "top-title" => $topTitle1,
                 "title" => $title1,
                 "detail" => $detail1,
-                "btn-link-csr" => $link1,
+                "btn-link-csr" => $link1_link,
+                "btn-title-csr" => $link1,
                 "image" => $image_1,
                 "swiper-container" => "card-images-list-1",
                 "swiper-pagination" => "csr-pagination-1",
-                "images" => $images_1
+                "images" => $images_1,
+                "modal" => ".big-class-div-1"
+
             ]
         )
         ?>
         <div class="margin-page-csr"></div>
         <?php 
+ 
         get_template_part(
             "templates/csr/card-page-csr-2", 
             null, 
             [
-                "top-title" => $topTitle1,
-                "title" => $title1,
-                "detail" => $detail1,
-                "btn-link-csr" => $link1,
+                "top-title" => $topTitle2,
+                "title" => $title2,
+                "detail" => $detail2,
+ 
+                "btn-link-csr" => $link2_link,
+                "btn-title-csr" => $link1,
                 "image" => $image_2,
                 "swiper-container" => "card-images-list-2",
                 "swiper-pagination" => "csr-pagination-2",
-                "images" => $images_2
+                "images" => $images_2,
+                "modal" => ".big-class-div-2"
 
             ]
         )

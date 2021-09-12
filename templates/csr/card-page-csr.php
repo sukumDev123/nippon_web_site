@@ -6,6 +6,8 @@ $images = $args["images"];
  
 ?>
 
+
+
 <div class="card-page">
             <div class="row">
                 <div class="col-12 col-lg-6">
@@ -13,8 +15,8 @@ $images = $args["images"];
                     <h1 class="title"><?php echo $args["title"] ?></h1>
                     <img class="image-card-page image-card-page-mobile" src="<?php echo $args["image"] ?>" alt="Image">
                     <p class="detail"><?php echo $args["detail"] ?></p>
-                    <a class="btn-link-csr" href="">
-                        <button><?php echo $args["btn-link-csr"] ?></button>
+                    <a class="btn-link-csr" href="<?php echo $args["btn-link-csr"] ?>">
+                        <button><?php echo $args["btn-title-csr"] ?></button>
                     </a>
                 </div>
                 <div class="col-12 col-lg-6">
@@ -24,8 +26,8 @@ $images = $args["images"];
             <div class="wrapper-swp-csr">
             <div class="swiper-container card-images-list <?php echo $args["swiper-container"] ?> ">
                 <div class="swiper-wrapper">
-                    <?php foreach($images  as $image): ?>
-                    <div class="swiper-slide image-slide-csr">
+                    <?php $index = 0;foreach($images  as $image): ?>
+                    <div onclick="showModal('<?php echo $args['modal'] ?>' , <?php echo  $index++ ?>)" class="swiper-slide image-slide-csr">
                         <img src="<?php echo $image["full_image_url"] ?>" alt="Image Csr">
                     </div>
                     <?php endforeach; ?>

@@ -51,39 +51,12 @@ $featured_img_url = get_the_post_thumbnail_url($postId,'full');
     <div class="container">
         <a href="<?php echo get_site_url() ?>/tips-and-solutions/product-solutions/"> <?php  echo $text_static_solution['product'] ?></a>
         <a  href="<?php echo get_site_url() ?>/tips-and-solutions/problems-and-solutions/"><?php echo $text_static_solution["problem"] ?></a>
-        <a class="active right" href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/"><?php echo $text_static_solution["htp"] ?></a>
+        <a class="active right-solution" href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/"><?php echo $text_static_solution["htp"] ?></a>
         
        
     </div>
     
-        <!-- <button 
-            id="solution-page-button" 
-            type="button" 
-            class="btn  dropdown-toggle" 
-            data-bs-toggle="dropdown" 
-            aria-expanded="false"
-        >
-        Product Solutions
-        </button> -->
-        <!-- <ul class="dropdown-menu" aria-labelledby="solution-page-button">
-            <li  class="dropdown-item"  >
-            <a href="<?php echo get_site_url() ?>/tips-and-solutions/product-solutions/">
-                Product Solutions
-                </a>
-            </li>
-            <a href="<?php echo get_site_url() ?>/tips-and-solutions/problems-and-solutions/">
-            Problems and Solutions
-                </a>
-            </li>
-            <li  class="dropdown-item"  >
-            <a href="<?php echo get_site_url() ?>/tips-and-solutions/how-to-paint/">
-            How to Paint
-
-                </a>
-            </li>
-            
-            
-        </ul> -->
+      
 
 </div>
 

@@ -16,6 +16,10 @@
                 <p class="card-banner-detail"><?php echo $args['card-detail2'] ?></p>
             </div>
         </div>
-        <div class="scroll-to-content"></div>
+        <div class="scroll-to-content">
+            <h4 onclick="goToContentCSR()" class="scroll-icon">
+                <i class="bi bi-chevron-down"></i>
+            </h4>
+        </div>
     </div>
 </div>

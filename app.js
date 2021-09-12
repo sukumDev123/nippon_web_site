@@ -4,7 +4,8 @@ let searchType = "rgb-div";
 let product_suggestion = [];
 // let family_colors = [];
 let province = {};
-
+let swiper_model1 = "";
+let swiper_model2 = "";
 let districts = {};
 
 // let firstPostId = 0;
@@ -358,6 +359,31 @@ function homePageInitSwiper() {
     slidesPerView: 4,
     spaceBetween: 50,
   });
+  const swiper_modal_1 = new Swiper(".swiper-modal-1", {
+    slidesPerView: 1,
+    pagination: {
+      el: ".swiper-modal-1-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-modal-1-next",
+      prevEl: ".swiper-modal-1-prev",
+    },
+  });
+  const swiper_modal_2 = new Swiper(".swiper-modal-2", {
+    slidesPerView: 1,
+    pagination: {
+      el: ".swiper-modal-2-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-modal-2-next",
+      prevEl: ".swiper-modal-2-prev",
+    },
+  });
+  if (swiper_modal_1) swiper_model1 = swiper_modal_1;
+  if (swiper_modal_2) swiper_model2 = swiper_modal_2;
+
   const card_csr1 = new Swiper(".card-images-list-1", {
     slidesPerView: 1,
     spaceBetween: 14,
@@ -1589,9 +1615,11 @@ window.onload = () => {
   onLoadDate();
   onResetButtonInit();
   onHeaderCompareProduct();
-  onTipAndSolutionPageHeaderSelected();
+  // onTipAndSolutionPageHeaderSelected();
   onTemplateMyAccountHandle();
   onTemplateMyAccount2Handle();
+  onMenuSolutionContainer();
+  initYear();
   const message_right = document.querySelector(".message-right");
   const contact_message_box = document.querySelector(".contact-message-box");
   const arrow_up_to_top = document.querySelector(".arrow-up-to-top");
@@ -1743,10 +1771,75 @@ function onTemplateMyAccountHandle() {
       );
   }
 }
+function onMenuSolutionContainer() {
+  const menuSolution = document.querySelector(".menus-solution .container");
+  console.log({ menuSolution });
+  if (menuSolution) {
+    const aActiveCenter = document.querySelector("a.active");
+    const aActiveRight = document.querySelector("a.active.right");
+    const aActiveRightSolution = document.querySelector(
+      "a.active.right-solution"
+    );
+
+    console.log({
+      aActiveCenter: aActiveCenter.offsetWidth,
+      x: aActiveCenter.getBoundingClientRect().x,
+    });
+    let v = 100;
+    if (aActiveCenter.offsetWidth > 200) v = 50;
+
+    aActiveCenter &&
+      menuSolution.scrollTo(
+        aActiveCenter.getBoundingClientRect().x - v,
+        aActiveCenter.getBoundingClientRect().y
+      );
+    aActiveRight &&
+      menuSolution.scrollTo(
+        aActiveRight.getBoundingClientRect().x,
+        aActiveRight.getBoundingClientRect().y
+      );
+    aActiveRightSolution &&
+      menuSolution.scrollTo(
+        aActiveRightSolution.getBoundingClientRect().x + 200,
+        aActiveRightSolution.getBoundingClientRect().y
+      );
+  }
+}
 
 function onMyAccountChangedSelect(element) {
   const ele = document.querySelector(element);
   if (ele) {
     window.location.href = ele.value;
+  }
+}
+
+function goToContentCSR() {
+  const contentContainer = document.querySelector(".scroll-to-content");
+  contentContainer.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+}
+
+function showModal(ele, index) {
+  const eleID = document.querySelector(ele);
+  console.log({ swiper_model1, ele });
+
+  if (eleID) {
+    eleID.classList.add("show");
+    if (ele === ".big-class-div-1") {
+      if (swiper_model1) swiper_model1.slideTo(index, false, false);
+    }
+    if (ele === ".big-class-div-2") {
+      if (swiper_model2) swiper_model2.slideTo(index, false, false);
+    }
+  }
+}
+
+function closeModal(ele, index) {
+  const eleID = document.querySelector(ele);
+  console.log({ swiper_model1, ele });
+  if (eleID) {
+    eleID.classList.remove("show");
   }
 }
