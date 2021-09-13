@@ -54,14 +54,12 @@ function load_js() {
   
     wp_register_script("compare_js" ,  get_template_directory_uri() . '/src/compare_product.js' , '' , 1 , true);
     wp_enqueue_script("compare_js");
-  
-    wp_register_script("media_js" ,  get_template_directory_uri() . '/src/media.js' , '' , 1 , true);
-    wp_enqueue_script("media_js");
     wp_register_script("get_idea_js" ,  get_template_directory_uri() . '/src/get_idea.js' , '' , 1 , true);
     wp_enqueue_script("get_idea_js");
     wp_register_script("register" ,  get_template_directory_uri() . '/src/register.js' , '' , 1 , true);
     wp_enqueue_script("register");
-  
+    wp_register_script("media_js" ,  get_template_directory_uri() . '/src/media.js' , '' , 1 , true);
+    wp_enqueue_script("media_js");
 }
 add_action('wp_enqueue_scripts' , "load_js");
 
@@ -904,7 +902,10 @@ add_action( 'rest_api_init', function () {
             wp_insert_post($postArr);
             $phpmailer = send_email();
             $displayName = $toArray->first_name. " " . $toArray->last_name;
-            $phpmailer->addAddress( "nutsuda.c@likemeasia.com", "Nutsuda Chomtee");
+            // $phpmailer->addAddress( "nutsuda.c@likemeasia.com", "Nutsuda Chomtee");
+             $phpmailer->addAddress( "sukhum.n@likemeasia.com " , "Sukuhm Nilpech");
+    // registerSuccess( $phpmailer , "sukhum.n@likemeasia.com" ,  "Sukuhm Nilpech");
+
             $phpmailer->Subject = "มีรายการคำถามใหม่จาก คุณ ". $displayName;
             $logo = dirname(__FILE__) . '/assets/images/logo_png.png';
             $phpmailer->AddEmbeddedImage($logo, 'logo' ,  "logo.png" ); 
@@ -1157,24 +1158,24 @@ if ( ! function_exists( 'woocommerce_content_custom' ) ) {
  
  
 function add_login_header() {
-    if(is_user_logged_in()):
-        $found_posts = checkUserIsAddedUserData();	
-        if($found_posts  > 0 && !isset($_POST['signInSuccess'])):
-            $link = get_site_url();
-        echo <<<script
-            <script>
+    // if(is_user_logged_in()):
+    //     $found_posts = checkUserIsAddedUserData();	
+    //     if($found_posts  > 0 && !isset($_POST['signInSuccess'])):
+    //         $link = get_site_url();
+    //     echo <<<script
+    //         <script>
                 
-                window.location.href = "$link";
-            </script>
+    //             window.location.href = "$link";
+    //         </script>
 
-        script;
-        endif;
-    endif;
-    get_template_part("other/loading");
-    get_header();
+    //     script;
+    //     endif;
+    // endif;
+    // get_template_part("other/loading");
+    // get_header();
 }
 function add_login_footer() {
-    get_footer();
+    // get_footer();
 
 }
 function add_login_form($params) {
@@ -1190,10 +1191,10 @@ function add_login_form($params) {
     ]);
 }
 function add_register_form() {
-    get_template_part("templates/auth/signup" );
+    // get_template_part("templates/auth/signup" );
 }
 function add_lostpassword_form() {
-    get_template_part("templates/auth/lost_password" );
+    // get_template_part("templates/auth/lost_password" );
 
 }
  
@@ -1228,8 +1229,11 @@ function add_my_menu_items(   $endpoints ) {
 
    
 }
- 
 
+
+
+
+ 
 
 function complete_registration(
     $request
@@ -2022,66 +2026,66 @@ add_action ('empty_page', 'create_empty_page', 10, 1);
 
 function relationPost($args) {
 
-   $related_query = new WP_Query(array(
-        'post_type' => $args['post_type'] ,// 'problem_and_solution',
-        'category__in' => $args['category__in'] , // wp_get_post_categories(get_the_ID()),
-        'post__not_in' => $args["post__not_in"] , // array(get_the_ID()),
-        'posts_per_page' => 9,
-        'orderby' => 'date',
-        'order' => 'ASC' 
-  ));
-  $data_favorites = $args["data_favorites"];
-  $index = 0;
-  
-  if($related_query->found_posts == 0):
-    echo "";
-  else:
-   echo ' <div class="swiper-blog-div">
-    <h1 class="primary-text text-center ui header">บทความเพิ่มเติม</h1>
-    <div class="swiper-container swiper-blog">
-          <div class="swiper-wrapper">';
-                            while( $related_query->have_posts()):
-                                  $related_query->the_post();
-                                  $featured_img_url = get_the_post_thumbnail_url(get_the_ID(),'full');
-                                  $userId = FALSE;
-                                  if(get_current_user_id()):
-                                  $userId = get_current_user_id();
-                                  endif;
-                                  $checkFav = FALSE;
-                                  if(isset($data_favorites[get_the_ID()])):
-                                  $checkFav = TRUE;
-                                  endif;
-                                  $args_part = [
-                                    "title" => get_the_title(),
-                                    "detail" => get_field("short_text"),
-                                    "image" => $featured_img_url,
-                                    "user_id" => $userId,
-                                    "id" => get_the_ID(),
-                                    "favorite" =>  $checkFav,
-                                    "index" => $index,
-                                    "type_blog" => "problem-and-solution",
-                                  ];
-                                  if(isset($args["fav_false"])):
-                                    $args_part["fav_false"] = true;
-                                  endif;
-                                echo  '<div class="swiper-slide card-get-idea-control-width">';
-                                        
-                                              get_template_part("components/card-blog" , null , $args_part);
-                                              $index += 1;
-                                echo '</div>';
-                                  
-                            endwhile;
-                            wp_reset_query();
-
-    echo '                      
-                </div>
-            </div>
-        <div class="pagination-blog">
-                <div class="swiper-pagination"></div>
-        </div>
-        </div>';
-    endif;
-}
+    $related_query = new WP_Query(array(
+         'post_type' => $args['post_type'] ,// 'problem_and_solution',
+         'category__in' => $args['category__in'] , // wp_get_post_categories(get_the_ID()),
+         'post__not_in' => $args["post__not_in"] , // array(get_the_ID()),
+         'posts_per_page' => 9,
+         'orderby' => 'date',
+         'order' => 'ASC' 
+   ));
+   $data_favorites = $args["data_favorites"];
+   $index = 0;
+   
+   if($related_query->found_posts == 0):
+     echo "";
+   else:
+    echo ' <div class="swiper-blog-div">
+     <h1 class="primary-text text-center ui header">บทความเพิ่มเติม</h1>
+     <div class="swiper-container swiper-blog">
+           <div class="swiper-wrapper">';
+                             while( $related_query->have_posts()):
+                                   $related_query->the_post();
+                                   $featured_img_url = get_the_post_thumbnail_url(get_the_ID(),'full');
+                                   $userId = FALSE;
+                                   if(get_current_user_id()):
+                                   $userId = get_current_user_id();
+                                   endif;
+                                   $checkFav = FALSE;
+                                   if(isset($data_favorites[get_the_ID()])):
+                                   $checkFav = TRUE;
+                                   endif;
+                                   $args_part = [
+                                     "title" => get_the_title(),
+                                     "detail" => get_field("short_text"),
+                                     "image" => $featured_img_url,
+                                     "user_id" => $userId,
+                                     "id" => get_the_ID(),
+                                     "favorite" =>  $checkFav,
+                                     "index" => $index,
+                                     "type_blog" => "problem-and-solution",
+                                   ];
+                                   if(isset($args["fav_false"])):
+                                     $args_part["fav_false"] = true;
+                                   endif;
+                                 echo  '<div class="swiper-slide card-get-idea-control-width">';
+                                         
+                                               get_template_part("components/card-blog" , null , $args_part);
+                                               $index += 1;
+                                 echo '</div>';
+                                   
+                             endwhile;
+                             wp_reset_query();
+ 
+     echo '                      
+                 </div>
+             </div>
+         <div class="pagination-blog">
+                 <div class="swiper-pagination"></div>
+         </div>
+         </div>';
+     endif;
+ }
 
 add_action ('relation_post', 'relationPost', 10, 1);
 
@@ -2311,23 +2315,30 @@ function send_email() {
         $phpmailer->CharSet = "utf-8";
         // $phpmailer->Host       = 'smtp-relay.sendinblue.com';
         // $phpmailer->Port       = '587';
+        // $phpmailer->SMTPSecure = 'tls';
+        // $phpmailer->SMTPAuth   = true;
+        // $phpmailer->Username   = 'tanpong.s@ku.th'; 
+        // $phpmailer->Password = 'b3WdvfD92J8VwgzS'; 
         $phpmailer->Host       = '203.151.41.6';
-        $phpmailer->Port       = '25';
+        $phpmailer->Port       = 25;
         // $phpmailer->SMTPSecure = 'tls';
         // $phpmailer->SMTPAuth   = false;
-        $phpmailer->SMTPDebug  = 1;
+        // $phpmailer->SMTPDebug  = 1; 
         // $phpmailer->Username   = ''; 
         // $phpmailer->Password = ''; 
+
         // // // $phpmailer->From       = 'sukhum.n@likemeasia.com';
         // // // $phpmailer->FromName   = 'Sukhum';
         $phpmailer->setFrom('nipponpaintnoreply@nipponpaint.co.th', 'Nippon Paint No Reply');
         // $phpmailer->Subject = "test email wordpress";
+       
         // $phpmailer->Body = EmailBody();
         // $test = $phpmailer->Send();
         // $mail->IsHTML(true); 
         // $test = 1;
+
         // print_r( EmailBody());
-        // var_dump($phpmailer
+//    var_dump($phpmailer
         // return json_decode(json_encode(["test" =>  $logo ] ));
         return $phpmailer;
     }catch (Exception $e) {
@@ -2362,8 +2373,7 @@ function send_email_resgister($request) {
         <div>Test</div>
     text; 
     $test = $phpmailer->Send();
-    $SERVER_AR = $_SERVER['SERVER_ADDR'];
-return json_decode(json_encode(["test" => "2323" , "SERVER" => $SERVER_AR]));
+return json_decode(json_encode(["test" => "2323"]));
     
     // registerSuccess( $phpmailer , "sukhum.n@likemeasia.com" ,  "Sukuhm Nilpech");
 }
@@ -2443,13 +2453,13 @@ add_action( 'rest_api_init', function () {
   function saveCurrent() {
     global $wp;
 
-    // $checkWpLoginPageg = in_array($GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php'));
-//     if(! $checkWpLoginPageg) {
-//  if(!is_user_logged_in()):
-//         wp_safe_redirect( wp_login_url() );
-//     endif;
+    $checkWpLoginPageg = in_array($GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php'));
+    if(! $checkWpLoginPageg) {
+ if(!is_user_logged_in()):
+        // wp_safe_redirect( wp_login_url() );
+    endif;
 
-//     }
+    }
    
 
     $current_url = home_url(add_query_arg(array(), $wp->request));
@@ -2568,8 +2578,6 @@ add_action( 'rest_api_init', function () {
     endif;
   }
   add_action("header-user-nav" , "registerHeader" , 10, 1);                 
-
-
   function registerHeaderMobile($args) {
     $link = $args['link'];
     $site = get_site_url();
@@ -2594,7 +2602,7 @@ add_action( 'rest_api_init', function () {
             <div class="header-login-register-mobile">
                 <div  class="header-login-first" >
                     <a href='$site/wp-login.php?action=register'>
-                    <h5><i class="bi bi-person-fill"></i> </h5> ลงทะเบียนw
+                    <i class="bi bi-person-fill"></i> ลงทะเบียน
                     </a>
                 </div>
                 <div class="header-login-two" >
@@ -2607,6 +2615,8 @@ add_action( 'rest_api_init', function () {
     endif;
   }
   add_action("header-user-nav-mobile" , "registerHeaderMobile" , 10, 1);   
+
+
 
   function shareButton($args) {
     $tb =  get_bloginfo("template_directory");
@@ -2702,7 +2712,7 @@ function check_user_exists($request) {
     $myPost        = get_post($post_id);
     $post_created  = new DateTime( $myPost->post_date_gmt );
  
-    $diff = $pos_created->diff(new DateTime());
+    $diff = $post_created->diff(new DateTime());
     // $diff          = $created->diff( $modified );
  
     $checkNewPost = 0;
@@ -2712,11 +2722,11 @@ function check_user_exists($request) {
     }else{
         // Updated post
     }
+ 
+
     return  $checkNewPost;
 }
 // add_action('check_new_vs_update', 'check_new_vs_update' , 10 , 1 );
-
-
 
 
 

@@ -2220,7 +2220,7 @@ footer .copywrite {
   font-size: 21px;
   font-weight: 800;
 }
-@media screen and (min-width: 900px) {
+@media screen and (max-width: 900px) {
   #news {
     padding: 2em 2em !important;
   }
@@ -11251,7 +11251,7 @@ input:focus {
   position: relative;
   overflow: hidden;
   height: 100vh;
-  max-height: 550px;
+  max-height: 650px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11282,7 +11282,7 @@ input:focus {
   position: absolute;
   z-index: 1;
   height: 100vh;
-  max-height: 550px;
+  max-height: 650px;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -11291,7 +11291,7 @@ input:focus {
   position: absolute;
   z-index: 2;
   height: 100vh;
-  max-height: 550px;
+  max-height: 650px;
   background: rgba(0, 0, 0, 0.5);
 }
 .template-csr .banner-csr-div .container.content-banner {
@@ -11324,7 +11324,7 @@ input:focus {
   padding: 3em 14px 1.3em;
 }
 .template-csr .banner-csr-div .container.content-banner .cards-banner .card-banner img {
-  max-height: 42px;
+  max-height: 62px;
 }
 .template-csr .banner-csr-div .container.content-banner .cards-banner .card-banner .card-banner-detail {
   line-height: 1.6;
@@ -11343,13 +11343,14 @@ input:focus {
     max-height: 750px;
   }
   .template-csr .banner-csr-div .container.content-banner .banner-title {
-    font-size: 20px;
+    font-size: 24px;
     padding-left: 1em;
     padding-right: 1em;
     line-height: 1.5;
+    margin-bottom: 0;
   }
   .template-csr .banner-csr-div .container.content-banner .banner-sub-title {
-    font-size: 14px;
+    font-size: 18px;
     padding-left: 1em;
     padding-right: 1em;
   }
@@ -11362,12 +11363,15 @@ input:focus {
     border: 0px;
     margin: auto;
   }
+  .template-csr .banner-csr-div .container.content-banner .cards-banner .card-banner .card-banner-detail {
+    font-size: 14px;
+  }
   .template-csr .banner-csr-div .container.content-banner .cards-banner .card-banner .card-banner-title {
     font-size: 18px;
     margin: 18px 0 5px 0;
   }
   .template-csr .banner-csr-div .container.content-banner .cards-banner .card-banner img {
-    max-width: 32px;
+    max-width: 52px;
   }
 }
 .template-csr .container.content {
@@ -11411,6 +11415,7 @@ input:focus {
 @media screen and (max-width: 1024px) {
   .template-csr .container.content .wrapper-swp-csr {
     margin-top: 41px;
+    height: 300px;
   }
   .template-csr .container.content .wrapper-swp-csr .swiper-button-prev,
 .template-csr .container.content .wrapper-swp-csr .swiper-container-rtl .swiper-button-next {
@@ -11449,6 +11454,7 @@ input:focus {
 }
 .template-csr .container.content .card-page iframe {
   width: 100%;
+  height: 100%;
 }
 .template-csr .container.content .card-page iframe.mobile {
   display: none !important;
@@ -11470,20 +11476,7 @@ input:focus {
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-}
-.template-csr .container.content .card-page .btn-link-csr {
-  margin: auto;
-  font-weight: 800;
-}
-.template-csr .container.content .card-page .btn-link-csr button {
-  padding: 15px;
-  background-color: #1e4f92;
-  width: 100%;
-  max-width: 300px;
-  color: white;
-  border-radius: 6px;
-  border: 0px;
-  margin: auto;
+  height: 100%;
 }
 .template-csr .container.content .card-page .row div:first-child {
   padding-right: 64px;
@@ -11505,7 +11498,7 @@ input:focus {
   }
   .template-csr .container.content .margin-page-csr {
     padding-top: 0px;
-    padding-bottom: 6em;
+    padding-bottom: 4em;
     margin-bottom: 4em;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
@@ -11517,6 +11510,9 @@ input:focus {
   }
   .template-csr .container.content .card-page .title {
     font-size: 16px;
+  }
+  .template-csr .container.content .card-page .detail {
+    margin-bottom: 0px;
   }
   .template-csr .container.content .card-page .btn-link-csr button {
     max-width: 250px;
@@ -11628,7 +11624,7 @@ input:focus {
   height: 81px;
 }
 .template-out-company-banner .corporate-value-content .title {
-  font-size: 18px;
+  font-size: 21px;
   text-align: center;
 }
 .template-out-company-banner .corporate-value-content .detail {
@@ -11646,6 +11642,48 @@ input:focus {
   .template-out-company-banner .corporate-value-content .content-corporate {
     margin-bottom: 3em;
   }
+  .template-out-company-banner .corporate-value-content .title {
+    font-size: 18px;
+  }
+}
+.template-out-company-banner .corporate-value-content-2 {
+  display: flex;
+  justify-content: space-between;
+}
+.template-out-company-banner .corporate-value-content-2 .card-corporate {
+  width: 100%;
+}
+.template-out-company-banner .corporate-value-content-2 .content-corporate {
+  text-align: center;
+  padding: 0 20px;
+}
+.template-out-company-banner .corporate-value-content-2 img {
+  max-width: 100%;
+  height: 81px;
+}
+.template-out-company-banner .corporate-value-content-2 .title {
+  font-size: 30px;
+  text-align: center;
+  font-weight: 500;
+}
+.template-out-company-banner .corporate-value-content-2 .detail {
+  margin-top: 1em;
+  line-height: 1.9;
+  text-align: center;
+}
+.template-out-company-banner .corporate-value-content-2 .detail p {
+  line-height: 1.9;
+}
+@media screen and (max-width: 1024px) {
+  .template-out-company-banner .corporate-value-content-2 {
+    display: block;
+  }
+  .template-out-company-banner .corporate-value-content-2 .content-corporate {
+    margin-bottom: 3em;
+  }
+  .template-out-company-banner .corporate-value-content-2 .title {
+    font-size: 22px;
+  }
 }
 .template-out-company-banner .card-margin {
   margin-top: 6em;
@@ -11653,6 +11691,9 @@ input:focus {
 }
 .template-out-company-banner .footer-out-company {
   text-align: center;
+}
+.template-out-company-banner .footer-out-company h1 {
+  margin-bottom: 30px;
 }
 .template-out-company-banner .footer-out-company video {
   width: 100%;
@@ -11669,11 +11710,10 @@ input:focus {
   color: #1e4f92;
   text-align: center;
   padding: 0px !important;
-  margin-bottom: 30px;
 }
 @media screen and (max-width: 1024px) {
   .template-out-company-banner .footer-out-company .title-footer-our-company {
-    margin-bottom: 0px;
+    margin-bottom: 30px;
   }
 }
 .template-out-company-banner .border-content {
@@ -11690,6 +11730,14 @@ input:focus {
   color: #1e4f92;
   margin-bottom: 18px;
 }
+.template-out-company-banner .our-company-card .title.mobile {
+  display: none;
+}
+.template-out-company-banner .our-company-card .title.title.title-big {
+  color: #1e4f92;
+  text-align: center;
+  margin-bottom: 25px;
+}
 .template-out-company-banner .our-company-card .title.image-title-small {
   font-size: 20px;
   color: #000;
@@ -11705,6 +11753,9 @@ input:focus {
   padding-left: 100px !important;
 }
 .template-out-company-banner .our-company-card .content-right-small {
+  padding-left: 21px;
+}
+.template-out-company-banner .our-company-card .content-right-small2 {
   padding-left: 50px;
 }
 .template-out-company-banner .our-company-card .content-left {
@@ -11715,15 +11766,32 @@ input:focus {
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 10px;
+  max-height: 230px;
 }
 @media screen and (max-width: 1024px) {
   .template-out-company-banner .our-company-card .content-right,
-.template-out-company-banner .our-company-card .content-right-small {
+.template-out-company-banner .our-company-card .content-right-small,
+.template-out-company-banner .our-company-card .content-right-small2 {
     padding-left: 10.5px !important;
   }
   .template-out-company-banner .our-company-card .content-left,
 .template-out-company-banner .our-company-card .content-left-small {
     padding-right: 10.5px !important;
+  }
+  .template-out-company-banner .our-company-card .content-left-small .title,
+.template-out-company-banner .our-company-card .content-right-small .title {
+    text-align: center;
+  }
+  .template-out-company-banner .our-company-card .content-left-small .title.mobile,
+.template-out-company-banner .our-company-card .content-right-small .title.mobile {
+    display: block;
+  }
+  .template-out-company-banner .our-company-card .title.window {
+    display: none !important;
+  }
+  .template-out-company-banner .our-company-card img {
+    -o-object-fit: contain;
+       object-fit: contain;
   }
 }
 .template-out-company-banner .show-on-mobile {
@@ -11871,6 +11939,34 @@ input:focus {
   }
   .template-out-company-banner .container {
     padding: 4em 2em !important;
+  }
+}
+
+.btn-link-csr {
+  margin: auto;
+  font-weight: 800;
+  text-align: center;
+}
+.btn-link-csr.mobile {
+  display: none;
+  width: 100%;
+}
+.btn-link-csr button {
+  padding: 15px;
+  background-color: #1e4f92;
+  width: 100%;
+  max-width: 300px;
+  color: white;
+  border-radius: 6px;
+  border: 0px;
+  margin: auto;
+}
+@media screen and (max-width: 1024px) {
+  .btn-link-csr.window {
+    display: none !important;
+  }
+  .btn-link-csr.mobile {
+    display: block !important;
   }
 }
 

@@ -36,7 +36,8 @@ $search  =  get_site_url() . "/search/";
  
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
- 
+    <meta name="robots" content="noindex" />
+    <meta name="googlebot" content="noindex" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php wp_head(); ?>
     <title><?php echo  $titleHeader.$title_static['title']; ?></title>
