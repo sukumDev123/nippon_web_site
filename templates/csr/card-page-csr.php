@@ -15,7 +15,7 @@ $images = $args["images"];
                     <h1 class="title"><?php echo $args["title"] ?></h1>
                     <img class="image-card-page image-card-page-mobile" src="<?php echo $args["image"] ?>" alt="Image">
                     <p class="detail"><?php echo $args["detail"] ?></p>
-                    <a class="btn-link-csr" href="<?php echo $args["btn-link-csr"] ?>">
+                    <a class="btn-link-csr" target="_blank" href="<?php echo $args["btn-link-csr"] ?>">
                         <button><?php echo $args["btn-title-csr"] ?></button>
                     </a>
                 </div>

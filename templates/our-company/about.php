@@ -91,7 +91,7 @@
         
         get_template_part("templates/our-company/components/footer-video" , null , [
             "title" => get_field("footer")["title"],
-            "video" => ""
+            "video" => get_field("footer")["video_link"]
         ])
         
         

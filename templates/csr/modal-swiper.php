@@ -21,8 +21,7 @@ $bigClassDiv = $args["big-class-div"];
          
        </div>
        <div class="swiper-pagination <?php  echo $nameSwiperClass ?>-pagination"></div>
-            <div class="swiper-button-prev <?php  echo $nameSwiperClass ?>-prev"></div>
-            <div class="swiper-button-next <?php  echo $nameSwiperClass ?>-next"></div>
+           
     </div>
    </div>
 </div>

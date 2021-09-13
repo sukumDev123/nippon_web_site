@@ -102,7 +102,8 @@ select,
 input,
 option,
 li,
-label {
+label,
+.active.section {
   font-family: "Sukhumvit Set", sans-serif !important;
 }
 body {
@@ -12616,6 +12617,7 @@ input {
       }
       @media screen and (max-width: 1024px) {
         & {
+          margin-top: 41px;
           .swiper-button-prev,
           .swiper-container-rtl .swiper-button-next {
             display: none;
@@ -12631,7 +12633,7 @@ input {
       margin-top: 4em;
       img {
         width: 100%;
-        max-height: 278px;
+        height: 200px;
         object-fit: cover;
         cursor: pointer;
       }
@@ -12654,9 +12656,26 @@ input {
         line-height: 1;
         margin-bottom: 10px;
       }
+      iframe {
+        width: 100%;
+        &.mobile {
+          display: none !important;
+        }
+        @media screen and (max-width: 1024px) {
+          & {
+            &.mobile {
+              display: block !important;
+              margin-bottom: 30px !important;
+            }
+            &.window {
+              display: none !important;
+            }
+          }
+        }
+      }
       .detail {
         line-height: 1.9;
-        margin-bottom: 1.9em;
+        margin-bottom: 30px;
       }
       .image-card-page {
         width: 100%;
@@ -12707,12 +12726,15 @@ input {
             font-size: 20px;
             // margin-bottom: ;
           }
+          iframe {
+            height: 200px;
+          }
           .title {
             font-size: 16px;
           }
           .btn-link-csr {
             button {
-              max-width: 200px;
+              max-width: 250px;
             }
           }
         }
@@ -12724,7 +12746,7 @@ input {
           }
         }
         .row div:last-child {
-          margin-top: 3em;
+          margin-top: 0em;
         }
         .row div:first-child {
           // margin-top: 3em;
@@ -12855,11 +12877,30 @@ input {
   }
   .footer-out-company {
     // padding: 4em 0;
+    text-align: center;
+
+    video {
+      width: 100%;
+      max-width: 900px !important;
+      height: 400px;
+
+      @media screen and (max-width: 1024px) {
+        & {
+          height: 250px;
+        }
+      }
+    }
     .title-footer-our-company {
       font-size: 25px;
       color: $primary-color;
       text-align: center;
       padding: 0px !important;
+      margin-bottom: 30px;
+      @media screen and (max-width: 1024px) {
+        & {
+          margin-bottom: 0px;
+        }
+      }
     }
   }
   .border-content {
@@ -13013,7 +13054,7 @@ input {
         .new-post {
           position: absolute;
           z-index: 2;
-          left: 5px;
+          left: 10px;
           top: 10px;
           background-color: #d7373f;
           padding: 10px 20px;
@@ -13028,8 +13069,12 @@ input {
           color: #000;
           line-height: 1.6;
         }
+        .sub-title {
+          color: #454545;
+        }
         .title {
           font-size: 20px;
+          margin-top: 5px;
           color: #000;
           line-height: 1.3;
         }
@@ -13094,14 +13139,18 @@ input {
     cursor: pointer;
     z-index: 1000000001;
   }
-  .contain-center,
-  .contain-swiper {
+  .contain-center {
     height: 100%;
+  }
+  .contain-swiper {
+    position: relative;
+    top: 50%;
+    transform: translate(0%, -50%);
   }
   .swiper-pagination {
     width: 100% !important;
     // background-color: white !important;
-    bottom: 10px !important;
+    bottom: -41px !important;
     .swiper-pagination-bullet {
       margin-right: 10px !important;
       background-color: white;
@@ -13132,8 +13181,10 @@ input {
       text-align: center;
       img {
         width: auto;
+        max-width: 100%;
         height: 500px;
         margin: auto;
+        object-fit: contain;
       }
     }
   }
@@ -13149,7 +13200,10 @@ input {
       .swiper-container {
         .swiper-slide {
           img {
-            max-height: 200px;
+            width: 100%;
+            object-fit: contain;
+            max-height: 300px;
+            height: 300px;
           }
         }
       }

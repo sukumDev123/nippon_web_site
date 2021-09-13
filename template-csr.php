@@ -8,7 +8,7 @@
  $title1 = get_field("learning")['sub_title'];
  $detail1 = get_field("learning")['detail'];
 $link1 = get_field("learning")['btn_title'];
-$link1_link = get_field("learning")['btn_link'];
+$link1_link = get_field("learning")['button_link'];
 // $images_1 = get_field("learning")['images'];
 $images_1  = acf_photo_gallery("learning_images" , get_the_ID());
 $image_1 = get_field("learning")['image']['url'];
@@ -16,10 +16,10 @@ $image_1 = get_field("learning")['image']['url'];
  $topTitle2 = get_field("help_society")['title'];
  $title2 = get_field("help_society")['sub_title'];
  $detail2 = get_field("help_society")['detail'];
-$link2 = get_field("help_society")['btn_title'];
-$link2_link = get_field("help_society")['btn_link'];
+$link2 = get_field("help_society")['button_text'];
+$link2_link = get_field("help_society")['button_link'];
 $images_2 = acf_photo_gallery("help_society_images" , get_the_ID());
-$image_2 = get_field("help_society")['image'];
+$video_link = get_field("help_society")['video_link_youtube'];
  
 $imageBanner = get_field("banner_image")['url'];
 
@@ -109,8 +109,8 @@ get_template_part("templates/csr/modal-swiper" , null , [
                 "detail" => $detail2,
  
                 "btn-link-csr" => $link2_link,
-                "btn-title-csr" => $link1,
-                "image" => $image_2,
+                "btn-title-csr" => $link2,
+                "video_link" => $video_link,
                 "swiper-container" => "card-images-list-2",
                 "swiper-pagination" => "csr-pagination-2",
                 "images" => $images_2,
