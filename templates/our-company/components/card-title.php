@@ -12,6 +12,18 @@ if(isset($args["class-image-mobile"])) {
     $classImgMobile = $args["class-image-mobile"];
 
 }
+$detail_class = "";
+if(isset($args["detail_class"])) {
+
+    $detail_class = $args["detail_class"];
+
+}
+$title_class = "";
+if(isset($args["title_class"])) {
+
+    $title_class = $args["title_class"];
+
+}
 
 ?>
 <?php if(isset($args["image-left"])): ?>
@@ -36,7 +48,7 @@ if(isset($args["class-image-mobile"])) {
         <img  class="<?php echo $classImgMobile ?>" src="<?php echo $args["image"] ?>" alt="<?php echo $args["title"] ?>">
     </div>
     <div class="col-12 col-lg-6 content-left">
-    <?php if($args["title"]): ?><h1 class="title <?php echo  $classTitleSmall ?>"><?php echo $args["title"] ?></h1> <?php endif; ?>
+    <?php if($args["title"]): ?><h1 class="title <?php echo $title_class ?> <?php echo  $classTitleSmall ?>"><?php echo $args["title"] ?></h1> <?php endif; ?>
             <p class="detail"><?php echo $args["detail"] ?></p>
     </div>
     <div class="col-12 col-lg-6 show-on-window">
@@ -51,7 +63,7 @@ if(isset($args["class-image-mobile"])) {
     </div>
     <div class="col-12 col-lg-10 content-left-small">
             <?php if($args["title"]): ?><h1 class="title <?php echo  $classTitleSmall ?>"><?php echo $args["title"] ?></h1> <?php endif; ?>
-            <p class="detail"><?php echo $args["detail"] ?></p>
+            <p class="detail <?php echo $detail_class ?>"><?php echo $args["detail"] ?></p>
     </div>
     <div class="col-12 col-lg-2 show-on-window">
         <img src="<?php echo $args["image"] ?>" alt="<?php echo $args["title"] ?>">
@@ -65,7 +77,7 @@ if(isset($args["class-image-mobile"])) {
     </div>
     <div class="col-12 col-lg-8 content-left-small">
             <?php if($args["title"]): ?><h1 class="title <?php echo  $classTitleSmall ?>"><?php echo $args["title"] ?></h1> <?php endif; ?>
-            <p class="detail"><?php echo $args["detail"] ?></p>
+            <p class="detail <?php echo $detail_class ?>"><?php echo $args["detail"] ?></p>
     </div>
     <div class="col-12 col-lg-4 show-on-window">
         <img src="<?php echo $args["image"] ?>" alt="<?php echo $args["title"] ?>">
@@ -86,7 +98,7 @@ if(isset($args["class-image-mobile"])) {
 </div>
     <div class="col-12 col-lg-7 content-right-small">
             <?php if($args["title"]): ?><h1 class="title mobile <?php echo  $classTitleSmall ?>"><?php echo $args["title"] ?></h1> <?php endif; ?>
-            <p class="detail"><?php echo $args["detail"] ?></p>
+            <p class="detail <?php echo $detail_class ?>"><?php echo $args["detail"] ?></p>
     </div>
 </div>
 <?php endif; ?>

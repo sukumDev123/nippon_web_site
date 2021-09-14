@@ -9,7 +9,7 @@ if(isset($args["class_title"])) {
     $classTitle  = $args['class_title'];
 }
 ?>
-<div class="corporate-value-content-2">
+<div class="corporate-value-content">
     <?php foreach($args["cards"] as $card): ?>
         <div class="card-corporate">
                 <div class="content-corporate">

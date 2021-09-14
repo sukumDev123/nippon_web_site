@@ -5,7 +5,7 @@
             "title" =>  get_field("content_card1")["title"],
             "detail" =>  get_field("content_card1")["detail"],
             "image-right"=> true ,
-            
+            "title_class" => "mobile-center",
             "image" =>    get_field("content_card1")["image"]["url"]
         ]);
         ?>

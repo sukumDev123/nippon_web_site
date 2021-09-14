@@ -110,7 +110,7 @@ get_template_part("templates/csr/modal-swiper" , null , [
  
                 "btn-link-csr" => $link2_link,
                 "btn-title-csr" => $link2,
-                "video_link" => $video_link,
+                "video_links" => $video_link,
                 "swiper-container" => "card-images-list-2",
                 "swiper-pagination" => "csr-pagination-2",
                 "images" => $images_2,

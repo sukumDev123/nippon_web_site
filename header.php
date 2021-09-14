@@ -47,7 +47,7 @@ $search  =  get_site_url() . "/search/";
         type="image/svg+xml"
     />
 <!-- Cookie Consent by https://www.cookiewow.com --> 
-<!-- <script type="text/javascript" src="https://cookiecdn.com/cwc.js"></script> <script id="cookieWow" type="text/javascript" src="https://cookiecdn.com/configs/SpwSg9nmBvzDVr18ai6uU1UF" data-cwcid="SpwSg9nmBvzDVr18ai6uU1UF"></script> -->
+<script type="text/javascript" src="https://cookiecdn.com/cwc.js"></script> <script id="cookieWow" type="text/javascript" src="https://cookiecdn.com/configs/SpwSg9nmBvzDVr18ai6uU1UF" data-cwcid="SpwSg9nmBvzDVr18ai6uU1UF"></script>
 </head>
 <body>
 

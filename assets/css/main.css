@@ -5624,6 +5624,7 @@ footer .copywrite {
 #single-product .right-side > p {
   margin-top: 1.2em;
   font-size: 1.2em;
+  line-height: 1.6;
 }
 #single-product .right-side ul {
   padding-left: 0px !important;
@@ -5633,6 +5634,7 @@ footer .copywrite {
   font-size: 1.2em;
   position: relative;
   padding-left: 15px;
+  line-height: 1.6;
 }
 #single-product .right-side .logo-images {
   margin-top: 4rem;
@@ -11478,8 +11480,11 @@ input:focus {
      object-fit: cover;
   height: 100%;
 }
-.template-csr .container.content .card-page .row div:first-child {
-  padding-right: 64px;
+.template-csr .container.content .card-page .row.content-left div:first-child {
+  padding-right: 45px;
+}
+.template-csr .container.content .card-page .row.content-right div:last-child {
+  padding-left: 45px;
 }
 .template-csr .container.content .image-card-page-mobile {
   display: none;
@@ -11525,6 +11530,7 @@ input:focus {
   }
   .template-csr .container.content .row div:last-child {
     margin-top: 0em;
+    padding-left: 1px !important;
   }
   .template-csr .container.content .row div:first-child {
     padding-right: 10px !important;
@@ -11682,12 +11688,17 @@ input:focus {
     margin-bottom: 3em;
   }
   .template-out-company-banner .corporate-value-content-2 .title {
-    font-size: 22px;
+    font-size: 30px;
   }
 }
 .template-out-company-banner .card-margin {
   margin-top: 6em;
   height: 1px;
+}
+@media screen and (max-width: 1024px) {
+  .template-out-company-banner .card-margin {
+    margin-top: 4em;
+  }
 }
 .template-out-company-banner .footer-out-company {
   text-align: center;
@@ -11702,7 +11713,7 @@ input:focus {
 }
 @media screen and (max-width: 1024px) {
   .template-out-company-banner .footer-out-company video {
-    height: 250px;
+    height: auto;
   }
 }
 .template-out-company-banner .footer-out-company .title-footer-our-company {
@@ -11785,6 +11796,12 @@ input:focus {
   .template-out-company-banner .our-company-card .content-left-small .title.mobile,
 .template-out-company-banner .our-company-card .content-right-small .title.mobile {
     display: block;
+  }
+  .template-out-company-banner .our-company-card .mobile-center {
+    text-align: center !important;
+  }
+  .template-out-company-banner .our-company-card .title {
+    font-size: 21px;
   }
   .template-out-company-banner .our-company-card .title.window {
     display: none !important;

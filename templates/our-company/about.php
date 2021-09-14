@@ -71,7 +71,8 @@
                         "detail" => get_field("content_card4")['detail'],
                         "image-right-small"=> true ,
                         "image" =>  get_field("content_card4")['image']['url'],
-                        "class-image-mobile" => "nippon-logo-size"
+                        "class-image-mobile" => "nippon-logo-size",
+                        "detail_class" => "mobile-center"
                     ]);
                 ?>
          
@@ -81,7 +82,9 @@
                         "title" => get_field("content_card5")['title'],
                         "detail" => get_field("content_card5")['detail'],
                         "image-left-small"=> true ,
-                        "image" =>  get_field("content_card5")['image']['url']
+                        "image" =>  get_field("content_card5")['image']['url'],
+                        "detail_class" => "mobile-center"
+
                     ]);
                 ?>
         </div>

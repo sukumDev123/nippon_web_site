@@ -9,7 +9,7 @@ $images = $args["images"];
 
 
 <div class="card-page">
-            <div class="row">
+            <div class="row content-left">
                 <div class="col-12 col-lg-6">
                     <h2 class="top-title"><?php echo $args["top-title"] ?></h2>
                     <h1 class="title"><?php echo $args["title"] ?></h1>

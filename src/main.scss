@@ -6349,6 +6349,7 @@ footer {
     > p {
       margin-top: 1.2em;
       font-size: 1.2em;
+      line-height: 1.6;
     }
     ul {
       // padding-left: 1em;
@@ -6358,6 +6359,7 @@ footer {
         font-size: 1.2em;
         position: relative;
         padding-left: 15px;
+        line-height: 1.6;
       }
       li::before {
         @extend .li-style;
@@ -12690,8 +12692,15 @@ input {
       }
 
       .row {
-        div:first-child {
-          padding-right: 64px;
+        &.content-left {
+          div:first-child {
+            padding-right: 45px;
+          }
+        }
+        &.content-right {
+          div:last-child {
+            padding-left: 45px;
+          }
         }
       }
     }
@@ -12744,6 +12753,7 @@ input {
         }
         .row div:last-child {
           margin-top: 0em;
+          padding-left: 1px !important;
         }
         .row div:first-child {
           // margin-top: 3em;
@@ -12871,6 +12881,7 @@ input {
       }
     }
   }
+
   .corporate-value-content-2 {
     display: flex;
     justify-content: space-between;
@@ -12907,7 +12918,7 @@ input {
           //  margin-bottom: ;
         }
         .title {
-          font-size: 22px;
+          font-size: 30px;
         }
       }
     }
@@ -12915,6 +12926,11 @@ input {
   .card-margin {
     margin-top: 6em;
     height: 1px;
+    @media screen and (max-width: 1024px) {
+      & {
+        margin-top: 4em;
+      }
+    }
   }
   .footer-out-company {
     // padding: 4em 0;
@@ -12929,7 +12945,7 @@ input {
 
       @media screen and (max-width: 1024px) {
         & {
-          height: 250px;
+          height: auto;
         }
       }
     }
@@ -12941,11 +12957,11 @@ input {
       @media screen and (max-width: 1024px) {
         & {
           margin-bottom: 30px;
-
         }
       }
     }
   }
+
   .border-content {
     border-bottom: 1px solid rgba($color: #000, $alpha: 0.1);
     height: 1px;
@@ -13021,7 +13037,11 @@ input {
             }
           }
         }
+        .mobile-center {
+          text-align: center !important;
+        }
         .title {
+          font-size: 21px;
           &.window {
             display: none !important;
           }
